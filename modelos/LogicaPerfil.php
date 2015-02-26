@@ -12,7 +12,7 @@
 		private $coordinadorP; //CoordinadorPerfil
 		private $response;
 		private $perfil;
-		private $validar;
+		private $validar; //Validaciones
 
 		public function __construct()
 		{
@@ -53,5 +53,9 @@
 			# code...
 		}
 
+		public function getResponse()
+		{
+			return $this->response;
+		}
 	}
 ?>

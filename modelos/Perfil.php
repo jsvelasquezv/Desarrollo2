@@ -12,7 +12,8 @@
 			
 		}
 
-		public function registrarPerfil($nombre, $descripcion, $permisoGestionarUsuarios, $permisoVender, $permisoGestionarPerfiles)
+		public function registrarPerfil($nombre, $descripcion, $permisoGestionarUsuarios, 
+			$permisoVender, $permisoGestionarPerfiles)
 		{
 			R::setup('mysql:host=localhost;dbname=tienda',
         	'root','holi');
@@ -36,7 +37,8 @@
 			R::close();
 		}
 
-		public function modificarPerfil($nombre, $descripcion, $permisoGestionarUsuarios, $permisoVender, $permisoGestionarPerfiles)
+		public function modificarPerfil($nombre, $descripcion, $permisoGestionarUsuarios, 
+			$permisoVender, $permisoGestionarPerfiles)
 		{
 			R::setup('mysql:host=localhost;dbname=tienda',
         	'root','holi');
