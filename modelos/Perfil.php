@@ -12,14 +12,13 @@
 			
 		}
 
-		public function registrarPerfil($nombre, $descripcion, $permisoGestionarUsuarios, 
+		public function registrarPerfil($nombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{
 			R::setup('mysql:host=localhost;dbname=tienda',
         	'root','holi');
-			$perfil = R::dispense( 'prueba' );
+			$perfil = R::dispense( 'perfil' );
 			$perfil->nombre = $nombre;
-			$perfil->descripcion = $descripcion;
 			$perfil->permisoGestionarUsuarios = $permisoGestionarUsuarios;
 			$perfil->permisoVender = $permisoVender;
 			$perfil->permisoGestionarPerfiles = $permisoGestionarPerfiles;
@@ -32,23 +31,22 @@
 		{
 			R::setup('mysql:host=localhost;dbname=tienda',
         	'root','holi');
-			$perfil = R::findOne('prueba', 'nombre = ?',[$nombre]);
+			$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
 			echo $perfil;
 			R::close();
 		}
 
-		public function modificarPerfil($nombre, $descripcion, $permisoGestionarUsuarios, 
+		public function modificarPerfil($nombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{
 			R::setup('mysql:host=localhost;dbname=tienda',
         	'root','holi');
-        	$perfil = R::findOne('prueba', 'nombre = ?',[$nombre]);
-       		$perfil->descripcion = $descripcion;
+        	$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
        		$perfil->permisoGestionarUsuarios = $permisoGestionarUsuarios;
 			$perfil->permisoVender = $permisoVender;
 			$perfil->permisoGestionarPerfiles = $permisoGestionarPerfiles;
        		R::store($perfil);
-       		$perfil = R::findOne('prueba', 'nombre = ?',[$nombre]);
+       		$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
        		echo $perfil;
         	R::close();
 		}

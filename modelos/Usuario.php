@@ -34,7 +34,7 @@
 		{
 			R::setup('mysql:host=localhost;dbname=tienda',
         	'root','holi');
-        	$perfil = R::findOne('prueba','nombre =?',[$nombrePerfil]);
+        	$perfil = R::findOne('perfil','nombre =?',[$nombrePerfil]);
         	$usuario = R::findOne('usuario','documento =?',[$documento]);
         	$usuario->tipoPerfil = $perfil['id'];
         	R::store($usuario);
