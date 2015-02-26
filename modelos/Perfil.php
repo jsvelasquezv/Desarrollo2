@@ -22,8 +22,7 @@
 			$perfil->permisoGestionarUsuarios = $permisoGestionarUsuarios;
 			$perfil->permisoVender = $permisoVender;
 			$perfil->permisoGestionarPerfiles = $permisoGestionarPerfiles;
-			$hola = R::store($perfil);
-			echo $hola;
+			R::store($perfil);
 			R::close();
 		}
 
@@ -32,8 +31,8 @@
 			R::setup('mysql:host=localhost;dbname=tienda',
         	'root','holi');
 			$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
-			echo $perfil;
 			R::close();
+			return $perfil;
 		}
 
 		public function modificarPerfil($nombre, $permisoGestionarUsuarios, 
@@ -46,8 +45,6 @@
 			$perfil->permisoVender = $permisoVender;
 			$perfil->permisoGestionarPerfiles = $permisoGestionarPerfiles;
        		R::store($perfil);
-       		$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
-       		echo $perfil;
         	R::close();
 		}
 

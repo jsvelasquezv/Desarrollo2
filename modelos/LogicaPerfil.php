@@ -17,6 +17,7 @@
 		public function __construct()
 		{
 			$this->validar = new Validaciones();
+			$this->perfil = new Perfil();
 		}
 
 		public function setCoordinadorP($coordinador) //coordinador:CoordinadorPerfil
@@ -49,11 +50,11 @@
 			return $this->response;
 		}
 
-		public function validarModificarPerfil($perfil) //perfil:PerfilVO
+		public function validarModificarPerfil($nombre, $permisoGestionarUsuarios, 
+			$permisoVender, $permisoGestionarPerfiles)
 		{
-			if ($nombre =="" or $permisoGestionarUsuarios =="" 
-				or $permisoVender =="" or $permisoGestionarPerfiles =="") {
-				$this->response[0] = "Todos los campos son requeridos";
+			if ($nombre =="") {
+				$this->response[0] = "Ingrese un nombre";
 			}
 			if ($this->validar->esMayor($nombre,30)) {
 				$this->response[1] = "El nombre debe contener maximo 30 caracteres";
@@ -68,12 +69,14 @@
 			{
 				$this->perfil->modificarPerfil($nombre, $permisoGestionarUsuarios, 
 					$permisoVender, $permisoGestionarPerfiles);
-				$this->response[0] = "Perfil creado con exito";			
+				$this->response[0] = "Perfil modificado con exito";			
 			}	
 			return $this->response;
 		}
 	}
-
-	$logica = new LogicaPerfil();
-	$logica->validarRegistroPerfil("",1,1,1);
+	/*$logica = new LogicaPerfil();
+	$status = $logica->validarModificarPerfil("root",0,0,0);
+	foreach ($status as $key) {
+		echo $key;
+	}*/
 ?>
