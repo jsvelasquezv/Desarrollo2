@@ -2,10 +2,15 @@
 	/**
 	* 
 	*/
+
+	require 'Perfil.php';
+
 	class LogicaPerfil
 	{
 		
 		private $coordinadorP; //CoordinadorPerfil
+		private $errores;
+		private $perfil;
 
 		public function __construct()
 		{
@@ -14,12 +19,12 @@
 
 		public function setCoordinadorP($coordinador) //coordinador:CoordinadorPerfil
 		{
-			# code...
+			$this->coordinadorP = $coordinador;
 		}
 
 		public function validarRegistoPerfil($perfil) //perfil:PerfilVO
 		{
-			# code...
+		
 		}
 
 		public function validarConsultaPerfil($nombrePerfil) //perfil:string

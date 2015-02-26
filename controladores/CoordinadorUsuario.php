@@ -42,5 +42,25 @@
 			# code...
 		}
 
+		public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
+		{
+			$usuario->tipoPerfil = $perfil->nombrePerfil;
+		}
+
+		public function modificarPerfil($perfil) //$perfil:PerfilVO
+		{
+			
+		}
+
+		public function buscarPerfil($nombre) //$nombre:string
+		{
+			$perfil = R::find('perfil', )
+		}
+
+		public function registrarPerfil($perfil) //$perfil:PerfilVO
+		{
+			# code...
+		}
+
 	}
 ?>

@@ -17,6 +17,11 @@
 			return $this->logicaPerfil;
 		}
 
+		public function setLogicaPerfil($logicaPerfil)
+		{
+			$this->logicaPerfil = $logicaPerfil;
+		}
+
 		public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
 		{
 			# code...
