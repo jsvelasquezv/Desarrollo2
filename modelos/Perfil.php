@@ -53,8 +53,8 @@
 
 	}
 
-	$perfil = new Perfil();
+	// $perfil = new Perfil();
 	// $perfilVO->modificarPerfil("Admin", "AllPermisos", 0, 0, 0);
-	$perfil->retornarPerfil("Krusty");
+	// $perfil->buscarPerfil("Krusty");
 	//$perfilVO->registrarPerfil(1000,'Krusty','AllPermisos', 0, 1 ,0);
 ?>
