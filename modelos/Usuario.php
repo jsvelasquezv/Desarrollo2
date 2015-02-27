@@ -68,6 +68,15 @@
 			return $usuario;
 		}
 
+		public function buscarUsuarioN($nombreUsuario)
+		{
+			R::setup('mysql:host=localhost;dbname=tienda',
+        	'root','holi');
+			$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$nombreUsuario]);
+			R::close();
+			return $usuario;
+		}
+
 		public function darDeBajaUsuario($documento)
 		{
 			R::setup('mysql:host=localhost;dbname=tienda',
@@ -79,7 +88,9 @@
 		}
 	}
 
-	// $user = new Usuario();
+	 // $user = new Usuario();
 	// $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
 	// $user->asignarPerfil("Gasimba",116264525);
+	 // $a = $user->buscarUsuarioN("juseve");
+	 // echo $a['password'];
 ?>

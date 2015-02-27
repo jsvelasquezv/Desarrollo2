@@ -89,10 +89,10 @@
 			return $this->responseConsultar;
 		}
 	}
-	$logica = new LogicaPerfil();
+	/*$logica = new LogicaPerfil();
 	//$status = $logica->validarModificarPerfil("root",0,0,0);
 	$status = $logica->validarRegistrarPerfil("Admin",1,1,1);
 	foreach ($status as $key) {
 		echo $key;
-	}
+	}*/
 ?>

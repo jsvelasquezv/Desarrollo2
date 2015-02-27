@@ -39,6 +39,10 @@
 		{
 			$this->logicaUsuario->validarDardeBajaUsuario($idUsuario);
 		}
+		public function loguear($nombreUsuario, $password)
+		{
+			this->logicaUsuario->validarLogin($nombreUsuario, $password);
+		}
 		//Por qué mierda estos metodos estaban por aca xD
 		// public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
 		// {
