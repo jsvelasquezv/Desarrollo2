@@ -2,65 +2,59 @@
 	/**
 	* 
 	*/
+	require '../modelos/LogicaUsuario.php';
 	class CoordinadorUsuario 
 	{
-
 		private $logicaUsuario; //LogicaUsuario
 		
 		public function __construct()
 		{
-			# code...
+			$logicaUsuario = new LogicaUsuario();
 		}
-
 		public function setLogicaUsuario($logicaU) //$logicaU:LogicaUsuario
 		{
-			# code...
+			$this->$logicaUsuario = $logicaU;
 		}
-
 		public function getLogicaUsuario()
 		{
 			return $this->logicaUsuario;
 		}
-
-		public function modificarUsuario($usuario) //$Usuario:UsuarioVO
+		public function modificarUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $password, $tipoPerfil) //$Usuario:UsuarioVO
 		{
-			# code...
+			$this->logicaUsuario->validarModificarUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $password, $tipoPerfil);
 		}
-
 		public function buscarUsuario($idUsuario) //$idUsuario:int
 		{
-			# code...
+			$this->logicaUsuario->validarConsultaUsuario($idUsuario);
 		}
-
-		public function registrarUsuario($usuario) //$usuario:UsuarioVO
+		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $password, $tipoPerfil) //$usuario:UsuarioVO
 		{
-			# code...
+			$this->logicaUsuario->validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $password, $tipoPerfil);
 		}
-
 		public function dardeBajaUsuario($idUsuario) //$idUsuario:int
 		{
-			# code...
+			$this->logicaUsuario->validarDardeBajaUsuario($idUsuario);
 		}
-
-		public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
-		{
-			$usuario->tipoPerfil = $perfil->nombrePerfil;
-		}
-
-		public function modificarPerfil($perfil) //$perfil:PerfilVO
-		{
+		//Por qué mierda estos metodos estaban por aca xD
+		// public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
+		// {
+		// 	$usuario->tipoPerfil = $perfil->nombrePerfil;
+		// }
+		// public function modificarPerfil($perfil) //$perfil:PerfilVO
+		// {
 			
-		}
-
-		public function buscarPerfil($nombre) //$nombre:string
-		{
-			$perfil = R::find('perfil', )
-		}
-
-		public function registrarPerfil($perfil) //$perfil:PerfilVO
-		{
-			# code...
-		}
-
+		// }
+		// public function buscarPerfil($nombre) //$nombre:string
+		// {
+		// 	$perfil = R::find('perfil', )
+		// }
+		// public function registrarPerfil($perfil) //$perfil:PerfilVO
+		// {
+		// 	# code...
+		// }
 	}
 ?>

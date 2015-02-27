@@ -2,44 +2,41 @@
 	/**
 	* 
 	*/
+	require '../modelos/LogicaPerfil.php';
 	class CoordinadorPerfil 
 	{
-		
-		$logicaPerfil; //LogicaPerfil
-
+		private $logicaPerfil; //LogicaPerfil
 		public function __construct()
 		{
-			# code...
+			$logicaPerfil = new LogicaPerfil();
 		}
-
 		public function getLogicaPerfil()
 		{
 			return $this->logicaPerfil;
 		}
-
 		public function setLogicaPerfil($logicaPerfil)
 		{
 			$this->logicaPerfil = $logicaPerfil;
 		}
-
 		public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
 		{
-			# code...
+			#Aca se supone que asigne un perfil a un usuario
 		}
-
-		public function modificarPerfil($perfil) //$perfil:PerfilVO
+		public function modificarPerfil($nombre, $permisoGestionarUsuarios,$permisoVender, $permisoGestionarPerfiles) //$perfil:PerfilVO
 		{
-			# code...
+			$this->logicaPerfil.validarModificarPerfil($nombre, $permisoGestionarUsuarios, 
+												 $permisoVender, $permisoGestionarPerfiles);
 		}
-
 		public function buscarPerfil($idPerfil) //$idPerfil:int
 		{
-			# code...
+			//$this->logicaPerfil.validarConsultarPerfil($idPerfil) 
+			// Descomentar la linea de arriba cuando se haga la funcion validarConsultarPerfil en LogicaPerfil
 		}
-
-		public function registrarPerfil($perfil) // //$perfil:PerfilVO
+		public function registrarPerfil($nombre, $permisoGestionarUsuarios,$permisoVender, $permisoGestionarPerfiles) // //$perfil:PerfilVO
 		{
-			# code...
+			//se crea un perfil solo si ya se ha validado los campos correctamente
+			$this->logicaPerfil.validarRegistroPerfil($nombre, $permisoGestionarUsuarios, 
+												$permisoVender, $permisoGestionarPerfiles);
 		}
 	}
 ?>
