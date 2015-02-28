@@ -88,6 +88,12 @@
 			}
 			return $this->responseConsultar;
 		}
+
+		public function getPerfiles()
+		{
+			$perfiles = $this->perfil->getPerfiles();
+			return $perfiles;
+		}
 	}
 	/*$logica = new LogicaPerfil();
 	//$status = $logica->validarModificarPerfil("root",0,0,0);

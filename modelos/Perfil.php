@@ -48,6 +48,15 @@
         	R::close();
 		}
 
+		public function getPerfiles()
+		{
+			R::setup('mysql:host=localhost;dbname=tienda',
+        	'root','holi');
+        	$perfiles = R::findAll('perfil');
+        	R::close();
+        	return $perfiles;
+		}
+
 	}
 
 	// $perfil = new Perfil();

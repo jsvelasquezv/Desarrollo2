@@ -162,6 +162,12 @@
 			}
 			return $user;
 		}
+
+		public function getUsuarios()
+		{
+			$usuarios = $this->usuario->getUsuarios();
+			return $usuarios;
+		}
 	}
 
 	/*$logica = new LogicaUsuario();

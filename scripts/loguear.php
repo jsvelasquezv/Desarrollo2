@@ -5,14 +5,13 @@
 	if(isset($_POST["ingresar"])){		
 		$logica = new LogicaUsuario();
 		$response = $logica->validarLogin($username, $contrasena);
-		foreach ($response as $key) {
-			echo $key;
-		}
 		session_start();
 		$_SESSION['user'] = $username;
-		$_SESSION['logueado'] = $true;
+		$_SESSION['logueado'] = true;
+		header('Location: ../index.php');
 	}elseif (isset($_POST["recuperar"])) {
 		
-		header('Location: http://www.commentcamarche.net/forum/');
+		header('Location: ../index.php');
 	}
+	//unset($_SESSION);
 ?>

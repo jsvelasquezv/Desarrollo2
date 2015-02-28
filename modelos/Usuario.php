@@ -86,6 +86,15 @@
 			R::store($usuario);
 			R::close();
 		}
+
+		public function getUsuarios()
+		{
+			R::setup('mysql:host=localhost;dbname=tienda',
+        	'root','holi');
+        	$usuarios = R::findAll('usuario');
+        	R::close();
+        	return $usuarios;
+		}
 	}
 
 	 // $user = new Usuario();

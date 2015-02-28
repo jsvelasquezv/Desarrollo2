@@ -9,5 +9,5 @@
 	$tipo_perfil = $_POST["perfilA"];
 	$usuario = new LogicaUsuario();
 	$usuario->validarRegistroUsuario($documento, $nombre, $apellido, $email, $username, $password, $tipo_perfil);
-	header('Location: ../index.html');
+	header('Location: ../index.php');
 ?>
