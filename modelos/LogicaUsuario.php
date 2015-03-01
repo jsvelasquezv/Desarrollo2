@@ -2,26 +2,28 @@
 	/**
 	* 
 	*/
-	require 'Usuario.php';
-	require 'Validaciones.php';
+	require_once 'Usuario.php';
+	require_once 'Validaciones.php';
+	require_once 'Perfil.php';
+	require_once 'LogicaPerfil.php';
 	class LogicaUsuario
 	{
 		private $coordinadorU; #coordinadorU:CoordinadorUsuario
 		private $responseRegistro;
 		private $responseLogin;
 		private $responseConsulta;
+		private $responseModificacion;
+		private $responseBaja;
 		private $usuario;
 		private $validar; //Validaciones
+		private $perfil;
 
 		public function __construct()
 		{
 			$this->validar = new Validaciones();
 			$this->usuario = new Usuario();
-		}
-
-		public function setCoordinador($coordinador) //coordinador:CoordinadorUsuario
-		{
-			$this->coordinadorU = $coordinador;
+			$this->perfil = new Perfil();
+			$this->logicaPerfil = new LogicaPerfil();
 		}
 
 		public function validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
@@ -67,25 +69,26 @@
 			}
 			if (empty($this->responseRegistro)) 
 			{
-				$this->usuario->registrarUsuario($documento, $nombre, $apellidos, $email, 
+				$usuarioCreado = $this->usuario->registrarUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $tipoPerfil);
 				$this->responseRegistro[0] = "Perfil creado con exito";			
+				return $usuarioCreado;
 			}	
-			return $this->responseRegistro;
 		}
 
 		public function validarConsultaUsuario($documento) //documento:int
 		{
-			$usuario;
+			if ($documento == "") {
+				$this->responseConsulta[0] = "Ingrese un numero de documento";
+			}
 			if (!($this->validar->esNumerico($documento))){
-				$this->responseConsulta[0] = "El documento debe ser numerico";
+				$this->responseConsulta[1] = "El documento debe ser numerico";
 			}
 			if (empty($this->responseConsulta)) {
-				$usuario = $this->usuario->buscarUsuario($documento);
-				$this->responseConsulta[0] = "Resultado de la busqueda";
+				$usuarioColsultado;
+				$usuarioColsultado = $this->usuario->buscarUsuario($documento);
+				return $usuarioColsultado;
 			}
-			return $usuario;
-
 		}
 
 		public function validarConsultaUsuarioN($nombreUsuario)
@@ -95,78 +98,111 @@
 		}
 
 		public function validarModificarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil){
+			$nombreUsuario, $password, $tipoPerfil)
+		{
 			if ($this->validar->esMayor($nombre,30)) {
-				$this->response[1] = "El nombre debe contener maximo 30 caracteres";
+				$this->responseModificacion[1] = "El nombre debe contener maximo 30 caracteres";
 			}
 			if ($this->validar->esMenor($nombre,4)){
-				$this->response[2] = "El nombre debe contener minimo 4 caracteres";
+				$this->responseModificacion[2] = "El nombre debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($apellido, 30)){
-				$this->response[3] = "El apellido debe contener maximo 30 caracteres";
+				$this->responseModificacion[3] = "El apellido debe contener maximo 30 caracteres";
 			}
 			if ($this->validar->esMenor($apellido, 4)){
-				$this->response[4] = "El apellido debe contener minimo 4 caracteres";
+				$this->responseModificacion[4] = "El apellido debe contener minimo 4 caracteres";
 			}
 			if (!($this->validar->esAlfabetico($nombre))){
-				$this->response[5] = "El nombre debe ser alfabetico";
+				$this->responseModificacion[5] = "El nombre debe ser alfabetico";
 			}
 			if (!($this->validar->esAlfabetico($apellido))){
-				$this->response[6] = "El apellido debe ser alfabetico";
+				$this->responseModificacion[6] = "El apellido debe ser alfabetico";
 			}
 			if (!($this->validar->esNumerico($documento))){
-				$this->response[7] = "El docuemnto debe ser numerico";
+				$this->responseModificacion[7] = "El docuemnto debe ser numerico";
 			}
 			if ($this->validar->esMenor($password, 4)){
-				$this->response[8] = "El password debe contener minimo 4 caracteres";
+				$this->responseModificacion[8] = "El password debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($password, 30)){
-				$this->response[9] = "El password debe contener maximo 30 caracteres";
+				$this->responseModificacion[9] = "El password debe contener maximo 30 caracteres";
 			}
 			if ($this->validar->esMenor($nombreUsuario, 4)){
-				$this->response[10] = "El nombre de usuario debe contener minimo 4 caracteres";
+				$this->responseModificacion[10] = "El nombre de usuario debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){
-				$this->response[11] = "El nombre de usuario debe contener maximo 30 caracteres";
+				$this->responseModificacion[11] = "El nombre de usuario debe contener maximo 30 caracteres";
 			}
-			return $this->response;
+			if (empty($this->responseModificacion))
+			{
+				$usuarioModificado = $this->usuario->modificarUsuario();
+				return $usuarioModificado;
+			}
 		}
 
 		public function validarDardeBajaUsuario($documento) //documento:int
 		{
 			if (!($this->validar->esNumerico($documento))){
-				$this->response[0] = "El docuemnto debe ser numerico";
+				$this->responseBaja[0] = "El documento debe ser numerico";
 			}
 			if (empty($this->response)) {
+				$this->responseBaja[0] = "Usuario dado de baja con exito";
 				$this->usuario->darDeBajaUsuario($documento);
-				$this->response[0] = "Usuario dado de baja con exito";
 			}
 		}
 
 		public function validarLogin($nombreUsuario, $password)
 		{
-			$user = $this->usuario->buscarUsuarioN($nombreUsuario);
+			$usuario = $this->usuario->buscarUsuario($nombreUsuario);
 			//$user2 = $this->usuario->buscarUsuarioN($nombreUsuario);
-			$user2 = $user;
-			if (empty($user)) 
+			$user2 = $usuario;
+			if (empty($usuario)) 
 			{
 				$this->responseLogin[0] = "El usuario no existe";
 			}
-			elseif($password != $user['password'])
+			elseif($password != $usuario['password'])
 			{
 				$this->responseLogin[1] = "Contrasena incorrecta";
 			}
+			elseif (!empty($this->responseLogin)) 
+			{
+				foreach ($this->responseLogin as $key) {
+					echo $key;
+				}
+				header('Location: ../index.php');
+			}
 			else
 			{
-				$this->responseLogin[0] = "Logueado con exito";
+				$perfilAsignado = $this->perfil->buscarPerfil($usuario['tipo_perfil']);
+				session_start();
+				$_SESSION['logueado'] = true;
+				$_SESSION['user'] = $usuario['nombre_usuario'];
+				$_SESSION['permisoDeVender'] = $perfilAsignado['permiso_vender'];
+				$_SESSION['permisoDeGestionarPerfiles'] = $perfilAsignado['permiso_gestionar_perfiles'];
+				$_SESSION['permisoDeGestionarUsuarios'] = $perfilAsignado['permiso_gestionar_usuarios'];
+				header('Location: ../index.php');
 			}
-			return $user;
 		}
 
 		public function getUsuarios()
 		{
 			$usuarios = $this->usuario->getUsuarios();
 			return $usuarios;
+		}
+
+		public function getResponseRegistro()
+		{
+			return $this->responseRegistro;
+		}
+
+		public function getResponseLogin()
+		{
+			return $this->responseLogin;
+		}
+
+		public function getResponseDarDeBaja()
+		{
+			return $this->responseDarDeBaja;
 		}
 	}
 

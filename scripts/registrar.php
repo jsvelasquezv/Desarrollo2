@@ -1,6 +1,6 @@
 <?php 
 	require_once '../modelos/LogicaUsuario.php';
-	$nombre = $_POST["username"]; 
+	$nombre = $_POST["nombre"]; 
 	$apellido = $_POST["apellido"];
 	$username = $_POST["username"];
 	$password = $_POST["password"];

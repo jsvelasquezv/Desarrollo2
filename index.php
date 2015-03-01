@@ -65,7 +65,7 @@
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Ingresar</span>  
-          <form action="scripts/loguear.php" method="post">            
+          <form action="controladores/CoordinadorUsuario.php" method="post">            
             <div class="input-field col m4 l2">
               <input id="username" type="text" class="validate" name="username">
               <label for="username">Usuario</label>

@@ -3,7 +3,8 @@
 	* 
 	*/
 
-	require '../libs/rb.php';
+	require_once '../libs/rb.php';
+	require_once '../modelos/ConexionBD.php';
 
 	class Usuario 
 	{
@@ -16,8 +17,7 @@
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $tipoPerfil)
 		{
-			R::setup('mysql:host=localhost;dbname=tienda',
-        	'root','holi');
+			R::selectDatabase('default');
         	$usuario = R::dispense('usuario');
         	$usuario->documento = $documento;
         	$usuario->nombre = $nombre;
@@ -32,21 +32,18 @@
 
 		public function asignarPerfil($nombrePerfil, $documento)
 		{
-			R::setup('mysql:host=localhost;dbname=tienda',
-        	'root','holi');
+			R::selectDatabase('default');
         	$perfil = R::findOne('perfil','nombre =?',[$nombrePerfil]);
         	$usuario = R::findOne('usuario','documento =?',[$documento]);
         	$usuario->tipoPerfil = $perfil['id'];
         	R::store($usuario);
-        	echo $usuario;
         	R::close();
 		}
 
 		public function modificarUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $tipoPerfil)
 		{
-			R::setup('mysql:host=localhost;dbname=tienda',
-        	'root','holi');
+			R::selectDatabase('default');
         	$usuario = R::findOne('usuario', 'documento = ?',[$documento]);
         	$usuario->documento = $documento;
         	$usuario->nombre = $nombre;
@@ -59,28 +56,27 @@
         	R::close();
 		}
 
-		public function bucarUsuario($documento)
+		public function buscarUsuario($parametro)
 		{
-			R::setup('mysql:host=localhost;dbname=tienda',
-        	'root','holi');
-			$usuario = R::findOne('usuario', 'documento = ?',[$documento]);
-			R::close();
-			return $usuario;
-		}
+			R::selectDatabase('default');
 
-		public function buscarUsuarioN($nombreUsuario)
-		{
-			R::setup('mysql:host=localhost;dbname=tienda',
-        	'root','holi');
-			$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$nombreUsuario]);
-			R::close();
-			return $usuario;
+        	if (ctype_alpha($parametro)) 
+        	{
+        		$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$parametro]);
+        		R::close();
+				return $usuario;
+        	}
+        	else
+        	{
+				$usuario = R::findOne('usuario', 'documento = ?',[$parametro]);
+				R::close();
+				return $usuario;
+        	}
 		}
 
 		public function darDeBajaUsuario($documento)
 		{
-			R::setup('mysql:host=localhost;dbname=tienda',
-        	'root','holi');
+			R::selectDatabase('default');
 			$usuario = R::findOne('usuario', 'documento = ?',[$documento]);
 			$usuario->estado = false;
 			R::store($usuario);
@@ -89,8 +85,7 @@
 
 		public function getUsuarios()
 		{
-			R::setup('mysql:host=localhost;dbname=tienda',
-        	'root','holi');
+			R::selectDatabase('default');
         	$usuarios = R::findAll('usuario');
         	R::close();
         	return $usuarios;

@@ -2,32 +2,44 @@
 	/**
 	* 
 	*/
-	require '../modelos/LogicaUsuario.php';
+	require_once '../modelos/LogicaUsuario.php';
+	require_once '../modelos/LogicaPerfil.php';
+
+	if(isset($_POST["ingresar"])){	
+		$username = $_POST["username"]; 
+		$contrasena = $_POST["password"];
+		$coordinador = new CoordinadorUsuario();
+		$coordinador->loguear($username, $contrasena);
+	}elseif (isset($_POST["recuperar"])) {
+		
+		header('Location: ../index.php');
+	}
+
 	class CoordinadorUsuario 
 	{
 		private $logicaUsuario; //LogicaUsuario
+		private $logicaPerfil;
 		
 		public function __construct()
 		{
-			$logicaUsuario = new LogicaUsuario();
+			$this->logicaUsuario = new LogicaUsuario();
+			$this->logicaPerfil = new LogicaPerfil();
 		}
-		public function setLogicaUsuario($logicaU) //$logicaU:LogicaUsuario
+
+		public function loguear($nombreUsuario, $password)
 		{
-			$this->$logicaUsuario = $logicaU;
+			$this->logicaUsuario->validarLogin($nombreUsuario,$password);		
 		}
-		public function getLogicaUsuario()
-		{
-			return $this->logicaUsuario;
-		}
+		
 		public function modificarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil) //$Usuario:UsuarioVO
+			$nombreUsuario, $password, $tipoPerfil)
 		{
 			$this->logicaUsuario->validarModificarUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $tipoPerfil);
 		}
-		public function buscarUsuario($idUsuario) //$idUsuario:int
+		public function buscarUsuario($documento)
 		{
-			$this->logicaUsuario->validarConsultaUsuario($idUsuario);
+			$this->logicaUsuario->validarConsultaUsuario($documento);
 		}
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $tipoPerfil) //$usuario:UsuarioVO
@@ -38,10 +50,6 @@
 		public function dardeBajaUsuario($idUsuario) //$idUsuario:int
 		{
 			$this->logicaUsuario->validarDardeBajaUsuario($idUsuario);
-		}
-		public function loguear($nombreUsuario, $password)
-		{
-			this->logicaUsuario->validarLogin($nombreUsuario, $password);
 		}
 		//Por qué mierda estos metodos estaban por aca xD
 		// public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO

@@ -3,8 +3,8 @@
 	* 
 	*/
 
-	require 'Perfil.php';
-	require 'Validaciones.php';
+	require_once 'Perfil.php';
+	require_once 'Validaciones.php';
 
 	class LogicaPerfil
 	{
@@ -80,13 +80,17 @@
 			return $this->responseModificar;
 		}
 
-		public function validarConsultarPerfil($nombre)
+		public function validarConsultarPerfil($parametro)
 		{
-			if(empty($this->perfil->buscarPerfil($nombre)))
+			$perfilBuscado = $this->perfil->buscarPerfil($parametro);
+			if(empty($perfilBuscado))
 			{
-				$this->responseConsultar[0] = "No exite el perfil " .$nombre;
+				$this->responseConsultar[0] = "No exite el perfil ";
 			}
-			return $this->responseConsultar;
+			else
+			{
+				return $perfilBuscado;
+			}
 		}
 
 		public function getPerfiles()
