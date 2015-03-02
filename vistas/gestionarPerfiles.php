@@ -46,7 +46,6 @@ include_once '../scripts/gestionarPerfiles.php';
 					<th>Gestionar Usuarios</th>
 					<th>Vender</th>
 					<th>Gestionar Perfiles</th>
-					<th>Opciones</th>
 				</tr>
 			</thead>
 			<tbody>				
@@ -55,7 +54,8 @@ include_once '../scripts/gestionarPerfiles.php';
 					<td> <?php echo $key['nombre'];?> </td>
 					<td> <?php echo $key['permiso_gestionar_usuarios'];?> </td>
 					<td> <?php echo $key['permiso_vender'];?> </td>      
-					<td> <?php echo $key['permiso_gestionar_perfiles'];?> </td> <?php
+					<td> <?php echo $key['permiso_gestionar_perfiles'];?> </td>
+					<td><a href="../controladores/CoordinadorPerfil.php?edit=<?php echo $key["nombre"] ?>" class="btn-flat" name="edit" id="edit"><i class="mdi-image-edit"></i></a></td> <?php
 					?> </tr> <?php 
 				} ?>
 			</tbody>
@@ -70,7 +70,7 @@ include_once '../scripts/gestionarPerfiles.php';
 					<div class="card login">
 						<div class="card-content">
 							<span class="card-title teal-text">Crear Perfil</span>  
-							<form action="controladores/CoordinadorUsuario.php" method="post">            
+							<form action="../controladores/CoordinadorPerfil.php" method="post">            
 								<div class="input-field col m4 l2">
 									<input id="nombre" type="text" class="validate" name="nombre">
 									<label for="nombre">Nombre</label>
@@ -78,11 +78,11 @@ include_once '../scripts/gestionarPerfiles.php';
 								<h6>Permisos:</h6>
 								<p>
     								<input type="checkbox" id="permiso1" name="permiso1"/>
-    								<label for="permiso1">Vender</label>
+    								<label for="permiso1">Gestionar Usuarios</label>
   								</p>
    								<p>
     								<input type="checkbox" id="permiso2" name="permiso2"/>
-    								<label for="permiso2">Gestionar Usuarios</label>
+    								<label for="permiso2">Vender</label>
   								</p>
   								<p>
     								<input type="checkbox" id="permiso3" name="permiso3"/>

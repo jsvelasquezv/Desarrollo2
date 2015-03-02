@@ -2,41 +2,76 @@
 	/**
 	* 
 	*/
-	require '../modelos/LogicaPerfil.php';
+	require_once '../modelos/LogicaPerfil.php';
+
+	
+	if (isset($_GET['edit'])) {
+		$edit = $_GET['edit'];
+		$coordinador = new CoordinadorPerfil();
+		$editable = $coordinador->buscarPerfil($edit);
+		header('Location: ../vistas/editarPerfil.php?nombre='.$editable['nombre'].'&permiso1='
+		.$editable['permisoGestionarUsuarios'].'&permiso2='.$editable['permisoVender']
+		.'&permiso2='.$editable['permisoGestionarPerfiles'].'.php');
+
+	}
+	if (isset($_POST['crear'])) {
+		$nombre = $_POST['nombre'];
+		$permiso1;
+		$permiso2;
+		$permiso3;
+		if (!isset($_POST['permiso1'])) {
+			$permiso1 = 0;
+			echo $permiso1;
+		}elseif ($_POST['permiso1']==true) {
+			$permiso1 = 1;
+			echo $permiso1;
+		}
+
+		if (!isset($_POST['permiso2'])) {
+			$permiso2 = 0;
+			echo $permiso2;
+		}elseif ($_POST['permiso2']==true) {
+			$permiso2 = 1;
+			echo $permiso2;
+		}
+
+		if (!isset($_POST['permiso3'])) {
+			$permiso3 = 0;
+			echo $permiso3;
+		}elseif ($_POST['permiso3']==true) {
+			$permiso3 = 1;
+			echo $permiso3;
+		}		
+		$coordinador = new CoordinadorPerfil();
+		$coordinador->registrarPerfil($nombre,$permiso1,$permiso2,$permiso3);
+	}
+
 	class CoordinadorPerfil 
 	{
 		private $logicaPerfil; //LogicaPerfil
+
 		public function __construct()
 		{
-			$logicaPerfil = new LogicaPerfil();
+			$this->logicaPerfil = new LogicaPerfil();
 		}
-		public function getLogicaPerfil()
-		{
-			return $this->logicaPerfil;
-		}
-		public function setLogicaPerfil($logicaPerfil)
-		{
-			$this->logicaPerfil = $logicaPerfil;
-		}
-		public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
-		{
-			#Aca se supone que asigne un perfil a un usuario
-		}
+		
 		public function modificarPerfil($nombre, $permisoGestionarUsuarios,$permisoVender, $permisoGestionarPerfiles) //$perfil:PerfilVO
 		{
-			$this->logicaPerfil.validarModificarPerfil($nombre, $permisoGestionarUsuarios, 
+			//$editable = $this->logicaPerfil->validarConsultarPerfil();
+			$this->logicaPerfil->validarModificarPerfil($nombre, $permisoGestionarUsuarios, 
 												 $permisoVender, $permisoGestionarPerfiles);
+			header('Location: ../vistas/gestionarPerfiles.php');
 		}
 		public function buscarPerfil($idPerfil) //$idPerfil:int
 		{
-			//$this->logicaPerfil.validarConsultarPerfil($idPerfil) 
+			$this->logicaPerfil->validarConsultarPerfil($idPerfil);
 			// Descomentar la linea de arriba cuando se haga la funcion validarConsultarPerfil en LogicaPerfil
 		}
-		public function registrarPerfil($nombre, $permisoGestionarUsuarios,$permisoVender, $permisoGestionarPerfiles) // //$perfil:PerfilVO
+		public function registrarPerfil($nombre, $permisoGestionarUsuarios, $permisoVender, $permisoGestionarPerfiles) // //$perfil:PerfilVO
 		{
-			//se crea un perfil solo si ya se ha validado los campos correctamente
-			$this->logicaPerfil.validarRegistroPerfil($nombre, $permisoGestionarUsuarios, 
+			$this->logicaPerfil->validarRegistrarPerfil($nombre, $permisoGestionarUsuarios, 
 												$permisoVender, $permisoGestionarPerfiles);
+			header('Location: ../vistas/gestionarPerfiles.php');
 		}
 	}
 ?>

@@ -22,11 +22,6 @@
 			$this->perfil = new Perfil();
 		}
 
-		public function setCoordinadorP($coordinador) //coordinador:CoordinadorPerfil
-		{
-			$this->coordinadorP = $coordinador;
-		}
-
 		public function validarRegistrarPerfil($nombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{

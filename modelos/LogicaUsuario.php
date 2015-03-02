@@ -8,7 +8,6 @@
 	require_once 'LogicaPerfil.php';
 	class LogicaUsuario
 	{
-		private $coordinadorU; #coordinadorU:CoordinadorUsuario
 		private $responseRegistro;
 		private $responseLogin;
 		private $responseConsulta;
@@ -27,11 +26,11 @@
 		}
 
 		public function validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $perfilId)
+			$nombreUsuario, $password, $ID)
 		{
 			if ($nombre =="" or $apellidos =="" 
 				or $email =="" or $nombreUsuario ==""
-				or $password =="" or $documento =="" or $perfilId ="") {
+				or $password =="" or $documento =="" or $ID =="") {
 				$this->responseRegistro[0] = "Todos los campos son requeridos";
 			}
 			if ($this->validar->esMayor($nombre,30)) {
@@ -70,8 +69,8 @@
 			if (empty($this->responseRegistro)) 
 			{
 				$usuarioCreado = $this->usuario->registrarUsuario($documento, $nombre, $apellidos, $email, 
-					$nombreUsuario, $password, $perfilId);
-				$this->responseRegistro[0] = "Perfil creado con exito";			
+					$nombreUsuario, $password, $ID);
+				$this->responseRegistro[0] = "Perfil creado con exito";		
 				return $usuarioCreado;
 			}		
 		}
@@ -136,7 +135,7 @@
 			if (empty($this->responseModificacion))
 			{
 				$usuarioModificado = $this->usuario->modificarUsuario();
-				return $usuarioModificado;
+				header('Location: ../index.php');
 			}
 		}
 

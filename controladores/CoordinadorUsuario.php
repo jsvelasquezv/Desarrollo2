@@ -19,11 +19,9 @@
 		$email = $_POST['email'];
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-		$perfil = $_POST['perfilSelec'];
+		$perfilID = $_POST['perfilSelec'];
 		$coordinador = new CoordinadorUsuario();
-		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfil);
-		//header('Location: ../index.php');
-
+		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID);
 	}
 
 
@@ -42,6 +40,13 @@
 		{
 			$this->logicaUsuario->validarLogin($nombreUsuario,$password);		
 		}
+
+		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $password, $perfilID) 
+		{
+			$this->logicaUsuario->validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $password, $perfilID);
+		}
 		
 		public function modificarUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $tipoPerfil)
@@ -53,32 +58,10 @@
 		{
 			$this->logicaUsuario->validarConsultaUsuario($documento);
 		}
-		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil) //$usuario:UsuarioVO
-		{
-			$this->logicaUsuario->validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil);
-		}
+		
 		public function dardeBajaUsuario($idUsuario) //$idUsuario:int
 		{
 			$this->logicaUsuario->validarDardeBajaUsuario($idUsuario);
 		}
-		//Por qué mierda estos metodos estaban por aca xD
-		// public function asignarPerfil($usuario, $perfil) //$usuario:UsuarioVO, $perfil:PerfilVO
-		// {
-		// 	$usuario->tipoPerfil = $perfil->nombrePerfil;
-		// }
-		// public function modificarPerfil($perfil) //$perfil:PerfilVO
-		// {
-			
-		// }
-		// public function buscarPerfil($nombre) //$nombre:string
-		// {
-		// 	$perfil = R::find('perfil', )
-		// }
-		// public function registrarPerfil($perfil) //$perfil:PerfilVO
-		// {
-		// 	# code...
-		// }
 	}
 ?>

@@ -4,3 +4,7 @@ $( document ).ready(function(){
 	$('.modal-trigger').leanModal();
 	$('select').material_select();
 });
+
+$("#edit").on('click', function() {
+   $('#modal1').openModal();
+});

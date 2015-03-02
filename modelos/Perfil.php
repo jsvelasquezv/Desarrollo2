@@ -28,7 +28,7 @@
 
 		public function buscarPerfil($parametro)
 		{
-			 R::selectDatabase('default');
+			R::selectDatabase('default');
         	if (ctype_alpha($parametro)) 
         	{
 				$perfil = R::findOne('perfil', 'nombre = ?',[$parametro]);
@@ -46,7 +46,7 @@
 		public function modificarPerfil($nombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{
-			 R::selectDatabase('default');
+			R::selectDatabase('default');
         	$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
        		$perfil->permisoGestionarUsuarios = $permisoGestionarUsuarios;
 			$perfil->permisoVender = $permisoVender;
@@ -57,7 +57,7 @@
 
 		public function getPerfiles()
 		{
-			 R::selectDatabase('default');
+			R::selectDatabase('default');
         	$perfiles = R::findAll('perfil');
         	R::close();
         	return $perfiles;
