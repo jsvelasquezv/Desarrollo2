@@ -15,7 +15,7 @@
 		}
 
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil)
+			$nombreUsuario, $password, $perfilId)
 		{
 			R::selectDatabase('default');
         	$usuario = R::dispense('usuario');
@@ -25,8 +25,9 @@
         	$usuario->email = $email;
         	$usuario->nombreUsuario = $nombreUsuario;
         	$usuario->password = $password;
-        	$usuario->tipoPerfil = $tipoPerfil;
-        	R::store($usuario);
+        	$usuario->tipoPerfil = $perfilId;
+        	echo "perfil = ".$perfilId;
+        	// R::store($usuario);
         	R::close();
 		}
 

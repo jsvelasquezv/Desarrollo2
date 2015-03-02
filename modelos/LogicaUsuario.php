@@ -27,11 +27,11 @@
 		}
 
 		public function validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil)
+			$nombreUsuario, $password, $perfilId)
 		{
 			if ($nombre =="" or $apellidos =="" 
 				or $email =="" or $nombreUsuario ==""
-				or $password =="" or $documento =="" or $tipoPerfil ="") {
+				or $password =="" or $documento =="" or $perfilId ="") {
 				$this->responseRegistro[0] = "Todos los campos son requeridos";
 			}
 			if ($this->validar->esMayor($nombre,30)) {
@@ -70,10 +70,10 @@
 			if (empty($this->responseRegistro)) 
 			{
 				$usuarioCreado = $this->usuario->registrarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil);
+					$nombreUsuario, $password, $perfilId);
 				$this->responseRegistro[0] = "Perfil creado con exito";			
 				return $usuarioCreado;
-			}	
+			}		
 		}
 
 		public function validarConsultaUsuario($documento) //documento:int

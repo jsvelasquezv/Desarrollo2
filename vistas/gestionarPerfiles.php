@@ -1,5 +1,5 @@
 <?php 
-	include_once '../scripts/gestionarPerfiles.php';
+include_once '../scripts/gestionarPerfiles.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,23 +20,25 @@
 				<a href="#!" class="brand-logo">Logo</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 				<ul class="right hide-on-med-and-down">
-
 					<li><a href="../scripts/salir.php">Salir</a></li>
-					<li><a class="dropdown-button " href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-				</ul>
+					<?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+					<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+					<?php } ?>
+				</ul>      
 				<ul id ="dropdown1" class="dropdown-content">
-					<li><a href="../vistas/gestionarPerfiles.php">Perfiles</a></li>
-          			<li><a href="../vistas/gestionarUsuarios.php">Usuarios</a></li>
-				</ul>
-				<ul class="side-nav" id="mobile-demo">
-					<li><a href="#modal1" class="modal-trigger">Salir</a></li>
-					<li><a href="#modal2" class="modal-trigger">Opciones</a></li>
+					<?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+					<li><a href="gestionarPerfiles.php">Perfiles</a></li>
+					<?php } ?>
+					<?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+					<li><a href="gestionarUsuarios.php">Usuarios</a></li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<?php }else{ header('Location: ../index.php');}?>    
 	<div class="container">		
+		<div class="row">
 		<table class="hoverable responsive-table centered">
 			<thead>
 				<tr>
@@ -44,19 +46,56 @@
 					<th>Gestionar Usuarios</th>
 					<th>Vender</th>
 					<th>Gestionar Perfiles</th>
+					<th>Opciones</th>
 				</tr>
 			</thead>
 			<tbody>				
 				<?php foreach ($_SESSION['perfiles'] as $key) {
 					?> <tr>
-						 <td> <?php echo $key['nombre'];?> </td>
-						 <td> <?php echo $key['permiso_gestionar_usuarios'];?> </td>
-						 <td> <?php echo $key['permiso_vender'];?> </td>      
-						 <td> <?php echo $key['permiso_gestionar_perfiles'];?> </td> <?php
+					<td> <?php echo $key['nombre'];?> </td>
+					<td> <?php echo $key['permiso_gestionar_usuarios'];?> </td>
+					<td> <?php echo $key['permiso_vender'];?> </td>      
+					<td> <?php echo $key['permiso_gestionar_perfiles'];?> </td> <?php
 					?> </tr> <?php 
 				} ?>
 			</tbody>
 		</table>	
+		</div>
+		<div class="row">
+			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#modal1"><i class="mdi-content-add"></i></a>
+		</div>
+		<div class="valign-wrapper">
+			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
+				<div id="modal1" class="modal modalLogin">
+					<div class="card login">
+						<div class="card-content">
+							<span class="card-title teal-text">Crear Perfil</span>  
+							<form action="controladores/CoordinadorUsuario.php" method="post">            
+								<div class="input-field col m4 l2">
+									<input id="nombre" type="text" class="validate" name="nombre">
+									<label for="nombre">Nombre</label>
+								</div>
+								<h6>Permisos:</h6>
+								<p>
+    								<input type="checkbox" id="permiso1" name="permiso1"/>
+    								<label for="permiso1">Vender</label>
+  								</p>
+   								<p>
+    								<input type="checkbox" id="permiso2" name="permiso2"/>
+    								<label for="permiso2">Gestionar Usuarios</label>
+  								</p>
+  								<p>
+    								<input type="checkbox" id="permiso3" name="permiso3"/>
+    								<label for="permiso3">Gestionar Perfiles</label>
+  								</p>
+  								<br>
+								<input class="btn-flat orange-text" type="submit" value="Crear" name="crear">
+							</form>                     
+						</div>
+					</div>
+				</div>
+			</div>    
+		</div>
 	</div>
 </body>
 </html>

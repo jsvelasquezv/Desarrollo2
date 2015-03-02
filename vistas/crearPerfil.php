@@ -8,7 +8,6 @@
   <script src="assets/jquery-2.1.3.min.js"></script>
   <script src="assets/materialize/js/materialize.min.js"></script>
   <script src="assets/js/styles.js"></script>
-
   <title>Desarrollo2</title>
 </head>
 <body>
@@ -20,20 +19,18 @@
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         <ul class="right hide-on-med-and-down">          
           <li><a href="scripts/salir.php">Salir</a></li>
-            <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+            <?php if (!(isset($_SESSION['permisoDeGestionarPerfiles']) and isset($_SESSION['permisoDeGestionarUsuarios']))) { ?>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <?php } ?>
         </ul>      
         <ul id ="dropdown1" class="dropdown-content">
-          <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+          <?php if (!(isset($_SESSION['permisoDeGestionarPerfiles']))) { ?>
             <li><a href="vistas/gestionarPerfiles.php">Perfiles</a></li>
           <?php } ?>
-          <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+          <?php if (!(isset($_SESSION['permisoDeGestionarPerfiles']))) { ?>
             <li><a href="vistas/gestionarUsuarios.php">Usuarios</a></li>
           <?php } ?>
         </ul>
-
-        <!-- responsive navbar -->
         <ul class="side-nav" id="mobile-demo">
           <li><a href="#modal1" class="modal-trigger">Salir</a></li>
           <li><a href="#modal2" class="modal-trigger">Opciones</a></li>
@@ -97,7 +94,7 @@
     <div class="card login">
       <div class="card-content">
         <span class="card-title teal-text">Resgistrarse</span>  
-        <form action="controladores/CoordinadorUsuario.php" method="post">            
+        <form action="scripts/registrar.php" method="post">            
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre">
@@ -130,14 +127,14 @@
           </div>
           <div class="row">
             <div class="col s12">
-              <select name="perfilSelec">
+              <select name="perfilA">
                 <option value="1">Perfil 1</option>
                 <option value="2">Perfil 2</option>
                 <option value="3">Perfil 3</option>
               </select>
             </div>
           </div>
-          <input class="btn-flat orange-text" type="submit" value="Registrarse" name="registrarse">
+          <input class="btn-flat orange-text" type="submit" value="Registrarse" name="resgistrarse">
         </form>                     
       </div>
     </div>

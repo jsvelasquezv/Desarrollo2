@@ -10,10 +10,22 @@
 		$contrasena = $_POST["password"];
 		$coordinador = new CoordinadorUsuario();
 		$coordinador->loguear($username, $contrasena);
-	}elseif (isset($_POST["recuperar"])) {
-		
+	}elseif (isset($_POST["recuperar"])) {		
 		header('Location: ../index.php');
+	}elseif (isset($_POST["registrarse"])) {
+		$documento = $_POST['documento'];
+		$nombre = $_POST['nombre'];
+		$apellidos = $_POST['apellido'];
+		$email = $_POST['email'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$perfil = $_POST['perfilSelec'];
+		$coordinador = new CoordinadorUsuario();
+		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfil);
+		//header('Location: ../index.php');
+
 	}
+
 
 	class CoordinadorUsuario 
 	{
