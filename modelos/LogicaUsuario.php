@@ -96,8 +96,8 @@
 			return $usuario;
 		}
 
-		public function validarModificarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil)
+		public function validarModificarUsuario($documento, $documentoN, $nombre, $apellido, $email, 
+			$nombreUsuario, $tipoPerfil)
 		{
 			if ($this->validar->esMayor($nombre,30)) {
 				$this->responseModificacion[1] = "El nombre debe contener maximo 30 caracteres";
@@ -120,22 +120,17 @@
 			if (!($this->validar->esNumerico($documento))){
 				$this->responseModificacion[7] = "El docuemnto debe ser numerico";
 			}
-			if ($this->validar->esMenor($password, 4)){
-				$this->responseModificacion[8] = "El password debe contener minimo 4 caracteres";
-			}
-			if ($this->validar->esMayor($password, 30)){
-				$this->responseModificacion[9] = "El password debe contener maximo 30 caracteres";
-			}
 			if ($this->validar->esMenor($nombreUsuario, 4)){
-				$this->responseModificacion[10] = "El nombre de usuario debe contener minimo 4 caracteres";
+				$this->responseModificacion[8] = "El nombre de usuario debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){
-				$this->responseModificacion[11] = "El nombre de usuario debe contener maximo 30 caracteres";
+				$this->responseModificacion[9] = "El nombre de usuario debe contener maximo 30 caracteres";
 			}
 			if (empty($this->responseModificacion))
 			{
-				$usuarioModificado = $this->usuario->modificarUsuario();
-				header('Location: ../index.php');
+				//echo $tipoPerfil;
+				$usuarioModificado = $this->usuario->modificarUsuario($documento, $documentoN, $nombre, $apellido, $email, $nombreUsuario, $tipoPerfil);
+				header('Location: ../vistas/gestionarUsuarios.php');
 			}
 		}
 

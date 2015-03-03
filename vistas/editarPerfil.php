@@ -24,7 +24,7 @@
 					<span class="card-title teal-text">Editar Perfil</span>  
 					<form action="../controladores/CoordinadorPerfil.php" method="post">            
 						<div class="input-field">
-							<input id="nombre" type="text" class="validate" name="nuevoNombre">
+							<input id="nombre" type="text" class="validate" name="nuevoNombre" value="<?php echo $nombre; ?>">
 							<label for="nombre">Nombre</label>
 						</div>
 						<input type="hidden" name="antiguo" value="<?php echo $nombre; ?>">

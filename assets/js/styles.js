@@ -3,6 +3,7 @@ $( document ).ready(function(){
 	$(".dropdown-button").dropdown();
 	$('.modal-trigger').leanModal();
 	$('select').material_select();
+	$('.tooltipped').tooltip({delay: 50});
 });
 
 $("#edit").on('click', function() {

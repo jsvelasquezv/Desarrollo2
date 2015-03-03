@@ -22,6 +22,34 @@
 		$perfilID = $_POST['perfilSelec'];
 		$coordinador = new CoordinadorUsuario();
 		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID);
+	}elseif (isset($_POST["registrar"])) {
+		$documento = $_POST['documento'];
+		$nombre = $_POST['nombre'];
+		$apellidos = $_POST['apellido'];
+		$email = $_POST['email'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$perfilID = $_POST['perfilSelec'];
+		$coordinador = new CoordinadorUsuario();
+		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID);
+		header('Location: ../vistas/gestionarUsuarios.php');
+	}elseif (isset($_GET['editUsuario'])) {
+		$editUsuario = $_GET['editUsuario'];
+		$coordinador = new CoordinadorUsuario();
+		$editable = $coordinador->buscarUsuario($editUsuario);
+		header('Location: ../vistas/editarUsuario.php?documento='.$editable['documento'].'&nombre='.$editable['nombre'].
+			'&apellidos='.$editable['apellidos'].'&email='.$editable['email'].'&username='.$editable['nombre_usuario']);
+	}elseif (isset($_POST['editar'])) {
+		$documento = $_POST['antiguo'];
+		$documentoN = $_POST['documento'];
+		$nombre = $_POST['nombre'];
+		$apellidos = $_POST['apellido'];
+		$email = $_POST['email'];
+		$username = $_POST['username'];
+		$perfilID = $_POST['perfilSelec'];
+		$coordinador = new CoordinadorUsuario();
+		//echo $perfilID;
+		$coordinador->modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, $username, $perfilID);
 	}
 
 
@@ -48,15 +76,17 @@
 			$nombreUsuario, $password, $perfilID);
 		}
 		
-		public function modificarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil)
+		public function modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, 
+			$nombreUsuario, $tipoPerfil)
 		{
-			$this->logicaUsuario->validarModificarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil);
+			//echo $tipoPerfil;
+			$this->logicaUsuario->validarModificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, 
+			$nombreUsuario, $tipoPerfil);
 		}
 		public function buscarUsuario($documento)
 		{
-			$this->logicaUsuario->validarConsultaUsuario($documento);
+			$usuario = $this->logicaUsuario->validarConsultaUsuario($documento);
+			return $usuario;
 		}
 		
 		public function dardeBajaUsuario($idUsuario) //$idUsuario:int

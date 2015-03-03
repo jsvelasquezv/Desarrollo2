@@ -40,18 +40,17 @@
         	R::close();
 		}
 
-		public function modificarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $tipoPerfil)
+		public function modificarUsuario($documento,$documentoN, $nombre, $apellidos, $email, 
+			$nombreUsuario, $perfil)
 		{
 			R::selectDatabase('default');
         	$usuario = R::findOne('usuario', 'documento = ?',[$documento]);
-        	$usuario->documento = $documento;
+        	$usuario->documento = $documentoN;
         	$usuario->nombre = $nombre;
         	$usuario->apellidos = $apellidos;
         	$usuario->email = $email;
         	$usuario->nombreUsuario = $nombreUsuario;
-        	$usuario->password = $password;
-        	$usuario->tipoPerfil = $tipoPerfil;
+        	$usuario->tipoPerfil = $perfil;
         	R::store($usuario);
         	R::close();
 		}

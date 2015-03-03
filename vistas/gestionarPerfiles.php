@@ -71,8 +71,8 @@ include_once '../scripts/gestionarPerfiles.php';
 						<div class="card-content">
 							<span class="card-title teal-text">Crear Perfil</span>  
 							<form action="../controladores/CoordinadorPerfil.php" method="post">            
-								<div class="input-field col m4 l2">
-									<input id="nombre" type="text" class="validate" name="nombre">
+								<div class="input-field col m4 l2 tooltipped" data-position="right" data-tooltip="Este campo es requerido">
+									<input id="nombre" type="text" name="nombre"  required maxlength="30">
 									<label for="nombre">Nombre</label>
 								</div>
 								<h6>Permisos:</h6>
