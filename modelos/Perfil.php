@@ -43,11 +43,12 @@
         	}
 		}
 
-		public function modificarPerfil($nombre, $permisoGestionarUsuarios, 
+		public function modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{
 			R::selectDatabase('default');
         	$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
+        	$perfil->nombre = $nuevoNombre;
        		$perfil->permisoGestionarUsuarios = $permisoGestionarUsuarios;
 			$perfil->permisoVender = $permisoVender;
 			$perfil->permisoGestionarPerfiles = $permisoGestionarPerfiles;
@@ -64,6 +65,9 @@
 		}
 
 	}
+
+	/*$perfil = new Perfil();
+	$perfil->modificarPerfil('Admin','Root',1,1,1);*/
 
 	/*$perfil = new Perfil();
 	// $perfilVO->modificarPerfil("Admin", "AllPermisos", 0, 0, 0);

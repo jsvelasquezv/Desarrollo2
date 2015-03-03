@@ -51,24 +51,24 @@
 			return $this->responseRegistrar;
 		}
 
-		public function validarModificarPerfil($nombre, $permisoGestionarUsuarios, 
+		public function validarModificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{
 			if ($nombre =="") {
 				$this->responseModificar[0] = "Ingrese un nombre";
 			}
-			if ($this->validar->esMayor($nombre,30)) {
-				$this->responseModificar[1] = "El nombre debe contener maximo 30 caracteres";
+			if ($this->validar->esMayor($nuevoNombre,30)) {
+				$this->responseModificar[1] = "El nuevoNombre debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($nombre,4)){
-				$this->responseModificar[2] = "El nombre debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($nuevoNombre,4)){
+				$this->responseModificar[2] = "El nuevoNombre debe contener minimo 4 caracteres";
 			}
-			if (!($this->validar->esAlfabetico($nombre))){
+			if (!($this->validar->esAlfabetico($nuevoNombre))){
 				$this->responseModificar[3] = "El nombre debe ser alfabetico";
 			}
 			if (empty($this->responseModificar)) 
 			{
-				$this->perfil->modificarPerfil($nombre, $permisoGestionarUsuarios, 
+				$this->perfil->modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 					$permisoVender, $permisoGestionarPerfiles);
 				$this->responseModificar[0] = "Perfil modificado con exito";			
 			}	
@@ -95,7 +95,8 @@
 		}
 	}
 	/*$logica = new LogicaPerfil();
-	//$status = $logica->validarModificarPerfil("root",0,0,0);
+	$logica->validarModificarPerfil('Root', 'Admin', 1,1,1);*/
+	/*//$status = $logica->validarModificarPerfil("root",0,0,0);
 	$status = $logica->validarRegistrarPerfil("Admin",1,1,1);
 	foreach ($status as $key) {
 		echo $key;
