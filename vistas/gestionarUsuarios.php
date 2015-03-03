@@ -58,7 +58,9 @@
 						 <td> <?php echo $key['nombre_usuario'];?> </td>
 						 <td> <?php echo $key['email'];?> </td>
 						 <td> <?php echo $key['tipo_perfil'];?> </td>      
-						 <td> <?php echo $key['estado'];?> </td> <?php
+						 <td> <?php echo $key['estado'];?> </td> 
+						 <td><a href="../controladores/CoordinadorUsuario.php?editUsuario=<?php echo $key['documento'] ?>" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
+						 <td><a href="../controladores/CoordinadorUsuario.php?downUsuario=<?php echo $key['documento'] ?>" class="grey-text text-darken-3" name="down" id="down"><i class="mdi-action-thumb-down small"></i></a></td> <?php
 					?> </tr> <?php 
 				} ?>
 			</tbody>

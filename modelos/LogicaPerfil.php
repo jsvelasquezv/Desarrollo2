@@ -25,9 +25,8 @@
 		public function validarRegistrarPerfil($nombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{
-			if ($nombre =="" or $permisoGestionarUsuarios =="" 
-				or $permisoVender =="" or $permisoGestionarPerfiles =="") {
-				$this->responseRegistrar[0] = "Todos los campos son requeridos";
+			if ($nombre =="") {
+				$this->responseRegistrar[0] = "Ingresa un nombre";
 			}
 			if ($this->validar->esMayor($nombre,30)) {
 				$this->responseRegistrar[1] = "El nombre debe contener maximo 30 caracteres";
@@ -48,7 +47,10 @@
 					$permisoVender, $permisoGestionarPerfiles);
 				$this->responseRegistrar[0] = "Perfil creado con exito";			
 			}	
-			return $this->responseRegistrar;
+			// echo $nombre;
+			// echo $permisoGestionarUsuarios;
+			// echo $permisoVender;
+			// echo $permisoGestionarPerfiles;
 		}
 
 		public function validarModificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
@@ -71,8 +73,11 @@
 				$this->perfil->modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 					$permisoVender, $permisoGestionarPerfiles);
 				$this->responseModificar[0] = "Perfil modificado con exito";			
-			}	
-			return $this->responseModificar;
+			}
+			echo $nombre;
+			echo $permisoGestionarUsuarios;
+			echo $permisoVender;
+			echo $permisoGestionarPerfiles;	
 		}
 
 		public function validarConsultarPerfil($parametro)

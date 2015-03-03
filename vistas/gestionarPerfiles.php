@@ -61,7 +61,7 @@ include_once '../scripts/gestionarPerfiles.php';
 			</tbody>
 		</table>	
 		</div>
-		<div class="row">
+		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
 			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#modal1"><i class="mdi-content-add"></i></a>
 		</div>
 		<div class="valign-wrapper">

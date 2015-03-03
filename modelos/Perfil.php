@@ -23,6 +23,10 @@
 			$perfil->permisoVender = $permisoVender;
 			$perfil->permisoGestionarPerfiles = $permisoGestionarPerfiles;
 			R::store($perfil);
+			// echo $perfil->nombre;
+			// echo $perfil->permisoGestionarUsuarios;
+			// echo $perfil->permisoVender;
+			// echo $perfil->permisoGestionarPerfiles;
 			R::close();
 		}
 

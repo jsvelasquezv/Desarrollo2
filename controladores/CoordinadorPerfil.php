@@ -11,7 +11,6 @@
 		header('Location: ../vistas/editarPerfil.php?nombre='.$editable['nombre'].'&permiso1='
 		.$editable['permisoGestionarUsuarios'].'&permiso2='.$editable['permisoVender']
 		.'&permiso3='.$editable['permisoGestionarPerfiles']);
-
 	}
 	if (isset($_POST['crear'])) {
 		$nombre = $_POST['nombre'];
@@ -20,7 +19,7 @@
 		$permiso3;
 		if (!isset($_POST['permiso1'])) {
 			$permiso1 = 0;
-			echo $permiso1;
+			// echo $permiso1;
 		}elseif ($_POST['permiso1']==true) {
 			$permiso1 = 1;
 			echo $permiso1;
@@ -31,7 +30,7 @@
 			echo $permiso2;
 		}elseif ($_POST['permiso2']==true) {
 			$permiso2 = 1;
-			echo $permiso2;
+			// echo $permiso2;
 		}
 
 		if (!isset($_POST['permiso3'])) {
@@ -39,7 +38,7 @@
 			echo $permiso3;
 		}elseif ($_POST['permiso3']==true) {
 			$permiso3 = 1;
-			echo $permiso3;
+			// echo $permiso3;
 		}		
 		$coordinador = new CoordinadorPerfil();
 		$coordinador->registrarPerfil($nombre,$permiso1,$permiso2,$permiso3);
@@ -92,6 +91,12 @@
 			//$editable = $this->logicaPerfil->validarConsultarPerfil();
 			$this->logicaPerfil->validarModificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 												 $permisoVender, $permisoGestionarPerfiles);
+			// echo $nombre;
+			// echo $nuevoNombre;
+			// echo $permisoGestionarUsuarios;
+			// echo $permisoVender;
+			// echo $permisoGestionarPerfiles;
+			
 			header('Location: ../vistas/gestionarPerfiles.php');
 		}
 		public function buscarPerfil($idPerfil) //$idPerfil:int
@@ -104,6 +109,12 @@
 		{
 			$this->logicaPerfil->validarRegistrarPerfil($nombre, $permisoGestionarUsuarios, 
 												$permisoVender, $permisoGestionarPerfiles);
+
+			// echo $nombre;
+			// echo $permisoGestionarUsuarios;
+			// echo $permisoVender;
+			// echo $permisoGestionarPerfiles;
+
 			header('Location: ../vistas/gestionarPerfiles.php');
 		}
 	}

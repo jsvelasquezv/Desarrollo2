@@ -30,12 +30,12 @@
 						<input type="hidden" name="antiguo" value="<?php echo $nombre; ?>">
 						<h6>Permisos:</h6>
 						<p>
-							<input type="checkbox" id="permiso1" name="permiso1"/>
-							<label for="permiso1">Vender</label>
+							<input type="checkbox" id="permiso2" name="permiso2"/>
+							<label for="permiso2">Vender</label>
 						</p>
 						<p>
-							<input type="checkbox" id="permiso2" name="permiso2"/>
-							<label for="permiso2">Gestionar Usuarios</label>
+							<input type="checkbox" id="permiso1" name="permiso1"/>
+							<label for="permiso1">Gestionar Usuarios</label>
 						</p>
 						<p>
 							<input type="checkbox" id="permiso3" name="permiso3"/>
