@@ -63,13 +63,22 @@
 		public function getPerfiles()
 		{
 			R::selectDatabase('default');
-        	$perfiles = R::findAll('perfil');
+            $perfiles = R::findAll('perfil');
+        	//$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
+        	// var_dump($perfil);
         	R::close();
+
         	return $perfiles;
 		}
 
 	}
 
+	// $perfil = new Perfil();
+	// $perfiles = $perfil->getPerfiles();
+	// foreach ($perfiles as $key) {
+	// 	echo $key['id'];
+	// 	echo $key['nombre'];
+	// }
 	/*$perfil = new Perfil();
 	$perfil->modificarPerfil('Admin','Root',1,1,1);*/
 

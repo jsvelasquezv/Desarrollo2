@@ -1,20 +1,19 @@
 <?php 
-    session_start(); 
-    // if (!isset($_SESSION['perfilesCargados'])) {
-    //   header('Location: scripts/init.php');
-    // }
-    // $sesion = $_SESSION['perfilesCargados'];
-    // echo $sesion[0];
+  require_once '../controladores/Principal.php';
+  $principal = new Principal();
+  $principal->cargarPerfiles();
+  session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="assets/materialize/css/materialize.min.css" type="text/css">
-  <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
-  <script src="assets/jquery-2.1.3.min.js"></script>
-  <script src="assets/materialize/js/materialize.min.js"></script>
-  <script src="assets/js/styles.js"></script>
+  <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css" type="text/css">
+  <link rel="stylesheet" href="../assets/css/styles.css" type="text/css">
+  <script src="../assets/jquery-2.1.3.min.js"></script>
+  <script src="../assets/materialize/js/materialize.min.js"></script>
+  <script src="../assets/js/styles.js"></script>
 
   <title>Desarrollo2</title>
 </head>
@@ -26,17 +25,17 @@
         <a href="#!" class="brand-logo">Logo</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         <ul class="right hide-on-med-and-down">          
-          <li><a href="scripts/salir.php">Salir</a></li>
+          <li><a href="../scripts/salir.php">Salir</a></li>
             <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <?php } ?>
         </ul>      
         <ul id ="dropdown1" class="dropdown-content">
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
-            <li><a href="vistas/gestionarPerfiles.php">Perfiles</a></li>
+            <li><a href="../vistas/gestionarPerfiles.php">Perfiles</a></li>
           <?php } ?>
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
-            <li><a href="vistas/gestionarUsuarios.php">Usuarios</a></li>
+            <li><a href="../vistas/gestionarUsuarios.php">Usuarios</a></li>
           <?php } ?>
         </ul>
 
@@ -80,7 +79,7 @@
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Ingresar</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">            
+          <form action="../controladores/CoordinadorUsuario.php" method="post">            
             <div class="input-field col m4 l2">
               <input id="username" type="text" class="validate" name="username">
               <label for="username">Usuario</label>
@@ -104,7 +103,7 @@
     <div class="card login">
       <div class="card-content">
         <span class="card-title teal-text">Resgistrarse</span>  
-        <form action="controladores/CoordinadorUsuario.php" method="post">            
+        <form action="../controladores/CoordinadorUsuario.php" method="post">            
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre">

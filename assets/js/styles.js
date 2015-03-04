@@ -9,3 +9,4 @@ $( document ).ready(function(){
 $("#edit").on('click', function() {
    $('#modal1').openModal();
 });
+

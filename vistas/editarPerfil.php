@@ -3,6 +3,7 @@
  $permiso1 = $_GET['permiso1'];
  $permiso2 = $_GET['permiso2'];
  $permiso3 = $_GET['permiso3'];
+ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +17,46 @@
 	<title>Desarrollo2</title>
 </head>
 <body>
+	<?php if ((isset($_SESSION['logueado']))){ ?>
+	<nav class="teal">
+		<div class="nav-wrapper">
+			<div class="col s12">
+				<a href="#!" class="brand-logo">Logo</a>
+				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="../scripts/salir.php">Salir</a></li>
+					<?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+					<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+					<?php } ?>
+				</ul>      
+				<ul id ="dropdown1" class="dropdown-content">
+					<?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+					<li><a href="gestionarPerfiles.php">Perfiles</a></li>
+					<?php } ?>
+					<?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+					<li><a href="gestionarUsuarios.php">Usuarios</a></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<?php }else{ header('Location: ../index.php');}?>    
 	<div class="container">
 		<div class="row">			
 		<div class="col s12 m8 offset-m2 l6 offset-l3">
 			<div class="card">
 				<div class="card-content">
 					<span class="card-title teal-text">Editar Perfil</span>  
-					<form action="../controladores/CoordinadorPerfil.php" method="post">            
+					<form action="../controladores/CoordinadorPerfil.php" method="post">
+						<?php if (isset($_SESSION['eUpdatePerfil'])) {	?>					
+								<div class="card">
+									<div class="card-content">
+									<?php foreach ($_SESSION['eUpdatePerfil'] as $key) { ?>
+										<p><?php echo $key; ?></p>
+									<?php } ?>
+									</div>
+								</div>        
+						<?php } ?>              
 						<div class="input-field">
 							<input id="nombre" type="text" class="validate" name="nuevoNombre" value="<?php echo $nombre; ?>">
 							<label for="nombre">Nombre</label>

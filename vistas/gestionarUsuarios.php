@@ -108,9 +108,11 @@
           <div class="row">
             <div class="col s12">
               <select name="perfilSelec">
-                <option value="1">Perfil 1</option>
-                <option value="2">Perfil 2</option>
-                <option value="3">Perfil 3</option>
+              	<?php foreach ($_SESSION['[perfiles'] as $key => $value) { ?>
+                	<option value="<?php echo $key['id']; ?>"><?php echo $key['nombre']; ?></option>
+              	<?php } ?>
+               <!--  <option value="2">Perfil 2</option>
+                <option value="3">Perfil 3</option> -->
               </select>
             </div>
           </div>

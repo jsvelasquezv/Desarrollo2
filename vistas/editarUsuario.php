@@ -55,13 +55,14 @@
             </div>
             <div class="col s6">
               <select name="perfilSelec">
+              	<?php  ?>
                 <option value="1">Perfil 1</option>
                 <option value="2">Perfil 2</option>
                 <option value="3">Perfil 3</option>
               </select>
             </div>
           </div>
-          <input class="btn-flat orange-text" type="submit" value="Registrarse" name="editar">
+          <input class="btn-flat orange-text" type="submit" value="Guardar" name="editar">
         </form>                     
       </div>
     </div>

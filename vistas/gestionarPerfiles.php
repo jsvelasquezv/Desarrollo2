@@ -59,18 +59,27 @@ include_once '../scripts/gestionarPerfiles.php';
 					?> </tr> <?php 
 				} ?>
 			</tbody>
-		</table>	
+		</table>
 		</div>
 		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#modal1"><i class="mdi-content-add"></i></a>
+			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#modal"><i class="mdi-content-add"></i></a>
 		</div>
 		<div class="valign-wrapper">
 			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
-				<div id="modal1" class="modal modalLogin">
+				<div id="modal" class="modal modalLogin">
 					<div class="card login">
 						<div class="card-content">
 							<span class="card-title teal-text">Crear Perfil</span>  
-							<form action="../controladores/CoordinadorPerfil.php" method="post">            
+							<form action="../controladores/CoordinadorPerfil.php" method="post">  
+								<?php if (isset($_SESSION['eRegistroPerfil'])) {	?>					
+								<div class="card">
+									<div class="card-content">
+									<?php foreach ($_SESSION['eRegistroPerfil'] as $key) { ?>
+										<p><?php echo $key; ?></p>
+									<?php } ?>
+									</div>
+								</div>        
+								<?php } ?>  
 								<div class="input-field col m4 l2 tooltipped" data-position="right" data-tooltip="Este campo es requerido">
 									<input id="nombre" type="text" name="nombre"  required maxlength="30">
 									<label for="nombre">Nombre</label>
@@ -96,6 +105,9 @@ include_once '../scripts/gestionarPerfiles.php';
 				</div>
 			</div>    
 		</div>
+			<?php if (isset($_SESSION['eRegistroPerfil'])) {
+			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
+		} ?>
 	</div>
 </body>
 </html>

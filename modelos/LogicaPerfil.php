@@ -45,7 +45,8 @@
 			{
 				$this->perfil->registrarPerfil($nombre, $permisoGestionarUsuarios, 
 					$permisoVender, $permisoGestionarPerfiles);
-				$this->responseRegistrar[0] = "Perfil creado con exito";			
+				session_start();
+				unset($_SESSION['eRegistroPerfil']);
 			}	
 			// echo $nombre;
 			// echo $permisoGestionarUsuarios;
@@ -68,16 +69,21 @@
 			if (!($this->validar->esAlfabetico($nuevoNombre))){
 				$this->responseModificar[3] = "El nombre debe ser alfabetico";
 			}
+			if (!empty($this->perfil->buscarPerfil($nuevoNombre))) 
+			{
+				$this->responseRegistrar[4] = "El nombre ya existe";
+			}
 			if (empty($this->responseModificar)) 
 			{
 				$this->perfil->modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 					$permisoVender, $permisoGestionarPerfiles);
-				$this->responseModificar[0] = "Perfil modificado con exito";			
+				session_start();
+				unset($_SESSION['eUpdatePerfil']);
 			}
-			echo $nombre;
-			echo $permisoGestionarUsuarios;
-			echo $permisoVender;
-			echo $permisoGestionarPerfiles;	
+			// echo $nombre;
+			// echo $permisoGestionarUsuarios;
+			// echo $permisoVender;
+			// echo $permisoGestionarPerfiles;	
 		}
 
 		public function validarConsultarPerfil($parametro)
@@ -96,10 +102,31 @@
 		public function getPerfiles()
 		{
 			$perfiles = $this->perfil->getPerfiles();
+			// echo $perfiles;
 			return $perfiles;
 		}
+
+		public function getResponseRegistrar()
+		{
+			return $this->responseRegistrar;
+		}
+
+		public function getResponseModificar()
+		{
+			return $this->responseModificar;
+		}
 	}
-	/*$logica = new LogicaPerfil();
+	 // $perfil = new LogicaPerfil();
+	 // $perfil->validarRegistrarPerfil("Hola",1,1,1);
+	// $perfiles = $perfil->getPerfiles();
+	// foreach ($perfiles as $key) {
+	// 	echo $key['id'];
+	// 	echo $key['nombre'];
+	// }
+
+	// $logica = new LogicaPerfil();
+	// $logica->getPerfiles();
+	/*
 	$logica->validarModificarPerfil('Root', 'Admin', 1,1,1);*/
 	/*//$status = $logica->validarModificarPerfil("root",0,0,0);
 	$status = $logica->validarRegistrarPerfil("Admin",1,1,1);

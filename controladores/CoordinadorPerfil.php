@@ -91,6 +91,12 @@
 			//$editable = $this->logicaPerfil->validarConsultarPerfil();
 			$this->logicaPerfil->validarModificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 												 $permisoVender, $permisoGestionarPerfiles);
+
+			$errores = $this->logicaPerfil->getResponseModificar();
+			if (isset($errores)) {
+				session_start();
+				$_SESSION['eUpdatePerfil'] = $this->logicaPerfil->getResponseModificar();
+			}
 			// echo $nombre;
 			// echo $nuevoNombre;
 			// echo $permisoGestionarUsuarios;
@@ -110,12 +116,23 @@
 			$this->logicaPerfil->validarRegistrarPerfil($nombre, $permisoGestionarUsuarios, 
 												$permisoVender, $permisoGestionarPerfiles);
 
+			$errores = $this->logicaPerfil->getResponseRegistrar();
+			if (isset($errores)) {
+				session_start();
+				$_SESSION['eRegistroPerfil'] = $this->logicaPerfil->getResponseRegistrar();				
+			}	
+			
+			// foreach ($_SESSION['eRegistroPerfil'] as $key ) {
+			// 	# code...
+			// echo $key;
+			// }
 			// echo $nombre;
 			// echo $permisoGestionarUsuarios;
 			// echo $permisoVender;
 			// echo $permisoGestionarPerfiles;
-
 			header('Location: ../vistas/gestionarPerfiles.php');
 		}
 	}
+	// $registrar = new CoordinadorPerfil();
+	// $error = $registrar->registrarPerfil("Admin",1,1,1);
 ?>
