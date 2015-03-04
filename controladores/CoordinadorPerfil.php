@@ -96,6 +96,7 @@
 			if (isset($errores)) {
 				session_start();
 				$_SESSION['eUpdatePerfil'] = $this->logicaPerfil->getResponseModificar();
+				header('Location: ')
 			}
 			// echo $nombre;
 			// echo $nuevoNombre;

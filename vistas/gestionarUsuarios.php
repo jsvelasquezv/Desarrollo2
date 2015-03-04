@@ -36,6 +36,7 @@
 		</div>
 	</nav>
 	<?php }else{ header('Location: ../index.php');}?>    
+	<?php $perfiles = $_SESSION['perfiles']; ?>
 	<div class="container">		
 		<table class="hoverable responsive-table">
 			<thead>
@@ -57,7 +58,8 @@
 						 <td> <?php echo $key['apellidos'];?> </td>
 						 <td> <?php echo $key['nombre_usuario'];?> </td>
 						 <td> <?php echo $key['email'];?> </td>
-						 <td> <?php echo $key['tipo_perfil'];?> </td>      
+						 <td> <?php $nom = $perfiles[$key['tipo_perfil']];
+						 echo $nom['nombre'];?> </td>      
 						 <td> <?php echo $key['estado'];?> </td> 
 						 <td><a href="../controladores/CoordinadorUsuario.php?editUsuario=<?php echo $key['documento'] ?>" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
 						 <td><a href="../controladores/CoordinadorUsuario.php?downUsuario=<?php echo $key['documento'] ?>" class="grey-text text-darken-3" name="down" id="down"><i class="mdi-action-thumb-down small"></i></a></td> <?php
@@ -108,10 +110,10 @@
           <div class="row">
             <div class="col s12">
               <select name="perfilSelec">
-              	<?php foreach ($_SESSION['[perfiles'] as $key => $value) { ?>
-                	<option value="<?php echo $key['id']; ?>"><?php echo $key['nombre']; ?></option>
+              	<?php foreach ($perfiles as $key) { ?>
+                	<option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
               	<?php } ?>
-               <!--  <option value="2">Perfil 2</option>
+                <!-- <option value="2">Perfil 2</option>
                 <option value="3">Perfil 3</option> -->
               </select>
             </div>
