@@ -72,6 +72,15 @@
 			if ($this->validar->esMayor($nombreUsuario, 30)){
 				$this->responseRegistro[13] = "El nombre de usuario debe contener maximo 30 caracteres";
 			}
+			if (!empty($this->usuario->buscarUsuario($documento))) {
+				$this->responseRegistro[14] = "El documento ya esta registrado";
+			}
+			if (!empty($this->usuario->buscarUsuarioE($email))) {
+				$this->responseRegistro[15] = "El email ya esta registrado";
+			}
+			if (!empty($this->usuario->buscarUsuario($nombreUsuario))) {
+				$this->responseRegistro[16] = "El nombre de usuario ya esta registrado";
+			}
 			if (empty($this->responseRegistro)) 
 			{
 				$usuarioCreado = $this->usuario->registrarUsuario($documento, $nombre, $apellidos, $email, 
@@ -142,6 +151,15 @@
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){
 				$this->responseModificacion[11] = "El nombre de usuario debe contener maximo 30 caracteres";
+			}
+			if (!empty($this->usuario->buscarUsuario($documento))) {
+				$this->responseModificacion[12] = "El documento ya esta registrado";
+			}
+			if (!empty($this->usuario->buscarUsuarioE($email))) {
+				$this->responseModificacion[13] = "El email ya esta registrado";
+			}
+			if (!empty($this->usuario->buscarUsuario($nombreUsuario))) {
+				$this->responseModificacion[14] = "El nombre de usuario ya esta registrado";
 			}
 			if (empty($this->responseModificacion))
 			{
