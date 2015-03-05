@@ -69,14 +69,23 @@
 		</table>	
 	</div>
 	<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-		<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#modal1"><i class="mdi-content-add"></i></a>
+		<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#modal"><i class="mdi-content-add"></i></a>
 	</div>
 	<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
-   <div id="modal1" class="modal modalLogin">
+   <div id="modal" class="modal modalLogin">
     <div class="card login">
       <div class="card-content">
         <span class="card-title teal-text">Resgistrar</span>  
-        <form action="../controladores/CoordinadorUsuario.php" method="post">            
+        <form action="../controladores/CoordinadorUsuario.php" method="post"> 
+        	<?php if (isset($_SESSION['eRegistroUsuario'])) {	?>					
+				<div class="card">
+					<div class="card-content">
+						<?php foreach ($_SESSION['eRegistroUsuario'] as $key) { ?>
+							<p><?php echo $key; ?></p>
+						<?php } ?>
+					</div>
+				</div>        
+			<?php } ?>             
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre">
@@ -123,6 +132,9 @@
       </div>
     </div>
   </div>
+  <?php if (isset($_SESSION['eRegistroUsuario'])) {
+			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
+		} ?>
 </div>   
 </body>
 </html>

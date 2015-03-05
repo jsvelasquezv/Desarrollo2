@@ -81,6 +81,13 @@
 		{
 			$this->logicaUsuario->validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $perfilID);
+			$errores = $this->logicaUsuario->getResponseRegistrar();
+			if (isset($errores)) {
+				session_start();
+				$_SESSION['eRegistroUsuario'] = $this->logicaUsuario->getResponseRegistrar();
+			}else{
+				header('Location: ../vistas/gestionarUsuarios.php');
+			}
 		}
 		
 		public function modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, 

@@ -55,6 +55,15 @@
         <span class="card-title teal-text">Editar Usuario</span>  
         <?php $perfiles = $_SESSION['perfiles']; ?>
         <form action="../controladores/CoordinadorUsuario.php" method="post">  
+          <?php if (isset($_SESSION['eUpdateUsuario'])) {  ?>
+                <div class="card">
+                  <div class="card-content">
+                  <?php foreach ($_SESSION['eUpdateUsuario'] as $key) { ?>
+                    <p><?php echo $key; ?></p>
+                  <?php } ?>
+                  </div>
+                </div>        
+            <?php } ?>     
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre" value="<?php echo $nombre; ?>">

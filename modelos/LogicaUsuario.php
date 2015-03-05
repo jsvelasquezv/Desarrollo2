@@ -118,13 +118,19 @@
 				$this->responseModificacion[6] = "El apellido debe ser alfabetico";
 			}
 			if (!($this->validar->esNumerico($documento))){
-				$this->responseModificacion[7] = "El docuemnto debe ser numerico";
+				$this->responseModificacion[7] = "El documento debe ser numerico";
+			}
+			if (!($this->validar->esMayor($documento, 15))){
+				$this->responseModificacion[8] = "El documento debe contener maximo 15 digitos";
+			}
+			if (!($this->validar->esMenor($documento, 8))){
+				$this->responseModificacion[9] = "El documento debe contener minimo 8 digitos";
 			}
 			if ($this->validar->esMenor($nombreUsuario, 4)){
-				$this->responseModificacion[8] = "El nombre de usuario debe contener minimo 4 caracteres";
+				$this->responseModificacion[10] = "El nombre de usuario debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){
-				$this->responseModificacion[9] = "El nombre de usuario debe contener maximo 30 caracteres";
+				$this->responseModificacion[11] = "El nombre de usuario debe contener maximo 30 caracteres";
 			}
 			if (empty($this->responseModificacion))
 			{
@@ -182,7 +188,7 @@
 			return $usuarios;
 		}
 
-		public function getResponseRegistro()
+		public function getResponseRegistrar()
 		{
 			return $this->responseRegistro;
 		}
