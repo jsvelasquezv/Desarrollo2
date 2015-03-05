@@ -96,7 +96,12 @@
 			if (isset($errores)) {
 				session_start();
 				$_SESSION['eUpdatePerfil'] = $this->logicaPerfil->getResponseModificar();
-				header('Location: ')
+				header('Location: ../vistas/editarPerfil.php?nombre='.$nombre.'&permiso1='.$permisoGestionarUsuarios
+					.'&permiso2='.$permisoVender.'&permiso3='.$permisoGestionarPerfiles);
+			}
+			else
+			{
+				header('Location: ../vistas/gestionarPerfiles.php');
 			}
 			// echo $nombre;
 			// echo $nuevoNombre;
@@ -104,7 +109,6 @@
 			// echo $permisoVender;
 			// echo $permisoGestionarPerfiles;
 			
-			header('Location: ../vistas/gestionarPerfiles.php');
 		}
 		public function buscarPerfil($idPerfil) //$idPerfil:int
 		{

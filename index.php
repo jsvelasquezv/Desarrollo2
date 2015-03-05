@@ -5,6 +5,10 @@
     // }
     // $sesion = $_SESSION['perfilesCargados'];
     // echo $sesion[0];
+    if (isset($_SESSION['eLogin'])) {
+      $erroresLogin = $_SESSION['eLogin'];
+      echo $erroresLogin;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +29,11 @@
       <div class="col s12">
         <a href="#!" class="brand-logo">Logo</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-        <ul class="right hide-on-med-and-down">          
+        <ul class="right hide-on-med-and-down">
+         <!--  <form action="controladores/Principal.php">
+            <input type="hidden" value="salir" name="salir">
+            <button name="salir" class="btn-flat white-text">Salir</button>
+          </form> -->
           <li><a href="scripts/salir.php">Salir</a></li>
             <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -80,7 +88,16 @@
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Ingresar</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">            
+          <form action="controladores/CoordinadorUsuario.php" method="post">   
+              <?php if (isset($erroresLogin)) {  ?>          
+                <div class="card">
+                  <div class="card-content">
+                  <?php foreach ($erroresLogin as $key) { ?>
+                    <p><?php echo $key; ?></p>
+                  <?php } ?>
+                  </div>
+                </div>        
+              <?php } ?>           
             <div class="input-field col m4 l2">
               <input id="username" type="text" class="validate" name="username">
               <label for="username">Usuario</label>

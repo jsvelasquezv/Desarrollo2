@@ -48,7 +48,7 @@
 				<div class="card-content">
 					<span class="card-title teal-text">Editar Perfil</span>  
 					<form action="../controladores/CoordinadorPerfil.php" method="post">
-						<?php if (isset($_SESSION['eUpdatePerfil'])) {	?>					
+						<?php if (isset($_SESSION['eUpdatePerfil'])) {	?>
 								<div class="card">
 									<div class="card-content">
 									<?php foreach ($_SESSION['eUpdatePerfil'] as $key) { ?>

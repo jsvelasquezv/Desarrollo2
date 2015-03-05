@@ -129,7 +129,9 @@
 			if (empty($this->responseModificacion))
 			{
 				//echo $tipoPerfil;
-				$usuarioModificado = $this->usuario->modificarUsuario($documento, $documentoN, $nombre, $apellido, $email, $nombreUsuario, $tipoPerfil);
+				$this->usuario->modificarUsuario($documento, $documentoN, $nombre, $apellido, $email, $nombreUsuario, $tipoPerfil);
+				session_start();
+				unset($_SESSION['eUpdateUsuario']);
 				header('Location: ../vistas/gestionarUsuarios.php');
 			}
 		}
@@ -142,6 +144,7 @@
 			if (empty($this->response)) {
 				$this->responseBaja[0] = "Usuario dado de baja con exito";
 				$this->usuario->darDeBajaUsuario($documento);
+				header('Location: ../vistas/gestionarUsuarios.php');
 			}
 		}
 
@@ -158,14 +161,7 @@
 			{
 				$this->responseLogin[1] = "Contrasena incorrecta";
 			}
-			elseif (!empty($this->responseLogin)) 
-			{
-				foreach ($this->responseLogin as $key) {
-					echo $key;
-				}
-				header('Location: ../index.php');
-			}
-			else
+			elseif (empty($this->responseLogin)) 
 			{
 				$perfilAsignado = $this->perfil->buscarPerfil($usuario['tipo_perfil']);
 				session_start();
@@ -174,6 +170,8 @@
 				$_SESSION['permisoDeVender'] = $perfilAsignado['permiso_vender'];
 				$_SESSION['permisoDeGestionarPerfiles'] = $perfilAsignado['permiso_gestionar_perfiles'];
 				$_SESSION['permisoDeGestionarUsuarios'] = $perfilAsignado['permiso_gestionar_usuarios'];
+				session_start();
+				unset($_SESSION['eLogin']);
 				header('Location: ../index.php');
 			}
 		}
@@ -192,6 +190,11 @@
 		public function getResponseLogin()
 		{
 			return $this->responseLogin;
+		}
+
+		public function getResponseModificar()
+		{
+			return $this->responseModificacion;
 		}
 
 		public function getResponseDarDeBaja()

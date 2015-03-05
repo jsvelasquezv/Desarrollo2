@@ -39,6 +39,7 @@
 		$editable = $coordinador->buscarUsuario($editUsuario);
 		header('Location: ../vistas/editarUsuario.php?documento='.$editable['documento'].'&nombre='.$editable['nombre'].
 			'&apellidos='.$editable['apellidos'].'&email='.$editable['email'].'&username='.$editable['nombre_usuario']);
+
 	}elseif (isset($_POST['editar'])) {
 		$documento = $_POST['antiguo'];
 		$documentoN = $_POST['documento'];
@@ -50,6 +51,9 @@
 		$coordinador = new CoordinadorUsuario();
 		//echo $perfilID;
 		$coordinador->modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, $username, $perfilID);
+	}elseif (isset($_GET['down'])) {
+		$coordinador = new CoordinadorUsuario();
+		$coordinador->dardeBajaUsuario($_GET['down']);
 	}
 
 
@@ -66,7 +70,10 @@
 
 		public function loguear($nombreUsuario, $password)
 		{
-			$this->logicaUsuario->validarLogin($nombreUsuario,$password);		
+			$this->logicaUsuario->validarLogin($nombreUsuario,$password);	
+			session_start();
+			$_SESSION['eRegistroPerfil'] = $this->logicaUsuario->getResponseLogin();
+			header('Location: ../index.php');	
 		}
 
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
@@ -82,6 +89,15 @@
 			//echo $tipoPerfil;
 			$this->logicaUsuario->validarModificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, 
 			$nombreUsuario, $tipoPerfil);
+			$errores = $this->logicaUsuario->getResponseModificar();
+			if (isset($errores)) {
+				session_start();
+				$_SESSION['eUpdateUsuario'] = $this->logicaUsuario->getResponseModificar();
+				header('Location: ../vistas/editarUsuario.php?nombre=');
+			}
+			else {
+				header('Location: ../vistas/gestionarUsuarios.php');
+			}
 		}
 		public function buscarUsuario($documento)
 		{
