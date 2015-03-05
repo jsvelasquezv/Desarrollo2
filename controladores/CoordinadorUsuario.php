@@ -107,6 +107,7 @@
 					header('Location: ../vistas/gestionarUsuarios.php');
 				}
 			}else {
+				echo "<script languaje='javascript'>alert('Usuario Creado con exito')</script>";
 				header('Location: ../vistas/gestionarUsuarios.php');
 			}
 		}

@@ -197,7 +197,7 @@
 
 		public function validarLogin($nombreUsuario, $password)
 		{
-			$usuario = $this->usuario->buscarUsuarioE($nombreUsuario);
+			$usuario = $this->usuario->buscarUsuario($nombreUsuario);
 			//$user2 = $this->usuario->buscarUsuarioN($nombreUsuario);
 			$user2 = $usuario;
 			if (empty($usuario)) 
@@ -213,7 +213,7 @@
 				$perfilAsignado = $this->perfil->buscarPerfil($usuario['tipo_perfil']);
 				session_start();
 				$_SESSION['logueado'] = true;
-				$_SESSION['user'] = $usuario['email'];
+				$_SESSION['user'] = $usuario['nombre_usuario'];
 				$_SESSION['permisoDeVender'] = $perfilAsignado['permiso_vender'];
 				$_SESSION['permisoDeGestionarPerfiles'] = $perfilAsignado['permiso_gestionar_perfiles'];
 				$_SESSION['permisoDeGestionarUsuarios'] = $perfilAsignado['permiso_gestionar_usuarios'];
