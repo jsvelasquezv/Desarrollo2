@@ -59,7 +59,7 @@
 		{
 			R::selectDatabase('default');
 
-        	if (ctype_alpha($parametro)) 
+        	if (ctype_alnum($parametro)) 
         	{
         		$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$parametro]);
         		R::close();
@@ -99,9 +99,9 @@
 		}
 	}
 
-	 // $user = new Usuario();
+	$user = new Usuario();
 	// $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
 	// $user->asignarPerfil("Gasimba",116264525);
-	 // $a = $user->buscarUsuarioN("juseve");
-	 // echo $a['password'];
+	 $a = $user->buscarUsuario("barreroide123");
+	 echo $a;
 ?>

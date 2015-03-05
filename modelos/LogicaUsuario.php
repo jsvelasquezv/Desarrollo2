@@ -202,7 +202,7 @@
 			$user2 = $usuario;
 			if (empty($usuario)) 
 			{
-				$this->responseLogin[0] = "El correo no esta registrado";
+				$this->responseLogin[0] = "El usuario no esta registrado";
 			}
 			elseif($password != $usuario['password'])
 			{
