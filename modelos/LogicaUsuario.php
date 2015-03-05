@@ -140,10 +140,10 @@
 			if (!($this->validar->esNumerico($documento))){
 				$this->responseModificacion[7] = "El documento debe ser numerico";
 			}
-			if (!($this->validar->esMayor($documento, 15))){
+			if (($this->validar->esMayor($documento, 15))){
 				$this->responseModificacion[8] = "El documento debe contener maximo 15 digitos";
 			}
-			if (!($this->validar->esMenor($documento, 8))){
+			if (($this->validar->esMenor($documento, 8))){
 				$this->responseModificacion[9] = "El documento debe contener minimo 8 digitos";
 			}
 			if ($this->validar->esMenor($nombreUsuario, 4)){
@@ -152,15 +152,27 @@
 			if ($this->validar->esMayor($nombreUsuario, 30)){
 				$this->responseModificacion[11] = "El nombre de usuario debe contener maximo 30 caracteres";
 			}
-			if (!empty($this->usuario->buscarUsuario($documento))) {
+			$comparador = $this->usuario->buscarUsuario($documento);
+			if ($comparador['documento']!=$documentoN and (!empty($this->usuario->buscarUsuario($documentoN)))){
 				$this->responseModificacion[12] = "El documento ya esta registrado";
 			}
-			if (!empty($this->usuario->buscarUsuarioE($email))) {
-				$this->responseModificacion[13] = "El email ya esta registrado";
+			//$comparado2 = $this->usuario->buscarUsuario($nombreUsuario);
+			if ($comparador['nombre_usuario']!=$nombreUsuario and (!empty($this->usuario->buscarUsuario($nombreUsuario)))){
+				$this->responseModificacion[13] = "El nombre de usuario ya esta registrado";
 			}
-			if (!empty($this->usuario->buscarUsuario($nombreUsuario))) {
-				$this->responseModificacion[14] = "El nombre de usuario ya esta registrado";
+			//$comparado3 = $this->usuario->buscarUsuarioE($documento);
+			if ($comparador['email']!=$email and (!empty($this->usuario->buscarUsuarioE($email)))){
+				$this->responseModificacion[14] = "El correo ya esta registrado";
 			}
+			// if (!empty($this->usuario->buscarUsuario($documento)){
+			// 	$this->responseModificacion[12] = "El documento ya esta registrado";
+			// }
+			// if (!empty($this->usuario->buscarUsuarioE($email))) {
+			// 	$this->responseModificacion[13] = "El email ya esta registrado";
+			// }
+			// if (!empty($this->usuario->buscarUsuario($nombreUsuario))) {
+			// 	$this->responseModificacion[14] = "El nombre de usuario ya esta registrado";
+			// }
 			if (empty($this->responseModificacion))
 			{
 				//echo $tipoPerfil;
