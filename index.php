@@ -99,7 +99,7 @@
               <?php } ?>           
             <div class="input-field col m4 l2">
               <input id="username" type="text" class="validate" name="username">
-              <label for="username">Usuario</label>
+              <label for="username">Correo</label>
             </div>
             <div class="input-field">
               <input id="password" type="password" class="validate" name="password">
