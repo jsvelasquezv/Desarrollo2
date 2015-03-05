@@ -24,9 +24,7 @@
 			$correo = $_POST['correo'];
 			$coordinador = new CoordinadorUsuario();
 			$coordinador->recuperar($correo);
-		}
-
-		
+		}		
 	}elseif (isset($_POST["registrarse"])) {
 		$documento = $_POST['documento'];
 		$nombre = $_POST['nombre'];
@@ -103,8 +101,11 @@
 			if (isset($errores)) {
 				session_start();
 				$_SESSION['eRegistroUsuario'] = $this->logicaUsuario->getResponseRegistrar();
-			}elseif ($origen=='index') {
-				header('Location: ../index.php');
+				if ($origen=='index') {
+					header('Location: ../index.php');
+				}else{
+					header('Location: ../vistas/gestionarUsuarios.php');
+				}
 			}else {
 				header('Location: ../vistas/gestionarUsuarios.php');
 			}

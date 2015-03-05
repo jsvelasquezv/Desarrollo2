@@ -52,19 +52,25 @@
 				$this->responseRegistro[6] = "El apellido debe ser alfabetico";
 			}
 			if (!($this->validar->esNumerico($documento))){
-				$this->responseRegistro[7] = "El docuemnto debe ser numerico";
+				$this->responseRegistro[7] = "El documento debe ser numerico";
+			}
+			if (($this->validar->esMayor($documento, 15))){
+				$this->responseRegistro[8] = "El documento debe contener maximo 15 digitos";
+			}
+			if (($this->validar->esMenor($documento,8))){
+				$this->responseRegistro[9] = "El documento debe contener minimo 8 digitos";
 			}
 			if ($this->validar->esMenor($password, 4)){
-				$this->responseRegistro[8] = "El password debe contener minimo 4 caracteres";
+				$this->responseRegistro[10] = "El password debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($password, 30)){
-				$this->responseRegistro[9] = "El password debe contener maximo 30 caracteres";
+				$this->responseRegistro[11] = "El password debe contener maximo 30 caracteres";
 			}
 			if ($this->validar->esMenor($nombreUsuario, 4)){
-				$this->responseRegistro[10] = "El nombre de usuario debe contener minimo 4 caracteres";
+				$this->responseRegistro[12] = "El nombre de usuario debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){
-				$this->responseRegistro[11] = "El nombre de usuario debe contener maximo 30 caracteres";
+				$this->responseRegistro[13] = "El nombre de usuario debe contener maximo 30 caracteres";
 			}
 			if (empty($this->responseRegistro)) 
 			{
