@@ -70,7 +70,6 @@
 			{
 				$usuarioCreado = $this->usuario->registrarUsuario($documento, $nombre, $apellidos, $email, 
 					$nombreUsuario, $password, $ID);
-				$this->responseRegistro[0] = "Perfil creado con exito";		
 				return $usuarioCreado;
 			}		
 		}
