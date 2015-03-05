@@ -73,6 +73,14 @@
         	}
 		}
 
+		public function buscarUsuarioE($email)
+		{
+			R::selectDatabase('default');
+			$usuario = R::findOne('usuario', 'email = ?',[$email]);
+        	R::close();
+			return $usuario;
+		}
+
 		public function darDeBajaUsuario($documento)
 		{
 			R::selectDatabase('default');

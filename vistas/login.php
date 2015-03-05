@@ -1,23 +1,20 @@
 <?php 
-    session_start();
-    // unset($_SESSION['eLogin']);
-    // unset($_SESSION['eRegistroUsuario']);
-    if (isset($_SESSION['eLogin'])) {
-      $erroresLogin = $_SESSION['eLogin'];
-    }
-    if (isset($_SESSION['eRegistroUsuario'])) {
-      $erroresRegistro = $_SESSION['eRegistroUsuario'];
-    }
+    session_start(); 
+    // if (!isset($_SESSION['perfilesCargados'])) {
+    //   header('Location: scripts/init.php');
+    // }
+    // $sesion = $_SESSION['perfilesCargados'];
+    // echo $sesion[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="assets/materialize/css/materialize.min.css" type="text/css">
-  <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
-  <script src="assets/jquery-2.1.3.min.js"></script>
-  <script src="assets/materialize/js/materialize.min.js"></script>
-  <script src="assets/js/styles.js"></script>
+  <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css" type="text/css">
+  <link rel="stylesheet" href="../assets/css/styles.css" type="text/css">
+  <script src="../assets/jquery-2.1.3.min.js"></script>
+  <script src="../assets/materialize/js/materialize.min.js"></script>
+  <script src="../assets/js/styles.js"></script>
 
   <title>Desarrollo2</title>
 </head>
@@ -40,10 +37,10 @@
         </ul>      
         <ul id ="dropdown1" class="dropdown-content">
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
-            <li><a href="vistas/gestionarPerfiles.php">Perfiles</a></li>
+            <li><a href="../vistas/gestionarPerfiles.php">Perfiles</a></li>
           <?php } ?>
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
-            <li><a href="vistas/gestionarUsuarios.php">Usuarios</a></li>
+            <li><a href="../vistas/gestionarUsuarios.php">Usuarios</a></li>
           <?php } ?>
         </ul>
 
@@ -87,7 +84,7 @@
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Ingresar</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">   
+          <form action="../controladores/CoordinadorUsuario.php" method="post">   
               <?php if (isset($erroresLogin)) {  ?>          
                 <div class="card">
                   <div class="card-content">
@@ -106,16 +103,13 @@
               <label for="password">Contrasena</label>
             </div>  
             <input class="btn-flat orange-text" type="submit" value="Ingresar" name="ingresar">        
-            <a href="#modal3" class="modal-trigger text-darken-2">Olvide mi contrasena</a>
+            <button class="btn-flat orange-text" name="recuperar">Olvide mi contrasena</button>
           </form>                     
         </div>
       </div>
     </div>
   </div>    
 </div>
-<?php if (isset($erroresLogin)) {
-      echo "<script language='javascript'> $('#modal1').openModal(); </script>"; 
-    } ?>
 
 <div class="valign-wrapper">
   <div class="col s12 m8 offset-m2 l4 offset-l3 valign">
@@ -123,16 +117,7 @@
     <div class="card login">
       <div class="card-content">
         <span class="card-title teal-text">Resgistrarse</span>  
-        <form action="controladores/CoordinadorUsuario.php" method="post">  
-            <?php if (isset($erroresRegistro)) {  ?>          
-                <div class="card">
-                  <div class="card-content">
-                  <?php foreach ($erroresRegistro as $key) { ?>
-                    <p><?php echo $key; ?></p>
-                  <?php } ?>
-                  </div>
-                </div>        
-              <?php } ?>         
+        <form action="../controladores/CoordinadorUsuario.php" method="post">            
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre">
@@ -173,39 +158,12 @@
               </select> -->
             </div>
           </div>
-          <div class="row">
-            <input class="btn-flat orange-text" type="submit" value="Registrarse" name="registrarse">
-            <input class="btn-flat orange-text" type="submit" value="Cancelar" name="cancelarRI">
-          </div>
-        </form>   
-        <?php if (isset($erroresRegistro)) {
-      echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
-    } ?>                  
+          <input class="btn-flat orange-text" type="submit" value="Registrarse" name="registrarse">
+        </form>                     
       </div>
     </div>
   </div>
 </div>    
-</div>
-<div class="valign-wrapper">
-    <div class="col s12 m8 offset-m2 l4 offset-l3 valign">
-     <div id="modal3" class="modal modalLogin">
-      <div class="card login">
-        <div class="card-content">
-          <span class="card-title teal-text">Recuperar Contrasena</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post"> 
-            <label for="">
-              Se enviara la contrasena a tu correo
-            </label>      
-            <div class="input-field">
-              <input id="correo" type="text" class="validate" name="correo">
-              <label for="correo">Correo</label>
-            </div>  
-            <input class="btn-flat orange-text" type="submit" value="Enviar" name="recuperar">        
-          </form>                     
-        </div>
-      </div>
-    </div>
-  </div>    
 </div>
 </body>
 </html>

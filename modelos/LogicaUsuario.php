@@ -95,6 +95,12 @@
 			return $usuario;
 		}
 
+		public function validarConsultarUsuarioE($email)
+		{
+			$usuario = $this->usuario->buscarUsuarioE($email);
+			return $usuario;
+		}
+
 		public function validarModificarUsuario($documento, $documentoN, $nombre, $apellido, $email, 
 			$nombreUsuario, $tipoPerfil)
 		{
