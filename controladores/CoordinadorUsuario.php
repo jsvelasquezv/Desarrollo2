@@ -93,7 +93,8 @@
 			if (isset($errores)) {
 				session_start();
 				$_SESSION['eUpdateUsuario'] = $this->logicaUsuario->getResponseModificar();
-				header('Location: ../vistas/editarUsuario.php?nombre=');
+				header('Location: ../vistas/editarUsuario.php?documento='.$documento.'&nombre='.$nombre.'&apellidos='.$apellidos.'&email='.$email.
+					'&username='.$nombreUsuario);
 			}
 			else {
 				header('Location: ../vistas/gestionarUsuarios.php');
