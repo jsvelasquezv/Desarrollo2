@@ -47,6 +47,7 @@
 		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID);
 		header('Location: ../vistas/gestionarUsuarios.php');
 	}elseif (isset($_GET['editUsuario'])) {
+
 		$editUsuario = $_GET['editUsuario'];
 		$coordinador = new CoordinadorUsuario();
 		$editable = $coordinador->buscarUsuario($editUsuario);

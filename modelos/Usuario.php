@@ -59,16 +59,16 @@
 		{
 			R::selectDatabase('default');
 
-        	if (ctype_alnum($parametro)) 
+        	if (ctype_digit(($parametro))) 
         	{
-        		$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$parametro]);
-        		R::close();
+				$usuario = R::findOne('usuario', 'documento = ?',[$parametro]);
+				R::close();
 				return $usuario;
         	}
         	else
         	{
-				$usuario = R::findOne('usuario', 'documento = ?',[$parametro]);
-				R::close();
+        		$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$parametro]);
+        		R::close();
 				return $usuario;
         	}
 		}
@@ -99,9 +99,9 @@
 		}
 	}
 
-	$user = new Usuario();
-	// $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
-	// $user->asignarPerfil("Gasimba",116264525);
-	 $a = $user->buscarUsuario("barreroide123");
-	 echo $a;
+	// $user = new Usuario();
+	// // $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
+	// // $user->asignarPerfil("Gasimba",116264525);
+	 // $a = $user->buscarUsuario(116264525);
+	 // echo $a;
 ?>
