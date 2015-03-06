@@ -124,6 +124,11 @@
 		public function validarModificarUsuario($documento, $documentoN, $nombre, $apellido, $email, 
 			$nombreUsuario, $tipoPerfil)
 		{
+			if ($nombre =="" or $apellido =="" 
+				or $email =="" or $nombreUsuario ==""
+				or $documentoN =="" or $tipoPerfil =="") {
+				$this->responseModificacion[0] = "Todos los campos son requeridos";
+			}
 			if ($this->validar->esMayor($nombre,30)) {
 				$this->responseModificacion[1] = "El nombre debe contener maximo 30 caracteres";
 			}
