@@ -3,6 +3,12 @@
 	$logica = new LogicaPerfil();
 	session_start();
 	$_SESSION['perfiles'] = $logica->getPerfiles();
+	if (isset($_SESSION['exitoRegistrar'])) {
+		$exitoRegistrar = $_SESSION['exitoRegistrar'];
+	}
+	if (isset($_SESSION['exitoModificar'])) {
+		$exitoModificar = $_SESSION['exitoModificar'];
+	}
 
 	// foreach ($_SESSION['perfiles'] as $key) {
 	// 	echo $key['id'];

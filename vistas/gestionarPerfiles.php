@@ -109,5 +109,29 @@ include_once '../scripts/gestionarPerfiles.php';
 			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
 		} ?>
 	</div>
+	<div id="modal2" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha creado correctamente el perfil</p> 
+        </div>
+          <?php if (isset($exitoRegistrar)) {
+             echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
+             unset($_SESSION['exitoRegistrar']);
+          } ?>                      
+      </div>
+    </div>
+    <div id="modal3" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha modificado correctamente el perfil</p> 
+        </div>
+          <?php if (isset($exitoModificar)) {
+             echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
+             unset($_SESSION['exitoModificar']);
+          } ?>                      
+      </div>
+    </div>
 </body>
 </html>

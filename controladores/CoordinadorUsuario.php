@@ -108,9 +108,9 @@
 					header('Location: ../vistas/gestionarUsuarios.php');
 				}
 			}else {
-				header('Location: ../vistas/gestionarUsuarios.php');
 				session_start();
 				$_SESSION['exitoRegistrar'] = 1;
+				header('Location: ../vistas/gestionarUsuarios.php');
 			}
 		}
 		
@@ -128,6 +128,8 @@
 					'&username='.$nombreUsuario);
 			}
 			else {
+				session_start();
+				$_SESSION['exitoModificar'] = 1;
 				header('Location: ../vistas/gestionarUsuarios.php');
 			}
 		}

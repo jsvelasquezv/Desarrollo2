@@ -6,6 +6,12 @@
 	session_start();
 	$_SESSION['usuarios'] = $logicaUsuario->getUsuarios();
 	$_SESSION['perfiles'] = $logicaPerfil->getPerfiles();
+	if (isset($_SESSION['exitoRegistrar'])) {
+		$exitoRegistrar = $_SESSION['exitoRegistrar'];
+	}
+	if (isset($_SESSION['exitoModificar'])) {
+		$exitoModificar = $_SESSION['exitoModificar'];
+	}
 	// foreach ($_SESSION['usuarios'] as $key => $value) {
 	// 	echo $key['id'];
 	// 	echo $key['nombre'];

@@ -100,7 +100,9 @@
 					.'&permiso2='.$permisoVender.'&permiso3='.$permisoGestionarPerfiles);
 			}
 			else
-			{
+			{	
+				session_start();
+				$_SESSION['exitoModificar'] = 1;
 				header('Location: ../vistas/gestionarPerfiles.php');
 			}
 			// echo $nombre;
@@ -125,7 +127,13 @@
 			if (isset($errores)) {
 				session_start();
 				$_SESSION['eRegistroPerfil'] = $this->logicaPerfil->getResponseRegistrar();				
-			}	
+			}
+			else
+			{
+				session_start();
+				$_SESSION['exitoRegistrar'] = 1;
+				header('Location: ../vistas/gestionarPerfiles.php');
+			}
 			
 			// foreach ($_SESSION['eRegistroPerfil'] as $key ) {
 			// 	# code...
@@ -135,7 +143,6 @@
 			// echo $permisoGestionarUsuarios;
 			// echo $permisoVender;
 			// echo $permisoGestionarPerfiles;
-			header('Location: ../vistas/gestionarPerfiles.php');
 		}
 	}
 	// $registrar = new CoordinadorPerfil();
