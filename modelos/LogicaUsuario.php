@@ -17,6 +17,7 @@
 		private $responseConsulta;
 		private $responseModificacion;
 		private $responseBaja;
+		private $responseCambiarPass;
 		private $usuario;
 		private $validar; //Validaciones
 		private $perfil;
@@ -284,6 +285,27 @@
 			}
 		}
 
+		public function validarCambiarPass($username, $passVieja, $passNueva, $passNuevaC)
+		{
+			$usuario = $this->usuario->buscarUsuario($username);
+			if ($usuario['password']!=$passVieja) {
+				$this->responseCambiarPass[0] = "Tu contrasena es incorrecta";
+			}
+			if ($passNueva != $passNuevaC) {
+				$this->responseCambiarPass[1] = "Las contrasenas deben coincidir";
+			}
+			if ($this->validar->esMenor($passNueva, 4)) {
+				$this->responseCambiarPass[2] = "La contrasena debe contener minimo 4 caracteres";	
+			}
+			if ($this->validar->esMayor($passNueva, 30)) {
+				$this->responseCambiarPass[3] = "La contrasena debe contener maximo 30 caracteres";
+			}
+			else if (empty($this->responseCambiarPass)) 
+			{
+				$this->usuario->cambiarPass($username, $passNueva);
+			}
+		}
+
 		public function getUsuarios()
 		{
 			$usuarios = $this->usuario->getUsuarios();
@@ -313,6 +335,11 @@
 		public function getResponseRecuperacion()
 		{
 			return $this->responseRecuperacion;
+		}
+
+		public function getResponseCambiarPass()
+		{
+			return $this->responseCambiarPass;
 		}
 	}
 

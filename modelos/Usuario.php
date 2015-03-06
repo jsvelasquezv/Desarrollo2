@@ -97,6 +97,15 @@
         	R::close();
         	return $usuarios;
 		}
+
+		public function cambiarPass($username, $password)
+		{
+			R::selectDatabase('default');
+			$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$username]);
+			$usuario->password = $password;
+			R::store($usuario);
+			R::close();
+		}
 	}
 
 	// $user = new Usuario();

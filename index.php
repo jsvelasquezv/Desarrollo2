@@ -12,6 +12,9 @@
     if (isset($_SESSION['eRecuperacion'])) {
       $erroresRecuperacion = $_SESSION['eRecuperacion'];
     }
+    if (isset($_SESSION['eCambiarPass'])) {
+      $erroresCambiarPass = $_SESSION['eCambiarPass'];
+    }
     if (isset($_SESSION['exitoRecuperacion'])) {
       $exitoRecuperacion = $_SESSION['exitoRecuperacion'];
     }
@@ -20,6 +23,9 @@
     }
     if (isset($_SESSION['exitoLogin'])) {
       $exitoLogin = $_SESSION['exitoLogin'];
+    }
+    if (isset($_SESSION['exitoCambiarPass'])) {
+      $exitoCambiarPass = $_SESSION['exitoCambiarPass'];
     }
 ?>
 <!DOCTYPE html>
@@ -46,6 +52,7 @@
             <input type="hidden" value="salir" name="salir">
             <button name="salir" class="btn-flat white-text">Salir</button>
           </form> -->
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
           <li><a href="scripts/salir.php">Salir</a></li>
             <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -58,6 +65,10 @@
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
             <li><a href="vistas/gestionarUsuarios.php">Usuarios</a></li>
           <?php } ?>
+        </ul>
+        <ul id ="dropdown2" class="dropdown-content">          
+            <li><a href="#modal6" class="modal-trigger">Modificar mis datos</a></li>
+            <li><a href="#modal7" class="modal-trigger">Cambiar contrasena</a></li>
         </ul>
 
         <!-- responsive navbar -->
@@ -268,6 +279,56 @@
           <?php if (isset($exitoLogin)) {
              echo "<script language='javascript'> $('#modal6').openModal(); </script>"; 
              unset($_SESSION['exitoLogin']);
+          } ?>                      
+      </div>
+    </div>
+     <div id="modal7" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+          <span class="card-title teal-text">Cambiar Contrasena</span>  
+          <form action="controladores/CoordinadorUsuario.php" method="post">   
+              <?php if (isset($erroresCambiarPass)) {  ?>          
+                <div class="card">
+                  <div class="card-content">
+                  <?php foreach ($erroresCambiarPass as $key) { ?>
+                    <p><?php echo $key; ?></p>
+                  <?php } ?>
+                  </div>
+                </div>        
+              <?php } ?>           
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordVieja">
+              <label for="password">Contrasena Actual</label>
+            </div> 
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordNueva">
+              <label for="password">Contrasena Nueva</label>
+            </div>  
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordNuevaC">
+              <label for="password">Repite la Contrasena</label>
+            </div>  
+            <input class="btn-flat orange-text" type="submit" value="Guardar" name="cambiarPass">        
+          </form>            
+           <?php if (isset($erroresCambiarPass)) {
+             echo "<script language='javascript'> $('#modal7').openModal(); </script>"; 
+             unset($erroresCambiarPass);
+             unset($_SESSION['eCambiarPass']);
+             // header('Location: index.php');
+          } ?>               
+        </div>
+      </div>
+    </div>
+    </div>
+     <div id="modal8" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha cambiado la contrasena de tu cuenta</p> 
+        </div>
+          <?php if (isset($exitoCambiarPass)) {
+             echo "<script language='javascript'> $('#modal8').openModal(); </script>"; 
+             unset($_SESSION['exitoCambiarPass']);
           } ?>                      
       </div>
     </div>

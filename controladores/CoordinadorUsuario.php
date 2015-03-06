@@ -11,7 +11,14 @@
 		unset($_SESSION['eRegistroUsuario']);
 		header('Location: ../index.php');
 	}
-
+	if (isset($_POST['cambiarPass'])) {
+		$passVieja = $_POST['passwordVieja'];
+		$passNueva = $_POST['passwordNueva'];
+		$passNuevaC = $_POST['passwordNuevaC'];
+		$coordinador = new CoordinadorUsuario();
+		session_start();
+		$coordinador->cambiarPass($_SESSION['user'],$passVieja, $passNueva, $passNuevaC);
+	}
 	if(isset($_POST["ingresar"])){	
 		$username = $_POST["username"]; 
 		$contrasena = $_POST["password"];
@@ -93,6 +100,23 @@
 			{
 				session_start();
 				$_SESSION['exitoLogin'] = 1;
+			}
+		}
+
+		public function cambiarPass($username, $passVieja, $passNueva, $passNuevaC)
+		{
+			$this->logicaUsuario->validarCambiarPass($username, $passVieja, $passNueva, $passNuevaC);
+			$errores = $this->logicaUsuario->getResponseCambiarPass();
+			if (!empty($errores)) {
+				session_start();
+				$_SESSION['eCambiarPass'] = $this->logicaUsuario->getResponseCambiarPass();
+				header('Location: ../index.php');
+			}
+			else
+			{
+				session_start();
+				$_SESSION['exitoCambiarPass'] = 1;
+				header('Location: ../index.php');
 			}
 		}
 
