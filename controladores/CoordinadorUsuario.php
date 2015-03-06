@@ -151,7 +151,7 @@
 
 			$to         = $correo; //The 'To' field
 			$subject    = 'Recuperacion de Contrasena';
-			$content    = $contrasena;
+			$content    = 'Tu contrasena es '.$contrasena;
 
 			$mailer = new PHPMailer();
 
