@@ -15,6 +15,12 @@
     if (isset($_SESSION['exitoRecuperacion'])) {
       $exitoRecuperacion = $_SESSION['exitoRecuperacion'];
     }
+    if (isset($_SESSION['exitoRegistrar'])) {
+      $exitoRegistrar = $_SESSION['exitoRegistrar'];
+    }
+    if (isset($_SESSION['exitoLogin'])) {
+      $exitoLogin = $_SESSION['exitoLogin'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -232,12 +238,36 @@
  <div id="modal4" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
-            <h5>Se ha enviado la contrasena a tu correo</h5>
+          <span class="card-title teal-text">Se ha enviado la contrasena</span> 
             <p>Por favor verifica en la carpeta de spam.</p> 
         </div>
           <?php if (isset($exitoRecuperacion)) {
              echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
              unset($_SESSION['exitoRecuperacion']);
+          } ?>                      
+      </div>
+    </div>
+   <div id="modal5" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Te has registrado correctamente</span> 
+            <p>Por favor logueate</p> 
+        </div>
+          <?php if (isset($exitoRegistrar)) {
+             echo "<script language='javascript'> $('#modal5').openModal(); </script>"; 
+             unset($_SESSION['exitoRegistrar']);
+          } ?>                      
+      </div>
+    </div>
+     <div id="modal6" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Bienvenido</span> 
+            <p>Has iniciado sesion correctamente</p> 
+        </div>
+          <?php if (isset($exitoLogin)) {
+             echo "<script language='javascript'> $('#modal6').openModal(); </script>"; 
+             unset($_SESSION['exitoLogin']);
           } ?>                      
       </div>
     </div>

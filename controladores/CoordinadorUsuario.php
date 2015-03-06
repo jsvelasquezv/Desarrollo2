@@ -89,6 +89,8 @@
 				$_SESSION['eLogin'] = $this->logicaUsuario->getResponseLogin();
 				header('Location: ../index.php');	
 			}	
+			session_start();
+			$_SESSION['exitoLogin'] = 1;
 		}
 
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
@@ -106,8 +108,9 @@
 					header('Location: ../vistas/gestionarUsuarios.php');
 				}
 			}else {
-				echo "<script languaje='javascript'>alert('Usuario Creado con exito')</script>";
 				header('Location: ../vistas/gestionarUsuarios.php');
+				session_start();
+				$_SESSION['exitoRegistrar'] = 1;
 			}
 		}
 		
