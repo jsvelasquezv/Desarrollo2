@@ -4,9 +4,7 @@
 	*/
 	require_once '../modelos/LogicaUsuario.php';
 	require_once '../modelos/LogicaPerfil.php';
-	require_once '../mailer/PHPMailerAutoload.php';
-	require_once '../mailer/class.phpmailer.php';
-	require_once '../mailer/class.smtp.php';
+	
 
 	if (isset($_POST['cancelarRI'])) {
 		session_start();
@@ -133,56 +131,20 @@
 
 		public function recuperar($email)
 		{
-			$usuario = $this->logicaUsuario->validarConsultarUsuarioE($email);
-			$correo = $usuario['email'];
-			$contrasena = $usuario['password'];
-
-			$crendentials = array(
-  			'email'     => 'proyectodesarrollo2@gmail.com',    //Your GMail adress
-    		'password'  => 'Desarrollo2Proyecto'               //Your GMail password
-    		);
-    		$smtp = array(
-			'host' => 'smtp.gmail.com',
-			'port' => 587,
-			'username' => $crendentials['email'],
-			'password' => $crendentials['password'],
-			'secure' => 'tls' //SSL or TLS
-			);
-
-			$to         = $correo; //The 'To' field
-			$subject    = 'Recuperacion de Contrasena';
-			$content    = 'Tu contrasena es '.$contrasena;
-
-			$mailer = new PHPMailer();
-
-			//SMTP Configuration
-			$mailer->isSMTP();
-			$mailer->SMTPAuth   = true; //We need to authenticate
-			$mailer->Host       = $smtp['host'];
-			$mailer->Port       = $smtp['port'];
-			$mailer->Username   = $smtp['username'];
-			$mailer->Password   = $smtp['password'];
-			$mailer->SMTPSecure = $smtp['secure']; 
-
-			//Now, send mail :
-			//From - To :
-			$mailer->From       = $crendentials['email'];
-			$mailer->FromName   = 'Proyecto Desarrollo2'; //Optional
-			$mailer->addAddress($to);  // Add a recipient
-
-			//Subject - Body :
-			$mailer->Subject        = $subject;
-			$mailer->Body           = $content;
-			$mailer->isHTML(true); //Mail body contains HTML tags
-
-			//Check if mail is sent :
-			if(!$mailer->send()) {
-			    echo 'Error sending mail : ' . $mailer->ErrorInfo;
-			    header('Location: ../index.php');
-			} else {
-			    echo 'Message sent !';
-			    header('Location: ../index.php');
+			$this->logicaUsuario->validarRecuperacion($email);
+			$errores = $this->logicaUsuario->getResponseRecuperacion();
+			if (!empty($errores)) {
+				session_start();
+				$_SESSION['eRecuperacion'] = $this->logicaUsuario->getResponseRecuperacion();
+			}else
+			{
+				session_start();
+				if (isset($_SESSION['eRecuperacion'])) {
+					unset($_SESSION['eRecuperacion']);
+				}
+				$_SESSION['exitoRecuperacion'] = 1;
 			}
+			header('Location: ../index.php');
 		}
 
 		public function buscarUsuario($documento)

@@ -6,8 +6,12 @@
 	require_once 'Validaciones.php';
 	require_once 'Perfil.php';
 	require_once 'LogicaPerfil.php';
+	require_once '../mailer/PHPMailerAutoload.php';
+	require_once '../mailer/class.phpmailer.php';
+	require_once '../mailer/class.smtp.php';
 	class LogicaUsuario
-	{
+	{	
+		private $responseRecuperacion;
 		private $responseRegistro;
 		private $responseLogin;
 		private $responseConsulta;
@@ -223,6 +227,63 @@
 			}
 		}
 
+		public function validarRecuperacion($email)
+		{
+			$usuario = $this->usuario->buscarUsuarioE($email);
+			if (empty($usuario)) {
+				$this->responseRecuperacion[0] = 'El correo no esta registrado';
+			}
+			else
+			{
+			$correo = $usuario['email'];
+			$contrasena = $usuario['password'];
+
+			$crendentials = array(
+  			'email'     => 'proyectodesarrollo2@gmail.com',    //Your GMail adress
+    		'password'  => 'Desarrollo2Proyecto'               //Your GMail password
+    		);
+    		$smtp = array(
+			'host' => 'smtp.gmail.com',
+			'port' => 587,
+			'username' => $crendentials['email'],
+			'password' => $crendentials['password'],
+			'secure' => 'tls' //SSL or TLS
+			);
+
+			$to         = $correo; //The 'To' field
+			$subject    = 'Recuperacion de Contrasena';
+			$content    = 'Tu contrasena es '.$contrasena;
+
+			$mailer = new PHPMailer();
+
+			//SMTP Configuration
+			$mailer->isSMTP();
+			$mailer->SMTPAuth   = true; //We need to authenticate
+			$mailer->Host       = $smtp['host'];
+			$mailer->Port       = $smtp['port'];
+			$mailer->Username   = $smtp['username'];
+			$mailer->Password   = $smtp['password'];
+			$mailer->SMTPSecure = $smtp['secure']; 
+
+			//Now, send mail :
+			//From - To :
+			$mailer->From       = $crendentials['email'];
+			$mailer->FromName   = 'Proyecto Desarrollo2'; //Optional
+			$mailer->addAddress($to);  // Add a recipient
+
+			//Subject - Body :
+			$mailer->Subject        = $subject;
+			$mailer->Body           = $content;
+			$mailer->isHTML(true); //Mail body contains HTML tags
+
+				//Check if mail is sent :
+				if(!$mailer->send()) {
+			    	// echo 'Error sending mail : ' . $mailer->ErrorInfo;
+			    	$this->responseRecuperacion[1] = 'Error al enviar el correo: '.$mailer->ErrorInfo;
+				}
+			}
+		}
+
 		public function getUsuarios()
 		{
 			$usuarios = $this->usuario->getUsuarios();
@@ -248,11 +309,17 @@
 		{
 			return $this->responseDarDeBaja;
 		}
+
+		public function getResponseRecuperacion()
+		{
+			return $this->responseRecuperacion;
+		}
 	}
 
-	/*$logica = new LogicaUsuario();
-	$log = $logica->validarLogin("juseve","j89s1994");
-	foreach ($log as $key) {
-		echo $key;
-	}*/
+	// $logica = new LogicaUsuario();
+	// $logica->validarRecuperacion('juseve200@gmail.com');
+	// $log = $logica->getResponseRecuperacion();
+	// foreach ($log as $key) {
+	// 	echo $key;
+	// }
 ?>

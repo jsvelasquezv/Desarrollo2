@@ -2,11 +2,18 @@
     session_start();
     // unset($_SESSION['eLogin']);
     // unset($_SESSION['eRegistroUsuario']);
+    // echo $_SESSION['eRecuperacion'];
     if (isset($_SESSION['eLogin'])) {
       $erroresLogin = $_SESSION['eLogin'];
     }
     if (isset($_SESSION['eRegistroUsuario'])) {
       $erroresRegistro = $_SESSION['eRegistroUsuario'];
+    }
+    if (isset($_SESSION['eRecuperacion'])) {
+      $erroresRecuperacion = $_SESSION['eRecuperacion'];
+    }
+    if (isset($_SESSION['exitoRecuperacion'])) {
+      $exitoRecuperacion = $_SESSION['exitoRecuperacion'];
     }
 ?>
 <!DOCTYPE html>
@@ -193,6 +200,15 @@
         <div class="card-content">
           <span class="card-title teal-text">Recuperar Contrasena</span>  
           <form action="controladores/CoordinadorUsuario.php" method="post"> 
+            <?php if (isset($erroresRecuperacion)) {  ?>          
+                <div class="card">
+                  <div class="card-content">
+                  <?php foreach ($erroresRecuperacion as $key) { ?>
+                    <p><?php echo $key; ?></p>
+                  <?php } ?>
+                  </div>
+                </div>        
+              <?php } ?>         
             <label for="">
               Se enviara la contrasena a tu correo
             </label>      
@@ -201,11 +217,29 @@
               <label for="correo">Correo</label>
             </div>  
             <input class="btn-flat orange-text" type="submit" value="Enviar" name="recuperar">        
-          </form>                     
+          </form>       
+          <?php if (isset($erroresRecuperacion)) {
+             echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
+             unset($erroresRecuperacion);
+             unset($_SESSION['eRecuperacion']);
+             // header('Location: index.php');
+          } ?>                      
         </div>
       </div>
     </div>
   </div>    
 </div>
+ <div id="modal4" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <h5>Se ha enviado la contrasena a tu correo</h5>
+            <p>Por favor verifica en la carpeta de spam.</p> 
+        </div>
+          <?php if (isset($exitoRecuperacion)) {
+             echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
+             unset($_SESSION['exitoRecuperacion']);
+          } ?>                      
+      </div>
+    </div>
 </body>
 </html>
