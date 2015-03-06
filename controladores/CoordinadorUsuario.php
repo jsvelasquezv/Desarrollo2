@@ -89,8 +89,11 @@
 				$_SESSION['eLogin'] = $this->logicaUsuario->getResponseLogin();
 				header('Location: ../index.php');	
 			}	
-			session_start();
-			$_SESSION['exitoLogin'] = 1;
+			else
+			{
+				session_start();
+				$_SESSION['exitoLogin'] = 1;
+			}
 		}
 
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
