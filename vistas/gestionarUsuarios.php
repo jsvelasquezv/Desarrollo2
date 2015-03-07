@@ -183,7 +183,7 @@
             <span class="card-title teal-text">Error</span> 
             <p>No se encuentra un usuario con ese documento</p> 
         </div>
-          <?php if (isset($eBuscar)) {
+          <?php if (isset($errorBuscarPerfil)) {
              echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
              unset($_SESSION['eBuscar']);
           } ?>                      

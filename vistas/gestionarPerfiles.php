@@ -44,6 +44,18 @@ include_once '../scripts/gestionarPerfiles.php';
 	<?php }else{ header('Location: ../index.php');}?>    
 	<div class="container">		
 		<div class="row">
+      <form action="../controladores/CoordinadorPerfil.php" method="post">
+        <div class="row">
+         <div class="input-field col s6 tooltipped" data-position="right" data-tooltip="Presiona enter para buscar" >
+              <i class="mdi-action-search prefix"></i>
+              <input id="nombreP" type="text" class="validate" name="nombreP">
+              <label for="nombreP">Ingresa un nombre para buscar</label>
+              <input type="submit" class="btn col s3 offset-s1" name="buscarP" value="Buscar" style='display:none;'>
+            </div>
+        </div>
+      </form>
+    </div>
+		<div class="row">
 		<table class="hoverable responsive-table centered">
 			<thead>
 				<tr>
@@ -137,6 +149,18 @@ include_once '../scripts/gestionarPerfiles.php';
           <?php if (isset($exitoModificar)) {
              echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
              unset($_SESSION['exitoModificar']);
+          } ?>                      
+      </div>
+    </div>
+     <div id="modal4" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Error</span> 
+            <p>No se encuentra un perfil con ese nombre</p> 
+        </div>
+          <?php if (isset($eBuscar)) {
+             echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
+             unset($_SESSION['eBuscarP']);
           } ?>                      
       </div>
     </div>
