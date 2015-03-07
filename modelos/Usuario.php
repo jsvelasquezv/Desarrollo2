@@ -55,6 +55,20 @@
         	R::close();
 		}
 
+		public function modificarMiUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $nombreUsuarioN)
+		{
+			R::selectDatabase('default');
+        	$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$nombreUsuario]);
+        	$usuario->documento = $documento;
+        	$usuario->nombre = $nombre;
+        	$usuario->apellidos = $apellidos;
+        	$usuario->email = $email;
+        	$usuario->nombreUsuario = $nombreUsuarioN;
+        	R::store($usuario);
+        	R::close();
+		}
+
 		public function buscarUsuario($parametro)
 		{
 			R::selectDatabase('default');

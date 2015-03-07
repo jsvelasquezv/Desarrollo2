@@ -11,6 +11,31 @@
 		unset($_SESSION['eRegistroUsuario']);
 		header('Location: ../index.php');
 	}
+
+	if (isset($_GET['user'])) {
+		session_start();
+		$usuario = $_SESSION['user'];
+		echo $usuario;
+
+		$coordinador = new CoordinadorUsuario();
+		$editable = $coordinador->buscarUsuarioN($usuario);
+		//echo $editable;
+		header('Location: ../vistas/editarMiUsuario.php?documento='.$editable['documento'].'&nombre='.$editable['nombre'].
+			'&apellidos='.$editable['apellidos'].'&email='.$editable['email'].'&username='.$editable['nombre_usuario']);
+	}
+	if (isset($_POST['editMiUsuario'])) {
+		session_start();
+		$documento = $_POST['Midocumento'];
+		$nombre = $_POST['Minombre'];
+		$apellidos = $_POST['Miapellido'];
+		$email = $_POST['Miemail'];
+		$username = $_POST['Miusername'];
+
+		$coordinador = new CoordinadorUsuario();
+		$coordinador->modificarMiUsuario($documento, $nombre, $apellidos, $email, 
+			$_SESSION['user'], $username);	
+	}
+
 	if (isset($_POST['cambiarPass'])) {
 		$passVieja = $_POST['passwordVieja'];
 		$passNueva = $_POST['passwordNueva'];
@@ -161,6 +186,29 @@
 			}
 		}
 
+		public function modificarMiUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $nombreUsuarioN)
+		{
+			//echo $tipoPerfil;
+			$this->logicaUsuario->validarModificarMiUsuario($documento, $nombre, $apellidos, $email, 
+			$nombreUsuario, $nombreUsuarioN);
+			$errores = $this->logicaUsuario->getResponseMiModificacion();
+			//session_start();
+			if (isset($errores)) {
+				$_SESSION['eUpdateMiUsuario'] = $this->logicaUsuario->getResponseModificar();
+				foreach ($errores as $key) {
+					echo $key;
+				}
+				 header('Location: ../vistas/editarMiUsuario.php?documento='.$documento.'&nombre='.$nombre.'&apellidos='.$apellidos.'&email='.$email.
+					'&username='.$nombreUsuario);
+			}
+			else {
+				$_SESSION['user'] = $nombreUsuarioN;
+				$_SESSION['exitoModificarMiUsuario'] = 1;
+				header('Location: ../index.php');
+			}
+		}
+
 		public function recuperar($email)
 		{
 			$this->logicaUsuario->validarRecuperacion($email);
@@ -181,7 +229,14 @@
 
 		public function buscarUsuario($documento)
 		{
+			//echo $documento;
 			$usuario = $this->logicaUsuario->validarConsultaUsuario($documento);
+			return $usuario;
+		}
+
+		public function buscarUsuarioN($documento)
+		{
+			$usuario = $this->logicaUsuario->validarConsultaUsuarioN($documento);
 			return $usuario;
 		}
 		

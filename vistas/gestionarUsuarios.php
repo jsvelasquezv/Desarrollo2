@@ -17,7 +17,7 @@
 	<nav class="teal">
 		<div class="nav-wrapper">
 			<div class="col s12">
-				<a href="#!" class="brand-logo">Logo</a>
+				<a href="../index.php" class="brand-logo">Logo</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 				<ul class="right hide-on-med-and-down">
 

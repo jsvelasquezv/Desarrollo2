@@ -16,6 +16,7 @@
 		private $responseLogin;
 		private $responseConsulta;
 		private $responseModificacion;
+		private $responseMiModificacion;
 		private $responseBaja;
 		private $responseCambiarPass;
 		private $usuario;
@@ -96,6 +97,7 @@
 
 		public function validarConsultaUsuario($documento) //documento:int
 		{
+			//echo $documento;
 			if ($documento == "") {
 				$this->responseConsulta[0] = "Ingrese un numero de documento";
 			}
@@ -111,7 +113,7 @@
 
 		public function validarConsultaUsuarioN($nombreUsuario)
 		{
-			$usuario = $this->usuario->buscarUsuarioN($nombreUsuario);
+			$usuario = $this->usuario->buscarUsuario($nombreUsuario);
 			return $usuario;
 		}
 
@@ -193,12 +195,91 @@
 			}
 		}
 
+		public function validarModificarMiUsuario($documento, $nombre, $apellido, $email, 
+			$nombreUsuario, $nombreUsuarioN)
+		{
+			echo $documento;
+			echo $nombre;
+			echo $apellido;
+			echo $email;
+			echo $nombreUsuario;
+			echo $nombreUsuarioN;
+
+			if ($nombre =="" or $apellido =="" 
+				or $email =="" or $nombreUsuarioN ==""
+				or $nombreUsuario =="" or $documento=="") {
+				$this->responseMiModificacion[0] = "Todos los campos son requeridos";
+			}
+			if ($this->validar->esMayor($nombre,30)) {
+				$this->responseMiModificacion[1] = "El nombre debe contener maximo 30 caracteres";
+			}
+			if ($this->validar->esMenor($nombre,4)){
+				$this->responseMiModificacion[2] = "El nombre debe contener minimo 4 caracteres";
+			}
+			if ($this->validar->esMayor($apellido, 30)){
+				$this->responseMiModificacion[3] = "El apellido debe contener maximo 30 caracteres";
+			}
+			if ($this->validar->esMenor($apellido, 4)){
+				$this->responseMiModificacion[4] = "El apellido debe contener minimo 4 caracteres";
+			}
+			if (!($this->validar->esAlfabetico($nombre))){
+				$this->responseMiModificacion[5] = "El nombre debe ser alfabetico";
+			}
+			if (!($this->validar->esAlfabetico($apellido))){
+				$this->responseMiModificacion[6] = "El apellido debe ser alfabetico";
+			}
+			if (!($this->validar->esNumerico($documento))){
+				$this->responseMiModificacion[7] = "El documento debe ser numerico";
+			}
+			if (($this->validar->esMayor($documento, 15))){
+				$this->responseMiModificacion[8] = "El documento debe contener maximo 15 digitos";
+			}
+			if (($this->validar->esMenor($documento, 8))){
+				$this->responseMiModificacion[9] = "El documento debe contener minimo 8 digitos";
+			}
+			if ($this->validar->esMenor($nombreUsuario, 4)){
+				$this->responseMiModificacion[10] = "El nombre de usuario debe contener minimo 4 caracteres";
+			}
+			if ($this->validar->esMayor($nombreUsuario, 30)){
+				$this->responseMiModificacion[11] = "El nombre de usuario debe contener maximo 30 caracteres";
+			}
+			$comparador = $this->usuario->buscarUsuario($nombreUsuario);
+			if ($comparador['documento']!=$documento and (!empty($this->usuario->buscarUsuario($documento)))){
+				$this->responseMiModificacion[12] = "El documento ya esta registrado";
+			}
+			//$comparado2 = $this->usuario->buscarUsuario($nombreUsuario);
+			if ($comparador['nombre_usuario']!=$nombreUsuario and (!empty($this->usuario->buscarUsuario($nombreUsuario)))){
+				$this->responseMiModificacion[13] = "El nombre de usuario ya esta registrado";
+			}
+			//$comparado3 = $this->usuario->buscarUsuarioE($documento);
+			if ($comparador['email']!=$email and (!empty($this->usuario->buscarUsuarioE($email)))){
+				$this->responseMiModificacion[14] = "El correo ya esta registrado";
+			}
+			// if (!empty($this->usuario->buscarUsuario($documento)){
+			// 	$this->responseMiModificacion[12] = "El documento ya esta registrado";
+			// }
+			// if (!empty($this->usuario->buscarUsuarioE($email))) {
+			// 	$this->responseMiModificacion[13] = "El email ya esta registrado";
+			// }
+			// if (!empty($this->usuario->buscarUsuario($nombreUsuario))) {
+			// 	$this->responseMiModificacion[14] = "El nombre de usuario ya esta registrado";
+			// }
+			if (empty($this->responseMiModificacion))
+			{
+				//echo $tipoPerfil;
+				$this->usuario->modificarMiUsuario($documento, $nombre, $apellido, $email, 
+			$nombreUsuario, $nombreUsuarioN);
+				//unset($_SESSION['eUpdateMiUsuario']);
+				//header('Location: ../vistas/gestionarUsuarios.php');
+			}
+		}
+
 		public function validarDardeBajaUsuario($documento) //documento:int
 		{
 			if (!($this->validar->esNumerico($documento))){
 				$this->responseBaja[0] = "El documento debe ser numerico";
 			}
-			if (empty($this->response)) {
+			if (empty($this->responseBaja)) {
 				$this->responseBaja[0] = "Usuario dado de baja con exito";
 				$this->usuario->darDeBajaUsuario($documento);
 				header('Location: ../vistas/gestionarUsuarios.php');
@@ -345,6 +426,11 @@
 		public function getResponseCambiarPass()
 		{
 			return $this->responseCambiarPass;
+		}
+
+		public function getResponseMiModificacion()
+		{
+			return $this->responseMiModificacion;
 		}
 	}
 

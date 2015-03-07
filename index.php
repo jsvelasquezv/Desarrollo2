@@ -27,6 +27,15 @@
     if (isset($_SESSION['exitoCambiarPass'])) {
       $exitoCambiarPass = $_SESSION['exitoCambiarPass'];
     }
+    if (isset($_SESSION['user'])) {
+      $userMod = $_SESSION['user'];
+    }
+    // if (isset($_SESSION['eUpdateMiUsuario'])) {
+    //   $errorModificarMiUsuario = $_SESSION['eUpdateMiUsuario'];
+    // }
+    if (isset($_SESSION['exitoModificarMiUsuario'])) {
+      $exitoModificarMiUsuario = $_SESSION['exitoModificarMiUsuario'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +76,7 @@
           <?php } ?>
         </ul>
         <ul id ="dropdown2" class="dropdown-content">          
-            <li><a href="#modal6" class="modal-trigger">Modificar mis datos</a></li>
+            <li><a href="controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar mis datos</a></li>
             <li><a href="#modal7" class="modal-trigger">Cambiar contrasena</a></li>
         </ul>
 
@@ -329,6 +338,18 @@
           <?php if (isset($exitoCambiarPass)) {
              echo "<script language='javascript'> $('#modal8').openModal(); </script>"; 
              unset($_SESSION['exitoCambiarPass']);
+          } ?>                      
+      </div>
+    </div>
+    <div id="modal9" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se han modificado los datos de tu cuenta</p> 
+        </div>
+          <?php if (isset($exitoModificarMiUsuario)) {
+             echo "<script language='javascript'> $('#modal9').openModal(); </script>"; 
+             unset($_SESSION['exitoModificarMiUsuario']);
           } ?>                      
       </div>
     </div>
