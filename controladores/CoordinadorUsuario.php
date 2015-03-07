@@ -12,6 +12,21 @@
 		header('Location: ../index.php');
 	}
 
+	if (isset($_POST['buscar'])) {
+		$documento = $_POST['emailB'];
+		$coordinador = new CoordinadorUsuario();
+		$editable = $coordinador->buscarUsuario($documento);
+		if (empty($editable)) {
+			session_start();
+			$_SESSION['eBuscar'] = 1;
+			header('Location: ../vistas/gestionarUsuarios.php');
+		}
+		else{
+			header('Location: ../vistas/editarUsuario.php?documento='.$editable['documento'].'&nombre='.$editable['nombre'].
+				'&apellidos='.$editable['apellidos'].'&email='.$editable['email'].'&username='.$editable['nombre_usuario']);			
+		}
+	}
+
 	if (isset($_GET['user'])) {
 		session_start();
 		$usuario = $_SESSION['user'];

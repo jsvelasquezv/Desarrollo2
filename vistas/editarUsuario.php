@@ -66,28 +66,28 @@
             <?php } ?>     
           <div class="row">
             <div class="input-field col s6">
-              <input id="nombre" type="text" class="validate" name="nombre" value="<?php echo $nombre; ?>">
+              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nombre; ?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
               <label for="nombre">Nombre</label>
             </div>
           <input type="hidden" name="antiguo" value="<?php echo $documento; ?>">          
             <div class="input-field col s6">
-              <input id="apellido" type="text" class="validate" name="apellido" value="<?php echo $apellidos; ?>">
+              <input id="apellido" type="text" class="validate tooltipped" name="apellido" value="<?php echo $apellidos; ?>" data-position="right" data-tooltip="Este campo es requerido, 2-30 caracteres alfabeticos" >
               <label for="apellido">Apellidos</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username" value="<?php echo $username; ?>">
+              <input id="username" type="text" class="validate tooltipped" name="username" value="<?php echo $username; ?>" data-position="left" data-tooltip="Este campo es requerido, 2-30 caracteres alfanumericos">
               <label for="username">Username</label>
             </div>
             <div class="input-field col s6">
-              <input id="email" type="text" class="validate" name="email" value="<?php echo $email; ?>">
+              <input id="email" type="text" class="validate tooltipped" name="email" value="<?php echo $email; ?>" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
               <label for="email">E-mail</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="documento" type="text" class="validate" name="documento" value="<?php echo $documento; ?>">
+              <input id="documento" type="text" class="validate tooltipped" name="documento" value="<?php echo $documento; ?>" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
               <label for="documento">Documento</label>
             </div>
             <div class="col s6">

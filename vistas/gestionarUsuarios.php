@@ -38,6 +38,19 @@
 	<?php }else{ header('Location: ../index.php');}?>    
 	<?php $perfiles = $_SESSION['perfiles']; ?>
 	<div class="container">		
+    <br>
+    <div class="row">
+      <form action="../controladores/CoordinadorUsuario.php" method="post">
+        <div class="row">
+         <div class="input-field col s6 tooltipped" data-position="right" data-tooltip="Presiona enter para buscar" >
+              <i class="mdi-action-search prefix"></i>
+              <input id="emailB" type="text" class="validate" name="emailB">
+              <label for="emailB">Ingresa un documento para buscar</label>
+              <input type="submit" class="btn col s3 offset-s1" name="buscar" value="Buscar" style='display:none;'>
+            </div>
+        </div>
+      </form>
+    </div>
 		<table class="hoverable responsive-table">
 			<thead>
 				<tr>
@@ -157,6 +170,18 @@
           <?php if (isset($exitoModificar)) {
              echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
              unset($_SESSION['exitoModificar']);
+          } ?>                      
+      </div>
+    </div>
+    <div id="modal4" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Error</span> 
+            <p>No se encuentra un usuario con ese documento</p> 
+        </div>
+          <?php if (isset($eBuscar)) {
+             echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
+             unset($_SESSION['eBuscar']);
           } ?>                      
       </div>
     </div>

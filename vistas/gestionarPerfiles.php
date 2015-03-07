@@ -62,7 +62,7 @@ include_once '../scripts/gestionarPerfiles.php';
 		</table>
 		</div>
 		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger" href="#modal"><i class="mdi-content-add"></i></a>
+			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Nuevo Perfil" href="#modal"><i class="mdi-content-add"></i></a>
 		</div>
 		<div class="valign-wrapper">
 			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
@@ -83,10 +83,11 @@ include_once '../scripts/gestionarPerfiles.php';
 								<div class="input-field col m4 l2 tooltipped" data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 									<input id="nombre" type="text" name="nombre"  required maxlength="30">
 									<label for="nombre">Nombre</label>
-								</div class="tooltipped" data-position="right" data-tooltip="Selecciona minimo un permiso">
+								</div>
+								<div class="tooltipped" data-position="bottom" data-tooltip="Selecciona minimo un permiso">						
 								<h6>Permisos:</h6>
 								<p>
-    								<input type="checkbox" id="permiso1" name="permiso1" class="tooltipped">
+    								<input type="checkbox" id="permiso1" name="permiso1" >
     								<label for="permiso1">Gestionar Usuarios</label>
   								</p>
    								<p>
@@ -99,6 +100,7 @@ include_once '../scripts/gestionarPerfiles.php';
   								</p>
   								<br>
 								<input class="btn-flat orange-text" type="submit" value="Crear" name="crear">
+								</div>
 							</form>                     
 						</div>
 					</div>

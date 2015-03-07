@@ -12,6 +12,9 @@
 	if (isset($_SESSION['exitoModificar'])) {
 		$exitoModificar = $_SESSION['exitoModificar'];
 	}
+	if (isset($_SESSION['eBuscar'])) {
+		$eBuscar = $_SESSION['eBuscar'];
+	}
 	// foreach ($_SESSION['usuarios'] as $key => $value) {
 	// 	echo $key['id'];
 	// 	echo $key['nombre'];

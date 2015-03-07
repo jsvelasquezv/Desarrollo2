@@ -42,14 +42,14 @@
 			if ($this->validar->esMayor($nombre,30)) {
 				$this->responseRegistro[1] = "El nombre debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($nombre,4)){
-				$this->responseRegistro[2] = "El nombre debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($nombre,3)){
+				$this->responseRegistro[2] = "El nombre debe contener minimo 3 caracteres";
 			}
 			if ($this->validar->esMayor($apellidos, 30)){
 				$this->responseRegistro[3] = "El apellido debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($apellidos, 4)){
-				$this->responseRegistro[4] = "El apellido debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($apellidos, 2)){
+				$this->responseRegistro[4] = "El apellido debe contener minimo 2 caracteres";
 			}
 			if (!($this->validar->esAlfabetico($nombre))){
 				$this->responseRegistro[5] = "El nombre debe ser alfabetico";
@@ -72,8 +72,8 @@
 			if ($this->validar->esMayor($password, 30)){
 				$this->responseRegistro[11] = "El password debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($nombreUsuario, 4)){
-				$this->responseRegistro[12] = "El nombre de usuario debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($nombreUsuario, 2)){
+				$this->responseRegistro[12] = "El nombre de usuario debe contener minimo 2 caracteres";
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){
 				$this->responseRegistro[13] = "El nombre de usuario debe contener maximo 30 caracteres";
@@ -134,14 +134,14 @@
 			if ($this->validar->esMayor($nombre,30)) {
 				$this->responseModificacion[1] = "El nombre debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($nombre,4)){
-				$this->responseModificacion[2] = "El nombre debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($nombre,3)){
+				$this->responseModificacion[2] = "El nombre debe contener minimo 3 caracteres";
 			}
 			if ($this->validar->esMayor($apellido, 30)){
 				$this->responseModificacion[3] = "El apellido debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($apellido, 4)){
-				$this->responseModificacion[4] = "El apellido debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($apellido, 2)){
+				$this->responseModificacion[4] = "El apellido debe contener minimo 2 caracteres";
 			}
 			if (!($this->validar->esAlfabetico($nombre))){
 				$this->responseModificacion[5] = "El nombre debe ser alfabetico";
@@ -158,8 +158,8 @@
 			if (($this->validar->esMenor($documento, 8))){
 				$this->responseModificacion[9] = "El documento debe contener minimo 8 digitos";
 			}
-			if ($this->validar->esMenor($nombreUsuario, 4)){
-				$this->responseModificacion[10] = "El nombre de usuario debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($nombreUsuario, 2)){
+				$this->responseModificacion[10] = "El nombre de usuario debe contener minimo 2 caracteres";
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){
 				$this->responseModificacion[11] = "El nombre de usuario debe contener maximo 30 caracteres";
@@ -213,14 +213,14 @@
 			if ($this->validar->esMayor($nombre,30)) {
 				$this->responseMiModificacion[1] = "El nombre debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($nombre,4)){
-				$this->responseMiModificacion[2] = "El nombre debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($nombre,3)){
+				$this->responseMiModificacion[2] = "El nombre debe contener minimo 3 caracteres";
 			}
 			if ($this->validar->esMayor($apellido, 30)){
 				$this->responseMiModificacion[3] = "El apellido debe contener maximo 30 caracteres";
 			}
-			if ($this->validar->esMenor($apellido, 4)){
-				$this->responseMiModificacion[4] = "El apellido debe contener minimo 4 caracteres";
+			if ($this->validar->esMenor($apellido, 2)){
+				$this->responseMiModificacion[4] = "El apellido debe contener minimo 2 caracteres";
 			}
 			if (!($this->validar->esAlfabetico($nombre))){
 				$this->responseMiModificacion[5] = "El nombre debe ser alfabetico";
@@ -237,7 +237,7 @@
 			if (($this->validar->esMenor($documento, 8))){
 				$this->responseMiModificacion[9] = "El documento debe contener minimo 8 digitos";
 			}
-			if ($this->validar->esMenor($nombreUsuario, 4)){
+			if ($this->validar->esMenor($nombreUsuario, 2)){
 				$this->responseMiModificacion[10] = "El nombre de usuario debe contener minimo 4 caracteres";
 			}
 			if ($this->validar->esMayor($nombreUsuario, 30)){

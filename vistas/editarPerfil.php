@@ -62,6 +62,7 @@
 							<label for="nombre">Nombre</label>
 						</div>
 						<input type="hidden" name="antiguo" value="<?php echo $nombre; ?>">
+						<div class="tooltipped" data-position="bottom" data-tooltip="Selecciona minimo un permiso">	
 						<h6>Permisos:</h6>
 						<p>
 							<input type="checkbox" id="permiso2" name="permiso2" <?php if ($permiso2==1) {echo "checked"; } ?> >
@@ -77,6 +78,7 @@
 						</p>
 						<br>
 						<input class="btn-flat orange-text" type="submit" value="Guardar" name="editar">
+						</div>
 					</form>                     
 				</div>
 			</div>			
