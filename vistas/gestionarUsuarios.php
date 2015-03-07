@@ -49,7 +49,7 @@
          <div class="input-field col s6 tooltipped" data-position="right" data-tooltip="Presiona enter para buscar" >
               <i class="mdi-action-search prefix"></i>
               <input id="emailB" type="text" class="validate" name="emailB">
-              <label for="emailB">Ingresa un documento para buscar</label>
+              <label for="emailB">Ingresa un email para buscar</label>
               <input type="submit" class="btn col s3 offset-s1" name="buscar" value="Buscar" style='display:none;'>
             </div>
         </div>

@@ -19,6 +19,7 @@
 		private $responseMiModificacion;
 		private $responseBaja;
 		private $responseCambiarPass;
+		private $responseBusqueda;
 		private $usuario;
 		private $validar; //Validaciones
 		private $perfil;
@@ -118,8 +119,11 @@
 		}
 
 		public function validarConsultarUsuarioE($email)
-		{
+		{	
 			$usuario = $this->usuario->buscarUsuarioE($email);
+			if (empty($usuario)) {
+				$this->responseBusqueda[0] = "Ingresa un email registrado";
+			}
 			return $usuario;
 		}
 
@@ -436,9 +440,16 @@
 		{
 			return $this->responseMiModificacion;
 		}
+
+		public function getResponseBusqueda()
+		{
+			return $this->responseBusqueda;
+		}
 	}
 
 	// $logica = new LogicaUsuario();
+	// echo $usuario = $logica->validarConsultarUsuarioE('');
+	// $log = $logica->getResponseBusqueda();
 	// $logica->validarRecuperacion('juseve200@gmail.com');
 	// $log = $logica->getResponseRecuperacion();
 	// foreach ($log as $key) {

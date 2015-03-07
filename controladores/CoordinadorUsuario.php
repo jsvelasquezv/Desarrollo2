@@ -15,7 +15,7 @@
 	if (isset($_POST['buscar'])) {
 		$documento = $_POST['emailB'];
 		$coordinador = new CoordinadorUsuario();
-		$editable = $coordinador->buscarUsuario($documento);
+		$editable = $coordinador->buscarUsuarioE($documento);
 		if (empty($editable)) {
 			session_start();
 			$_SESSION['eBuscar'] = 1;
@@ -253,6 +253,12 @@
 		public function buscarUsuarioN($documento)
 		{
 			$usuario = $this->logicaUsuario->validarConsultaUsuarioN($documento);
+			return $usuario;
+		}
+
+		public function buscarUsuarioE($email)
+		{
+			$usuario = $this->logicaUsuario->validarConsultarUsuarioE($email);
 			return $usuario;
 		}
 		
