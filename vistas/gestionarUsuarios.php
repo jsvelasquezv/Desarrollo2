@@ -135,7 +135,7 @@
           </div>
           <div class="row">
             <div class="col s12">
-              <select name="perfilSelec" class="browser-default">
+              <select name="perfilSelec" class="scroll browser-default">
               	<?php foreach ($perfiles as $key) { ?>
                 	<option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
               	<?php } ?>
