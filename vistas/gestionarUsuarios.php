@@ -20,8 +20,8 @@
 				<a href="../index.php" class="brand-logo">Logo</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 				<ul class="right hide-on-med-and-down">
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
           <li><a class="dropdown-button " href="#!" data-activates="dropdown1">Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         </ul>
         <ul id ="dropdown1" class="dropdown-content">
           <li><a href="../vistas/gestionarPerfiles.php">Perfiles</a></li>

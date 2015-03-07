@@ -39,7 +39,6 @@
 			'&apellidos='.$editable['apellidos'].'&email='.$editable['email'].'&username='.$editable['nombre_usuario']);
 	}
 	if (isset($_POST['editMiUsuario'])) {
-		session_start();
 		$documento = $_POST['Midocumento'];
 		$nombre = $_POST['Minombre'];
 		$apellidos = $_POST['Miapellido'];
@@ -47,6 +46,7 @@
 		$username = $_POST['Miusername'];
 
 		$coordinador = new CoordinadorUsuario();
+		session_start();
 		$coordinador->modificarMiUsuario($documento, $nombre, $apellidos, $email, 
 			$_SESSION['user'], $username);	
 	}
@@ -209,8 +209,9 @@
 			$nombreUsuario, $nombreUsuarioN);
 			$errores = $this->logicaUsuario->getResponseMiModificacion();
 			//session_start();
-			if (isset($errores)) {
-				$_SESSION['eUpdateMiUsuario'] = $this->logicaUsuario->getResponseModificar();
+			if (!empty($errores)) {
+				
+				$_SESSION['eMiUsuario'] = $errores;
 				foreach ($errores as $key) {
 					echo $key;
 				}

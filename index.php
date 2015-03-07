@@ -61,10 +61,10 @@
             <input type="hidden" value="salir" name="salir">
             <button name="salir" class="btn-flat white-text">Salir</button>
           </form> -->
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <?php } ?>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         </ul>      
         <ul id ="dropdown1" class="dropdown-content">
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>

@@ -198,12 +198,12 @@
 		public function validarModificarMiUsuario($documento, $nombre, $apellido, $email, 
 			$nombreUsuario, $nombreUsuarioN)
 		{
-			echo $documento;
-			echo $nombre;
-			echo $apellido;
-			echo $email;
-			echo $nombreUsuario;
-			echo $nombreUsuarioN;
+			// echo $documento;
+			// echo $nombre;
+			// echo $apellido;
+			// echo $email;
+			// echo $nombreUsuario;
+			// echo $nombreUsuarioN;
 
 			if ($nombre =="" or $apellido =="" 
 				or $email =="" or $nombreUsuarioN ==""
@@ -263,6 +263,10 @@
 			// }
 			// if (!empty($this->usuario->buscarUsuario($nombreUsuario))) {
 			// 	$this->responseMiModificacion[14] = "El nombre de usuario ya esta registrado";
+			// }
+			// if (!empty($this->responseMiModificacion)) {
+			// 	session_start();
+			// 	$_SESSION['eMiUsuario'];
 			// }
 			if (empty($this->responseMiModificacion))
 			{
