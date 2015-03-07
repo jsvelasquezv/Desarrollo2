@@ -28,18 +28,21 @@
 			if ($nombre =="") {
 				$this->responseRegistrar[0] = "Ingresa un nombre";
 			}
+			if ($permisoGestionarUsuarios==0 and $permisoGestionarPerfiles==0 and $permisoVender==0) {
+				$this->responseRegistrar[1] = "Selecciona minimo un permiso";
+			}
 			if ($this->validar->esMayor($nombre,30)) {
-				$this->responseRegistrar[1] = "El nombre debe contener maximo 30 caracteres";
+				$this->responseRegistrar[2] = "El nombre debe contener maximo 30 caracteres";
 			}
 			if ($this->validar->esMenor($nombre,4)){
-				$this->responseRegistrar[2] = "El nombre debe contener minimo 4 caracteres";
+				$this->responseRegistrar[3] = "El nombre debe contener minimo 4 caracteres";
 			}
 			if (!($this->validar->esAlfabetico($nombre))){
-				$this->responseRegistrar[3] = "El nombre debe ser alfabetico";
+				$this->responseRegistrar[4] = "El nombre debe ser alfabetico";
 			}
 			if (!empty($this->perfil->buscarPerfil($nombre))) 
 			{
-				$this->responseRegistrar[4] = "El nombre ya existe";
+				$this->responseRegistrar[5] = "El nombre ya existe";
 			}
 			if (empty($this->responseRegistrar)) 
 			{
@@ -60,18 +63,21 @@
 			if ($nombre =="") {
 				$this->responseModificar[0] = "Ingrese un nombre";
 			}
+			if ($permisoGestionarUsuarios==0 and $permisoGestionarPerfiles==0 and $permisoVender==0) {
+				$this->responseModificar[1] = "Selecciona minimo un permiso";
+			}
 			if ($this->validar->esMayor($nuevoNombre,30)) {
-				$this->responseModificar[1] = "El nuevoNombre debe contener maximo 30 caracteres";
+				$this->responseModificar[2] = "El nuevoNombre debe contener maximo 30 caracteres";
 			}
 			if ($this->validar->esMenor($nuevoNombre,4)){
-				$this->responseModificar[2] = "El nuevoNombre debe contener minimo 4 caracteres";
+				$this->responseModificar[3] = "El nuevoNombre debe contener minimo 4 caracteres";
 			}
 			if (!($this->validar->esAlfabetico($nuevoNombre))){
-				$this->responseModificar[3] = "El nombre debe ser alfabetico";
+				$this->responseModificar[4] = "El nombre debe ser alfabetico";
 			}
 			if (!empty($this->perfil->buscarPerfil($nuevoNombre))) 
 			{
-				$this->responseRegistrar[4] = "El nombre ya existe";
+				$this->responseRegistrar[5] = "El nombre ya existe";
 			}
 			if (empty($this->responseModificar)) 
 			{

@@ -55,7 +55,7 @@ include_once '../scripts/gestionarPerfiles.php';
 					<td> <?php echo $key['permiso_gestionar_usuarios'];?> </td>
 					<td> <?php echo $key['permiso_vender'];?> </td>      
 					<td> <?php echo $key['permiso_gestionar_perfiles'];?> </td>
-					<td><a href="../controladores/CoordinadorPerfil.php?edit=<?php echo $key["nombre"] ?>" class="btn-flat" name="edit" id="edit"><i class="mdi-image-edit"></i></a></td> <?php
+					<td><a href="../controladores/CoordinadorPerfil.php?edit=<?php echo $key["nombre"] ?>" class="btn-flat tooltipped" name="edit" id="edit" data-position="right" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td> <?php
 					?> </tr> <?php 
 				} ?>
 			</tbody>
@@ -80,13 +80,13 @@ include_once '../scripts/gestionarPerfiles.php';
 									</div>
 								</div>        
 								<?php } ?>  
-								<div class="input-field col m4 l2 tooltipped" data-position="right" data-tooltip="Este campo es requerido">
+								<div class="input-field col m4 l2 tooltipped" data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 									<input id="nombre" type="text" name="nombre"  required maxlength="30">
 									<label for="nombre">Nombre</label>
-								</div>
+								</div class="tooltipped" data-position="right" data-tooltip="Selecciona minimo un permiso">
 								<h6>Permisos:</h6>
 								<p>
-    								<input type="checkbox" id="permiso1" name="permiso1"/>
+    								<input type="checkbox" id="permiso1" name="permiso1" class="tooltipped">
     								<label for="permiso1">Gestionar Usuarios</label>
   								</p>
    								<p>

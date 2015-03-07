@@ -58,7 +58,7 @@
 								</div>        
 						<?php } ?>              
 						<div class="input-field">
-							<input id="nombre" type="text" class="validate" name="nuevoNombre" value="<?php echo $nombre; ?>">
+							<input id="nombre" type="text" class="validate tooltipped" name="nuevoNombre" value="<?php echo $nombre; ?>"  data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 							<label for="nombre">Nombre</label>
 						</div>
 						<input type="hidden" name="antiguo" value="<?php echo $nombre; ?>">
