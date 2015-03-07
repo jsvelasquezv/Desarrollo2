@@ -62,9 +62,8 @@
             <button name="salir" class="btn-flat white-text">Salir</button>
           </form> -->
           <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          <li><a href="scripts/salir.php">Salir</a></li>
             <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <?php } ?>
         </ul>      
         <ul id ="dropdown1" class="dropdown-content">
@@ -78,6 +77,7 @@
         <ul id ="dropdown2" class="dropdown-content">          
             <li><a href="controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar mis datos</a></li>
             <li><a href="#modal7" class="modal-trigger">Cambiar contrasena</a></li>
+            <li><a href="scripts/salir.php">Salir</a></li>
         </ul>
 
         <!-- responsive navbar -->
