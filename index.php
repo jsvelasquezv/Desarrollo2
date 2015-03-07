@@ -71,7 +71,7 @@
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
             <li><a href="vistas/gestionarPerfiles.php">Perfiles</a></li>
           <?php } ?>
-          <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="vistas/gestionarUsuarios.php">Usuarios</a></li>
           <?php } ?>
         </ul>

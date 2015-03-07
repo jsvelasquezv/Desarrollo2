@@ -64,15 +64,15 @@
 						<input type="hidden" name="antiguo" value="<?php echo $nombre; ?>">
 						<h6>Permisos:</h6>
 						<p>
-							<input type="checkbox" id="permiso2" name="permiso2"/>
+							<input type="checkbox" id="permiso2" name="permiso2" <?php if ($permiso2==1) {echo "checked"; } ?> >
 							<label for="permiso2">Vender</label>
 						</p>
 						<p>
-							<input type="checkbox" id="permiso1" name="permiso1"/>
+							<input type="checkbox" id="permiso1" name="permiso1" <?php if ($permiso1==1) {echo "checked"; } ?> >
 							<label for="permiso1">Gestionar Usuarios</label>
 						</p>
 						<p>
-							<input type="checkbox" id="permiso3" name="permiso3"/>
+							<input type="checkbox" id="permiso3" name="permiso3" <?php if ($permiso3==1) {echo "checked"; } ?> >
 							<label for="permiso3">Gestionar Perfiles</label>
 						</p>
 						<br>
