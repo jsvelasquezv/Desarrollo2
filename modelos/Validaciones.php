@@ -22,11 +22,7 @@
 
 		public function validarEmail($parametro)
 		{	
-			if ((strlen($parametro) <6 ) || (strlen($parametro) > 60)){
-				return preg_match('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$/', $parametro);
-			}else{
-				return 0;
-			}
+			return preg_match('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$/', $parametro);
 		}
 
 		public function esMayor($valor, $tamanoMax)
