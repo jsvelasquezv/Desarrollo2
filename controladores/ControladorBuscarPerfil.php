@@ -21,7 +21,7 @@
 		{
 			$perfilBuscado = $this->perfil->buscarPerfil($parametro);
 			if(empty($perfilBuscado)){
-				$this->responseBuscar[0] = "No exite el perfil ";
+				$this->responseBuscar[0] = "No exite el perfil";
 			}else{
 				return $perfilBuscado;
 			}
