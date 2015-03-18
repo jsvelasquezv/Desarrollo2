@@ -47,4 +47,6 @@
 			}
 		}
 	}
+	// $validaciones = new Validaciones();
+	// echo $validaciones->esAlfabetico("hola");
 ?>

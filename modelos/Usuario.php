@@ -4,7 +4,7 @@
 	*/
 
 	require_once '../libs/rb.php';
-	require_once '../modelos/ConexionBD.php';
+	require_once 'ConexionBD.php';
 
 	class Usuario 
 	{
@@ -79,15 +79,20 @@
 				R::close();
 				return $usuario;
         	}
-        	else
+        	else if(ctype_alpha($parametro))
         	{
         		$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$parametro]);
         		R::close();
 				return $usuario;
         	}
+        	else{
+        		$usuario = R::findOne('usuario', 'email = ?',[$parametro]);
+        		R::close();
+        		return $usuario;
+        	}
 		}
 
-		public function buscarUsuarioE($email)
+		public function consultarUsuario($email)
 		{
 			R::selectDatabase('default');
 			$usuario = R::findOne('usuario', 'email = ?',[$email]);
@@ -122,9 +127,9 @@
 		}
 	}
 
-	// $user = new Usuario();
-	// // $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
-	// // $user->asignarPerfil("Gasimba",116264525);
-	 // $a = $user->buscarUsuario(116264525);
-	 // echo $a;
+	//  $user = new Usuario();
+	//  $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
+	//  $user->asignarPerfil("Gasimba",116264525);
+	//  $a = $user->buscarUsuario("morocho@oscar.com");
+	//  echo $a;
 ?>

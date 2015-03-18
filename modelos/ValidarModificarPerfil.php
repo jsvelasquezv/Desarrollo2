@@ -5,55 +5,58 @@
 	require_once '../modelos/Perfil.php';
 	require_once '../modelos/Validaciones.php';
 
-	class ClassName ControladorRegistroPerfil
+	class ValidarModificarPerfil
 	{
-		private $perfil;
+		private $perfilModelo;
 		private $validaciones;
-		private $responseCrear;
+		private $responseModificar;
 		
 		function __construct()
 		{
-			$this->perfil = new Perfil();
+			$this->perfilModelo = new Perfil();
 			$this->validaciones = new Validaciones();
 		}
 
-		public function registrarPerfil($nombre, $permisoGestionarUsuarios, $permisoVender, $permisoGestionarPerfiles)
+		public function modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
+			$permisoVender, $permisoGestionarPerfiles)
 		{
-			if ($nombre=="") {
-				$this->responseCrear[0]="Ingresa un nombre";
+			// echo $nombre;
+			// echo $nuevoNombre;
+			// echo $permisoGestionarUsuarios;
+			// echo $permisoVender;
+			// echo $permisoGestionarPerfiles;	
+			if ($nombre =="") {
+				$this->responseModificar[0] = "Ingrese un nombre";
 			}
-			if ($permisoGestionarUsuarios==0 or $permisoVender==0 or $permisoGestionarPerfiles==0) {
-				$this->responseCrear[1]="Selecciona minimo un perfil";
+			if ($permisoGestionarUsuarios==0 and $permisoGestionarPerfiles==0 and $permisoVender==0) {
+				$this->responseModificar[1] = "Selecciona minimo un permiso";
 			}
-			if ($this->validaciones->esAlfabetico($nombre)) {
-				$this->responseCrear[2]="El nombre debe ser alfabetico";
+			if ($this->validaciones->esMayor($nuevoNombre,30)) {
+				$this->responseModificar[2] = "El nuevoNombre debe contener maximo 30 caracteres";
 			}
-			if ($this->validaciones->esMenor($nombre,4) {
-				$this->responseCrear[3]="El nombre debe contener minimo 4 caracteres";
+			if ($this->validaciones->esMenor($nuevoNombre,4)) {
+				$this->responseModificar[3] = "El nuevoNombre debe contener minimo 4 caracteres";
 			}
-			if ($this->validaciones->esMayor($nombre,30) {
-				$this->responseCrear[4]="El nombre debe contener maximo 30 caracteres";
+			if (!($this->validaciones->esAlfabetico($nuevoNombre))) {
+				$this->responseModificar[4] = "El nombre debe ser alfabetico";
 			}
-			if (!empty($this->perfil->buscarPerfil($nombre))){
-				$this->responseCrear[4]="El nombre ya existe";
+			if (!empty($this->perfilModelo->buscarPerfil($nuevoNombre))) {
+				$this->responseRegistrar[5] = "El nombre ya existe";
 			}
-			if (empty($this->responseCrear)){
+			if (empty($this->responseModificar)) {
+				$this->perfilModelo->modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
+					$permisoVender, $permisoGestionarPerfiles);
 				session_start();
-				$_SESSION['eRegistroPerfil'] = $this->responseCrear;		
-				header('Location: ../vistas/gestionarPerfiles.php');		
-			}else{
-				session_start();
-				$_SESSION['exitoRegistrar'] = 1;
-				header('Location: ../vistas/gestionarPerfiles.php');
+				unset($_SESSION['eUpdatePerfil']);
 			}
-			foreach ($_SESSION['eRegistroPerfil'] as $key ) {
-				# code...
-			echo $key;
-			}
-			echo $nombre;
-			echo $permisoGestionarUsuarios;
-			echo $permisoVender;
-			echo $permisoGestionarPerfiles;
+		}
+
+		public function getResponse()
+		{
+			return $this->responseModificar;
 		}
 	}
+
+	// $validaciones = new ValidarModificarPerfil();
+	// $validaciones->modificarPerfil("hola", "hola mundo", 1,0,1);
 ?>

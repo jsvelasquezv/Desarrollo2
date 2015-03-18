@@ -5,6 +5,7 @@
 	class ValidarLogin 
 	{
 		private responseLogin;
+		private modeloUsuario;
 
 		function __construct()
 		{

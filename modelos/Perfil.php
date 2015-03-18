@@ -33,16 +33,16 @@
 		public function buscarPerfil($parametro)
 		{
 			R::selectDatabase('default');
-        	if (ctype_alpha($parametro)) 
+        	if (ctype_digit($parametro))
         	{
-				$perfil = R::findOne('perfil', 'nombre = ?',[$parametro]);
-				R::close();
+        		$perfil = R::findOne('perfil', 'id = ?',[$parametro]);
+      			R::close();
 				return $perfil;
         	}
         	else
         	{
-        		$perfil = R::findOne('perfil', 'id = ?',[$parametro]);
-      			R::close();
+				$perfil = R::findOne('perfil', 'nombre = ?',[$parametro]);
+				R::close();
 				return $perfil;
         	}
 		}
