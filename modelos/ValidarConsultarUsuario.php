@@ -3,7 +3,7 @@
 	* 
 	*/
 	require_once 'Usuario.php';
-	require_once '../../modelos/Validaciones.php';
+	require_once 'Validaciones.php';
 
 	class ValidarConsultarUsuario 
 	{

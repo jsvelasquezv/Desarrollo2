@@ -4,7 +4,10 @@
 	*/
 	require_once '../modelos/LogicaUsuario.php';
 	require_once '../modelos/LogicaPerfil.php';
-	
+	require_once '../modelos/ValidarConsultarUsuario.php';
+	require_once '../modelos/ValidarRegistrarUsuario.php';
+	require_once '../modelos/ValidarModificarUsuario.php';
+	require_once '../modelos/ValidarLogin.php';
 
 	if (isset($_POST['cancelarRI'])) {
 		session_start();
@@ -90,9 +93,8 @@
 		$perfilID = $_POST['perfilSelec'];
 		$coordinador = new CoordinadorUsuario();
 		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID);
-		header('Location: ../vistas/gestionarUsuarios.php');
-	}elseif (isset($_GET['editUsuario'])) {
 
+	}elseif (isset($_GET['editUsuario'])) {
 		$editUsuario = $_GET['editUsuario'];
 		$coordinador = new CoordinadorUsuario();
 		$editable = $coordinador->buscarUsuario($editUsuario);
@@ -108,8 +110,8 @@
 		$username = $_POST['username'];
 		$perfilID = $_POST['perfilSelec'];
 		$coordinador = new CoordinadorUsuario();
-		//echo $perfilID;
 		$coordinador->modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, $username, $perfilID);
+	
 	}elseif (isset($_GET['down'])) {
 		$coordinador = new CoordinadorUsuario();
 		$coordinador->dardeBajaUsuario($_GET['down']);
@@ -120,26 +122,37 @@
 	{
 		private $logicaUsuario; //LogicaUsuario
 		private $logicaPerfil;
-		
+		private $validarConsultarUsuario;
+		private $validarRegistrarUsuario;
+		private $validarModificarUsuario;
+		private $valdiarLogin;
+
 		public function __construct()
 		{
 			$this->logicaUsuario = new LogicaUsuario();
 			$this->logicaPerfil = new LogicaPerfil();
+			$this->validarConsultarUsuario = new ValidarConsultarUsuario();
+			$this->validarRegistrarUsuario = new ValidarRegistrarUsuario();
+			$this->validarLogin = new ValidarLogin();
+			//$this->validarModificarUsuario = new ValidarModificarUsuario();
 		}
 
 		public function loguear($nombreUsuario, $password)
 		{
-			$this->logicaUsuario->validarLogin($nombreUsuario,$password);
-			$errores = $this->logicaUsuario->getResponseLogin();
-			if (isset($errores)) {
-				session_start();
-				$_SESSION['eLogin'] = $this->logicaUsuario->getResponseLogin();
+			$this->validarLogin->validarLogin($nombreUsuario,$password);
+			$errores = $this->validarLogin->getResponse();
+			//session_start();
+			/*foreach ($errores as $key) {
+				echo $key;
+			}*/
+			if (!empty($errores)) {
+				$_SESSION['eLogin'] = $errores;
 				header('Location: ../index.php');	
 			}	
 			else
 			{
-				session_start();
 				$_SESSION['exitoLogin'] = 1;
+				header('Location: ../index.php');
 			}
 		}
 
@@ -163,16 +176,19 @@
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $perfilID, $origen) 
 		{
-			$this->logicaUsuario->validarRegistroUsuario($documento, $nombre, $apellidos, $email, 
+			$this->validarRegistrarUsuario->validarRegistrar($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $password, $perfilID);
-			$errores = $this->logicaUsuario->getResponseRegistrar();
-			if (isset($errores)) {
+			$errores = $this->validarRegistrarUsuario->getResponse();
+			foreach ($errores as $key) {
+				echo $key;
+			}
+			if (!empty($errores)) {
 				session_start();
-				$_SESSION['eRegistroUsuario'] = $this->logicaUsuario->getResponseRegistrar();
+				$_SESSION['eRegistroUsuario'] = $errores;
 				if ($origen=='index') {
 					header('Location: ../index.php');
 				}else{
-					header('Location: ../vistas/gestionarUsuarios.php');
+					header('Location: ../vistas/registrarUsuario.php');
 				}
 			}else {
 				session_start();

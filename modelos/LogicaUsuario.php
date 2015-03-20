@@ -296,30 +296,7 @@
 
 		public function validarLogin($nombreUsuario, $password)
 		{
-			$usuario = $this->usuario->buscarUsuario($nombreUsuario);
-			//$user2 = $this->usuario->buscarUsuarioN($nombreUsuario);
-			$user2 = $usuario;
-			if (empty($usuario)) 
-			{
-				$this->responseLogin[0] = "El usuario no esta registrado";
-			}
-			elseif($password != $usuario['password'])
-			{
-				$this->responseLogin[1] = "Contrasena incorrecta";
-			}
-			elseif (empty($this->responseLogin)) 
-			{
-				$perfilAsignado = $this->perfil->buscarPerfil($usuario['tipo_perfil']);
-				session_start();
-				$_SESSION['logueado'] = true;
-				$_SESSION['user'] = $usuario['nombre_usuario'];
-				$_SESSION['permisoDeVender'] = $perfilAsignado['permiso_vender'];
-				$_SESSION['permisoDeGestionarPerfiles'] = $perfilAsignado['permiso_gestionar_perfiles'];
-				$_SESSION['permisoDeGestionarUsuarios'] = $perfilAsignado['permiso_gestionar_usuarios'];
-				session_start();
-				unset($_SESSION['eLogin']);
-				header('Location: ../index.php');
-			}
+			
 		}
 
 		public function validarRecuperacion($email)

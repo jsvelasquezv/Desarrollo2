@@ -123,7 +123,8 @@
              unset($erroresCambiarPass);
              unset($_SESSION['eCambiarPass']);
              // header('Location: index.php');
-          } ?>               
+          } 
+          unset($_SESSION['eUpdatePerfil'])?>               
         </div>
       </div>
     </div>

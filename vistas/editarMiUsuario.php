@@ -5,11 +5,6 @@
 	$apellidos = $_GET['apellidos'];
 	$email = $_GET['email'];
 	$username = $_GET['username'];
-	/*echo " 
-                <script language='JavaScript'> 
-                alert('JavaScript dentro de PHP'); 
-                </script>";*/
-  //echo $errorModificar =  $_SESSION['eMiUsuario'];
   if (isset($_SESSION['eMiUsuario'])) {
     $errorModificar = $_SESSION['eMiUsuario'];
   }

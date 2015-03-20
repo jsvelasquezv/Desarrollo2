@@ -79,7 +79,7 @@
 				R::close();
 				return $usuario;
         	}
-        	else if(ctype_alpha($parametro))
+        	else if(ctype_alnum($parametro))
         	{
         		$usuario = R::findOne('usuario', 'nombre_usuario = ?',[$parametro]);
         		R::close();
@@ -136,9 +136,9 @@
 		}
 	}
 
-	//  $user = new Usuario();
+	  //$user = new Usuario();
 	//  $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
 	//  $user->asignarPerfil("Gasimba",116264525);
-	//  $a = $user->buscarUsuario("morocho@oscar.com");
-	//  echo $a;
+	  //$a = $user->buscarUsuario("juanTwo");
+	  //echo $a;
 ?>

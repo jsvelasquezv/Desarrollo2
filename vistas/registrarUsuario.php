@@ -1,24 +1,5 @@
 <?php 
   include_once '../scripts/gestionarUsuarios.php';
-  if (isset($_GET['documento'])){  
-	 $documento = $_GET['documento'];
-  }
-  if (isset($_GET['nombre'])){  
-   $nombre = $_GET['nombre'];
-  }
-  if (isset($_GET['apellidos'])){  
-   $apellidos = $_GET['apellidos'];
-  }
-  if (isset($_GET['email'])){  
-   $email = $_GET['email'];
-  }
-  if (isset($_GET['username'])){  
-   $username = $_GET['username'];
-  }
-  if (isset($_GET['estado']))
-  {
-    $estado = $_GET['estado'];
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,52 +42,57 @@
     </div>
   </nav>
   <?php }else{ header('Location: ../index.php');}?> 
+  <?php $perfiles = $_SESSION['perfiles']; ?>
 <div class="container">
   <div class="row">
     
   <div class="col s12 m8 offset-m2 l6 offset-l3">
     <div class="card login">
       <div class="card-content">
-        <span class="card-title teal-text">Editar Usuario</span>  
-        <?php $perfiles = $_SESSION['perfiles']; ?>
-        <form action="../controladores/CoordinadorUsuario.php" method="post">  
-          <?php if (isset($_SESSION['eUpdateUsuario'])) {  ?>
-                <div class="card">
-                  <div class="card-content">
-                  <?php foreach ($_SESSION['eUpdateUsuario'] as $key) { ?>
-                    <p><?php echo $key; ?></p>
-                  <?php } ?>
-                  </div>
-                </div>        
-            <?php } ?>     
+    <span class="card-title teal-text">Resgistrar Usuario</span>  
+        <form action="../controladores/CoordinadorUsuario.php" method="post"> 
+          <?php if (isset($_SESSION['eRegistroUsuario'])) { ?>          
+        <div class="card">
+          <div class="card-content">
+            <?php foreach ($_SESSION['eRegistroUsuario'] as $key) { ?>
+              <p><?php echo $key; ?></p>
+            <?php } ?>
+          </div>
+        </div>        
+      <?php } ?>             
           <div class="row">
             <div class="input-field col s6">
-              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nombre; ?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
+              <input id="nombre" type="text" class="validate" name="nombre">
               <label for="nombre">Nombre</label>
             </div>
-          <input type="hidden" name="antiguo" value="<?php echo $documento; ?>">          
             <div class="input-field col s6">
-              <input id="apellido" type="text" class="validate tooltipped" name="apellido" value="<?php echo $apellidos; ?>" data-position="right" data-tooltip="Este campo es requerido, 2-30 caracteres alfabeticos" >
+              <input id="apellido" type="text" class="validate" name="apellido">
               <label for="apellido">Apellidos</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="username" type="text" class="validate tooltipped" name="username" value="<?php echo $username; ?>" data-position="left" data-tooltip="Este campo es requerido, 2-30 caracteres alfanumericos">
+              <input id="username" type="text" class="validate" name="username">
               <label for="username">Username</label>
             </div>
             <div class="input-field col s6">
-              <input id="email" type="text" class="validate tooltipped" name="email" value="<?php echo $email; ?>" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
-              <label for="email">E-mail</label>
+              <input id="password" type="password" class="validate" name="password">
+              <label for="password">Password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="documento" type="text" class="validate tooltipped" name="documento" value="<?php echo $documento; ?>" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
+              <input id="documento" type="text" class="validate" name="documento">
               <label for="documento">Documento</label>
             </div>
-            <div class="col s6">
-               <select name="perfilSelec">
+            <div class="input-field col s6">
+              <input id="email" type="text" class="validate" name="email">
+              <label for="email">E-mail</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <select name="perfilSelec" class="scroll browser-default">
                 <?php foreach ($perfiles as $key) { ?>
                   <option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
                 <?php } ?>
@@ -115,8 +101,8 @@
               </select>
             </div>
           </div>
-          <input class="btn-flat orange-text" type="submit" value="Guardar" name="editar">
-        </form>                     
+          <input class="btn-flat orange-text" type="submit" value="Registrarse" name="registrar">
+        </form>                        
       </div>
     </div>
   </div>
@@ -154,7 +140,9 @@
              unset($erroresCambiarPass);
              unset($_SESSION['eCambiarPass']);
              // header('Location: index.php');
-          } ?>               
+          } 
+             unset($_SESSION['eRegistroUsuario']);
+          ?>               
         </div>
       </div>
     </div>
