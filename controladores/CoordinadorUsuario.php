@@ -82,7 +82,7 @@
 		$password = $_POST['password'];
 		$perfilID = $_POST['perfilSelec'];
 		$coordinador = new CoordinadorUsuario();
-		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID, 'index');
+		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID, $estado, 'index');
 	}elseif (isset($_POST["registrar"])) {
 		$documento = $_POST['documento'];
 		$nombre = $_POST['nombre'];
@@ -91,8 +91,9 @@
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$perfilID = $_POST['perfilSelec'];
+		$estado = $_POST['estado'];
 		$coordinador = new CoordinadorUsuario();
-		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID);
+		$coordinador->registrarUsuario($documento, $nombre, $apellidos, $email, $username, $password, $perfilID, $estado);
 
 	}elseif (isset($_GET['editUsuario'])) {
 		$editUsuario = $_GET['editUsuario'];
@@ -109,8 +110,9 @@
 		$email = $_POST['email'];
 		$username = $_POST['username'];
 		$perfilID = $_POST['perfilSelec'];
+		$estado = $_POST['estado'];
 		$coordinador = new CoordinadorUsuario();
-		$coordinador->modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, $username, $perfilID);
+		$coordinador->modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, $username, $perfilID, $estado);
 	
 	}elseif (isset($_GET['down'])) {
 		$coordinador = new CoordinadorUsuario();
@@ -174,10 +176,10 @@
 		}
 
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $perfilID, $origen) 
+			$nombreUsuario, $password, $perfilID, $estado, $origen) 
 		{
 			$this->validarRegistrarUsuario->validarRegistrar($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $perfilID);
+			$nombreUsuario, $password, $perfilID, $estado);
 			$errores = $this->validarRegistrarUsuario->getResponse();
 			foreach ($errores as $key) {
 				echo $key;
@@ -198,13 +200,13 @@
 		}
 		
 		public function modificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, 
-			$nombreUsuario, $tipoPerfil)
+			$nombreUsuario, $tipoPerfil, $estado)
 		{
-			//echo $tipoPerfil;
+			echo $estado;
 			$this->logicaUsuario->validarModificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, 
-			$nombreUsuario, $tipoPerfil);
+			$nombreUsuario, $tipoPerfil, $estado);
 			$errores = $this->logicaUsuario->getResponseModificar();
-			if (isset($errores)) {
+			if (!empty($errores)) {
 				session_start();
 				$_SESSION['eUpdateUsuario'] = $this->logicaUsuario->getResponseModificar();
 				header('Location: ../vistas/editarUsuario.php?documento='.$documento.'&nombre='.$nombre.'&apellidos='.$apellidos.'&email='.$email.

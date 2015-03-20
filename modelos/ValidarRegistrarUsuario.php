@@ -18,7 +18,7 @@
 		}
 
 		public function validarRegistrar($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $ID)
+			$nombreUsuario, $password, $ID, $estado)
 		{
 			if ($nombre =="" or $apellidos =="" 
 				or $email =="" or $nombreUsuario ==""
@@ -85,7 +85,7 @@
 			if (empty($this->responseCrear)) 
 			{
 				$usuario = $this->usuarioModelo->registrarUsuario($documento, $nombre, $apellidos, $email, 
-					$nombreUsuario, $password, $ID);
+					$nombreUsuario, $password, $ID, $estado);
 				return $usuario;
 			}		
 		}

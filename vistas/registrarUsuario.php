@@ -91,17 +91,23 @@
             </div>
           </div>
           <div class="row">
-            <div class="col s12">
-              <select name="perfilSelec" class="scroll browser-default">
+            <div class="col s6">
+            <label for="perfil">Perfil</label>
+              <select name="perfilSelec" class="scroll browser-default" id="perfil">
                 <?php foreach ($perfiles as $key) { ?>
                   <option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
                 <?php } ?>
-                <!-- <option value="2">Perfil 2</option>
-                <option value="3">Perfil 3</option> -->
+              </select>
+            </div>
+            <div class="col s6">
+            <label for="estado">Estado</label>
+              <select name="estado" class="scroll browser-default" id="estado">
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
               </select>
             </div>
           </div>
-          <input class="btn-flat orange-text" type="submit" value="Registrarse" name="registrar">
+          <input class="btn-flat orange-text" type="submit" value="Registrar" name="registrar">
         </form>                        
       </div>
     </div>

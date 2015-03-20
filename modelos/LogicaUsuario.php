@@ -128,8 +128,9 @@
 		}
 
 		public function validarModificarUsuario($documento, $documentoN, $nombre, $apellido, $email, 
-			$nombreUsuario, $tipoPerfil)
+			$nombreUsuario, $tipoPerfil, $estado)
 		{
+			echo $estado;
 			if ($nombre =="" or $apellido =="" 
 				or $email =="" or $nombreUsuario ==""
 				or $documentoN =="" or $tipoPerfil =="") {
@@ -192,10 +193,9 @@
 			if (empty($this->responseModificacion))
 			{
 				//echo $tipoPerfil;
-				$this->usuario->modificarUsuario($documento, $documentoN, $nombre, $apellido, $email, $nombreUsuario, $tipoPerfil);
+				$this->usuario->modificarUsuario($documento, $documentoN, $nombre, $apellido, $email, $nombreUsuario, $tipoPerfil, $estado);
 				session_start();
 				unset($_SESSION['eUpdateUsuario']);
-				header('Location: ../vistas/gestionarUsuarios.php');
 			}
 		}
 

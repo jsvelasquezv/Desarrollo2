@@ -15,7 +15,7 @@
 		}
 
 		public function registrarUsuario($documento, $nombre, $apellidos, $email, 
-			$nombreUsuario, $password, $ID)
+			$nombreUsuario, $password, $ID, $estado)
 		{
 			R::selectDatabase('default');
         	$usuario = R::dispense('usuario');
@@ -26,11 +26,12 @@
         	$usuario->nombreUsuario = $nombreUsuario;
         	$usuario->password = $password;
         	$usuario->tipo_perfil = $ID;
+        	$usuario->estado = $estado;
         	R::store($usuario);
         	R::close();
 		}
 
-		public function asignarPerfil($nombrePerfil, $documento)
+		/*public function asignarPerfil($nombrePerfil, $documento)
 		{
 			R::selectDatabase('default');
         	$perfil = R::findOne('perfil','nombre =?',[$nombrePerfil]);
@@ -38,10 +39,10 @@
         	$usuario->tipoPerfil = $perfil['id'];
         	R::store($usuario);
         	R::close();
-		}
+		}*/
 
 		public function modificarUsuario($documento,$documentoN, $nombre, $apellidos, $email, 
-			$nombreUsuario, $perfil)
+			$nombreUsuario, $perfil, $estado)
 		{
 			R::selectDatabase('default');
         	$usuario = R::findOne('usuario', 'documento = ?',[$documento]);
@@ -51,6 +52,7 @@
         	$usuario->email = $email;
         	$usuario->nombreUsuario = $nombreUsuario;
         	$usuario->tipoPerfil = $perfil;
+        	$usuario->estado = $estado;
         	R::store($usuario);
         	R::close();
 		}

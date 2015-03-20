@@ -15,8 +15,7 @@
   if (isset($_GET['username'])){  
    $username = $_GET['username'];
   }
-  if (isset($_GET['estado']))
-  {
+  if (isset($_GET['estado'])){
     $estado = $_GET['estado'];
   }
 ?>
@@ -96,23 +95,32 @@
               <label for="username">Username</label>
             </div>
             <div class="input-field col s6">
-              <input id="email" type="text" class="validate tooltipped" name="email" value="<?php echo $email; ?>" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
+              <input id="documento" type="text" class="validate tooltipped" name="documento" value="<?php echo $documento; ?>" data-position="right" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
+              <label for="documento">Documento</label>
+            </div>
+          </div>
+           <div class="row">
+            <div class="input-field col s12">
+              <input id="email" type="text" class="validate tooltipped" name="email" value="<?php echo $email; ?>" data-position="bottom" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
               <label for="email">E-mail</label>
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s6">
-              <input id="documento" type="text" class="validate tooltipped" name="documento" value="<?php echo $documento; ?>" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
-              <label for="documento">Documento</label>
-            </div>
             <div class="col s6">
-               <select name="perfilSelec">
+              <label for="perfil">Perfil</label>
+               <select name="perfilSelec" id="perfil" class="browser-default">
                 <?php foreach ($perfiles as $key) { ?>
                   <option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
-                <?php } ?>
-                <!-- <option value="2">Perfil 2</option>
-                <option value="3">Perfil 3</option> -->
+                <?php } ?>      
               </select>
+            </div>
+              <div class="col s6">
+                <label for="perfil">Estado</label>
+               <select name="estado" id="estado" class="browser-default">
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
+              </select>
+              </div>
             </div>
           </div>
           <input class="btn-flat orange-text" type="submit" value="Guardar" name="editar">
