@@ -67,12 +67,9 @@
         	//$perfil = R::findOne('perfil', 'nombre = ?',[$nombre]);
         	// var_dump($perfil);
         	R::close();
-
         	return $perfiles;
 		}
-
 	}
-
 	// $perfil = new Perfil();
 	// $perfiles = $perfil->getPerfiles();
 	// foreach ($perfiles as $key) {

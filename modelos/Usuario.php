@@ -92,6 +92,15 @@
         	}
 		}
 
+		public function buscarUsuarioE($email)
+		{
+			R::selectDatabase('default');
+			$usuario = R::findOne('usuario', 'email = ?',[$parametro]);
+        	R::close();
+        	return $usuario;
+
+		}
+
 		public function consultarUsuario($email)
 		{
 			R::selectDatabase('default');

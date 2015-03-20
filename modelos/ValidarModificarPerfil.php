@@ -17,7 +17,7 @@
 			$this->validaciones = new Validaciones();
 		}
 
-		public function modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
+		public function validarModificar($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 			$permisoVender, $permisoGestionarPerfiles)
 		{
 			// echo $nombre;

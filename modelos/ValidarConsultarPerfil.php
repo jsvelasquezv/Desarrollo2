@@ -17,7 +17,7 @@
 			$this->validaciones = new Validaciones();
 		}
 
-		public function consultarPerfil($nombre)
+		public function validarConsultar($nombre)
 		{
 			$perfil = $this->perfilModelo->buscarPerfil($nombre);
 			if(empty($perfil))
@@ -28,6 +28,12 @@
 			{
 				return $perfil;
 			}
+		}
+
+		public function consultarTodos()
+		{
+			$perfiles = $this->perfilModelo->getPerfiles();
+			return $perfiles;
 		}
 
 		public function getResponse()

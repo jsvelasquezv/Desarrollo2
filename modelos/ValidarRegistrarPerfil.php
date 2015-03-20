@@ -17,7 +17,7 @@
 			$this->validaciones = new Validaciones();
 		}
 
-		public function registrarPerfil($nombre, $permisoGestionarUsuarios, $permisoVender, $permisoGestionarPerfiles)
+		public function validarRegistrar($nombre, $permisoGestionarUsuarios, $permisoVender, $permisoGestionarPerfiles)
 		{
 			echo $nombre;
 			echo $permisoGestionarUsuarios;
@@ -26,7 +26,7 @@
 			if ($nombre=="") {
 				$this->responseCrear[0]="Ingresa un nombre";
 			}
-			if ($permisoGestionarUsuarios==0 or $permisoVender==0 or $permisoGestionarPerfiles==0) {
+			if ($permisoGestionarUsuarios==0 and $permisoVender==0 and $permisoGestionarPerfiles==0) {
 				$this->responseCrear[1]="Selecciona minimo un permiso";
 			}
 			if (!$this->validaciones->esAlfabetico($nombre)) {

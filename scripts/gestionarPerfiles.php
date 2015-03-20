@@ -1,8 +1,8 @@
 <?php 
-	require_once '../modelos/LogicaPerfil.php';
-	$logica = new LogicaPerfil();
+	require_once '../modelos/ValidarConsultarPerfil.php';
+	$validarConsulta = new ValidarConsultarPerfil();
 	session_start();
-	$_SESSION['perfiles'] = $logica->getPerfiles();
+	$_SESSION['perfiles'] = $validarConsulta->consultarTodos();
 	if (isset($_SESSION['exitoRegistrar'])) {
 		$exitoRegistrar = $_SESSION['exitoRegistrar'];
 	}
@@ -12,7 +12,6 @@
 	if (isset($_SESSION['eBuscarP'])) {
 		$errorBuscarPerfil = $_SESSION['eBuscarP'];
 	}
-
 	// foreach ($_SESSION['perfiles'] as $key) {
 	// 	echo $key['id'];
 	// 	echo $key['nombre'];

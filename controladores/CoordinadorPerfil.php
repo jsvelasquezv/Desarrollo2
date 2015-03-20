@@ -2,7 +2,10 @@
 	/**
 	* 
 	*/
-	require_once '../modelos/LogicaPerfil.php';
+	//require_once '../modelos/LogicaPerfil.php';
+	require_once '../modelos/ValidarConsultarPerfil.php';
+	require_once '../modelos/ValidarRegistrarPerfil.php';
+	require_once '../modelos/ValidarModificarPerfil.php';
 
 	if (isset($_GET['edit'])) {
 		$edit = $_GET['edit'];
@@ -93,23 +96,29 @@
 
 	class CoordinadorPerfil 
 	{
-		private $logicaPerfil; //LogicaPerfil
+		//private $logicaPerfil; //LogicaPerfil
+		private $validarConsultarPerfil;
+		private $validarModificarPerfil;
+		private $validarRegistrarPerfil;
 
 		public function __construct()
 		{
-			$this->logicaPerfil = new LogicaPerfil();
+			//$this->logicaPerfil = new LogicaPerfil();
+			$this->validarConsultarPerfil = new ValidarConsultarPerfil();
+			$this->validarRegistrarPerfil = new ValidarRegistrarPerfil();
+			$this->validarModificarPerfil = new ValidarModificarPerfil();
 		}
 		
 		public function modificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios,$permisoVender, $permisoGestionarPerfiles) //$perfil:PerfilVO
 		{
 			//$editable = $this->logicaPerfil->validarConsultarPerfil();
-			$this->logicaPerfil->validarModificarPerfil($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
+			$this->validarModificarPerfil->validarModificar($nombre, $nuevoNombre, $permisoGestionarUsuarios, 
 												 $permisoVender, $permisoGestionarPerfiles);
 
-			$errores = $this->logicaPerfil->getResponseModificar();
+			$errores = $this->validarModificarPerfil->getResponse();
 			if (!empty($errores)) {
 				session_start();
-				$_SESSION['eUpdatePerfil'] = $this->logicaPerfil->getResponseModificar();
+				$_SESSION['eUpdatePerfil'] = $errores;
 				header('Location: ../vistas/editarPerfil.php?nombre='.$nombre.'&permiso1='.$permisoGestionarUsuarios
 					.'&permiso2='.$permisoVender.'&permiso3='.$permisoGestionarPerfiles);
 			}
@@ -126,27 +135,28 @@
 			// echo $permisoGestionarPerfiles;
 			
 		}
+
 		public function buscarPerfil($idPerfil) //$idPerfil:int
 		{
-			$perfil = $this->logicaPerfil->validarConsultarPerfil($idPerfil);
+			$perfil = $this->validarConsultarPerfil->validarConsultar($idPerfil);
 			return $perfil;
-			// Descomentar la linea de arriba cuando se haga la funcion validarConsultarPerfil en LogicaPerfil
 		}
+
 		public function registrarPerfil($nombre, $permisoGestionarUsuarios, $permisoVender, $permisoGestionarPerfiles) // //$perfil:PerfilVO
 		{
-			$this->logicaPerfil->validarRegistrarPerfil($nombre, $permisoGestionarUsuarios, 
+			$this->validarRegistrarPerfil->validarRegistrar($nombre, $permisoGestionarUsuarios, 
 												$permisoVender, $permisoGestionarPerfiles);
 
-			$errores = $this->logicaPerfil->getResponseRegistrar();
-			if (isset($errores)) {
+			$errores = $this->validarRegistrarPerfil->getResponse();
+			if (!empty($errores)) {
 				session_start();
-				$_SESSION['eRegistroPerfil'] = $this->logicaPerfil->getResponseRegistrar();		
-				header('Location: ../vistas/gestionarPerfiles.php');		
+				$_SESSION['eRegistroPerfil'] = $errores;		
+				header('Location: ../vistas/registrarPerfil.php');		
 			}
 			else
 			{
-				session_start();
 				$_SESSION['exitoRegistrar'] = 1;
+				unset($_SESSION['eRegistroPerfil']);
 				header('Location: ../vistas/gestionarPerfiles.php');
 			}
 			

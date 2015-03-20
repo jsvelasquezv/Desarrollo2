@@ -1,14 +1,20 @@
 <?php 
   include_once '../scripts/gestionarUsuarios.php';
-	$documento = $_GET['documento'];
-	$nombre = $_GET['nombre'];
-	$apellidos = $_GET['apellidos'];
-	$email = $_GET['email'];
-	$username = $_GET['username'];
-	/*echo " 
-                <script language='JavaScript'> 
-                alert('JavaScript dentro de PHP'); 
-                </script>";*/
+  if (isset($_GET['documento'])){  
+	 $documento = $_GET['documento'];
+  }
+  if (isset($_GET['nombre'])){  
+   $nombre = $_GET['nombre'];
+  }
+  if (isset($_GET['apellidos'])){  
+   $apellidos = $_GET['apellidos'];
+  }
+  if (isset($_GET['email'])){  
+   $email = $_GET['email'];
+  }
+  if (isset($_GET['username'])){  
+   $username = $_GET['username'];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,11 +1,11 @@
 <?php 
 	require_once '../modelos/LogicaUsuario.php';
-	require_once '../modelos/LogicaPerfil.php';
+	require_once '../modelos/ValidarConsultarPerfil.php';
 	$logicaUsuario = new LogicaUsuario();
-	$logicaPerfil = new LogicaPerfil();
+	$validarConsultar = new ValidarConsultarPerfil();
 	session_start();
 	$_SESSION['usuarios'] = $logicaUsuario->getUsuarios();
-	$_SESSION['perfiles'] = $logicaPerfil->getPerfiles();
+	$_SESSION['perfiles'] = $validarConsultar->consultarTodos();
 	if (isset($_SESSION['exitoRegistrar'])) {
 		$exitoRegistrar = $_SESSION['exitoRegistrar'];
 	}

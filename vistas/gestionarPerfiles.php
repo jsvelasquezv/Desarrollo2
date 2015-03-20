@@ -79,7 +79,7 @@ include_once '../scripts/gestionarPerfiles.php';
 		</table>
 		</div>
 		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Nuevo Perfil" href="#modal"><i class="mdi-content-add"></i></a>
+			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Nuevo Perfil" href="../vistas/registrarPerfil.php"><i class="mdi-content-add"></i></a>
 		</div>
 		<div class="valign-wrapper">
 			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
@@ -124,9 +124,6 @@ include_once '../scripts/gestionarPerfiles.php';
 				</div>
 			</div>    
 		</div>
-			<?php if (isset($_SESSION['eRegistroPerfil'])) {
-			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
-		} ?>
 	</div>
 	<div id="modal2" class="modal modalLogin">
       <div class="card login">
