@@ -85,7 +85,7 @@
 				unset($_SESSION['eUpdateUsuario']);
 			}
 		}
-		public getResponse ()
+		public function getResponse ()
 		{
 			return $this->responseModificar;
 		}

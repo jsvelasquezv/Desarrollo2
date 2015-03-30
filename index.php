@@ -50,21 +50,28 @@
   <title>Desarrollo2</title>
 </head>
 <body>
+
   <?php if ((isset($_SESSION['logueado']))){ ?>
   <nav class="teal">
     <div class="nav-wrapper">
       <div class="col s12">
-        <a href="#!" class="brand-logo">Logo</a>
+        <a href="#!" ><img src="assets/images/logo.png"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-        <ul class="right hide-on-med-and-down">
+
+        <ul class="right hide-on-med-and-down" >
          <!--  <form action="controladores/Principal.php">
             <input type="hidden" value="salir" name="salir">
             <button name="salir" class="btn-flat white-text">Salir</button>
           </form> -->
-            <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-            <?php } ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+         
+          <li><a  href="vistas/compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
+          <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <?php } ?>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Mi Perfil &nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          
+
         </ul>      
         <ul id ="dropdown1" class="dropdown-content">
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
@@ -73,27 +80,50 @@
           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="vistas/gestionarUsuarios.php">Usuarios</a></li>
           <?php } ?>
+           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+            <li><a href="vistas/categorias.php">Categorias</a></li>
+          <?php } ?>
         </ul>
-        <ul id ="dropdown2" class="dropdown-content">          
-            <li><a href="controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar mis datos</a></li>
-            <li><a href="#modal7" class="modal-trigger">Cambiar contrasena</a></li>
+        <ul id ="dropdown2" class="dropdown-content">   
+
+        
+            <li><a href="controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar <br>mis datos</a></li>
+            <li><a href="#modal7" class="modal-trigger">Cambiar<br> contrasena</a></li>
             <li><a href="scripts/salir.php">Salir</a></li>
         </ul>
 
+        <ul id="dropdown3" class="dropdown-content">
+              <li><a href="vistas/crearProducto.php"> Mis<br> productos</a></li>
+             <li><a href="vistas/visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
+
+            </ul> 
+        
+
         <!-- responsive navbar -->
         <ul class="side-nav" id="mobile-demo">
-          <li><a href="#modal1" class="modal-trigger">Salir</a></li>
-          <li><a href="#modal2" class="modal-trigger">Opciones</a></li>
+         <img src="assets/images/logo.png">
+          <li> <a href="index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+           <li><a  href="vistas/compras.php" ><i class = " mdi-action-shopping-cart left" class="modal-trigger"></i>Compra </a></li>
+            <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown1" class="modal-trigger">&nbsp;&nbsp;Modulos <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php } ?>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown2" class="modal-trigger">&nbsp;&nbsp;Mi cuenta <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown3" class="modal-trigger">&nbsp;&nbsp;Mi perfil <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+
+          <li><a href="scripts/salir.php" class="modal-trigger">&nbsp;&nbsp;Salir</a></li>
+          <li><a href="#" >&nbsp;&nbsp;Opciones</a></li>
         </ul>
         
       </div>
     </div>
   </nav>
+
+
     <?php }else{ ?>    
   <nav class="teal">
     <div class="nav-wrapper">
       <div class="col s12">
-        <a href="#!" class="brand-logo">Logo</a>
+       <a href="#!" ><img src="assets/images/logo.png"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="#modal1" class="modal-trigger">Ingresa</a></li>
@@ -107,12 +137,109 @@
           <li><a href="#!">three</a></li>
         </ul> -->
         <ul class="side-nav" id="mobile-demo">
-          <li><a href="#modal1" class="modal-trigger">Ingresa</a></li>
-          <li><a href="#modal2" class="modal-trigger">Registrate</a></li>
+          <img src="assets/images/logo.png">
+          <li><a href="#modal1" class="modal-trigger">&nbsp;&nbsp;Ingresa</a></li>
+          <li><a href="#modal2" class="modal-trigger">&nbsp;&nbsp;Registrate</a></li>
         </ul>
       </div>
     </div>
   </nav>
+ <!-- ******************************************************************** INDEX SIN LOGEARSE************************************************************************************** -->
+  <div class="parallax-container ">
+    <div class="parallax"> <img src="assets/images/parallax1.jpg" style = "display:block ; background-image: url(assets/images/parallax1.jpg)" /> 
+      
+   
+  </div>
+  <div class="section ">
+    <div class="row container">
+      <h6 class="header"></h6>
+
+      <p class="grey-text text-darken-3 lighten-3">
+        
+        <div id = "izq"> <a href="#" class="waves-effect waves-light "> 
+          <h5><p> &nbsp;&nbsp;&nbsp;&nbsp;¿Quieres comprar?<br>
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;Encuentra una buena oferta</b>
+          </p></h5>
+          <H3>&nbsp;&nbsp;&nbsp;VER OFERTAS</H3></a>
+
+        </div>
+         <div id = "der"><a href="#modal2" class="modal-trigger" > 
+         <h5> <p>&nbsp;&nbsp;&nbsp;&nbsp;¿Quieres vender?<br>
+                <b>&nbsp;&nbsp;&nbsp;&nbsp;Registrate y publica tus productos</b>
+            </p></h5> 
+            <h3>&nbsp;&nbsp;CREA TUS PRODUCTOS</h3></a>
+          </div>
+      </p>
+    </div>
+  </div>
+  </div>
+ <!-- +++++++++++++++++++++++++++++++++++++ inicia CATEGORIAS ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+ <section id = "category-tree" > <!-- "contenedor de las categorias" -->
+   <div class = "title-bar" >  <!-- titulo categorias -->
+        <h2>Categorias</h2>
+   </div>
+  <center>
+  <ul class = "category-list  category-list-first" > <!-- primer columna donde estan listadas las categorias   -->
+    <li class="category"><!-- espacio de cada categoria  -->
+      <a class=" categoryLink" href="#"> 
+        <span class="icon"> <img src="assets/images/pc.jpg"></span>
+        <h6>&nbsp;&nbsp;&nbsp;Tecnología</h6>
+      </a>
+    </li>
+
+    
+       <li class="category"><!-- espacio de cada categoria  -->
+           <a class=" categoryLink" href="#"> 
+                <span class="icon"> <img src="assets/images/vehiculo.jpg"></span>
+                 <h6>&nbsp;&nbsp;&nbsp;&nbsp;Vehiculos</h6>
+          </a>
+        </li>
+  </ul>
+
+ 
+
+  <ul class = "category-list  " > <!-- columna dos listado de las categorias -->
+    <li class="category"><!-- espacio de cada categoria  -->
+      <a class=" categoryLink" href="#"> 
+        <span class="icon"> <img src="assets/images/tijera.jpg"></span>
+        <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estilo</h6>
+      </a>
+      
+    </li>
+       
+          <li class="category"><!-- espacio de cada categoria  -->
+              <a class=" categoryLink" href="#"> 
+                 <span class="icon"> <img src="assets/images/casa.jpg"></span>
+                   <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hogar</h6>
+               </a>
+               
+          </li>           
+  </ul>
+
+  <ul class = "category-list  " >
+     <li class="category"><!-- espacio de cada categoria  -->
+       <a class=" categoryLink" href="#"> 
+          <span class="icon"><img src="assets/images/salud.jpg"> </span>
+             <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salud</h6>
+      </a>
+             
+          </li>
+
+          
+          <li class="category"><!-- espacio de cada categoria  -->
+            <a class=" categoryLink" href="#"> 
+               <span class="icon"><img src="assets/images/libro.jpg"></i></span>
+                  <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Libros</h6>
+                </a>
+               
+          </li>
+  </ul>
+  </center>
+
+
+<!-- ********************************************************************************************************************************************************** -->
   <?php } ?>
   <div class="valign-wrapper">
     <div class="col s12 m8 offset-m2 l4 offset-l3 valign">
@@ -146,6 +273,7 @@
     </div>
   </div>    
 </div>
+
 <?php if (isset($erroresLogin)) {
       echo "<script language='javascript'> $('#modal1').openModal(); </script>"; 
     } ?>
@@ -211,6 +339,7 @@
             <input class="btn-flat orange-text" type="submit" value="Cancelar" name="cancelarRI">
           </div>
         </form>   
+
         <?php if (isset($erroresRegistro)) {
       echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
     } ?>                  
@@ -255,6 +384,7 @@
     </div>
   </div>    
 </div>
+
  <div id="modal4" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -329,6 +459,7 @@
       </div>
     </div>
     </div>
+
      <div id="modal8" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
