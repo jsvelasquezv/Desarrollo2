@@ -112,7 +112,7 @@
 			}
 		}
 
-		public function validarConsultaUsuarioN($nombreUsuario)
+		/*public function validarConsultaUsuarioN($nombreUsuario)
 		{
 			$usuario = $this->usuario->buscarUsuario($nombreUsuario);
 			return $usuario;
@@ -125,7 +125,7 @@
 				$this->responseBusqueda[0] = "Ingresa un email registrado";
 			}
 			return $usuario;
-		}
+		}*/
 
 		public function validarModificarUsuario($documento, $documentoN, $nombre, $apellido, $email, 
 			$nombreUsuario, $tipoPerfil, $estado)
@@ -198,7 +198,7 @@
 				unset($_SESSION['eUpdateUsuario']);
 			}
 		}
-
+		
 		public function validarModificarMiUsuario($documento, $nombre, $apellido, $email, 
 			$nombreUsuario, $nombreUsuarioN)
 		{
@@ -294,10 +294,10 @@
 			}
 		}
 
-		public function validarLogin($nombreUsuario, $password)
+		/*public function validarLogin($nombreUsuario, $password)
 		{
 			
-		}
+		}*/
 
 		public function validarRecuperacion($email)
 		{

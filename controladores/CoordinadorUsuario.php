@@ -2,12 +2,13 @@
 	/**
 	* 
 	*/
-	require_once '../modelos/LogicaUsuario.php';
-	require_once '../modelos/LogicaPerfil.php';
+	//require_once '../modelos/LogicaUsuario.php';
+	////require_once '../modelos/LogicaPerfil.php';
 	require_once '../modelos/ValidarConsultarUsuario.php';
 	require_once '../modelos/ValidarRegistrarUsuario.php';
 	require_once '../modelos/ValidarModificarUsuario.php';
 	require_once '../modelos/ValidarLogin.php';
+	require_once '../modelos/GestionarContrasena.php';
 
 	if (isset($_POST['cancelarRI'])) {
 		session_start();
@@ -18,7 +19,7 @@
 	if (isset($_POST['buscar'])) {
 		$documento = $_POST['emailB'];
 		$coordinador = new CoordinadorUsuario();
-		$editable = $coordinador->buscarUsuarioE($documento);
+		$editable = $coordinador->buscarUsuario($documento);
 		if (empty($editable)) {
 			session_start();
 			$_SESSION['eBuscar'] = 1;
@@ -33,11 +34,10 @@
 	if (isset($_GET['user'])) {
 		session_start();
 		$usuario = $_SESSION['user'];
-		echo $usuario;
-
+		// echo $usuario;
 		$coordinador = new CoordinadorUsuario();
-		$editable = $coordinador->buscarUsuarioN($usuario);
-		//echo $editable;
+		$editable = $coordinador->buscarUsuario($usuario);
+		// echo $editable;
 		header('Location: ../vistas/editarMiUsuario.php?documento='.$editable['documento'].'&nombre='.$editable['nombre'].
 			'&apellidos='.$editable['apellidos'].'&email='.$editable['email'].'&username='.$editable['nombre_usuario']);
 	}
@@ -131,12 +131,13 @@
 
 		public function __construct()
 		{
-			$this->logicaUsuario = new LogicaUsuario();
-			$this->logicaPerfil = new LogicaPerfil();
+			//$this->logicaUsuario = new LogicaUsuario();
+			//$this->logicaPerfil = new LogicaPerfil();
 			$this->validarConsultarUsuario = new ValidarConsultarUsuario();
 			$this->validarRegistrarUsuario = new ValidarRegistrarUsuario();
 			$this->validarLogin = new ValidarLogin();
-			//$this->validarModificarUsuario = new ValidarModificarUsuario();
+			$this->validarModificarUsuario = new ValidarModificarUsuario();
+			$this->gestionarContrasena = new GestionarContrasena();
 		}
 
 		public function loguear($nombreUsuario, $password)
@@ -160,11 +161,11 @@
 
 		public function cambiarPass($username, $passVieja, $passNueva, $passNuevaC)
 		{
-			$this->logicaUsuario->validarCambiarPass($username, $passVieja, $passNueva, $passNuevaC);
-			$errores = $this->logicaUsuario->getResponseCambiarPass();
+			$this->gestionarContrasena->validarCambiarPass($username, $passVieja, $passNueva, $passNuevaC);
+			$errores = $this->gestionarContrasena->getResponse();
 			if (!empty($errores)) {
 				session_start();
-				$_SESSION['eCambiarPass'] = $this->logicaUsuario->getResponseCambiarPass();
+				$_SESSION['eCambiarPass'] = $errores;
 				header('Location: ../index.php');
 			}
 			else
@@ -203,12 +204,12 @@
 			$nombreUsuario, $tipoPerfil, $estado)
 		{
 			echo $estado;
-			$this->logicaUsuario->validarModificarUsuario($documento, $documentoN, $nombre, $apellidos, $email, 
+			$this->validarModificarUsuario->validarModificar($documento, $documentoN, $nombre, $apellidos, $email, 
 			$nombreUsuario, $tipoPerfil, $estado);
-			$errores = $this->logicaUsuario->getResponseModificar();
+			$errores = $this->validarModificarUsuario->getResponse();
 			if (!empty($errores)) {
 				session_start();
-				$_SESSION['eUpdateUsuario'] = $this->logicaUsuario->getResponseModificar();
+				$_SESSION['eUpdateUsuario'] = $this->validarModificarUsuario->getResponse();
 				header('Location: ../vistas/editarUsuario.php?documento='.$documento.'&nombre='.$nombre.'&apellidos='.$apellidos.'&email='.$email.
 					'&username='.$nombreUsuario);
 			}
@@ -223,9 +224,9 @@
 			$nombreUsuario, $nombreUsuarioN)
 		{
 			//echo $tipoPerfil;
-			$this->logicaUsuario->validarModificarMiUsuario($documento, $nombre, $apellidos, $email, 
+			$this->validarModificarUsuario->validarModificarMi($documento, $nombre, $apellidos, $email, 
 			$nombreUsuario, $nombreUsuarioN);
-			$errores = $this->logicaUsuario->getResponseMiModificacion();
+			$errores = $this->validarModificarUsuario->getResponse();
 			//session_start();
 			if (!empty($errores)) {
 				
@@ -245,11 +246,11 @@
 
 		public function recuperar($email)
 		{
-			$this->logicaUsuario->validarRecuperacion($email);
-			$errores = $this->logicaUsuario->getResponseRecuperacion();
+			$this->gestionarContrasena->validarRecuperacion($email);
+			$errores = $this->gestionarContrasena->getResponse();
 			if (!empty($errores)) {
 				session_start();
-				$_SESSION['eRecuperacion'] = $this->logicaUsuario->getResponseRecuperacion();
+				$_SESSION['eRecuperacion'] = $errores;
 			}else
 			{
 				session_start();
@@ -261,24 +262,26 @@
 			header('Location: ../index.php');
 		}
 
-		public function buscarUsuario($documento)
+		public function buscarUsuario($parametro)
 		{
-			//echo $documento;
-			$usuario = $this->logicaUsuario->validarConsultaUsuario($documento);
+			//echo $parametro;
+			$usuario = $this->validarConsultarUsuario->consultarUsuario($parametro);
+			//echo $this->validarConsultarUsuario->getResponse()[1];
+			// echo $usuario;
 			return $usuario;
 		}
 
-		public function buscarUsuarioN($documento)
-		{
-			$usuario = $this->logicaUsuario->validarConsultaUsuarioN($documento);
-			return $usuario;
-		}
+		// public function buscarUsuario($documento)
+		// {
+		// 	$usuario = $this->logicaUsuario->validarConsultaUsuarioN($documento);
+		// 	return $usuario;
+		// }
 
-		public function buscarUsuarioE($email)
-		{
-			$usuario = $this->logicaUsuario->validarConsultarUsuarioE($email);
-			return $usuario;
-		}
+		// public function buscarUsuario($email)
+		// {
+		// 	$usuario = $this->logicaUsuario->validarConsultarUsuarioE($email);
+		// 	return $usuario;
+		// }
 		
 		public function dardeBajaUsuario($idUsuario) //$idUsuario:int
 		{
