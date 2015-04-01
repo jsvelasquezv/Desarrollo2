@@ -65,6 +65,6 @@
 	}
 
 	// $perfil = new ValidarRegistrarPerfil();
-	// $perfil->validarRegistrarPerfil("hola mund",1,1,1);
+	// $perfil->validarRegistrar("hola mund",1,1,1);
 	// echo $perfil->getResponse()[2];
 ?>

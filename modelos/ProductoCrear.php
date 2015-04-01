@@ -7,6 +7,7 @@ require_once 'ConexionBD.php';
 require_once 'Producto.php';
 class ProductoCrear
 {
+	private $reponseCrear;
 	function __construct() {
 		
 	}
@@ -17,7 +18,7 @@ class ProductoCrear
 		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria);
 		R::selectDatabase('default');#Eligo la bd por defecto (tienda.sql)
 		$producto = R::dispense('producto');#creo un nuevo bean de tipo producto (producto es el nombre de la tabla en la base de datos)
-		#Importante: el bean hace referencia a la tabla de la base d edatos, y sus atributos seran cada
+		#Importante: el bean hace referencia a la tabla de la base de datos, y sus atributos seran cada
 		#uno de los campos de esa tabla Por ejemplo: producto->url_imagen se traduce como, de la tabla producto
 		#seleccione el campo url_imagen.
 		$producto->nombre = $miProducto->obtenerNombre();
@@ -29,6 +30,7 @@ class ProductoCrear
 		R::store($producto);#Se alamcena el bean ya creado en el almacén
         R::close();#se cierra el amacén
 	}
+
 
 }
 	// $pc = new ProductoCrear();
