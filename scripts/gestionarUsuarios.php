@@ -1,7 +1,7 @@
 <?php 
-	require_once '../modelos/LogicaUsuario.php';
+	require_once '../modelos/ValidarConsultarUsuario.php';
 	require_once '../modelos/ValidarConsultarPerfil.php';
-	$logicaUsuario = new LogicaUsuario();
+	$logicaUsuario = new ValidarConsultarUsuario();
 	$validarConsultar = new ValidarConsultarPerfil();
 	session_start();
 	$_SESSION['usuarios'] = $logicaUsuario->getUsuarios();

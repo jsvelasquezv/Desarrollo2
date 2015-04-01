@@ -89,10 +89,10 @@ INSERT INTO `perfil` (`id`, `nombre`, `permiso_gestionar_usuarios`, `permiso_ven
 --
 
 CREATE TABLE IF NOT EXISTS `producto` (
-`id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_comision` int(11) NOT NULL,
-  `id_categoria` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `comision_id` int(11) NOT NULL,
+  `categoria_id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `cantidad` int(4) NOT NULL,
   `valor_unitario` int(5) NOT NULL,

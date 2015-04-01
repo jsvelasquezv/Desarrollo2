@@ -94,7 +94,7 @@
         	}
 		}
 
-		public function buscarUsuarioE($email)
+		/*public function buscarUsuarioE($email)
 		{
 			R::selectDatabase('default');
 			$usuario = R::findOne('usuario', 'email = ?',[$parametro]);
@@ -109,7 +109,7 @@
 			$usuario = R::findOne('usuario', 'email = ?',[$email]);
         	R::close();
 			return $usuario;
-		}
+		}*/
 
 		public function darDeBajaUsuario($documento)
 		{
@@ -138,9 +138,9 @@
 		}
 	}
 
-	  //$user = new Usuario();
+	   // $user = new Usuario();
 	//  $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
 	//  $user->asignarPerfil("Gasimba",116264525);
-	  //$a = $user->buscarUsuario("juanTwo");
-	  //echo $a;
+	   // $a = $user->buscarUsuario("116264525");
+	  // echo $a;
 ?>
