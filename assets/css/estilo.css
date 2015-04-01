@@ -1,0 +1,71 @@
+body {
+    background: white;    /*Color del fondo de la aplicacion en general*/
+}
+
+.contenedor{
+    width: 1080px;
+    margin: auto;
+    background: white;
+    /* background: url("../images/parallax1.jpg"); Fondo Contenedor */
+    color: white;/*Color letras dentro de cada pestaña*/
+    padding: 8px 2px 25px 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.8);
+}
+
+#pestanas {
+    float: top;
+    font-size: 3ex;
+    font-weight: bold;
+    margin-left: 45px;
+}
+
+#pestanas ul{
+    margin-left: -40px;    
+}
+
+#pestanas li{
+    list-style-type: none;
+    float: left;
+    text-align: center;
+    margin: 0px 2px -2px -0px;
+    background: #D8D8D8; /*Fondo pestañas NO seleccionadas*/
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 2px solid white; /*borde de contenedor general */
+    border-bottom: white;
+    padding: 0px 32px 0px 32px;
+}
+
+#pestanas a{
+    text-decoration: none;
+    color: bisque;
+}
+
+#contenidopestanas{
+    clear: both;
+    background: white; /*Fondo Contenedor cada pestaña seleccionada*/
+    padding: 100px 0px 20px 20px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border: 2px solid white; /*borde de contenedor general */
+    width: 1025px;
+}
+
+table tr td{
+    color: black;
+}
+
+#centr{
+    text-align: center;
+}
+
+/*#pestanas pestana0{
+    text-decoration: none;
+    color: white;
+    border-color: white;
+}
+
+#cpestana0{
+
+}*/
