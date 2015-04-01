@@ -82,7 +82,6 @@ include_once '../scripts/gestionarPerfiles.php';
       </form>
     </div>
 		<div class="row">
-    <!--asi se muestran los datos en la tabla############################ -->
 		<table class="hoverable responsive-table centered">
 			<thead>
 				<tr>
@@ -104,7 +103,6 @@ include_once '../scripts/gestionarPerfiles.php';
 				} ?>
 			</tbody>
 		</table>
-    <!-- Fin tabla -->
 		</div>
 		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
 			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Nuevo Perfil" href="#modal"><i class="mdi-content-add"></i></a>
