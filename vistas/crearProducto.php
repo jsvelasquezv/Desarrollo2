@@ -116,6 +116,7 @@ require_once'../scripts/gestionarProductos.php';
           <th>Estado</th>
 				</tr>
 			</thead>
+      <!-- Tabla que muestra los productos en la vista -->
      <!-- '.$registro['nombre'].' -->
 			<tbody>				
  				<?php  foreach ($_SESSION['productos'] as $registro){
@@ -145,15 +146,18 @@ require_once'../scripts/gestionarProductos.php';
         <span class="card-title teal-text">Crear Producto</span>  
         <form action="../controladores/CoordinadorProductoCrear.php" method="POST">
         <!-- Muestro los errores al crear un producto -->
-        <?php if (isset($_SESSION['erroresCrearProducto'])) {  ?>          
-          <div class="card">
-            <div class="card-content">
-              <?php foreach ($_SESSION['erroresCrearProducto'] as $key) { ?>
-                <p><?php echo $key; ?></p>
-              <?php } ?>
-            </div>
-          </div>        
-        <?php unset($_SESSION['erroresCrearProducto']);} ?>              
+        <?php if(isset($_SESSION['erroresCrearProducto'])) {
+          echo "<script language='javascript'> $('#modal').openModal(); </script>"; ?>
+          <?php if (isset($_SESSION['erroresCrearProducto'])) {  ?>          
+            <div class="card">
+              <div class="card-content">
+                <?php foreach ($_SESSION['erroresCrearProducto'] as $key) { ?>
+                  <p><?php echo $key; ?></p>
+                <?php } ?>
+              </div>
+            </div>        
+          <?php } ?>           
+        <?php unset($_SESSION['erroresCrearProducto']);} ?> <!-- Destruye esa variable de sesion para liberar memoria y para que no me aparezca el modal cada que recarge la pagina -->             
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre">
@@ -196,18 +200,11 @@ require_once'../scripts/gestionarProductos.php';
               <label for="url"><i class="mdi-editor-insert-photo left"></i>URL de la imagen</label>
             </div>
           </div>
-         
-          </div>
-
-          
-
+        </div>
           <!-- Boton para crear Producto -->  
           <input class="btn-flat orange-text " type="submit" value="Crear Producto" name="crearProducto">
           <!--  FALTA DARLE FUNCINALIDAD PARA REGRESAR  -->
-         
-
-          
-        </form>                     
+        </form><!-- Cierra formulario crear prducto -->                     
       </div>
     </div>
   </div>
@@ -215,7 +212,7 @@ require_once'../scripts/gestionarProductos.php';
 			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
 		} ?>
 </div>   
-<div id="modal2" class="modal modalLogin">
+    <div id="modal2" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 

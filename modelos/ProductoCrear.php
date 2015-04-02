@@ -12,10 +12,10 @@ class ProductoCrear
 		
 	}
 	#Funcion que crea un producto con los parametros que se muestra
-	public function crearProducto($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria)
+	public function crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria)
 	{
 		#creo una nueva instancia de Producto con los paramtros de un producto
-		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria);
+		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria);
 		R::selectDatabase('default');#Eligo la bd por defecto (tienda.sql)
 		$producto = R::dispense('producto');#creo un nuevo bean de tipo producto (producto es el nombre de la tabla en la base de datos)
 		#Importante: el bean hace referencia a la tabla de la base de datos, y sus atributos seran cada
@@ -25,7 +25,7 @@ class ProductoCrear
 		$producto->cantidad = $miProducto->obtenerCantidad();
 		$producto->valor_unitario = $miProducto->obtenerValor();
 		$producto->url_imagen = $miProducto->obtenerURL();
-		$producto->usuario_id = $miProducto->obtenerIdUsuario();
+		$producto->usuario_username = $miProducto->obtenerUserUsuario();
 		$producto->categoria_id = $miProducto->obtenerIdCategoria();
 		R::store($producto);#Se alamcena el bean ya creado en el almacén
         R::close();#se cierra el amacén

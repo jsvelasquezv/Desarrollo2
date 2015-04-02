@@ -12,14 +12,14 @@ if (isset($_POST['crearProducto'])) {
 	$valor = $_POST['valorUnitario'];
 	$url = $_POST['url'];
 	session_start();
-	$user = $_SESSION['user'];
+	$userUsuario = $_SESSION['user'];
 	#Si se chuleo el checkbox de vendido, entonces...
 	if (! isset($_POST['vendido'])) {
 		$vendido = "Vendido";
 		// echo "Hola";
 	}
 $miCoordinadorProductoCrear = new CoordinadorProductoCrear();
-$miCoordinadorProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, 1, $idCategoria);	
+$miCoordinadorProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria);	
 }
 
 // echo $nombreProducto;
@@ -41,11 +41,11 @@ class CoordinadorProductoCrear
 	}
 	#Funcion que manda los datos de las vusatas al modelo y verifica si se puede o no
 	#crear un producto en la base de datos
-	public function crearProducto($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria)
+	public function crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria)
 	{
 		$validarCrearProducto = new ValidarCrearProducto();#Necesito un objeto de tipo ValidarCrearProducto
 		#valido la creacion del producto pasandole los datos que ya vienen de la vista
-		$validarCrearProducto->validarCrearProducto($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria);
+		$validarCrearProducto->validarCrearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria);
 		$errores = $validarCrearProducto->getResponse();#Luego, con la funcion getResponse, me doy cuenta si hay o no errores en la creacion (getRsponse devuelve un array)
 		#Si la variable errores NO está vacia entonces...
 		if(!empty($errores)){
@@ -60,6 +60,6 @@ class CoordinadorProductoCrear
 	}
 }
 // $cpc = new CoordinadorProductoCrear();
-// $cpc->crearProducto("Balon", 4, 12300, "www.balon.com", 2, 4);
+// $cpc->crearProducto("Balon", 4, 12300, "www.balon.com", "esto", 4);
 
 ?>

@@ -27,6 +27,7 @@ class ValidarBuscarProducto
 			else return $query;	
 		}
 		#Si el nombre no es alfabetico no se puedo iniciar la busqueda
+		
 		else $this->responseBuscarProducto[0] = "El nombre debe ser alfabetico";
 	}
 

@@ -8,16 +8,16 @@ class Producto
 	private $cantidad;
 	private $valor;
 	private $url; #Url de la imagen
-	private $idUsuario;
+	private $userUsuario;#Usuario que creo hace acciones sobre el producto
 	private $idCategoria;
 	// private $estado;
 
-	function __construct($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria) {
+	function __construct($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria) {
 		$this->nombre = $nombre;
 		$this->valor = $valor;
 		$this->cantidad = $cantidad;
 		$this->url = $url;
-		$this->idUsuario = $idUsuario;
+		$this->userUsuario = $userUsuario;
 		$this->idCategoria = $idCategoria;
 	}
 
@@ -43,9 +43,9 @@ class Producto
 		return $this->url;
 	}
 
-	public function obtenerIdUsuario()
+	public function obtenerUserUsuario()
 	{
-		return $this->idUsuario;
+		return $this->userUsuario;
 	}
 
 	public function obtenerIdCategoria()
@@ -74,9 +74,9 @@ class Producto
 		$this->url = $url;
 	}
 
-	public function cambiarIdUsuario($idUsuario)
+	public function cambiarUserUsuario($userUsuario)
 	{
-		$this->idUsuario = $idUsuario;
+		$this->userUsuario = $userUsuario;
 	}
 
 	public function cambiarIdCategoria($idCategoria)

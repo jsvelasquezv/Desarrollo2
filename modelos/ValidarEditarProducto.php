@@ -19,14 +19,14 @@ class ValidarEditarProducto
 	#que cuando vaya a editar, primero busque (con la variable $nombre), si ya existe un nombre
 	#igual, (no se edita un nombre para poner el mismo nombre)
 	public function validarEditarProducto($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
-	 							   $nuevoIdUsuario, $nuevoIdCategoria)
+	 							   $nuevoUserUsuario, $nuevoIdCategoria)
 	{
 		#Obejtos necesarios para esta gestion
 		$misValidaciones = new Validaciones();
 		$miProductoEditar = new ProductoEditar();
 		$miProductoBuscar = new ProductoBuscar();
 		#Se validan si los campos estan vacios, si deben de ser alfabeticos o no....y otras validaciones parecidas
-		if($nuevoNombre == "" or $nuevaCantidad =="" or $nuevoValor == "" or $nuevoIdUsuario == "" or $nuevoIdCategoria == "" or $nuevaUrl == ""){
+		if($nuevoNombre == "" or $nuevaCantidad =="" or $nuevoValor == "" or $nuevoUserUsuario == "" or $nuevoIdCategoria == "" or $nuevaUrl == ""){
 			$this->responseEditarProducto[0] = "Todos los campos son requeridos";
 		}
 		if(! ($misValidaciones->esAlfabetico($nuevoNombre)) ){
@@ -38,8 +38,8 @@ class ValidarEditarProducto
 		if(!$misValidaciones->esNumerico($nuevoValor)){
 			$this->responseEditarProducto[3] = "El valor debe ser numerico";
 		}
-		if(!$misValidaciones->esNumerico($nuevoIdUsuario)){
-			$this->responseEditarProducto[4] = "El ID del usuario debe ser numerico";
+		if(!$misValidaciones->esAlfabetico($nuevoUserUsuario)){
+			$this->responseEditarProducto[4] = "El nombre de usuario debe ser alfabético";
 		}
 		if(!$misValidaciones->esNumerico($nuevoIdCategoria)){
 			$this->responseEditarProducto[5] = "El ID de la categoria debe ser numerico";
@@ -48,13 +48,13 @@ class ValidarEditarProducto
 			$this->responseEditarProducto[6] = "La url no tiene un formato válido";
 		}
 		#Si se quiere cambiar un nombre por otro iguale entonces saldra este mensaje
-		if(! empty($miProductoBuscar->buscarProducto($nombre))){
+		if(! empty($miProductoBuscar->buscarProducto($nuevoNombre))){
 			$this->responseEditarProducto[7] = "Ya existe un producto con ese nombre, intente con otro";
 		}
 		#Si pasa todos estos filtros el producto se podrá editar
 		else{
 			$miProductoEditar->editarProducto($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
-	 							   $nuevoIdUsuario, $nuevoIdCategoria);
+	 							   $nuevoUserUsuario, $nuevoIdCategoria);
 			session_start();
 			unset($_SESSION['exitoEditarProducto']);
 
@@ -67,6 +67,6 @@ class ValidarEditarProducto
 	}
 }
 // $vep = new ValidarEditarProducto();
-// $vep->validarEditarProducto("Camaro", "Camaro", 4, 5666,"www.c.com",4, 5);
-
+// $vep->validarEditarProducto("Camaro", "Camaro", 4, 5666,"www.c.com","Default", 5);
+// echo $vep->getResponse()[7];
 ?>

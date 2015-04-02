@@ -122,7 +122,7 @@
 						<?php } ?>
 					</div>
 				</div>        
-			<?php } ?>             
+			<?php } unset($_SESSION['eRegistroUsuario'])?>             
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre">
