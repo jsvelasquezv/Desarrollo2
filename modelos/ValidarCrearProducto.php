@@ -22,7 +22,7 @@ class ValidarCrearProducto
 		#Se valida si los campos estan vacios, si son numericos o si son alfabeticos segun el caso
 		#Cada mensaje de error se guarda en una posicion en un array (responseValidarProducto)
 		if($nombre == "" or $cantidad =="" or $valor == "" or $idUsuario == "" or $idCategoria == ""){
-			$this->responseValidarProducto[0] = "Todos los campos son validos (La imagen es opcional)";
+			$this->responseValidarProducto[0] = "Todos los campos son requeridos";
 		}
 		if(! ($misValidaciones->esAlfabetico($nombre)) ){
 			$this->responseValidarProducto[1] = "El nombre debe ser alfabetico";
@@ -43,17 +43,15 @@ class ValidarCrearProducto
 			$this->responseValidarProducto[6] = "La url no tiene un formato válido";
 		}
 		#Si el array no esta vacio, es porque sucedio un error, en caso tal se crea una variable
-		#de sesion que me guarda ese error
+		#que me guarda ese error
 		if (!empty($this->responseValidarProducto)) {
-			session_start();
-			$_SESSION['exitoCrearProducto'] = $this->responseValidarProducto;
+			$conflictos = $this->responseValidarProducto;
 		}
-		#Si se pasan todos los filtros entonces es porque no hay errores, asi que se puede guardar
+		#Si se pasan todos los filtros entonces es porque no hay errores, asi que se puede crear y guardar
 		#el producto en la BD.
 		else{
-			session_start();
 			$miProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria);
-			$_SESSION['exitoCrearProducto'] = 1;
+			$conflictos = 0;#No hay conflictos
 		}
 
 	}

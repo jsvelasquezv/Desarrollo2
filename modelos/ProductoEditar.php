@@ -14,7 +14,7 @@ class ProductoEditar
 	#Funcion que permite editar un producto que ha sido previamente ya creado, recibe los nuevos
 	#parametros que seran reemplazados por los antiguas, el parametro nombre me busca el producto
 	#que quiero editar y me trae ese registro, ya con todo el registro si se procede con la actualización.
-	public function ProductoEditar($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
+	public function editarProducto($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
 	 							   $nuevoIdUsuario, $nuevoIdCategoria)
 	{
 		$miProducto = new Producto($nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
@@ -33,6 +33,6 @@ class ProductoEditar
         R::close();#Se cierra el amacén.
 	}
 }
-// $pe = new ProductoEditar();
-// $pe->ProductoEditar("Libro", "Cuaderno", 10, 1000000, "www.supercarro.com", 5, 6);
+ // $pe = new ProductoEditar();
+ // $pe->editarProducto("Materazi", "Camaro", 10, 1000000, "www.supercarro.com", 5, 6);
 ?>

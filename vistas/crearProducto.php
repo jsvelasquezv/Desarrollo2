@@ -1,7 +1,7 @@
 <?php 
-	
+require_once'../scripts/gestionarProductos.php';	
 
-  session_start();
+  // session_start();
  
   if (isset($_SESSION['exitoRegistrar'])) {
     $exitoRegistrar = $_SESSION['exitoRegistrar'];
@@ -89,6 +89,7 @@
 
 	<?php }else{ header('Location: ../index.php');}?>    
 	<?php $perfiles = $_SESSION['perfiles']; ?>
+ <!--  #================================================================== -->
 	<div class="container">		
     <br>
     <div class="row">
@@ -115,7 +116,7 @@
           <th>Estado</th>
 				</tr>
 			</thead>
-      <!-- envio de datos a la base de datos -->
+     
 			<tbody>				
  				<?php  {
 					?> <tr>
@@ -140,58 +141,59 @@
    <div id="modal" class="modal modalLogin">
     <div class="card login">
       <div class="card-content">
+      <!-- #==================Crear Producto===================== -->
         <span class="card-title teal-text">Crear Producto</span>  
-        <form action="../controladores/CoordinadorUsuario.php" method="post"> 
-        	<?php if (isset($_SESSION['eRegistroUsuario'])) {	?>					
-				<div class="card">
-					<div class="card-content">
-						<?php foreach ($_SESSION['eRegistroUsuario'] as $key) { ?>
-							<p><?php echo $key; ?></p>
-						<?php } ?>
-					</div>
-				</div>        
-			<?php } ?>             
+        <form action="../controladores/CoordinadorProductoCrear.php" method="POST">
+        <!-- Muestro los errores al crear un producto -->
+        <?php if (isset($_SESSION['erroresCrearProducto'])) {  ?>          
+          <div class="card">
+            <div class="card-content">
+              <?php foreach ($_SESSION['erroresCrearProducto'] as $key) { ?>
+                <p><?php echo $key; ?></p>
+              <?php } ?>
+            </div>
+          </div>        
+        <?php unset($_SESSION['erroresCrearProducto']);} ?>              
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate" name="nombre">
               <label for="nombre">Nombre</label>
             </div>
             <div class="input-field col s6">
-              <input id="apellido" type="text" class="validate" name="apellido">
-              <label for="apellido">Cantidad</label>
+              <input id="cantidad" type="text" class="validate" name="cantidad">
+              <label for="cantidad">Cantidad</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Categoria</label>
+              <input id="categorias" type="text" class="validate" name="categoria">
+              <label for="categoria">Categoria</label>
 
             </div>
              <div class="input-field col s6">
             <h6> &nbsp; &nbsp;Estado :</h6>
-            <form action="#">
-  <p>
-    <input name="group1" type="radio" id="test1" />
-    <label for="test1">En venta</label>
-  </p>
-  <p>
-    <input name="group1" type="radio" id="test2" />
-    <label for="test2">Vendido</label>
-  </p>
- 
-</form>
+            <!-- <form action="#"> -->
+              <!-- <p>
+                <input name="group1" type="radio" id="test1" />
+                <label for="test1">En venta</label>
+              </p> -->
+              <p>
+                <input name="group1" type="checkbox" id="test2" name="vendido">
+                <label for="test2">Vendido</label>
+              </p>
+            <!-- </form> -->
             </div>
             
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="documento" type="text" class="validate" name="documento">
-              <label for="documento">Valor Unitario</label>
+              <input id="valor_unitario" type="text" class="validate" name="valorUnitario">
+              <label for="valor_unitario">Valor Unitario</label>
             </div>
 
             <div class="input-field col s6">
-              <input id="email" type="url" class="validate" name="email">
-              <label for=" "> <i class="mdi-editor-insert-photo left"></i>URL de la imagen</label>
+              <input id="email" type="url" class="validate" name="url">
+              <label for="url"><i class="mdi-editor-insert-photo left"></i>URL de la imagen</label>
             </div>
           </div>
          
@@ -199,8 +201,8 @@
 
           
 
-
-          <input class="btn-flat orange-text " type="submit" value="Crear Producto" name="   " >
+          <!-- Boton para crear Producto -->  
+          <input class="btn-flat orange-text " type="submit" value="Crear Producto" name="crearProducto">
           <!--  FALTA DARLE FUNCINALIDAD PARA REGRESAR  -->
          
 
@@ -209,7 +211,7 @@
       </div>
     </div>
   </div>
-  <?php if (isset($_SESSION['eRegistroUsuario'])) {
+  <?php if (isset($_SESSION['erroresCrearProducto'])) {
 			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
 		} ?>
 </div>   
@@ -217,11 +219,11 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se ha creado correctamente el usuario</p> 
+            <p>Se ha creado correctamente el Producto</p> 
         </div>
-          <?php if (isset($exitoRegistrar)) {
+          <?php if (isset($exitoCrearProducto)) {
              echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
-             unset($_SESSION['exitoRegistrar']);
+             unset($_SESSION['exitoCrearProducto']);
           } ?>                      
       </div>
     </div>
@@ -229,11 +231,11 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se ha modificado correctamente el usuario</p> 
+            <p>Se ha modificado correctamente el Producto</p> 
         </div>
-          <?php if (isset($exitoModificar)) {
+          <?php if (isset($exitoEditarProducto)) {
              echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
-             unset($_SESSION['exitoModificar']);
+             unset($_SESSION['exitoEditarProducto']);
           } ?>                      
       </div>
     </div>
@@ -241,11 +243,11 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Error</span> 
-            <p>No se encuentra un usuario con ese documento</p> 
+            <p>No se encuentra un producto con ese nombre</p> 
         </div>
-          <?php if (isset($errorBuscarPerfil)) {
+          <?php if (isset($errorBuscarProducto)) {
              echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
-             unset($_SESSION['eBuscar']);
+             unset($_SESSION['errorBuscarProducto']);
           } ?>                      
       </div>
     </div>

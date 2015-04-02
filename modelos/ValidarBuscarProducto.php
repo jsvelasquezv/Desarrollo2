@@ -30,6 +30,13 @@ class ValidarBuscarProducto
 		else $this->responseBuscarProducto[0] = "El nombre debe ser alfabetico";
 	}
 
+	#Funcion que me trae todos los productos de la base de datos
+	public function buscarTodos(){
+		$miProductoBuscar = new ProductoBuscar();
+		$productos = $miProductoBuscar->getProductos();
+		return $productos;
+	}
+
 	public function getResponse()
 	{
 		return $this->responseBuscarProducto;
@@ -37,7 +44,10 @@ class ValidarBuscarProducto
 }
 
 // $vbp = new ValidarBuscarProducto();
-// $vbp->validarBuscarProducto("123edd");
+// $arreglo =  $vbp->buscarTodos();
+// foreach ($arreglo as $key) {
+// 	echo $key;
+// }
 // echo $vbp->getResponse()[0];
 
 ?>

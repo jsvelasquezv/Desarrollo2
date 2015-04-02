@@ -82,6 +82,7 @@ include_once '../scripts/gestionarPerfiles.php';
       </form>
     </div>
 		<div class="row">
+    <!-- EDITAR PERFILES -->
 		<table class="hoverable responsive-table centered">
 			<thead>
 				<tr>
@@ -102,18 +103,21 @@ include_once '../scripts/gestionarPerfiles.php';
 					?> </tr> <?php 
 				} ?>
 			</tbody>
-		</table>
+		</table><!-- final editar perfiles -->
 		</div>
 		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
 			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Nuevo Perfil" href="#modal"><i class="mdi-content-add"></i></a>
 		</div>
+    <!-- CREAR PERFILES -->
 		<div class="valign-wrapper">
 			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
 				<div id="modal" class="modal modalLogin">
 					<div class="card login">
 						<div class="card-content">
-							<span class="card-title teal-text">Crear Perfil</span>  
-							<form action="../controladores/CoordinadorPerfil.php" method="post">  
+							<span class="card-title teal-text">Crear Perfil</span> 
+              <!-- Formulario por metodo post --> 
+							<form action="../controladores/CoordinadorPerfil.php" method="post"> 
+              <!-- Muestro errores --> 
 								<?php if (isset($_SESSION['eRegistroPerfil'])) {	?>					
 								<div class="card">
 									<div class="card-content">
@@ -122,7 +126,9 @@ include_once '../scripts/gestionarPerfiles.php';
 									<?php } ?>
 									</div>
 								</div>        
-								<?php } ?>  
+								<?php
+                  unset($_SESSION['eRegistroPrfil']);  
+                  } ?>  
 								<div class="input-field col m4 l2 tooltipped" data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 									<input id="nombre" type="text" name="nombre"  required maxlength="30">
 									<label for="nombre">Nombre</label>
@@ -149,7 +155,7 @@ include_once '../scripts/gestionarPerfiles.php';
 					</div>
 				</div>
 			</div>    
-		</div>
+		</div><!-- FIN CREAR PERFILES -->
 			<?php if (isset($_SESSION['eRegistroPerfil'])) {
 			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
 		} ?>

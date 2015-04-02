@@ -10,6 +10,7 @@ class Producto
 	private $url; #Url de la imagen
 	private $idUsuario;
 	private $idCategoria;
+	#private $estado;
 
 	function __construct($nombre, $cantidad, $valor, $url, $idUsuario, $idCategoria) {
 		$this->nombre = $nombre;

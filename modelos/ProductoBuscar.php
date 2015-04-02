@@ -18,9 +18,20 @@ class ProductoBuscar
 		R::close();#se cierra el almacén de Beans
 		return $producto;	
 	}
+	#Funcion que me retorna todos los productos presentes en la base de datos
+	public function getProductos(){
+		R::selectDatabase('default');
+        $producto = R::findAll('producto');
+        R::close();
+        return $producto;
+	}
 }
 
 	// $pb = new ProductoBuscar();
-	// $consulta = $pb->buscarProducto("Moto Mas Grande");
-	// echo $consulta;
+	// $arreglo = $consulta = $pb->getProductos();
+
+	// foreach ($arreglo as $key) {
+	// 	echo $key;
+	// }
+	
 ?>
