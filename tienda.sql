@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-03-2015 a las 06:03:40
+-- Tiempo de generación: 02-04-2015 a las 15:20:21
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -70,17 +70,19 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `permiso_gestionar_usuarios` tinyint(1) DEFAULT NULL,
   `permiso_vender` tinyint(1) DEFAULT NULL,
   `permiso_gestionar_perfiles` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `perfil`
 --
 
 INSERT INTO `perfil` (`id`, `nombre`, `permiso_gestionar_usuarios`, `permiso_vender`, `permiso_gestionar_perfiles`) VALUES
-(1, 'Admin', 1, 1, 1),
+(1, 'Admin', 1, 1, 0),
 (2, 'Default', 0, 1, 0),
 (3, 'Krusty', 1, 1, 0),
-(4, 'Popeto', 1, 1, 0);
+(4, 'Popeto', 1, 1, 0),
+(5, 'hola mund', 1, 1, 1),
+(6, 'Super Admin', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -89,15 +91,25 @@ INSERT INTO `perfil` (`id`, `nombre`, `permiso_gestionar_usuarios`, `permiso_ven
 --
 
 CREATE TABLE IF NOT EXISTS `producto` (
-  `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
+  `usuario_username` varchar(30) NOT NULL,
   `comision_id` int(11) NOT NULL,
   `categoria_id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `cantidad` int(4) NOT NULL,
   `valor_unitario` int(5) NOT NULL,
-  `url_imagen` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `estado` varchar(30) NOT NULL DEFAULT 'En venta',
+  `url_imagen` varchar(30) NOT NULL,
+  `cateogira_id` int(11) unsigned DEFAULT NULL,
+  `usuario_id` varchar(191) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `usuario_username`, `comision_id`, `categoria_id`, `nombre`, `cantidad`, `valor_unitario`, `estado`, `url_imagen`, `cateogira_id`, `usuario_id`) VALUES
+(52, 'juanTwo', 0, 4, 'Celular', 2, 120000, 'En venta', 'http://lorempixel.com/130/130/', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,18 +126,19 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `nombre_usuario` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tipo_perfil` int(11) DEFAULT '2',
-  `estado` tinyint(1) DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `estado` tinyint(4) DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `documento`, `nombre`, `apellidos`, `email`, `nombre_usuario`, `password`, `tipo_perfil`, `estado`) VALUES
-(1, '116264525', 'Juan', 'Velasquez', 'Velasquez94@hotmail.com', 'juanTwo', '1234asdf', 1, 0),
+(1, '116264525', 'Juanito', 'Velasquez', 'Velasquez94@hotmail.com', 'juanTwo', '1234asdf', 1, 1),
 (5, '888834343', 'Oscar', 'Morocho', 'morocho@oscar.com', 'morochoscar', 'morocho', 1, 1),
 (9, '12331231', 'Pepeto', 'pepone', 'vadfgdfgsfdg', 'popocho', 'poposito', 1, 1),
-(10, '436523676', 'Barrera', 'Sebastian', 'barreroide@barrera', 'barreroide', 'barreroide', 1, 1);
+(10, '436523676', 'Barrera', 'Sebastian', 'barreroide@barrera', 'barreroide', 'barreroide', 1, 1),
+(11, '12345678431', 'Carlos Andres', 'Moreno', 'camv_123@hotmail.com', 'camv', 'camv', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -210,17 +223,17 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
