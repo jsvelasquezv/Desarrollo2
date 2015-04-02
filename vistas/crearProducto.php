@@ -1,7 +1,7 @@
 <?php 
 require_once'../scripts/gestionarProductos.php';	
 
-  // session_start();
+  // session_start(); no necestio esta session_star() aqui porque con el requiere_once ya la empece
  
   if (isset($_SESSION['exitoRegistrar'])) {
     $exitoRegistrar = $_SESSION['exitoRegistrar'];
@@ -105,7 +105,7 @@ require_once'../scripts/gestionarProductos.php';
         </div>
       </form>
     </div>
-		<table class="hoverable responsive-table">
+		<table class="hoverable responsive-table centered">
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -116,16 +116,16 @@ require_once'../scripts/gestionarProductos.php';
           <th>Estado</th>
 				</tr>
 			</thead>
-     
+     <!-- '.$registro['nombre'].' -->
 			<tbody>				
- 				<?php  {
+ 				<?php  foreach ($_SESSION['productos'] as $registro){
 					?> <tr>
-						 <td> <h5>hola</h5> </td> 
-						 <td> <h5>hola</h5>  </td> 
-						 <td> <h5>hola</h5>  </td>
-						 <td> <h5>hola</h5>  </td>
-						 <td> <h5>hola</h5> </td>
-						 <td> <h5>hola</h5> </td> 
+						 <td><?php echo $registro['nombre'];?></td> 
+						 <td><?php echo $registro['cantidad'];?></td> 
+						 <td><?php echo $registro['categoria_id'];?></td>
+						 <td><?php echo $registro['valor_unitario'];?></td>
+						 <td><?php echo '<img src="http://lorempixel.com/130/130/">'; ?></td>
+						 <td><?php echo $registro['estado'];?></td> 
 
 						 <td> <a href="editarProducto.php" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
 						 <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
@@ -170,19 +170,19 @@ require_once'../scripts/gestionarProductos.php';
               <label for="categoria">Categoria</label>
 
             </div>
-             <div class="input-field col s6">
+             <!-- <div class="input-field col s6">
             <h6> &nbsp; &nbsp;Estado :</h6>
-            <!-- <form action="#"> -->
-              <!-- <p>
+            <form action="#">
+              <p>
                 <input name="group1" type="radio" id="test1" />
                 <label for="test1">En venta</label>
-              </p> -->
+              </p>
               <p>
                 <input name="group1" type="checkbox" id="test2" name="vendido">
                 <label for="test2">Vendido</label>
               </p>
-            <!-- </form> -->
-            </div>
+            </form>
+            </div> -->
             
           </div>
           <div class="row">
