@@ -127,7 +127,7 @@ include_once '../scripts/gestionarPerfiles.php';
 									</div>
 								</div>        
 								<?php
-                  unset($_SESSION['eRegistroPrfil']);  
+                  unset($_SESSION['eRegistroPerfil']);  
                   } ?>  
 								<div class="input-field col m4 l2 tooltipped" data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 									<input id="nombre" type="text" name="nombre"  required maxlength="30">

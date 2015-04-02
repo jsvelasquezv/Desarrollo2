@@ -80,11 +80,11 @@
 								<div class="card">
 									<div class="card-content">
 									<?php foreach ($_SESSION['eUpdatePerfil'] as $key) { ?>
-										<p><?php echo $key; ?></p>
+										<p><?php echo $key;?></p>
 									<?php } ?>
 									</div>
 								</div>        
-						<?php } ?>              
+						<?php unset($_SESSION['eUpdatePerfil']);} ?>              
 						<div class="input-field">
 							<input id="nombre" type="text" class="validate tooltipped" name="nuevoNombre" value="<?php echo $nombre; ?>"  data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 							<label for="nombre">Nombre</label>

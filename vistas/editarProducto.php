@@ -1,7 +1,4 @@
-<?php 
- 
-  
- 
+<?php  
   session_start();
  
   if (isset($_SESSION['exitoRegistrar'])) {
@@ -13,8 +10,18 @@
   if (isset($_SESSION['eBuscar'])) {
     $eBuscar = $_SESSION['eBuscar'];
   }
-  
- 
+  // Se mandarán por GET los parametros actuales a la vista de editar Perfil
+  $nuevoNombre = $_GET['nombre'];
+  $nuevaCantidad = $_GET['cantidad'];
+  $nuevaCateogira = $_GET['categoria'];
+  $nuevoValor = $_GET['valor'];
+  $nuevaUrl = $_GET['url'];
+  // $nuevoEstado = $GET['estado'];
+  #Hago una variable que me almacena los posibles errores cuando quiero editar el producto
+  if(isset($_SESSION['erroresEditarProducto'])){
+    $errorEditarProducto = $_SESSION['erroresEditarProducto'];
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,63 +94,53 @@
   <div class="col s12 m8 offset-m2 l6 offset-l3">
     <div class="card login">
       <div class="card-content">
+      <!-- EDITAR PRODUCTO -->
         <span class="card-title teal-text">Editar producto</span>  
         <?php $perfiles = $_SESSION['perfiles']; ?>
-        <form action="../controladores/CoordinadorUsuario.php" method="post">  
-          <?php if (isset($_SESSION['eUpdateUsuario'])) {  ?>
-                <div class="card">
-                  <div class="card-content">
-                  <?php foreach ($_SESSION['eUpdateUsuario'] as $key) { ?>
-                    <p><?php echo $key; ?></p>
-                  <?php } ?>
-                  </div>
-                </div>        
-            <?php } ?>     
+        <form action="../controladores/CoordinadorProductoEditar.php" method="POST">     
           <div class="row">
             <div class="input-field col s6">
-              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
+              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nombre?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
               <label for="nombre">Nombre</label>
             </div>
-          <input type="hidden" name="antiguo" value="<?php echo $documento; ?>">          
+          <input type="hidden" name="nombreAntiguo" value="<?php echo $documento; ?>">          
             <div class="input-field col s6">
-              <input id="apellido" type="text" class="validate tooltipped" name="apellido" value="" data-position="right" data-tooltip="Este campo es requerido, 2-30 caracteres alfabeticos" >
-              <label for="apellido">Cantidad</label>
+              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" value="<?php echo $cantidad?>" data-position="right" data-tooltip="Este campo es requerido, 2-30 caracteres alfabeticos" >
+              <label for="cantidad">Cantidad</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="username" type="text" class="validate tooltipped" name="username" value="" data-position="left" data-tooltip="Este campo es requerido, 2-30 caracteres alfanumericos">
-              <label for="username">Categoria</label>
+              <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="<?php echo $categoria?>" data-position="left" data-tooltip="Este campo es requerido, 2-30 caracteres alfanumericos">
+              <label for="categoria">Categoria</label>
             </div>
             <div class="input-field col s6">
-              <input id="email" type="text" class="validate tooltipped" name="email" value="" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
-              <label for="email">Valor Unitario</label>
+              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $valor?>" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
+              <label for="valor">Valor Unitario</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="documento" type="text" class="validate tooltipped" name="documento" value="" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
-              <label for="documento">URL de la imagen</label>
+              <input id="url" type="text" class="validate tooltipped" name="url" value="<?php echo $url?>" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
+              <label for="url">URL de la imagen</label>
             </div>
 
              <div class="input-field col s6">
             <h6>&nbsp;&nbsp;&nbsp;Estado :</h6>
-             <form action="#">
-  <p>
-    <input name="group1" type="radio" id="test1" />
-    <label for="test1">En venta</label>
-  </p>
-  <p>
-    <input name="group1" type="radio" id="test2" />
-    <label for="test2">Vendido</label>
-  </p>
- 
-</form>
-        
+             
+          <p>
+            <input type="radio" id="enVenta" value = "en_venta" name="estado" checked>
+            <label for="enVenta">En venta</label>
+          </p>
+          <p>
+            <input type="radio" id="vendido" value = "ven_dido"name="estado">
+            <label for="vendido">Vendido</label>
+          </p>
             </div>
             
           </div>
-          <input class="btn-flat orange-text" type="submit" value="Guardar" name="editar">
+          <!-- BOTON QUE GUARDA LA EDICION DE LOS DATOS DE UN PRODUCTO -->
+          <input class="btn-flat orange-text" type="submit" value="Guardar" name="guardarEditada">
           <a  href="crearProducto.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
         </form>                     
       </div>

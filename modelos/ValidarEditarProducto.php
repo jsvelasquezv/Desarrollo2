@@ -67,6 +67,6 @@ class ValidarEditarProducto
 	}
 }
 // $vep = new ValidarEditarProducto();
-// $vep->validarEditarProducto("Camaro", "Camaro", 4, 5666,"www.c.com","Default", 5);
+// $vep->validarEditarProducto("Celular", "Mi cel", 4, 5666,"www.c.com","Default", 5);
 // echo $vep->getResponse()[7];
 ?>
