@@ -3,6 +3,7 @@
  $permiso1 = $_GET['permiso1'];
  $permiso2 = $_GET['permiso2'];
  $permiso3 = $_GET['permiso3'];
+
  session_start();
 ?>
 <!DOCTYPE html>

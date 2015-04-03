@@ -127,8 +127,8 @@ require_once'../scripts/gestionarProductos.php';
 						 <td><?php echo $registro['valor_unitario'];?></td>
 						 <td><?php echo '<img src="http://lorempixel.com/130/130/">'; ?></td>
 						 <td><?php echo $registro['estado'];?></td> 
-
-						 <td> <a href="editarProducto.php" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
+             <!-- Lapiz con el que se edita el producto -->
+						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro["nombre"] ?>" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
 						 <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
 					?> </tr> <?php 
 				} ?> 

@@ -1,4 +1,11 @@
 <?php  
+  // Se mandarán por GET los parametros actuales a la vista de editar Producto
+  $nuevoNombre = $_GET['nombre'];
+  $nuevaCantidad = $_GET['cantidad'];
+  $nuevaCategoria = $_GET['categoria'];
+  $nuevoValor = $_GET['valor'];
+  $nuevaUrl = $_GET['url'];
+  $nuevoEstado = $GET['estado'];
   session_start();
  
   if (isset($_SESSION['exitoRegistrar'])) {
@@ -10,13 +17,7 @@
   if (isset($_SESSION['eBuscar'])) {
     $eBuscar = $_SESSION['eBuscar'];
   }
-  // Se mandarán por GET los parametros actuales a la vista de editar Perfil
-  $nuevoNombre = $_GET['nombre'];
-  $nuevaCantidad = $_GET['cantidad'];
-  $nuevaCateogira = $_GET['categoria'];
-  $nuevoValor = $_GET['valor'];
-  $nuevaUrl = $_GET['url'];
-  // $nuevoEstado = $GET['estado'];
+  
   #Hago una variable que me almacena los posibles errores cuando quiero editar el producto
   if(isset($_SESSION['erroresEditarProducto'])){
     $errorEditarProducto = $_SESSION['erroresEditarProducto'];
@@ -100,28 +101,28 @@
         <form action="../controladores/CoordinadorProductoEditar.php" method="POST">     
           <div class="row">
             <div class="input-field col s6">
-              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nombre?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
+              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nuevoNombre;?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
               <label for="nombre">Nombre</label>
             </div>
-          <input type="hidden" name="nombreAntiguo" value="<?php echo $documento; ?>">          
+          <input type="hidden" name="antiguo" value="<?php echo $nuevoNombre; ?>">          
             <div class="input-field col s6">
-              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" value="<?php echo $cantidad?>" data-position="right" data-tooltip="Este campo es requerido, 2-30 caracteres alfabeticos" >
+              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" value="<?php echo $nuevaCantidad;?>" data-position="right" data-tooltip="Este campo es requerido, 2-30 caracteres alfabeticos" >
               <label for="cantidad">Cantidad</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="<?php echo $categoria?>" data-position="left" data-tooltip="Este campo es requerido, 2-30 caracteres alfanumericos">
+              <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="<?php echo $nuevaCategoria;?>" data-position="left" data-tooltip="Este campo es requerido, 2-30 caracteres alfanumericos">
               <label for="categoria">Categoria</label>
             </div>
             <div class="input-field col s6">
-              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $valor?>" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
+              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $nuevoValor;?>" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
               <label for="valor">Valor Unitario</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="url" type="text" class="validate tooltipped" name="url" value="<?php echo $url?>" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
+              <input id="url" type="text" class="validate tooltipped" name="url" value="<?php echo $nuevaUrl?>" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
               <label for="url">URL de la imagen</label>
             </div>
 
@@ -133,7 +134,7 @@
             <label for="enVenta">En venta</label>
           </p>
           <p>
-            <input type="radio" id="vendido" value = "ven_dido"name="estado">
+            <input type="radio" id="vendido" value = "ven_dido"name="estado"<?php if ($nuevoEstado == "Vendido"){ echo "checked"; }?>>
             <label for="vendido">Vendido</label>
           </p>
             </div>

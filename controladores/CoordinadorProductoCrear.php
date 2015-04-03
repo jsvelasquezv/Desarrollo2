@@ -1,8 +1,11 @@
 <?php
 require_once'../modelos/ValidarCrearProducto.php';
+require_once'../modelos/ValidarBuscarProducto.php';
 
 #========================SE OBTIENEN LOS DATOS PARA CREAR PRODUCTO DE LAS VISTAS=======================
 #Si se hizo click en el boton de crear producto, entonces...
+
+
 if (isset($_POST['crearProducto'])) {
 	#Se obtienen las variables del formulario
 	$vendido;
