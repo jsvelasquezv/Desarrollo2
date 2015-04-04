@@ -5,7 +5,7 @@
   $nuevaCategoria = $_GET['categoria'];
   $nuevoValor = $_GET['valor'];
   $nuevaUrl = $_GET['url'];
-  $nuevoEstado = $GET['estado'];
+  $nuevoEstado = $_GET['estado'];
   session_start();
  
   if (isset($_SESSION['exitoRegistrar'])) {
@@ -98,7 +98,16 @@
       <!-- EDITAR PRODUCTO -->
         <span class="card-title teal-text">Editar producto</span>  
         <?php $perfiles = $_SESSION['perfiles']; ?>
-        <form action="../controladores/CoordinadorProductoEditar.php" method="POST">     
+        <form action="../controladores/CoordinadorProductoEditar.php" method="POST">
+        <?php if (isset($_SESSION['erroresEditarProducto'])) {  ?>
+                <div class="card">
+                  <div class="card-content">
+                  <?php foreach ($_SESSION['erroresEditarProducto'] as $key) { ?>
+                    <p><?php echo $key;?></p>
+                  <?php } ?>
+                  </div>
+                </div>        
+            <?php unset($_SESSION['erroresEditarProducto']);} ?>      
           <div class="row">
             <div class="input-field col s6">
               <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nuevoNombre;?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
@@ -130,7 +139,7 @@
             <h6>&nbsp;&nbsp;&nbsp;Estado :</h6>
              
           <p>
-            <input type="radio" id="enVenta" value = "en_venta" name="estado" checked>
+            <input type="radio" id="enVenta" value = "en_venta" name="estado"<?php if ($nuevoEstado == "En venta"){ echo "checked"; }?>>
             <label for="enVenta">En venta</label>
           </p>
           <p>
@@ -148,11 +157,24 @@
     </div>
   </div>
   </div>
-  <div id="modal7" class="modal modalLogin">
+  <!-- MuestraMensajes -->
+    <div id="modal2" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha creado Editado el Producto</p> 
+        </div>
+          <?php if (isset($exitoCrearProducto)) {
+             echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
+             unset($_SESSION['exitoCrearProducto']);
+          } ?>                      
+      </div>
+    </div>
+<div id="modal7" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Cambiar Contrasena</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">   
+            <form action="controladores/CoordinadorUsuario.php" method="post">   
               <?php if (isset($erroresCambiarPass)) {  ?>          
                 <div class="card">
                   <div class="card-content">
@@ -185,5 +207,6 @@
         </div>
       </div>
     </div>
+    
 </body>
 </html>

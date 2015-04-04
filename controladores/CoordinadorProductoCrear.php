@@ -6,23 +6,17 @@ require_once'../modelos/ValidarBuscarProducto.php';
 #Si se hizo click en el boton de crear producto, entonces...
 
 
-if (isset($_POST['crearProducto'])) {
+if (isset($_POST['crearProducto'])) {#Si se dio click en crear producto, entonces
 	#Se obtienen las variables del formulario
-	$vendido;
 	$nombre = $_POST['nombre'];#Nombre del producto
 	$cantidad = $_POST['cantidad'];
 	$idCategoria = $_POST['categoria'];
 	$valor = $_POST['valorUnitario'];
 	$url = $_POST['url'];
 	session_start();
-	$userUsuario = $_SESSION['user'];
-	#Si se chuleo el checkbox de vendido, entonces...
-	if (! isset($_POST['vendido'])) {
-		$vendido = "Vendido";
-		// echo "Hola";
-	}
-$miCoordinadorProductoCrear = new CoordinadorProductoCrear();
-$miCoordinadorProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria);	
+	$userUsuario = $_SESSION['user'];#se obtiene el nombre del usuario que actualmente esta creando dicho producto, es decir, el usuario que actualmente esta logueado en la aplicacion
+$miCoordinadorProductoCrear = new CoordinadorProductoCrear();#Creo una instancia de CoordinadorProductoCrear
+$miCoordinadorProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria);#creo el producto pasandole como parametros los datos que cogí del formulario	
 }
 
 // echo $nombreProducto;

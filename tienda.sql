@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-04-2015 a las 15:20:21
+-- Tiempo de generación: 04-04-2015 a las 23:00:33
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -70,19 +70,19 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `permiso_gestionar_usuarios` tinyint(1) DEFAULT NULL,
   `permiso_vender` tinyint(1) DEFAULT NULL,
   `permiso_gestionar_perfiles` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `perfil`
 --
 
 INSERT INTO `perfil` (`id`, `nombre`, `permiso_gestionar_usuarios`, `permiso_vender`, `permiso_gestionar_perfiles`) VALUES
-(1, 'Admin', 1, 1, 0),
+(1, 'Admin', 1, 1, 1),
 (2, 'Default', 0, 1, 0),
 (3, 'Krusty', 1, 1, 0),
 (4, 'Popeto', 1, 1, 0),
 (5, 'hola mund', 1, 1, 1),
-(6, 'Super Admin', 1, 1, 1);
+(9, 'Super Admin', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -100,16 +100,17 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `valor_unitario` int(5) NOT NULL,
   `estado` varchar(30) NOT NULL DEFAULT 'En venta',
   `url_imagen` varchar(30) NOT NULL,
-  `cateogira_id` int(11) unsigned DEFAULT NULL,
   `usuario_id` varchar(191) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id`, `usuario_username`, `comision_id`, `categoria_id`, `nombre`, `cantidad`, `valor_unitario`, `estado`, `url_imagen`, `cateogira_id`, `usuario_id`) VALUES
-(52, 'juanTwo', 0, 4, 'Celular', 2, 120000, 'En venta', 'http://lorempixel.com/130/130/', NULL, NULL);
+INSERT INTO `producto` (`id`, `usuario_username`, `comision_id`, `categoria_id`, `nombre`, `cantidad`, `valor_unitario`, `estado`, `url_imagen`, `usuario_id`) VALUES
+(65, 'usuario', 0, 5, 'Cama', 4, 5666, 'En venta', 'www.c.com', NULL),
+(66, 'juanTwo', 0, 3, 'Nevera', 12, 120000, 'En venta', 'http://www.nevera.com', NULL),
+(67, 'juanTwo', 0, 1, 'Licuadora grande', 4, 120000, 'En venta', 'http://www.abc.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -223,12 +224,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --

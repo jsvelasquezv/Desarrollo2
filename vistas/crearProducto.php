@@ -94,12 +94,13 @@ require_once'../scripts/gestionarProductos.php';
     <br>
     <div class="row">
       <h4>Mis productos</h4>
-      <form action="" method="post">
+      <form action="../controladores/CoordinadorProductoBuscar.php" method="POST">
         <div class="row">
          <div class="input-field col s6 tooltipped" data-position="right" data-tooltip="Presiona enter para buscar" >
               <i class="mdi-action-search prefix"></i>
-              <input id="emailB" type="text" class="validate" name="emailB">
-              <label for="emailB">Ingresa el nombre del producto</label>
+              <!-- Input donde se digita al nombre para buscar un producto -->
+              <input id="productoBuscar" type="text" class="validate" name="searchProducto">
+              <label for="productoBuscar">Ingresa el nombre del producto</label>
               <input type="submit" class="btn col s3 offset-s1" name="buscar" value="Buscar" style='display:none;'>
             </div>
         </div>
@@ -128,7 +129,7 @@ require_once'../scripts/gestionarProductos.php';
 						 <td><?php echo '<img src="http://lorempixel.com/130/130/">'; ?></td>
 						 <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
-						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro["nombre"] ?>" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
+						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
 						 <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
 					?> </tr> <?php 
 				} ?> 
@@ -208,6 +209,7 @@ require_once'../scripts/gestionarProductos.php';
       </div>
     </div>
   </div>
+  <!-- Notificacion de exito al editar -->
   <?php if (isset($_SESSION['erroresCrearProducto'])) {
 			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
 		} ?>
@@ -228,7 +230,7 @@ require_once'../scripts/gestionarProductos.php';
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se ha modificado correctamente el Producto</p> 
+            <p>Se ha editado correctamente el Producto</p> 
         </div>
           <?php if (isset($exitoEditarProducto)) {
              echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 

@@ -14,14 +14,15 @@ class ValidarCrearProducto
 		
 	}
 	#Funcion que valida si se crea o no el Producto
-	public function validarCrearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria)
+	public function validarCrearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado)
 	{
 		#Necestio dos obejtos, uno de Validaciones y uno ProductoCrear
 		$miProductoCrear = new ProductoCrear();
 		$misValidaciones = new Validaciones();
 		#Se valida si los campos estan vacios, si son numericos o si son alfabeticos segun el caso
 		#Cada mensaje de error se guarda en una posicion en un array (responseValidarProducto)
-		if($nombre == "" or $cantidad =="" or $valor == "" or $userUsuario == "" or $idCategoria == ""){
+		if($nombre == "" or $cantidad =="" or $valor == "" or $userUsuario == "" or $idCategoria == ""
+			or $url ==""){
 			$this->responseValidarProducto[0] = "Todos los campos son requeridos";
 		}
 		if(! ($misValidaciones->esAlfabetico($nombre)) ){
@@ -40,8 +41,11 @@ class ValidarCrearProducto
 			$this->responseValidarProducto[5] = "El ID de la categoria debe ser numerico";
 		}
 		if (!$misValidaciones->esUrl($url)) {
-			$this->responseValidarProducto[6] = "La url no tiene un formato válido";
+			$this->responseValidarProducto[7] = "La url no tiene un formato válido";
 		}
+		// if(!$misValidaciones->esEstado($estado)){
+		// 	$this->responseValidarProducto[7] = "'En venta' y 'Vendido' son los dos únicos estados posibles";
+		// }
 		#Si el array no esta vacio, es porque sucedio un error, en caso tal se crea una variable
 		#que me guarda ese error
 		if (!empty($this->responseValidarProducto)) {
@@ -50,7 +54,7 @@ class ValidarCrearProducto
 		#Si se pasan todos los filtros entonces es porque no hay errores, asi que se puede crear y guardar
 		#el producto en la BD.
 		else{
-			$miProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria);
+			$miProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, "En venta");
 			$conflictos = 0;#No hay conflictos
 		}
 
@@ -61,7 +65,7 @@ class ValidarCrearProducto
 	}
 }
 // $vcp = new ValidarCrearProducto();
-// $vcp->validarCrearProducto("Triciclo", 1, 1120, "www.triciclo.com", "Admin", 5);
+// $vcp->validarCrearProducto("Yate", 1, 1120, "www.yate.com", "Admin", 5, "Abono una parte");
 // echo $vcp->getResponse()[0];
 // echo $vcp->getResponse()[1];
 // echo $vcp->getResponse()[2];
@@ -69,5 +73,6 @@ class ValidarCrearProducto
 // echo $vcp->getResponse()[4];
 // echo $vcp->getResponse()[5];
 // echo $vcp->getResponse()[6];
+// echo $vcp->getResponse()[7];
 
 ?>

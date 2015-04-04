@@ -25,9 +25,26 @@ class ProductoBuscar
         R::close();
         return $producto;
 	}
+	#Funcion para saber si un producto existe o no en la BD, se busca por el nombre
+	public function existeElNombre($nombre){
+		$contador = 0;
+		$frijoles = $this->getProductos();#me traigo todos los frijoles de la base de datos
+		foreach ($frijoles as $frijol) {
+			if ($nombre == $frijol['nombre']) {
+				$contador = $contador+1;
+			}
+		}
+		if($contador == 0){#Si contador es cero es porque el producto no existe
+			return true;
+			// print("No existe");
+		}
+		// else print("Existe");
+		else return false;
+	}
 }
 
-	// $pb = new ProductoBuscar();
+	$pb = new ProductoBuscar();
+	// print $pb->existeElNombre("Mot");
 	// $arreglo = $consulta = $pb->getProductos();
 
 	// foreach ($arreglo as $key) {

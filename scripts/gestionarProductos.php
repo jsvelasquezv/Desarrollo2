@@ -10,10 +10,13 @@ if(isset($_SESSION['exitoBuscarProducto'])){
 #===========================================================
 if(isset($_SESSION['exitoEditarProducto'])){
 	$exitoEditarProducto = $_SESSION['exitoEditarProducto'];
+	// echo $exitoEditarProducto;
+
 }
 #===========================================================
 if(isset($_SESSION['exitoCrearProducto'])){
 	$exitoCrearProducto = $_SESSION['exitoCrearProducto'];
+	// echo $exitoCrearProducto;
 }
 // else{
 // 	$erroresCrearProducto = $_SESSION['erroresCrearProducto'];

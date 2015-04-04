@@ -6,12 +6,9 @@
 require_once'ProductoEditar.php';
 require_once'Validaciones.php';
 require_once'ProductoBuscar.php';
-
-
 class ValidarEditarProducto
 {
 	private $responseEditarProducto;#Vector de respuestas
-
 	function __construct() {
 		
 	}
@@ -19,7 +16,7 @@ class ValidarEditarProducto
 	#que cuando vaya a editar, primero busque (con la variable $nombre), si ya existe un nombre
 	#igual, (no se edita un nombre para poner el mismo nombre)
 	public function validarEditarProducto($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
-	 							   $nuevoUserUsuario, $nuevoIdCategoria)
+	 							   $nuevoUserUsuario, $nuevoIdCategoria, $nuevoEstado)
 	{
 		#Obejtos necesarios para esta gestion
 		$misValidaciones = new Validaciones();
@@ -29,7 +26,7 @@ class ValidarEditarProducto
 		if($nuevoNombre == "" or $nuevaCantidad =="" or $nuevoValor == "" or $nuevoUserUsuario == "" or $nuevoIdCategoria == "" or $nuevaUrl == ""){
 			$this->responseEditarProducto[0] = "Todos los campos son requeridos";
 		}
-		if(! ($misValidaciones->esAlfabetico($nuevoNombre)) ){
+		if(!$misValidaciones->esAlfabetico($nuevoNombre) ){
 			$this->responseEditarProducto[1] = "El nuevo nombre debe ser alfabetico";
 		}
 		if(!$misValidaciones->esNumerico($nuevaCantidad)){
@@ -47,26 +44,23 @@ class ValidarEditarProducto
 		if (!$misValidaciones->esUrl($nuevaUrl)) {
 			$this->responseEditarProducto[6] = "La url no tiene un formato válido";
 		}
-		#Si se quiere cambiar un nombre por otro iguale entonces saldra este mensaje
-		if(! empty($miProductoBuscar->buscarProducto($nuevoNombre))){
-			$this->responseEditarProducto[7] = "Ya existe un producto con ese nombre, intente con otro";
+		if (!$misValidaciones->esEstado($nuevoEstado)) {
+			$this->responseEditarProducto[7] = "Los unicos estados permitidos son 'En venta' y 'Vendido'";
 		}
 		#Si pasa todos estos filtros el producto se podrá editar
-		else{
+		if(empty($this->responseEditarProducto)){
 			$miProductoEditar->editarProducto($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
-	 							   $nuevoUserUsuario, $nuevoIdCategoria);
+	 							   $nuevoUserUsuario, $nuevoIdCategoria, $nuevoEstado);
 			session_start();
 			unset($_SESSION['exitoEditarProducto']);
-
 		}
 	}
-
 	public function getResponse()
 	{
 		return $this->responseEditarProducto;
 	}
 }
 // $vep = new ValidarEditarProducto();
-// $vep->validarEditarProducto("Celular", "Mi cel", 4, 5666,"www.c.com","Default", 5);
-// echo $vep->getResponse()[7];
+// $vep->validarEditarProducto("Cama", 123, 4, 5666,"www.c.com","usuario", 5, "En venta");
+// echo $vep->getResponse()[1];
 ?>

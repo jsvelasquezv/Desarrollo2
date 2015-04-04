@@ -172,7 +172,7 @@ include_once '../scripts/gestionarPerfiles.php';
           } ?>                      
       </div>
     </div>
-    <div id="modal3" class="modal modalLogin">
+     <div id="modal3" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
@@ -183,7 +183,7 @@ include_once '../scripts/gestionarPerfiles.php';
              unset($_SESSION['exitoModificar']);
           } ?>                      
       </div>
-    </div>
+    </div> 
      <div id="modal4" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">

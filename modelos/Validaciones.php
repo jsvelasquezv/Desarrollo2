@@ -29,6 +29,14 @@
 			return preg_match('/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$/ ', $parametro);
 		}
 
+		public function esEstado($parametro)
+		{
+			if(strcasecmp($parametro, "En venta") == 0 or strcasecmp($parametro, "Vendido") == 0){
+				return true;
+			}
+			else return false;
+		}
+
 		public function esMayor($valor, $tamanoMax)
 		{
 			if (strlen($valor) > $tamanoMax) {
