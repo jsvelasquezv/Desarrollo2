@@ -381,10 +381,13 @@
    
 
 
+
+
  <section id = "category-tree" > <!-- "contenedor de las categorias" -->
    <div class = "title-bar" >  <!-- titulo categorias -->
         <h4>Categorias</h4>
    </div>
+   <div class="divider"></div>
   <div class="contenedor">
   <div id="pestanas">
       <ul id="lista">
@@ -404,24 +407,13 @@
           </li>
       </ul>
   </div>
+
       
   <body onload="javascript:cambiarPestanna(pestanas,pestana0);">
       <div id="contenidopestanas">
         <div id="cpestana0">
-
-        </div>
-        <div id="cpestana1">
-            <table style="width:100%">
-                <tr>
-                    <td><img src="assets/images/pc.jpg"></td>
-                    <td><img src="assets/images/alejo.jpg"></td>
-                    <td><img src="assets/images/isa.jpg"></td>
-                </tr>
-                <tr>
-                    <td>Computador $120.000</td>
-                    <td>Computador $500.000</td>
-                    <td>Reloj $400.000</td>
-                </tr>
+          <table style="width:100%">
+               
                 <tr>
                     <td><img src="assets/images/ch.jpg"></td>
                     <td><img src="assets/images/logo.jpg"></td>
@@ -432,8 +424,99 @@
                     <td>Teclado Gamer $40.000</td>
                     <td>Tijera Corta Todo $12.000</td>
                 </tr>
+                <tr> <ul class="pagination pagination-lg" >
+                  <td colspan="3">
+                  <center>
+                  <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+                  <li class="waves-effect waves-teal"><a class="num"href="#!">1</a></li>
+                  <li class="waves-effect waves-teal"><a class="num"href="#!">2</a></li>
+                  <li class="waves-effect waves-teal"><a class="num"href="#!">3</a></li>
+                  <li class="waves-effect waves-teal"><a class="num"href="#!">4</a></li>
+                  <li class="waves-effect waves-teal"><a class="num"href="#!">5</a></li>
+                  <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+                  </center>
+                  </td>
+                 </ul>
+                </tr>
             </table>
         </div>
+
+        <div id="cpestana1">
+            <table style="width:100%">
+
+                 <tr>
+                  <td colspan="3">
+                    <!-- <div id="pestanas"> -->
+                      <ul class="pagination pagination-lg" id="lista">
+                        <center>
+                          <li class="waves-effect waves-teal"><a class="num"href="#"><i class="mdi-navigation-chevron-left"></i></a></li>
+                          <li class="waves-effect waves-teal" id="pestana20"><a class="num" href="'javascript:cambiarPestannaNum(pestanas,pestana20);'">1</a></li>
+                          <li class="waves-effect waves-teal" id="pestana30"><a class="num" href="'javascript:cambiarPestannaNum(pestanas,pestana30);'">2</a></li>
+                          <li class="waves-effect waves-teal" id="pestanaC"><a class="num"href="'javascript:cambiarPestannaNum(pestanas,pestanaC);'">3</a></li>
+                          <li class="waves-effect waves-teal" id="pestanaD"><a class="num"href="'javascript:cambiarPestannaNum(pestanas,pestanaD);'">4</a></li>
+                          <li class="waves-effect waves-teal" id="pestanaE"><a class="num"href="'javascript:cambiarPestannaNum(pestanas,pestanaE);'">5</a></li>
+                          <li class="waves-effect waves-teal"><a class="num"href=""><i class="mdi-navigation-chevron-right"></i></a></li>
+                        </center>
+                      </ul>
+                    <!-- </div> -->
+                  </td>
+                </tr>
+              <div onload="javascript:cambiarPestanna(pestanas,pestana20);">
+              <div id="cpestana20">
+                    <tr>
+                        <td><img src="assets/images/pc.jpg"></td>
+                        <td><img src="assets/images/alejo.jpg"></td>
+                        <td><img src="assets/images/isa.jpg"></td>
+                    </tr>
+                    <tr>
+                        <td>Computador $120.000</td>
+                        <td>Computador $500.000</td>
+                        <td>Reloj $400.000</td>
+
+                    </tr>
+                    <tr>
+                        <td><img src="assets/images/ch.jpg"></td>
+                        <td><img src="assets/images/logo.jpg"></td>
+                        <td><img src="assets/images/producto1.jpg"></td>
+                    </tr>
+                    <tr>
+                        <td>Play Station 4 $1'000.000</td>
+                        <td>Teclado Gamer $40.000</td>
+                        <td>Tijera Corta Todo $12.000</td>
+                    </tr>
+              </div>
+              
+              <div id="cpestana30">
+                    <tr>
+                        <td><img src="assets/images/pc.jpg"></td>
+                        <td><img src="assets/images/alejo.jpg"></td>
+                        <td><img src="assets/images/isa.jpg"></td>
+                    </tr>
+                    <tr>
+                        <td>Computador $120.000</td>
+                        <td>Computador $500.000</td>
+                        <td>Reloj $400.000</td>
+
+                    </tr>
+                    <tr>
+                        <td><img src="assets/images/ch.jpg"></td>
+                        <td><img src="assets/images/logo.jpg"></td>
+                        <td><img src="assets/images/producto1.jpg"></td>
+                    </tr>
+                    <tr>
+                        <td>Play Station 4 $1'000.000</td>
+                        <td>Teclado Gamer $40.000</td>
+                        <td>Tijera Corta Todo $12.000</td>
+                    </tr>
+              </div>
+              </div>
+            </table>
+        </div>
+
+
+
+
+
         <div id="cpestana2">
             <table style="width:100%">
                 <tr>
@@ -552,11 +635,15 @@
                     <td>Teclado Gamer $40.000</td>
                     <td>Tijera Corta Todo $12.000</td>
                 </tr>
-            </table>
+
+            </table >
         </div>
       </div>
   </body>
+
+
 </div>
+
 
  <!-- ********************** -->
 

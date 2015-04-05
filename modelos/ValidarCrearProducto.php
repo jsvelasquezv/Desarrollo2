@@ -25,23 +25,29 @@ class ValidarCrearProducto
 			or $url ==""){
 			$this->responseValidarProducto[0] = "Todos los campos son requeridos";
 		}
+		if ($misValidaciones->esMayor($nombre, 30)) {
+			$this->responseValidarProducto[1] = "El nombre debe contener máximo 30 caracteres";
+		}
+		if ($misValidaciones->esMenor($nombre, 3)) {
+			$this->responseValidarProducto[2] = "El nombre debe contener mínimo 3 caracteres";
+		}
 		if(! ($misValidaciones->esAlfabetico($nombre)) ){
-			$this->responseValidarProducto[1] = "El nombre debe ser alfabetico";
+			$this->responseValidarProducto[3] = "El nombre debe ser alfabetico";
 		}
 		if(!$misValidaciones->esNumerico($cantidad)){
-			$this->responseValidarProducto[2] = "La cantidad debe ser numerica";
+			$this->responseValidarProducto[4] = "La cantidad debe ser numerica";
 		}
 		if(!$misValidaciones->esNumerico($valor)){
-			$this->responseValidarProducto[3] = "El valor debe ser numerico";
+			$this->responseValidarProducto[5] = "El valor debe ser numerico";
 		}
 		if(!$misValidaciones->esAlfabetico($userUsuario)){
-			$this->responseValidarProducto[4] = "Error en el logueo, un usuario tiene un user numerico";
+			$this->responseValidarProducto[6] = "Error en el logueo, un usuario tiene un user numerico";
 		}
 		if(!$misValidaciones->esNumerico($idCategoria)){
-			$this->responseValidarProducto[5] = "El ID de la categoria debe ser numerico";
+			$this->responseValidarProducto[7] = "El ID de la categoria debe ser numerico";
 		}
 		if (!$misValidaciones->esUrl($url)) {
-			$this->responseValidarProducto[7] = "La url no tiene un formato válido";
+			$this->responseValidarProducto[8] = "La url no tiene un formato válido";
 		}
 		// if(!$misValidaciones->esEstado($estado)){
 		// 	$this->responseValidarProducto[7] = "'En venta' y 'Vendido' son los dos únicos estados posibles";
@@ -65,7 +71,7 @@ class ValidarCrearProducto
 	}
 }
 // $vcp = new ValidarCrearProducto();
-// $vcp->validarCrearProducto("Yate", 1, 1120, "www.yate.com", "Admin", 5, "Abono una parte");
+// $vcp->validarCrearProducto("Yate", 1, 1120, "www.yate muy bonito", "Admin", 5, "Abono una parte");
 // echo $vcp->getResponse()[0];
 // echo $vcp->getResponse()[1];
 // echo $vcp->getResponse()[2];

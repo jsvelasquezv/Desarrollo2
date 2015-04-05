@@ -29,17 +29,11 @@
 			return preg_match('/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$/ ', $parametro);
 		}
 
-		public function esEstado($parametro)
-		{
-			if(strcasecmp($parametro, "En venta") == 0 or strcasecmp($parametro, "Vendido") == 0){
-				return true;
-			}
-			else return false;
-		}
-
 		public function esMayor($valor, $tamanoMax)
 		{
-			if (strlen($valor) > $tamanoMax) {
+			#trim elimina espacios al principio y al final de una cadena, Esto es para que no me inserte
+			#a la base de datos valores como "Ca " o " Ca".
+			if (strlen(trim($valor)) > $tamanoMax) {
 				return true;
 			}
 			else
@@ -50,7 +44,9 @@
 		
 		public function esMenor($valor, $tamanoMin)
 		{
-			if (strlen($valor) < $tamanoMin) {
+			#trim elimina espacios al principio y al final de una cadena, Esto es para que no me inserte
+			#a la base de datos valores como "Ca " o " Ca".
+			if (strlen(trim($valor)) < $tamanoMin) {
 				return true;
 			}
 			else

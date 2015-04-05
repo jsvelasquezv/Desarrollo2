@@ -29,24 +29,30 @@ class ValidarEditarProducto
 		if(!$misValidaciones->esAlfabetico($nuevoNombre) ){
 			$this->responseEditarProducto[1] = "El nuevo nombre debe ser alfabetico";
 		}
+		if ($misValidaciones->esMayor($nuevoNombre, 30)) {
+			$this->responseEditarProducto[2] = "El nombre debe contener máximo 30 caracteres";
+		}
+		if ($misValidaciones->esMenor($nuevoNombre, 3)) {
+			$this->responseEditarProducto[3] = "El nombre debe contener mínimo 3 caracteres";
+		}
 		if(!$misValidaciones->esNumerico($nuevaCantidad)){
-			$this->responseEditarProducto[2] = "La cantidad debe ser numerica";
+			$this->responseEditarProducto[4] = "La cantidad debe ser numerica";
 		}
 		if(!$misValidaciones->esNumerico($nuevoValor)){
-			$this->responseEditarProducto[3] = "El valor debe ser numerico";
+			$this->responseEditarProducto[5] = "El valor debe ser numerico";
 		}
 		if(!$misValidaciones->esAlfabetico($nuevoUserUsuario)){
-			$this->responseEditarProducto[4] = "El nombre de usuario debe ser alfabético";
+			$this->responseEditarProducto[6] = "El nombre de usuario debe ser alfabético";
 		}
 		if(!$misValidaciones->esNumerico($nuevoIdCategoria)){
-			$this->responseEditarProducto[5] = "El ID de la categoria debe ser numerico";
+			$this->responseEditarProducto[7] = "El ID de la categoria debe ser numerico";
 		}
 		if (!$misValidaciones->esUrl($nuevaUrl)) {
-			$this->responseEditarProducto[6] = "La url no tiene un formato válido";
+			$this->responseEditarProducto[8] = "La url no tiene un formato válido";
 		}
-		if (!$misValidaciones->esEstado($nuevoEstado)) {
-			$this->responseEditarProducto[7] = "Los unicos estados permitidos son 'En venta' y 'Vendido'";
-		}
+		// if (!$misValidaciones->esEstado($nuevoEstado)) {
+		// 	$this->responseEditarProducto[9] = "Los unicos estados permitidos son 'En venta' y 'Vendido'";
+		// }
 		#Si pasa todos estos filtros el producto se podrá editar
 		if(empty($this->responseEditarProducto)){
 			$miProductoEditar->editarProducto($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,

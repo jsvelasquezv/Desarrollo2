@@ -118,7 +118,7 @@ require_once'../scripts/gestionarProductos.php';
 				</tr>
 			</thead>
       <!-- Tabla que muestra los productos en la vista -->
-     <!-- '.$registro['nombre'].' -->
+     <!-- '<img src="'.$registro['url_imagen'].'" width="130" height="130">'-->
 			<tbody>				
  				<?php  foreach ($_SESSION['productos'] as $registro){
 					?> <tr>
@@ -126,11 +126,11 @@ require_once'../scripts/gestionarProductos.php';
 						 <td><?php echo $registro['cantidad'];?></td> 
 						 <td><?php echo $registro['categoria_id'];?></td>
 						 <td><?php echo $registro['valor_unitario'];?></td>
-						 <td><?php echo '<img src="http://lorempixel.com/130/130/">'; ?></td>
+						 <td><?php echo '<img src="http://lorempixel.com/130/130/" width="130" height="130">' ?></td>
 						 <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
-						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="grey-text text-darken-3" name="edit" id="edit"><i class="mdi-image-edit small"></i></a></td>
-						 <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
+						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="edit" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td>
+						 <!-- <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> --> <?php
 					?> </tr> <?php 
 				} ?> 
 			</tbody>
@@ -161,17 +161,17 @@ require_once'../scripts/gestionarProductos.php';
         <?php unset($_SESSION['erroresCrearProducto']);} ?> <!-- Destruye esa variable de sesion para liberar memoria y para que no me aparezca el modal cada que recarge la pagina -->             
           <div class="row">
             <div class="input-field col s6">
-              <input id="nombre" type="text" class="validate" name="nombre">
+              <input id="nombre" type="text" class="validate tooltipped" data-tooltip="Este campo es requerido, 3-30 caractéres alfanuméricos" name="nombre">
               <label for="nombre">Nombre</label>
             </div>
             <div class="input-field col s6">
-              <input id="cantidad" type="text" class="validate" name="cantidad">
+              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" data-tooltip="Este campo es requerido y es numérico">
               <label for="cantidad">Cantidad</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="categorias" type="text" class="validate" name="categoria">
+              <input id="categorias" type="text" class="validate tooltipped" name="categoria" data-tooltip="Este campo es requerido y es numérico">
               <label for="categoria">Categoria</label>
 
             </div>
@@ -192,12 +192,12 @@ require_once'../scripts/gestionarProductos.php';
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="valor_unitario" type="text" class="validate" name="valorUnitario">
+              <input id="valor_unitario" type="text" class="validate tooltipped" data-tooltip="Este campo es requerido y es numérico" name="valorUnitario">
               <label for="valor_unitario">Valor Unitario</label>
             </div>
 
             <div class="input-field col s6">
-              <input id="email" type="url" class="validate" name="url">
+              <input id="email" type="url" class="validate tooltipped" data-tooltip="Este campo es requerido, use el formato https://www.example.com" name="url">
               <label for="url"><i class="mdi-editor-insert-photo left"></i>URL de la imagen</label>
             </div>
           </div>

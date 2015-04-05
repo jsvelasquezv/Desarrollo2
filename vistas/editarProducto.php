@@ -115,38 +115,37 @@
             </div>
           <input type="hidden" name="antiguo" value="<?php echo $nuevoNombre; ?>">          
             <div class="input-field col s6">
-              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" value="<?php echo $nuevaCantidad;?>" data-position="right" data-tooltip="Este campo es requerido, 2-30 caracteres alfabeticos" >
+              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" value="<?php echo $nuevaCantidad;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico" >
               <label for="cantidad">Cantidad</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="<?php echo $nuevaCategoria;?>" data-position="left" data-tooltip="Este campo es requerido, 2-30 caracteres alfanumericos">
+              <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="<?php echo $nuevaCategoria;?>" data-position="left" data-tooltip="Este campo es requerido y es numérico">
               <label for="categoria">Categoria</label>
             </div>
             <div class="input-field col s6">
-              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $nuevoValor;?>" data-position="right" data-tooltip="Este campo es requerido, 6-60 caracteres alfanumericos">
+              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $nuevoValor;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico">
               <label for="valor">Valor Unitario</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="url" type="text" class="validate tooltipped" name="url" value="<?php echo $nuevaUrl?>" data-position="left" data-tooltip="Este campo es requerido, 8-15 caracteres numericos">
+              <input id="url" type="url" class="validate tooltipped" name="url" value="<?php echo $nuevaUrl?>" data-position="left" data-tooltip="Este campo es requerido, use el formato https://www.example.com.co">
               <label for="url">URL de la imagen</label>
             </div>
-
-             <div class="input-field col s6">
-            <h6>&nbsp;&nbsp;&nbsp;Estado :</h6>
-             
-          <p>
-            <input type="radio" id="enVenta" value = "en_venta" name="estado"<?php if ($nuevoEstado == "En venta"){ echo "checked"; }?>>
-            <label for="enVenta">En venta</label>
-          </p>
-          <p>
-            <input type="radio" id="vendido" value = "ven_dido"name="estado"<?php if ($nuevoEstado == "Vendido"){ echo "checked"; }?>>
-            <label for="vendido">Vendido</label>
-          </p>
-            </div>
+  
+              <div class="input-field col s6 tooltipped" data-tooltip="Eliga el estado de su producto">
+                <h6>&nbsp;&nbsp;&nbsp;Estado :</h6>
+                <p>
+                  <input type="radio" id="enVenta" class="validate"  value = "en_venta" name="estado"<?php if ($nuevoEstado == "En venta"){ echo "checked"; }?>>
+                  <label for="enVenta">En venta</label>
+                </p>
+                <p>
+                  <input type="radio" id="vendido" value = "ven_dido"name="estado"<?php if ($nuevoEstado == "Vendido"){ echo "checked"; }?>>
+                  <label for="vendido">Vendido</label>
+                </p>
+              </div>
             
           </div>
           <!-- BOTON QUE GUARDA LA EDICION DE LOS DATOS DE UN PRODUCTO -->
