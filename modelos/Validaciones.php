@@ -55,7 +55,7 @@
 			}
 		}
 	}
-	$validaciones = new Validaciones();
+	// $validaciones = new Validaciones();
 	// echo $validaciones->esAlfabetico("hola");
 	//echo $validaciones->esUrl("wwww.hola.com");
 	//home/sebastian/.rvm/gems/ruby-2.2.0/bin:/home/sebastian/.rvm/gems/ruby-2.2.0@global/bin:/home/sebastian/.rvm/rubies/ruby-2.2.0/bin:

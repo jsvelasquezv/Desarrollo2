@@ -113,20 +113,22 @@ require_once'../scripts/gestionarProductos.php';
 					<th>Cantidad</th>
 					<th>Categoria</th>
 					<th>Valor Unitario</th>
-					<th>URL de la imagen</th>
+					<th>Imagen</th>
           <th>Estado</th>
 				</tr>
 			</thead>
       <!-- Tabla que muestra los productos en la vista -->
-     <!-- '<img src="'.$registro['url_imagen'].'" width="130" height="130">'-->
+      <!-- '<img src="'.$registro['url_imagen'].'" width="130" height="130">' -->
 			<tbody>				
  				<?php  foreach ($_SESSION['productos'] as $registro){
+                $imagen = $registro['url_imagen'];
 					?> <tr>
 						 <td><?php echo $registro['nombre'];?></td> 
 						 <td><?php echo $registro['cantidad'];?></td> 
 						 <td><?php echo $registro['categoria_id'];?></td>
 						 <td><?php echo $registro['valor_unitario'];?></td>
-						 <td><?php echo '<img src="http://lorempixel.com/130/130/" width="130" height="130">' ?></td>
+						 <!-- <td><?php echo $registro['url_imagen']?></td> -->
+             <td><?php echo '<img src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
 						 <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
 						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="edit" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td>

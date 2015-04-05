@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2015 a las 23:00:33
+-- Tiempo de generación: 05-04-2015 a las 16:44:27
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -99,18 +99,19 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `cantidad` int(4) NOT NULL,
   `valor_unitario` int(5) NOT NULL,
   `estado` varchar(30) NOT NULL DEFAULT 'En venta',
-  `url_imagen` varchar(30) NOT NULL,
+  `url_imagen` varchar(200) NOT NULL,
   `usuario_id` varchar(191) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`id`, `usuario_username`, `comision_id`, `categoria_id`, `nombre`, `cantidad`, `valor_unitario`, `estado`, `url_imagen`, `usuario_id`) VALUES
-(65, 'usuario', 0, 5, 'Cama', 4, 5666, 'En venta', 'www.c.com', NULL),
-(66, 'juanTwo', 0, 3, 'Nevera', 12, 120000, 'En venta', 'http://www.nevera.com', NULL),
-(67, 'juanTwo', 0, 1, 'Licuadora grande', 4, 120000, 'En venta', 'http://www.abc.com', NULL);
+(65, 'juanTwo', 0, 3, 'Cama', 2, 45000, 'En venta', 'http://www.estiloambientacion.com.ar/tienda/camas/cama-brandon-2-plazas-b.jpg', NULL),
+(66, 'juanTwo', 0, 3, 'Nevecon', 12, 120000, 'En venta', 'http://www.feriadelacarrera13electrodomesticos.com/47-157-thickbox_default/nevecon-whirpool-wd5550l.jpg', NULL),
+(67, 'juanTwo', 0, 1, 'Licuadora grande', 4, 120000, 'En venta', 'http://www.coppel.com/images/photos/muebles/166871-1.jpg', NULL),
+(68, 'juanTwo', 0, 1, 'Lapicero', 12, 1200, 'En venta', 'http://mpe-s1-p.mlstatic.com/lapicero-espia-hd-camara-fotos-filmadora-graba-video-usb-367-MPE2756017421_052012-F.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -229,7 +230,7 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
