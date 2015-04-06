@@ -1,8 +1,6 @@
 
 <?php 
-
- 
-  session_start();
+require_once'../scripts/gestionarCategorias.php';
  
   if (isset($_SESSION['exitoRegistrar'])) {
     $exitoRegistrar = $_SESSION['exitoRegistrar'];
@@ -12,9 +10,7 @@
   }
   if (isset($_SESSION['eBuscar'])) {
     $eBuscar = $_SESSION['eBuscar'];
-  }
- 
- 
+  } 
 ?>
 
 <!DOCTYPE html>
@@ -87,13 +83,13 @@
   <br>	
 		<div class="row">
       <h4>Categorias</h4>
-      <form action="" method="post">
+      <form action="../controladores/CoordinadorCategoriaBuscar.php" method="post">
         <div class="row">
          <div class="input-field col s6 tooltipped" data-position="right" data-tooltip="Presiona enter para buscar" >
               <i class="mdi-action-search prefix"></i>
-              <input id="nombreP" type="text" class="validate" name="nombreP">
+              <input id="nombreP" type="text" class="validate" name="nombre">
               <label for="nombreP">Ingresa un nombre para buscar</label>
-              <input type="submit" class="btn col s3 offset-s1" name="buscarP" value="Buscar" style='display:none;'>
+              <input type="submit" class="btn col s3 offset-s1" name="buscarC" value="Buscar" style='display:none;'>
             </div>
         </div>
       </form>
@@ -103,24 +99,20 @@
 			<thead>
 				<tr>
 					<th>Nombre</th>
-					<th>Descripcion</th>
-					
+					<th>Descripcion</th>				
 				</tr>
 			</thead>
 			<tbody>				
-				<?php  {
+				<?php foreach ($_SESSION['categorias'] as $elementos) {
 					?> <tr>
           <!-- *********************************************************************************************************************** -->
 					<!-- en esta parte ira la conexion para traer los datos de la base de datos y mostrarlos -->
-				  <td> <h6>hola</h6> </td>
-          <td> <h6>holita</h6> </td>
+				  <td> <h6><?php echo $elementos['nombre']; ?></h6> </td>
+          <td> <h6><?php echo $elementos['descripcion']; ?></h6> </td>
           <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
             <td><a href="editarCategoria.php" class="btn-flat tooltipped" name="edit" id="edit" data-position="right" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td> <?php
-          ?>
-          <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover Categoria"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
           ?> 
 				 </tr> <?php 
-
 				} ?>
 			</tbody>
 		</table>
@@ -134,18 +126,18 @@
 					<div class="card login">
 						<div class="card-content">
 
-           <!-- aqui esta el formato para creae una nueva categoria -->
+           <!-- aqui esta el formato para crear una nueva categoria -->
 							<span class="card-title teal-text">Crear Categoria</span> 
-							<form action="" method="post">  
-								<?php if (isset($_SESSION['eRegistroPerfil'])) {	?>					
-								<div class="card">
-									<div class="card-content">
-									<?php foreach ($_SESSION['eRegistroPerfil'] as $key) { ?>
-										<p><?php echo $key; ?></p>
-									<?php } ?>
-									</div>
-								</div>        
-								<?php } ?>  
+							<form action="../controladores/CoordinadorCategoriaCrear.php" method="post">  
+                <?php if (isset($_SESSION['erroresCreacionCat'])) {  ?>
+                    <div class="card">
+                      <div class="card-content">
+                      <?php foreach ($_SESSION['erroresCreacionCat'] as $elementos) { ?>
+                        <p><?php echo $elementos; ?></p>
+                      <?php } ?>
+                      </div>
+                    </div>        
+                <?php } ?> 
 
 								<div class="input-field col m4 l2 tooltipped" data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 									<input id="nombre" type="text" name="nombre"  required maxlength="30">

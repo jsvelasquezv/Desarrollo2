@@ -1,6 +1,6 @@
 <?php 
- 
-  
+$nombre = $_GET['nombre'];
+$diagnostico = $_GET['diagnostico'];
  
   session_start();
  
@@ -12,10 +12,9 @@
   }
   if (isset($_SESSION['eBuscar'])) {
     $eBuscar = $_SESSION['eBuscar'];
-  }
-  
- 
+  } 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,7 +103,7 @@
           <div class="row">
 
             <div class="input-field col s7">
-             <p align="center"> <input id="nombre" type="text" class="validate tooltipped" name="nombre"  value="" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
+             <p align="center"> <input id="nombre" type="text" class="validate tooltipped" name="nombre"  value="<?php echo $nombre; ?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
               <label for="nombre">Nombre</label></p>
             </div>
 
@@ -112,7 +111,7 @@
  
             <div class="input-field col s6">
                <h6>Descripción:</h6>
-                <p align="center"><textarea  name="diagnostico" id="diagnostico" resize="nu" cols="95" rows="10" onblur="guardar(this);"></textarea></p>
+                <p align="center"><textarea  name="diagnostico" id="diagnostico" resize="nu" cols="95" rows="10" onblur="guardar(this);"><?php echo $diagnostico; ?></textarea></p>
             </div>
           </div>
          

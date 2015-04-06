@@ -17,7 +17,7 @@
 
 		public function esAlfanumerico($parametro)
 		{
-			return preg_match('/^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ0-9]*$/', $parametro);
+			return preg_match('/^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ0-9 ]*$/', $parametro);
 		}
 
 		public function validarEmail($parametro)

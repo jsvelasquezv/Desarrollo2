@@ -128,7 +128,7 @@ require_once'../scripts/gestionarProductos.php';
 						 <td><?php echo $registro['categoria_id'];?></td>
 						 <td><?php echo $registro['valor_unitario'];?></td>
 						 <!-- <td><?php echo $registro['url_imagen']?></td> -->
-             <td><?php echo '<img src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
+             <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
 						 <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
 						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="edit" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td>
