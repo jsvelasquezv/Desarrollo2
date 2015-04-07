@@ -69,7 +69,8 @@ class CoordinadorProductoEditar
 		$frijolEncontrado = $miValidarBuscarProducto->validarBuscarProducto($nombre);
 		$errores = $miValidarEditarProducto->getResponse();#Si hay errores en la editada, los obtengo de esta forma
 		
-		if (! empty($errores)) {#Si hay errores (si el arreglo de errores no se encuentra vacio), entonces
+		if (! empty($errores)) {
+			#Si hay errores (si el arreglo de errores no se encuentra vacio), entonces
 			$_SESSION['erroresEditarProducto'] = $errores;#creo una variable de SESSION donde guardo los errores que hubieran dado lugar
 	
 			#Redirijo a la vista de editar usando las credenciales del producto que queria editar, pero que no pude. Por eso es que necesitaba un objeto ValidarBuscarProducto		
@@ -80,6 +81,7 @@ class CoordinadorProductoEditar
 
 		}
 		else{#Sino hubo errores entonces
+			
 			$_SESSION['exitoEditarProducto'] = 0;#Creo una variable de ssion y la igualo a cero, para usarlo luego en las vistas
 			unset($_SESSION['erroresEditarProducto']);#Libero memoria eliminando la variable de session erroresEditarProducto
 			unset($_SESSION['frijolEncontrado']);#...y libero tambien la variable de sessio frijolEncontrado

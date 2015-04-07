@@ -385,9 +385,11 @@
 
  <section id = "category-tree" > <!-- "contenedor de las categorias" -->
    <div class = "title-bar" >  <!-- titulo categorias -->
-        <h4>Categorias</h4>
+        <h4>Categorias</h4>    
+        <!-- BOTON DE AGREGAR AL CARRITO, DEBE DE ESTAR EN UN FORM -->
+        <i class="tiny mdi-action-shopping-cart orange-text"></i><input class="btn-flat orange-text" type="submit" value="Agregar al carrito" name="agregar">   
    </div>
-   <div class="divider"></div>
+   <div class="divider"></div><br>
   <div class="contenedor">
   <div id="pestanas">
       <ul id="lista">
@@ -407,8 +409,7 @@
           </li>
       </ul>
   </div>
-
-      
+  
   <body onload="javascript:cambiarPestanna(pestanas,pestana0);">
       <div id="contenidopestanas">
         <div id="cpestana0">

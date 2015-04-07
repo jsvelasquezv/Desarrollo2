@@ -69,4 +69,5 @@ class ValidarEditarProducto
 // $vep = new ValidarEditarProducto();
 // $vep->validarEditarProducto("Cama", 123, 4, 5666,"www.c.com","usuario", 5, "En venta");
 // echo $vep->getResponse()[1];
+
 ?>

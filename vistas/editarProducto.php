@@ -1,12 +1,13 @@
 <?php  
   // Se mandarán por GET los parametros actuales a la vista de editar Producto
+require'../scripts/gestionarCategorias.php';
   $nuevoNombre = $_GET['nombre'];
   $nuevaCantidad = $_GET['cantidad'];
-  $nuevaCategoria = $_GET['categoria'];
+  // $nuevaCategoria = $_GET['categoria'];
   $nuevoValor = $_GET['valor'];
   $nuevaUrl = $_GET['url'];
   $nuevoEstado = $_GET['estado'];
-  session_start();
+  // session_start();
  
   if (isset($_SESSION['exitoRegistrar'])) {
     $exitoRegistrar = $_SESSION['exitoRegistrar'];
@@ -120,10 +121,18 @@
             </div>
           </div>
           <div class="row">
+          <?php $categorias = $_SESSION['categorias']?>
             <div class="input-field col s6">
-              <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="<?php echo $nuevaCategoria;?>" data-position="left" data-tooltip="Este campo es requerido y es numérico">
+              <select name="categoria" id="">
+                <?php foreach ($categorias as $key) { ?>
+                  <option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
+                <?php } ?>
+                <option value=""></option>
+              </select>
+            <!-- <div class="input-field col s6">
+              <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="?php echo $nuevaCategoria;?>" data-position="left" data-tooltip="Este campo es requerido y es numérico">
               <label for="categoria">Categoria</label>
-            </div>
+            </div> -->
             <div class="input-field col s6">
               <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $nuevoValor;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico">
               <label for="valor">Valor Unitario</label>

@@ -1,8 +1,24 @@
 <?php 
-require_once'../scripts/gestionarProductos.php';	
+#Debi colocar tal cual el script de gestionar categorias aca porque de incluirlo, daba una Notice relacio-
+#nado con en el session_start().
+require'../scripts/gestionarProductos.php';
+#++++++++++++++++++PONGO EL SCRIPT DE gestionarCategorias+++++++++++++++++
+require_once'../modelos/CategoriaBuscar.php';
+$busquedaCat = new CategoriaBuscar();
 
-  // session_start(); no necestio esta session_star() aqui porque con el requiere_once ya la empece
- 
+$_SESSION['categorias'] = $busquedaCat->mostrarCategorias();
+if(isset($_SESSION['exitoBuscarCategoria'])){
+  $exitoBuscarCategoria = $_SESSION['exitoBuscarCategoria'];
+}
+#===========================================================
+if(isset($_SESSION['exitoEditarCategoria'])){
+  $exitoEditarCategoria = $_SESSION['exitoEditarCategoria'];
+}
+#===========================================================
+if(isset($_SESSION['exitoCrearCategoria'])){
+  $exitoCrearCategoria = $_SESSION['exitoCrearCategoria'];
+}	
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   if (isset($_SESSION['exitoRegistrar'])) {
     $exitoRegistrar = $_SESSION['exitoRegistrar'];
   }
@@ -107,6 +123,7 @@ require_once'../scripts/gestionarProductos.php';
       </form>
     </div>
 		<table class="hoverable responsive-table centered">
+    <?php $categorias = $_SESSION['categorias']?>
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -125,9 +142,10 @@ require_once'../scripts/gestionarProductos.php';
 					?> <tr>
 						 <td><?php echo $registro['nombre'];?></td> 
 						 <td><?php echo $registro['cantidad'];?></td> 
-						 <td><?php echo $registro['categoria_id'];?></td>
+						 <td><?php $cat = $categorias[$registro['categoria_id']];
+                       echo $cat['nombre'];?>
+             </td>
 						 <td><?php echo $registro['valor_unitario'];?></td>
-						 <!-- <td><?php echo $registro['url_imagen']?></td> -->
              <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
 						 <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
@@ -173,8 +191,14 @@ require_once'../scripts/gestionarProductos.php';
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="categorias" type="text" class="validate tooltipped" name="categoria" data-tooltip="Este campo es requerido y es numérico">
-              <label for="categoria">Categoria</label>
+              <select name="categoria" id="">
+                <?php foreach ($categorias as $key) { ?>
+                  <option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
+                <?php } ?>
+                <option value=""></option>
+              </select>
+              <!-- <input id="categorias" type="text" class="validate tooltipped" name="categoria" data-tooltip="Este campo es requerido y es numérico">
+              <label for="categoria">Categoria</label> -->
 
             </div>
              <!-- <div class="input-field col s6">

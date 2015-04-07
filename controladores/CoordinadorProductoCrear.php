@@ -19,9 +19,9 @@ $miCoordinadorProductoCrear = new CoordinadorProductoCrear();#Creo una instancia
 $miCoordinadorProductoCrear->crearProducto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria);#creo el producto pasandole como parametros los datos que cogí del formulario	
 }
 
-// echo $nombreProducto;
+// echo $nombre;
 // echo "<br>".$cantidad;
-// echo "<br>".$idCategoria;
+// echo "<br>CATEGORIA".$idCategoria;
 // echo "<br>".$valor;
 // echo "<br>".$url;
 // echo "<br>".$user;
@@ -50,6 +50,7 @@ class CoordinadorProductoCrear
 			header('Location: ../vistas/crearProducto.php');
 		}
 		else{#Sino...
+			// echo "No hubo errores :)";
 			$_SESSION['exitoCrearProducto'] = 0;#No hubieron errores
 			unset($_SESSION['erroresCrearProducto']);#Se libera memoria destruyendo la varibale de sesion erroresCrearProducto
 			header('Location: ../vistas/crearProducto.php');	

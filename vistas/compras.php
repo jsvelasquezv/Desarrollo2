@@ -78,13 +78,12 @@
 <div class="container">
    <div class="divider"></div>
   <div class="section">
-    <h5>Section 1</h5>
-    <p> se mostrara los productos selecinados en el carrito y me permitira retirar productos </p>
+    <!-- -->
         <?php $perfiles = $_SESSION['perfiles']; ?>
      
     <br>
     <div class="row">
-      <h4>Compras</h4>
+      <h4><i class="small mdi-action-shopping-cart"></i>Tu carrito de Compras</h4><br>
       <form action="" method="post">
         
       </form>
@@ -206,7 +205,7 @@
 
           </div>
           </div>
-           <input class="btn-flat orange-text" type="submit" value="Registrarse" name="registrar">
+           <input class="btn-flat orange-text" type="submit" value="Comprar" name="comprar">
           </div>
          
         </form>                     
