@@ -64,8 +64,8 @@ if(isset($_SESSION['exitoCrearCategoria'])){
           
 
         </ul>      
-        <ul id ="dropdown1" class="dropdown-content">
-          <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+        <ul id ="dropdown1" class="dropdown-content"><!-- holi -->
+          <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { $perfiles = $_SESSION['perfiles'];?>
             <li><a href="gestionarPerfiles.php">Perfiles</a></li>
           <?php } ?>
           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
@@ -104,7 +104,7 @@ if(isset($_SESSION['exitoCrearCategoria'])){
   </nav>
 
 	<?php }else{ header('Location: ../index.php');}?>    
-	<?php $perfiles = $_SESSION['perfiles']; ?>
+	<?php #aca iba a $perfiles ?>
  <!--  #================================================================== -->
 	<div class="container">		
     <br>

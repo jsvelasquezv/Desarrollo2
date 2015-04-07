@@ -98,7 +98,7 @@ require'../scripts/gestionarCategorias.php';
       <div class="card-content">
       <!-- EDITAR PRODUCTO -->
         <span class="card-title teal-text">Editar producto</span>  
-        <?php $perfiles = $_SESSION['perfiles']; ?>
+        <?php #$perfiles = $_SESSION['perfiles']; ?>
         <form action="../controladores/CoordinadorProductoEditar.php" method="POST">
         <?php if (isset($_SESSION['erroresEditarProducto'])) {  ?>
                 <div class="card">

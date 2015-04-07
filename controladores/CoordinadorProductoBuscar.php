@@ -2,9 +2,11 @@
 require_once '../modelos/ValidarBuscarProducto.php';
 #========================SE OBTIENEN EL NOMBRE DEL PRODUCTO A BUSCAR=======================
 if(isset($_POST['buscar'])){#Si se dio enter en el input de busqyea entonces
+	session_start();
+	$userUsuario = $_SESSION['user'];#obtengo el usuario que este logueado en la app
 	$nombre = $_POST['searchProducto'];#Obtengo el nombre del producto a ser buscado
 	$miCoordinadorProductoBuscar = new CoordinadorProductoBuscar();#Creo una instancia de CoordinadorProductoBuscar
-	$frijolEncontrado = $miCoordinadorProductoBuscar->buscarProducto($nombre);#busco el producto por el nombre
+	$frijolEncontrado = $miCoordinadorProductoBuscar->buscarProducto($nombre, $userUsuario);#busco el producto por el nombre
 	if (empty($frijolEncontrado)) {#Si no se obtuvieron resultados es porque no existe un producto en la BD con ese nombre
 			session_start();
 			$_SESSION['erroresBuscarProducto'] = 1;#Creo una variable de sesion erroresBuscarProducto y la igualo a 1 (lo se usara en las vistas, 1=true, 0=false)
@@ -29,10 +31,10 @@ class CoordinadorProductoBuscar
 		
 	}
 	#Funcion que busca el nombre usando los modelos
-	public function buscarProducto($nombre)
+	public function buscarProducto($nombre, $userUsuario)
 	{
 		$miValidarBuscarProducto = new ValidarBuscarProducto();#Necesito una instancia de ValidarBuscarProducto
-		$frijol = $miValidarBuscarProducto->validarBuscarProducto($nombre);#Llamo a la funcion que me valida el producto
+		$frijol = $miValidarBuscarProducto->validarBuscarProducto($nombre, $userUsuario);#Llamo a la funcion que me valida el producto
 		$errores = $miValidarBuscarProducto->getResponse();#Llamo a la funcion que me retorna los podibles errores que hubo en la busqueda de un producto
 		return $frijol;#Restorno el producto buscado
 	}

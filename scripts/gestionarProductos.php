@@ -1,9 +1,12 @@
 <?php
-require_once'../modelos/ValidarBuscarProducto.php';
+// require_once'../modelos/ValidarBuscarProducto.php';
+require_once '../modelos/ProductoBuscar.php';
 
-$validarBusqueda = new ValidarBuscarProducto();
+$busqueda = new ProductoBuscar();
 session_start();
-$_SESSION['productos'] = $validarBusqueda->buscarTodos();
+#userName del usuario que se encuntra logueado en el momento lo obtengo con esta variable de session
+$userUsuario = $_SESSION['user'];
+$_SESSION['productos'] = $busqueda->getProductosUser($userUsuario);#Esta variable de sesion me guarda los productos que el usuario ha creado
 if(isset($_SESSION['exitoBuscarProducto'])){
 	$exitoBuscarProducto = $_SESSION['exitoBuscarProducto'];
 }
