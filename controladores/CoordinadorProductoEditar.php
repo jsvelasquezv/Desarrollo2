@@ -2,17 +2,20 @@
 require_once'../modelos/ValidarEditarProducto.php';
 require_once'../modelos/ValidarBuscarProducto.php';
 #========================SE OBTIENEN LOS DATOS PARA CREAR PRODUCTO DE LAS VISTAS=======================
-
-if($_GET['edit']){#si se hizo click en el dibujo del lapiz de la tabla(que significa editar), entonces....
-	$editar = $_GET['edit'];#capturo el valor de edit, que es igual a el nombre del producto (ver en vistas), luego, editar es igual al nombre del producto seleccionado
+session_start();
+$nuevoUserUsuario = $_SESSION['user'];
+if(isset($_GET['edit'])){#si se hizo click en el dibujo del lapiz de la tabla(que significa editar), entonces....
+	#Usuario logueado actualmente, quien esta editando
+	$edit = $_GET['edit']; #capturo el valor de edit, que es igual a el nombre del producto (ver en vistas), luego, editar es igual al nombre del producto seleccionado
+	echo "Soy edit".$edit;
+	echo "<br> Soy User:".$nuevoUserUsuario;
 	$miValidarBuscarProducto= new ValidarBuscarProducto(); #creo una instancia de la clase de VaidarBuscarProducto
-	$frijolEncontrado = $miValidarBuscarProducto->validarBuscarProducto($editar);#busco el bean segun el nombre
-	
+	$frijolEncontrado = $miValidarBuscarProducto->validarBuscarProducto($edit, $nuevoUserUsuario);#busco el bean segun el nombre
 	#Redirecciono por get hacia donde se va a editar el el Producto
 	header('Location: ../vistas/editarProducto.php?nombre='.$frijolEncontrado['nombre'].'&cantidad='
 		.$frijolEncontrado['cantidad'].'&categoria='.$frijolEncontrado['categoria_id']
 		.'&valor='.$frijolEncontrado['valor_unitario'].'&url='.$frijolEncontrado['url_imagen']
-		.'&estado='.$frijolEncontrado['estado']);
+		.'&estado='.$frijolEncontrado['estado'].'&user='.$frijolEncontrado['usuario_username']);
 }
 #Si se dio click en guardar, entonces
 if(isset($_POST['guardarEditada'])){
@@ -22,8 +25,8 @@ if(isset($_POST['guardarEditada'])){
 	$nuevoValor = $_POST['valor'];
 	$nuevaUrl = $_POST['url'];
 	$nuevoIdCategoria = $_POST['categoria'];
-	session_start();
-	$nuevoUserUsuario = $_SESSION['user'];#Usuario logueado actualmente, quien esta editando
+	// session_start();
+	// $nuevoUserUsuario = $_SESSION['user'];#Usuario logueado actualmente, quien esta editando
 	#Si se chuleo el radioButton de vendido, entonces el estado del producto será en venta
 	if ($_POST['estado'] == "en_venta") {
 		$estado = "En venta";
@@ -40,9 +43,9 @@ if(isset($_POST['guardarEditada'])){
 // echo "<br>".$nuevoValor;
 // echo "<br>".$nuevoIdCategoria;
 // echo "<br>".$nuevaUrl;
-// echo "<br>".$nuevoUserUsuario;
+// // echo "<br> User:".$nuevoUserUsuario;
 // echo "<br>".$estado;
-
+// echo "<br>".$edit;
 /**
 *Clase que controla la entrada de los datos de las vistas y edita un producto, siempre y cuando esto
 * se pueda hacer, se ayuda de los modelos para tomar esta desicion
@@ -66,7 +69,7 @@ class CoordinadorProductoEditar
 		$miValidarEditarProducto->validarEditarProducto($nombre, $nuevoNombre, $nuevaCantidad, $nuevoValor, $nuevaUrl,
 	 							   $nuevoUserUsuario, $nuevoIdCategoria, $estado);
 		#Necesito obtener el frijol que quiero editar, para eso busco ese frijol y le paso el nombre antiguo, me traera todos los datos de aquel producto que quiero editar
-		$frijolEncontrado = $miValidarBuscarProducto->validarBuscarProducto($nombre);
+		$frijolEncontrado = $miValidarBuscarProducto->validarBuscarProducto($nombre, $nuevoUserUsuario);
 		$errores = $miValidarEditarProducto->getResponse();#Si hay errores en la editada, los obtengo de esta forma
 		
 		if (! empty($errores)) {
@@ -77,12 +80,12 @@ class CoordinadorProductoEditar
 			header('Location: ../vistas/editarProducto.php?nombre='.$frijolEncontrado['nombre'].'&cantidad='
 		.$frijolEncontrado['cantidad'].'&categoria='.$frijolEncontrado['categoria_id']
 		.'&valor='.$frijolEncontrado['valor_unitario'].'&url='.$frijolEncontrado['url_imagen']
-		.'&estado='.$frijolEncontrado['estado']);
+		.'&estado='.$frijolEncontrado['estado'].'&user='.$frijolEncontrado['usuario_username']);
 
 		}
 		else{#Sino hubo errores entonces
 			
-			$_SESSION['exitoEditarProducto'] = 0;#Creo una variable de ssion y la igualo a cero, para usarlo luego en las vistas
+			$_SESSION['exitoEditarProducto'] = 0;#Creo una variable de sesion y la igualo a cero, para usarlo luego en las vistas
 			unset($_SESSION['erroresEditarProducto']);#Libero memoria eliminando la variable de session erroresEditarProducto
 			unset($_SESSION['frijolEncontrado']);#...y libero tambien la variable de sessio frijolEncontrado
 			header('Location: ../vistas/crearProducto.php');
@@ -91,5 +94,5 @@ class CoordinadorProductoEditar
 }
 
 // $cpe = new CoordinadorProductoEditar();
-// $cpe->editarProducto("Licuadora", "Licuadora grande", 4, 4000, "www.a.com", "admin", 4, "Vendido");
+// $cpe->editarProducto("Licuadora grande", "Licuadora", 5, 4000, "www.a.com", "admin", 4, "Vendido");
 ?>

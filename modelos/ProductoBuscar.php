@@ -14,8 +14,9 @@ class ProductoBuscar
 	public function buscarProducto($nombre, $userUsuario)
 	{
 		R::selectDatabase('default');#Se selecciona la BD por default (tienda.sql)
-		$producto = R::getAll('SELECT * FROM producto WHERE nombre = :nombre AND usuario_username = :user',
-								[':nombre' => $nombre, ':user' => $userUsuario]	);#Asi se busca un (finOne) producto, recibe el nombre de la tabla, el campo donde va a buscar, y el nombre para que compare con ese campo
+		// $producto = R::getAll('SELECT * FROM producto WHERE nombre = :nombre AND usuario_username = :user',
+		// 						[':nombre' => $nombre, ':user' => $userUsuario]	);#Asi se busca un (finOne) producto, recibe el nombre de la tabla, el campo donde va a buscar, y el nombre para que compare con ese campo
+		$producto = R::findOne('producto', 'nombre = ? AND usuario_username = ?', [$nombre, $userUsuario]);
 		R::close();#se cierra el almacén de Beans
 		return $producto;	
 	}
@@ -36,9 +37,6 @@ class ProductoBuscar
 	// // print $pb->existeElNombre("Mot");
 	// $arreglo = $consulta = $pb->buscarProducto("Cama","juanTwo");
 
-	// foreach ($arreglo as $key => $value) {
-	// 	echo $key['id'];
-		
-	// }
+	// echo $arreglo;
 	
 ?>

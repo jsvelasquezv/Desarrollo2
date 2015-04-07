@@ -21,7 +21,7 @@ class ValidarEditarProducto
 		#Obejtos necesarios para esta gestion
 		$misValidaciones = new Validaciones();
 		$miProductoEditar = new ProductoEditar();
-		$miProductoBuscar = new ProductoBuscar();
+		// $miProductoBuscar = new ProductoBuscar();
 		#Se validan si los campos estan vacios, si deben de ser alfabeticos o no....y otras validaciones parecidas
 		if($nuevoNombre == "" or $nuevaCantidad =="" or $nuevoValor == "" or $nuevoUserUsuario == "" or $nuevoIdCategoria == "" or $nuevaUrl == ""){
 			$this->responseEditarProducto[0] = "Todos los campos son requeridos";

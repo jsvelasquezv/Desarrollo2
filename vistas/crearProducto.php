@@ -149,7 +149,7 @@ if(isset($_SESSION['exitoCrearCategoria'])){
              <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
 						 <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
-						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="edit" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td>
+						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="editar" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td>
 						 <!-- <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> --> <?php
 					?> </tr> <?php 
 				} ?> 
