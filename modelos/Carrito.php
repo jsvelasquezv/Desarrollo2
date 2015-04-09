@@ -30,8 +30,8 @@ class Carrito
 }		
 
 // $carrito = new Carrito();
-// $frijolito = $carrito->agregarAlCarrito("Atrápame si puedes");
-// echo empty($frijolito);
+// $frijolito = $carrito->agregarAlCarrito("Boligrafo");
+// echo $frijolito['id'];
 ?>
 
 

@@ -63,6 +63,9 @@ require'../scripts/gestionarCategorias.php';
           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="categorias.php">Categorias</a></li>
           <?php } ?>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+            <li><a href="comision.php">Comision</a></li>
+          <?php } ?>
         </ul>
          <ul id ="dropdown2" class="dropdown-content">          
             <li><a href="../controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar <br>mis datos</a></li>
@@ -100,7 +103,7 @@ require'../scripts/gestionarCategorias.php';
       <!-- EDITAR PRODUCTO -->
         <span class="card-title teal-text">Detalles del Producto</span>  
         <?php #$perfiles = $_SESSION['perfiles']; ?>
-        <form action="../controladores/CoordinadorProductoEditar.php" method="POST">
+      <form action="../controladores/CoordinadorCarrito.php" method="POST">
         <?php if (isset($_SESSION['erroresEditarProducto'])) {  ?>
                 <div class="card">
                   <div class="card-content">
@@ -112,56 +115,54 @@ require'../scripts/gestionarCategorias.php';
             <?php unset($_SESSION['erroresEditarProducto']);} ?>      
           <div class="row">
             <div class="input-field col s6">
-              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nuevoNombre;?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
+              <input id="nombre" type="text" class="validate tooltipped" name="nombre" value="<?php echo $nuevoNombre;?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos" disabled >
               <label for="nombre">Nombre</label>
             </div>
           <input type="hidden" name="antiguo" value="<?php echo $nuevoNombre; ?>">          
             <div class="input-field col s6">
-              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" value="<?php echo $nuevaCantidad;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico" >
+              <input id="cantidad" type="text" class="validate tooltipped" name="cantidad" value="<?php echo $nuevaCantidad;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico" disabled>
               <label for="cantidad">Cantidad</label>
             </div>
           </div>
           <div class="row">
           <?php $categorias = $_SESSION['categorias']?>
             <div class="input-field col s6">
-              <select name="categoria" id="">
+              <select disabled name="categoria" id="">
                 <?php foreach ($categorias as $key) { ?>
-                  <option value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
+                  <option  value="<?php echo $key['id']; ?>"> <?php echo $key['nombre']; ?> </option>
                 <?php } ?>
-                <option value=""></option>
               </select>
             <!-- <div class="input-field col s6">
               <input id="categoria" type="text" class="validate tooltipped" name="categoria" value="?php echo $nuevaCategoria;?>" data-position="left" data-tooltip="Este campo es requerido y es numérico">
               <label for="categoria">Categoria</label>
             </div> -->
             <div class="input-field col s6">
-              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $nuevoValor;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico">
+              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $nuevoValor;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico" disabled>
               <label for="valor">Valor Unitario</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="url" type="url" class="validate tooltipped" name="url" value="<?php echo $nuevaUrl?>" data-position="left" data-tooltip="Este campo es requerido, use el formato https://www.example.com.co">
+              <input id="url" type="url" class="validate tooltipped" name="url" value="<?php echo $nuevaUrl?>" data-position="left" data-tooltip="Este campo es requerido, use el formato https://www.example.com.co"disabled>
               <label for="url">URL de la imagen</label>
             </div>
   
-              <div class="input-field col s6 tooltipped" data-tooltip="Eliga el estado de su producto">
+              <div class="input-field col s6">
                 <h6>&nbsp;&nbsp;&nbsp;Estado :</h6>
                 <p>
-                  <input type="radio" id="enVenta" class="validate"  value = "en_venta" name="estado"<?php if ($nuevoEstado == "En venta"){ echo "checked"; }?>>
+                  <input type="radio" id="enVenta" class="validate"  value = "en_venta" name="estado"<?php if ($nuevoEstado == "En venta"){ echo "checked"; }?> disabled>
                   <label for="enVenta">En venta</label>
                 </p>
                 <p>
-                  <input type="radio" id="vendido" value = "ven_dido"name="estado"<?php if ($nuevoEstado == "Vendido"){ echo "checked"; }?>>
+                  <input type="radio" id="vendido" value = "ven_dido"name="estado"<?php if ($nuevoEstado == "Vendido"){ echo "checked"; }?> disabled>
                   <label for="vendido">Vendido</label>
                 </p>
-              </div>
-            
+              </div> 
           </div>
+          <input class="btn-flat orange-text" type="submit" value="Agregar Al carrito" name="agregarCarrito">
           <!-- BOTON QUE GUARDA LA EDICION DE LOS DATOS DE UN PRODUCTO -->
-          <input class="btn-flat orange-text" type="submit" value="Agregar Al carrito" name="agregar"/>
           <a  href="productos.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
-        </form>                     
+      </form>                     
       </div>
     </div>
   </div>

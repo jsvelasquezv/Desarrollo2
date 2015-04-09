@@ -42,8 +42,11 @@
 					<li><a href="gestionarUsuarios.php">Usuarios</a></li>
 					<?php } ?>
 					<?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
-            <li><a href="categorias.php">Categorias</a></li>
-          <?php } ?>
+		            <li><a href="categorias.php">Categorias</a></li>
+		          <?php } ?>
+		           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+		            <li><a href="comision.php">Comision</a></li>
+		          <?php } ?>
 				</ul>
 				 <ul id ="dropdown2" class="dropdown-content">          
             		<li><a href="../controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar <br>mis datos</a></li>

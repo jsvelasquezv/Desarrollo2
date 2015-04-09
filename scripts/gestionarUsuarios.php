@@ -3,7 +3,7 @@
 	require_once '../modelos/ValidarConsultarPerfil.php';
 	$logicaUsuario = new ValidarConsultarUsuario();
 	$validarConsultar = new ValidarConsultarPerfil();
-	session_start();
+	// session_start();
 	$_SESSION['usuarios'] = $logicaUsuario->getUsuarios();
 	$_SESSION['perfiles'] = $validarConsultar->consultarTodos();
 	if (isset($_SESSION['exitoRegistrar'])) {

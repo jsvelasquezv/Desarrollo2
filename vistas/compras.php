@@ -1,5 +1,7 @@
-<?php 
-	include_once '../scripts/gestionarUsuarios.php';
+<?php
+  // session_start(); 
+  include_once '../controladores/CoordinadorCarrito.php';
+  include_once '../scripts/gestionarUsuarios.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +47,9 @@
           <?php } ?>
            <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="categorias.php">Categorias</a></li>
+          <?php } ?>
+           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+            <li><a href="comision.php">Comision</a></li>
           <?php } ?>
         </ul>
         <ul id ="dropdown2" class="dropdown-content">   
@@ -104,19 +109,23 @@
       </thead>
       <!-- envio de datos a la base de datos -->
       <tbody>       
-        <?php  {
-          ?> <tr>
-             <td> <h5>hola</h5> </td> 
-             <td> <h5>hola</h5>  </td> 
-             <td> <h5>hola</h5>  </td>
-             <td> <h5>hola</h5>  </td>
-             <td> <h5>hola</h5> </td>
-             <td> <h5>hola</h5> </td> 
-             <td> <h5>hola</h5> </td> 
+        <?php //if(isset($_SESSION['carrito'])){   
+              foreach ($_SESSION['carrito'] as $registro) {
+                      echo $registro;
+                      // $imagen = $registro['url_imagen'];?>
+            <tr>
+               <td> <?php #echo '<img class="responsive-img circle" src="'.$registro['url_imagen'].'" width="130" height="130" alt="Imagen">';?></td> 
+               <td></td> 
+               <td><?php //$registro['nombre']?></td>
+               <td><?php //$registro['cantidad']?></td>
+               <td><?php //$registro['valor_unitario']?></td>
+               <td></td> 
+               <td></td> 
              
-             <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
-          ?> </tr> <?php 
-        } ?> 
+             <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td> 
+          </tr>  
+        <?php }
+          //}?>   
       </tbody>
     </table>  
     <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">

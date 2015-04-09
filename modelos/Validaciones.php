@@ -12,7 +12,7 @@
 
 		public function esNumerico($parametro)
 		{
-			return preg_match('/^[0-9]*$/', $parametro);
+			return preg_match('/^[0-9.]*$/', $parametro);
 		}
 
 		public function esAlfanumerico($parametro)

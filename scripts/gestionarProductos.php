@@ -1,6 +1,7 @@
 <?php
 
 // require_once'../modelos/ValidarBuscarProducto.php';
+
 require_once '../modelos/ProductoBuscar.php';
 
 $busqueda = new ProductoBuscar();

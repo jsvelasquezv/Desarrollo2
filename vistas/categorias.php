@@ -44,6 +44,9 @@ require_once '../scripts/gestionarCategorias.php';
            <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="categorias.php">Categorias</a></li>
           <?php } ?>
+           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+            <li><a href="comision.php">Comision</a></li>
+          <?php } ?>
 				</ul>
 				 <ul id ="dropdown2" class="dropdown-content">
                   
@@ -139,8 +142,8 @@ require_once '../scripts/gestionarCategorias.php';
 									<label for="nombre">Nombre</label>
 								</div>
                 <h6>Descripción:</h6>
-                <p align="center"><textarea  name="diagnostico" id="diagnostico" resize="nu" cols="95" rows="10" onblur="guardar(this);"></textarea></p>
-								
+                <textarea class="materialize-textarea"  name="diagnostico" id="diagnostico" onblur="guardar(this);"></textarea>
+								<!-- <label for="diagnostico">Descripcion</label> -->
   								<br>
 								<input class="btn-flat orange-text" type="submit" value="Crear" name="crear">
             <!-- **************************************************************************** -->
