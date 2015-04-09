@@ -14,4 +14,7 @@ if(isset($_SESSION['exitoEditarCategoria'])){
 if(isset($_SESSION['exitoCrearCategoria'])){
 	$exitoCrearCategoria = $_SESSION['exitoCrearCategoria'];
 }
+if (isset($_SESSION['errorBuscarCategoria'])) {
+		$errorBuscarCategoria = $_SESSION['errorBuscarCategoria'];
+	}
 ?>

@@ -98,7 +98,7 @@ require'../scripts/gestionarCategorias.php';
     <div class="card login">
       <div class="card-content">
       <!-- EDITAR PRODUCTO -->
-        <span class="card-title teal-text">Editar producto</span>  
+        <span class="card-title teal-text">Detalles del Producto</span>  
         <?php #$perfiles = $_SESSION['perfiles']; ?>
         <form action="../controladores/CoordinadorProductoEditar.php" method="POST">
         <?php if (isset($_SESSION['erroresEditarProducto'])) {  ?>
@@ -159,8 +159,8 @@ require'../scripts/gestionarCategorias.php';
             
           </div>
           <!-- BOTON QUE GUARDA LA EDICION DE LOS DATOS DE UN PRODUCTO -->
-          <input class="btn-flat orange-text" type="submit" value="Guardar" name="guardarEditada">
-          <a  href="crearProducto.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
+          <input class="btn-flat orange-text" type="submit" value="Agregar Al carrito" name="agregar"/>
+          <a  href="productos.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
         </form>                     
       </div>
     </div>

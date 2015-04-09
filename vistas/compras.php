@@ -21,6 +21,7 @@
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         <ul class="right hide-on-med-and-down" >
             <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+           <li> <a href="productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
           <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
          <!--  <form action="controladores/Principal.php">
             <input type="hidden" value="salir" name="salir">
@@ -82,8 +83,8 @@
         <?php $perfiles = $_SESSION['perfiles']; ?>
      
     <br>
-    <div class="row">
-      <h4><i class="small mdi-action-shopping-cart"></i>Tu carrito de Compras</h4><br>
+    <div class="row"> 
+      <h4><i class="mdi-action-shopping-cart left" class="modal-trigger"></i>Tu carrito de Compras</h4><br>
       <form action="" method="post">
         
       </form>

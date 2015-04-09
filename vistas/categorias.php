@@ -1,16 +1,9 @@
 
 <?php 
-require_once'../scripts/gestionarCategorias.php';
- 
-  if (isset($_SESSION['exitoRegistrar'])) {
-    $exitoRegistrar = $_SESSION['exitoRegistrar'];
+require_once '../scripts/gestionarCategorias.php';
+  if (isset($_SESSION['eBuscarP'])) {
+    $errorBuscarPerfil = $_SESSION['eBuscarP'];
   }
-  if (isset($_SESSION['exitoModificar'])) {
-    $exitoModificar = $_SESSION['exitoModificar'];
-  }
-  if (isset($_SESSION['eBuscar'])) {
-    $eBuscar = $_SESSION['eBuscar'];
-  } 
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +26,8 @@ require_once'../scripts/gestionarCategorias.php';
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 				<ul class="right hide-on-med-and-down">
            <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
-					<li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
+					<li> <a href="productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
+          <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
           <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
           <?php } ?>
@@ -107,10 +101,10 @@ require_once'../scripts/gestionarCategorias.php';
 					?> <tr>
           <!-- *********************************************************************************************************************** -->
 					<!-- en esta parte ira la conexion para traer los datos de la base de datos y mostrarlos -->
-				  <td> <h6><?php echo $elementos['nombre']; ?></h6> </td>
-          <td> <h6><?php echo $elementos['descripcion']; ?></h6> </td>
+				  <td><?php echo $elementos['nombre']; ?></td>
+          <td><?php echo $elementos['descripcion']; ?></td>
           <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-            <td><a href="editarCategoria.php" class="btn-flat tooltipped" name="edit" id="edit" data-position="right" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td> <?php
+            <td> <a href="../controladores/CoordinadorCategoriaEditar.php?edit=<?php echo $elementos['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="editar" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td> <?php 
           ?> 
 				 </tr> <?php 
 				} ?>
@@ -125,20 +119,21 @@ require_once'../scripts/gestionarCategorias.php';
 				<div id="modal" class="modal modalLogin">
 					<div class="card login">
 						<div class="card-content">
-
            <!-- aqui esta el formato para crear una nueva categoria -->
 							<span class="card-title teal-text">Crear Categoria</span> 
-							<form action="../controladores/CoordinadorCategoriaCrear.php" method="post">  
-                <?php if (isset($_SESSION['erroresCreacionCat'])) {  ?>
+							<form action="../controladores/CoordinadorCategoriaCrear.php" method="post"> 
+              <?php if(isset($_SESSION['erroresCreacionCategoria'])) {
+                echo "<script language='javascript'> $('#modal').openModal(); </script>"; ?> 
+                <?php if (isset($_SESSION['erroresCreacionCategoria'])) {  ?>
                     <div class="card">
                       <div class="card-content">
-                      <?php foreach ($_SESSION['erroresCreacionCat'] as $elementos) { ?>
+                      <?php foreach ($_SESSION['erroresCreacionCategoria'] as $elementos) { ?>
                         <p><?php echo $elementos; ?></p>
                       <?php } ?>
                       </div>
                     </div>        
                 <?php } ?> 
-
+                <?php unset($_SESSION['erroresCreacionCategoria']);} ?>
 								<div class="input-field col m4 l2 tooltipped" data-position="bottom" data-tooltip="Este campo es requerido, 4-30 caracteres alfabeticos">
 									<input id="nombre" type="text" name="nombre"  required maxlength="30">
 									<label for="nombre">Nombre</label>
@@ -156,7 +151,7 @@ require_once'../scripts/gestionarCategorias.php';
 				</div>
 			</div>    
 		</div>
-			<?php if (isset($_SESSION['eRegistroPerfil'])) {
+			<?php if (isset($_SESSION['erroresCreacionCategoria'])) {
 			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
 		} ?>
 	</div>
@@ -164,11 +159,11 @@ require_once'../scripts/gestionarCategorias.php';
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se ha creado correctamente el perfil</p> 
+            <p>Se ha creado correctamente la categoria</p> 
         </div>
-          <?php if (isset($exitoRegistrar)) {
+          <?php if (isset($exitoCrearCategoria)) {
              echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
-             unset($_SESSION['exitoRegistrar']);
+             unset($_SESSION['exitoCrearCategoria']);
           } ?>                      
       </div>
     </div>
@@ -176,11 +171,11 @@ require_once'../scripts/gestionarCategorias.php';
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se ha modificado correctamente el perfil</p> 
+            <p>Se ha editado correctamente la categoria</p> 
         </div>
-          <?php if (isset($exitoModificar)) {
+          <?php if (isset($exitoEditarCategoria)) {
              echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
-             unset($_SESSION['exitoModificar']);
+             unset($_SESSION['exitoEditarCategoria']);
           } ?>                      
       </div>
     </div>
@@ -188,11 +183,11 @@ require_once'../scripts/gestionarCategorias.php';
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Error</span> 
-            <p>No se encuentra un perfil con ese nombre</p> 
+            <p>No se encuentra una categoria con ese nombre</p> 
         </div>
-          <?php if (isset($eBuscar)) {
+          <?php if (isset($errorBuscarCategoria)) {
              echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
-             unset($_SESSION['eBuscarP']);
+             unset($_SESSION['errorBuscarCategoria']);
           } ?>                      
       </div>
     </div>

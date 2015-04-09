@@ -19,5 +19,5 @@ Class CategoriaEditar
 	}
 }
 	//$editable = new CategoriaEditar();
-	//$editable->editarCategoria("Salud", "belleza", "sfdgbfvbn");
+	//$editable->editarCategoria("Muebles", "Salas", "Poltronas, mesas");
 ?>

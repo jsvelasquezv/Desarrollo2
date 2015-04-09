@@ -17,7 +17,7 @@ if(isset($_SESSION['exitoEditarCategoria'])){
 #===========================================================
 if(isset($_SESSION['exitoCrearCategoria'])){
   $exitoCrearCategoria = $_SESSION['exitoCrearCategoria'];
-}	
+} 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   if (isset($_SESSION['exitoRegistrar'])) {
     $exitoRegistrar = $_SESSION['exitoRegistrar'];
@@ -33,16 +33,16 @@ if(isset($_SESSION['exitoCrearCategoria'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../assets/materialize/css/materialize.min.css" type="text/css">
-	<link rel="stylesheet" href="../assets/css/styles.css" type="text/css">
-	<script src="../assets/jquery-2.1.3.min.js"></script>
-	<script src="../assets/materialize/js/materialize.min.js"></script>
-	<script src="../assets/js/styles.js"></script>
-	<title>Desarrollo2</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css" type="text/css">
+  <link rel="stylesheet" href="../assets/css/styles.css" type="text/css">
+  <script src="../assets/jquery-2.1.3.min.js"></script>
+  <script src="../assets/materialize/js/materialize.min.js"></script>
+  <script src="../assets/js/styles.js"></script>
+  <title>Desarrollo2</title>
 </head>
 <body>
-	<?php if ((isset($_SESSION['logueado']))){ ?>
+  <?php if ((isset($_SESSION['logueado']))){ ?>
   <nav class="teal">
     <div class="nav-wrapper">
       <div class="col s12">
@@ -104,13 +104,13 @@ if(isset($_SESSION['exitoCrearCategoria'])){
     </div>
   </nav>
 
-	<?php }else{ header('Location: ../index.php');}?>    
-	<?php #aca iba a $perfiles ?>
+  <?php }else{ header('Location: ../index.php');}?>    
+  <?php #aca iba a $perfiles ?>
  <!--  #================================================================== -->
-	<div class="container">		
+  <div class="container">   
     <br>
     <div class="row">
-      <h4>Mis productos</h4>
+      <h4><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos a la venta</h4>
       <form action="../controladores/CoordinadorProductoBuscar.php" method="POST">
         <div class="row">
          <div class="input-field col s6 tooltipped" data-position="right" data-tooltip="Presiona enter para buscar" >
@@ -123,44 +123,46 @@ if(isset($_SESSION['exitoCrearCategoria'])){
         </div>
       </form>
     </div>
-		<table class="hoverable responsive-table centered">
+    <table class="hoverable responsive-table centered">
     <?php $categorias = $_SESSION['categorias']?>
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Cantidad</th>
-					<th>Categoria</th>
-					<th>Valor Unitario</th>
-					<th>Imagen</th>
+      <thead>
+        <tr>
+          <th><strong>Vendedor</strong></th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Categoria</th>
+          <th>Valor Unitario</th>
+          <th>Imagen</th>
           <th>Estado</th>
-				</tr>
-			</thead>
+        </tr>
+      </thead>
       <!-- Tabla que muestra los productos en la vista -->
       <!-- '<img src="'.$registro['url_imagen'].'" width="130" height="130">' -->
-			<tbody>				
- 				<?php  foreach ($_SESSION['productos'] as $registro){
-                $imagen = $registro['url_imagen'];
-					?> <tr>
-						 <td><?php echo $registro['nombre'];?></td> 
-						 <td><?php echo $registro['cantidad'];?></td> 
-						 <td><?php $cat = $categorias[$registro['categoria_id']];
+      <tbody>  
+        <?php  foreach ($_SESSION['todosLosProductos'] as $registro){
+                $imagen = $registro['url_imagen'];?>
+         <tr>
+             <td><?php echo $registro['usuario_username'];?></td> 
+             <td><?php echo $registro['nombre'];?></td> 
+             <td><?php echo $registro['cantidad'];?></td> 
+             <td><?php $cat = $categorias[$registro['categoria_id']];
                        echo $cat['nombre'];?>
              </td>
-						 <td><?php echo $registro['valor_unitario'];?></td>
+             <td><?php echo $registro['valor_unitario'];?></td>
              <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
-						 <td><?php echo $registro['estado'];?></td> 
+             <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
-						 <td> <a href="../controladores/CoordinadorProductoEditar.php?edit=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="editar" data-tooltip="Editar"><i class="mdi-image-edit"></i></a></td>
-						 <!-- <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> --> <?php
-					?> </tr> <?php 
-				} ?> 
-			</tbody>
-		</table>	
-	</div>
-	<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-		<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" href="#modal" data-tooltip="Nuevo Producto"><i class="mdi-content-add"></i></a>
-	</div>
-	<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
+             <td> <a href="../controladores/CoordinadorCarrito.php?agrega=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="editar" data-tooltip="Ver mas"><i class="mdi-action-visibility"></i></a></td>
+             <!-- <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> --> <?php
+          ?> </tr>
+          <?php } ?> 
+      </tbody>
+    </table>  
+  </div>
+  <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
+    <a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" href="#modal" data-tooltip="Nuevo Producto"><i class="mdi-content-add"></i></a>
+  </div>
+  <div class="col s12 m8 offset-m2 l4 offset-l3 valign">
    <div id="modal" class="modal modalLogin">
     <div class="card login">
       <div class="card-content">
@@ -202,19 +204,6 @@ if(isset($_SESSION['exitoCrearCategoria'])){
               <label for="categoria">Categoria</label> -->
 
             </div>
-             <!-- <div class="input-field col s6">
-            <h6> &nbsp; &nbsp;Estado :</h6>
-            <form action="#">
-              <p>
-                <input name="group1" type="radio" id="test1" />
-                <label for="test1">En venta</label>
-              </p>
-              <p>
-                <input name="group1" type="checkbox" id="test2" name="vendido">
-                <label for="test2">Vendido</label>
-              </p>
-            </form>
-            </div> -->
             
           </div>
           <div class="row">
@@ -238,8 +227,8 @@ if(isset($_SESSION['exitoCrearCategoria'])){
   </div>
   <!-- Notificacion de exito al editar -->
   <?php if (isset($_SESSION['erroresCrearProducto'])) {
-			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
-		} ?>
+      echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
+    } ?>
 </div>   
     <div id="modal2" class="modal modalLogin">
       <div class="card login">

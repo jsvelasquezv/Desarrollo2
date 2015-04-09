@@ -1,6 +1,6 @@
 <?php 
-$nombre = $_GET['nombre'];
-$diagnostico = $_GET['diagnostico'];
+  $nombre = $_GET['nombre'];
+  $diagnostico = $_GET['diagnostico'];
  
   session_start();
  
@@ -13,6 +13,9 @@ $diagnostico = $_GET['diagnostico'];
   if (isset($_SESSION['eBuscar'])) {
     $eBuscar = $_SESSION['eBuscar'];
   } 
+  if(isset($_SESSION['erroresEditarCategoria'])){
+    $errorEditarCategoria = $_SESSION['erroresEditarCategoria'];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -77,48 +80,34 @@ $diagnostico = $_GET['diagnostico'];
       </div>
     </div>
   </nav>
-
   <?php }else{ header('Location: ../index.php');}?> 
 <div class="container">
-  <div class="row">
-    
+  <div class="row">   
   <div class="col s12 m8 offset-m2 l6 offset-l3">
     <div class="card login">
       <div class="card-content">
         <span class="card-title teal-text">Editar categoria</span>  
-        
-
-        <form action="" method="post">  
-          <?php if (isset($_SESSION['eUpdateUsuario'])) {  ?>
+        <form action="../controladores/CoordinadorCategoriaEditar.php" method="post">  
+          <?php if (isset($_SESSION['erroresEditarCategoria'])) {  ?>
                 <div class="card">
                   <div class="card-content">
-                  <?php foreach ($_SESSION['eUpdateUsuario'] as $key) { ?>
+                  <?php foreach ($_SESSION['erroresEditarCategoria'] as $key) { ?>
                     <p><?php echo $key; ?></p>
                   <?php } ?>
                   </div>
                 </div>        
             <?php } ?> 
-
-
           <div class="row">
-
             <div class="input-field col s7">
              <p align="center"> <input id="nombre" type="text" class="validate tooltipped" name="nombre"  value="<?php echo $nombre; ?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
               <label for="nombre">Nombre</label></p>
             </div>
-
-          <input type="hidden" name="antiguo" value="<?php echo $documento; ?>">  
- 
+          <input type="hidden" name="antiguo" value="<?php echo $nombre; ?>">  
             <div class="input-field col s6">
                <h6>Descripción:</h6>
                 <p align="center"><textarea  name="diagnostico" id="diagnostico" resize="nu" cols="95" rows="10" onblur="guardar(this);"><?php echo $diagnostico; ?></textarea></p>
             </div>
-          </div>
-         
-         
-
-           
-            
+          </div>            
           </div>
           <input class="btn-flat orange-text" type="submit" value="Guardar" name="editar">
             <a  href="categorias.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
@@ -127,6 +116,19 @@ $diagnostico = $_GET['diagnostico'];
     </div>
   </div>
   </div>
+    <!-- MuestraMensajes -->
+    <div id="modal2" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Edicion categoria</p> 
+        </div>
+          <?php if (isset($erroresEditarCategoria)) {
+             echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
+             unset($_SESSION['erroresEditarCategoria']);
+          } ?>                      
+      </div>
+    </div>
   <div id="modal7" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">

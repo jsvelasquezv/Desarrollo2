@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     // unset($_SESSION['eLogin']);
     // unset($_SESSION['eRegistroUsuario']);
@@ -30,9 +30,14 @@
     if (isset($_SESSION['user'])) {
       $userMod = $_SESSION['user'];
     }
-    // if (isset($_SESSION['eUpdateMiUsuario'])) {
-    //   $errorModificarMiUsuario = $_SESSION['eUpdateMiUsuario'];
-    // }
+    if (isset($_SESSION['todosLosProductos'])) {
+      //echo "Todos los productos cargados";
+      // foreach ($_SESSION['todosLosProductos'] as $key) {
+      //   echo $key;
+      // }
+
+    }
+
     if (isset($_SESSION['exitoModificarMiUsuario'])) {
       $exitoModificarMiUsuario = $_SESSION['exitoModificarMiUsuario'];
     }
@@ -74,6 +79,7 @@
             <button name="salir" class="btn-flat white-text">Salir</button>
           </form> -->
           <li> <a href="index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+          <li> <a href="vistas/productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
           <li><a  href="vistas/compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
           <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
           <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -377,19 +383,59 @@
           } ?>                      
       </div>
     </div>
+
+
     <!-- ************************ -->
    
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
+<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
+<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
+<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
+<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
+<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
+<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <section id = "category-tree" > <!-- "contenedor de las categorias" -->
    <div class = "title-bar" >  <!-- titulo categorias -->
-        <h4>Categorias</h4>    
-        <!-- BOTON DE AGREGAR AL CARRITO, DEBE DE ESTAR EN UN FORM -->
-        <i class="tiny mdi-action-shopping-cart orange-text"></i><input class="btn-flat orange-text" type="submit" value="Agregar al carrito" name="agregar">   
+        <h4>Categorias</h4>
    </div>
-   <div class="divider"></div><br>
+   <div class="divider"></div>
   <div class="contenedor">
   <div id="pestanas">
       <ul id="lista">
@@ -409,241 +455,295 @@
           </li>
       </ul>
   </div>
-  
+
+      
   <body onload="javascript:cambiarPestanna(pestanas,pestana0);">
       <div id="contenidopestanas">
         <div id="cpestana0">
           <table style="width:100%">
-               
+          <?php  foreach ($todosLosProductos as $registro){
+                $imagen = $registro['url_imagen'];?> 
                 <tr>
-                    <td><img src="assets/images/ch.jpg"></td>
-                    <td><img src="assets/images/logo.jpg"></td>
-                    <td><img src="assets/images/producto1.jpg"></td>
+                  <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
                 </tr>
-                <tr>
-                    <td>Play Station 4 $1'000.000</td>
-                    <td>Teclado Gamer $40.000</td>
-                    <td>Tijera Corta Todo $12.000</td>
-                </tr>
-                <tr> <ul class="pagination pagination-lg" >
-                  <td colspan="3">
-                  <center>
-                  <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-                  <li class="waves-effect waves-teal"><a class="num"href="#!">1</a></li>
-                  <li class="waves-effect waves-teal"><a class="num"href="#!">2</a></li>
-                  <li class="waves-effect waves-teal"><a class="num"href="#!">3</a></li>
-                  <li class="waves-effect waves-teal"><a class="num"href="#!">4</a></li>
-                  <li class="waves-effect waves-teal"><a class="num"href="#!">5</a></li>
-                  <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-                  </center>
-                  </td>
-                 </ul>
-                </tr>
+          <?php }?>      
+                <!-- <tr>img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td> -->
+                    <!-- <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td> -->
+                    <!-- <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" hre
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
+                </tr> -->
             </table>
         </div>
 
         <div id="cpestana1">
             <table style="width:100%">
-
-                 <tr>
-                  <td colspan="3">
-                    <!-- <div id="pestanas"> -->
-                      <ul class="pagination pagination-lg" id="lista">
-                        <center>
-                          <li class="waves-effect waves-teal"><a class="num"href="#"><i class="mdi-navigation-chevron-left"></i></a></li>
-                          <li class="waves-effect waves-teal" id="pestana20"><a class="num" href="'javascript:cambiarPestannaNum(pestanas,pestana20);'">1</a></li>
-                          <li class="waves-effect waves-teal" id="pestana30"><a class="num" href="'javascript:cambiarPestannaNum(pestanas,pestana30);'">2</a></li>
-                          <li class="waves-effect waves-teal" id="pestanaC"><a class="num"href="'javascript:cambiarPestannaNum(pestanas,pestanaC);'">3</a></li>
-                          <li class="waves-effect waves-teal" id="pestanaD"><a class="num"href="'javascript:cambiarPestannaNum(pestanas,pestanaD);'">4</a></li>
-                          <li class="waves-effect waves-teal" id="pestanaE"><a class="num"href="'javascript:cambiarPestannaNum(pestanas,pestanaE);'">5</a></li>
-                          <li class="waves-effect waves-teal"><a class="num"href=""><i class="mdi-navigation-chevron-right"></i></a></li>
-                        </center>
-                      </ul>
-                    <!-- </div> -->
-                  </td>
-                </tr>
-              <div onload="javascript:cambiarPestanna(pestanas,pestana20);">
-              <div id="cpestana20">
                     <tr>
-                        <td><img src="assets/images/pc.jpg"></td>
-                        <td><img src="assets/images/alejo.jpg"></td>
-                        <td><img src="assets/images/isa.jpg"></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
                     </tr>
                     <tr>
-                        <td>Computador $120.000</td>
-                        <td>Computador $500.000</td>
-                        <td>Reloj $400.000</td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
 
                     </tr>
                     <tr>
-                        <td><img src="assets/images/ch.jpg"></td>
-                        <td><img src="assets/images/logo.jpg"></td>
-                        <td><img src="assets/images/producto1.jpg"></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
                     </tr>
                     <tr>
-                        <td>Play Station 4 $1'000.000</td>
-                        <td>Teclado Gamer $40.000</td>
-                        <td>Tijera Corta Todo $12.000</td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
+                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
                     </tr>
-              </div>
-              
-              <div id="cpestana30">
-                    <tr>
-                        <td><img src="assets/images/pc.jpg"></td>
-                        <td><img src="assets/images/alejo.jpg"></td>
-                        <td><img src="assets/images/isa.jpg"></td>
-                    </tr>
-                    <tr>
-                        <td>Computador $120.000</td>
-                        <td>Computador $500.000</td>
-                        <td>Reloj $400.000</td>
-
-                    </tr>
-                    <tr>
-                        <td><img src="assets/images/ch.jpg"></td>
-                        <td><img src="assets/images/logo.jpg"></td>
-                        <td><img src="assets/images/producto1.jpg"></td>
-                    </tr>
-                    <tr>
-                        <td>Play Station 4 $1'000.000</td>
-                        <td>Teclado Gamer $40.000</td>
-                        <td>Tijera Corta Todo $12.000</td>
-                    </tr>
-              </div>
-              </div>
             </table>
         </div>
-
-
-
-
 
         <div id="cpestana2">
             <table style="width:100%">
                 <tr>
-                    <td><img src="assets/images/alejo.jpg"></td>
-                    <td><img src="assets/images/isa.jpg"></td>
-                    <td><img src="assets/images/ch.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Computador $120.000</td>
-                    <td>Computador $500.000</td>
-                    <td>Reloj $400.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
                 </tr>
                 <tr>
-                    <td><img src="assets/images/logo.jpg"></td>
-                    <td><img src="assets/images/producto1.jpg"></td>
-                    <td><img src="assets/images/pc.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Play Station 4 $1'000.000</td>
-                    <td>Teclado Gamer $40.000</td>
-                    <td>Tijera Corta Todo $12.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
                 </tr>
             </table>
         </div>
         <div id="cpestana3">
             <table style="width:100%">
                 <tr>
-                    <td><img src="assets/images/isa.jpg"></td>
-                    <td><img src="assets/images/ch.jpg"></td>
-                    <td><img src="assets/images/logo.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Computador $120.000</td>
-                    <td>Computador $500.000</td>
-                    <td>Reloj $400.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
                 </tr>
                 <tr>
-                    <td><img src="assets/images/producto1.jpg"></td>
-                    <td><img src="assets/images/pc.jpg"></td>
-                    <td><img src="assets/images/alejo.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Play Station 4 $1'000.000</td>
-                    <td>Teclado Gamer $40.000</td>
-                    <td>Tijera Corta Todo $12.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
                 </tr>
             </table>
         </div>
         <div id="cpestana4">
             <table style="width:100%">
                 <tr>
-                    <td><img src="assets/images/ch.jpg"></td>
-                    <td><img src="assets/images/logo.jpg"></td>
-                    <td><img src="assets/images/producto1.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Computador $120.000</td>
-                    <td>Computador $500.000</td>
-                    <td>Reloj $400.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
                 </tr>
                 <tr>
-                    <td><img src="assets/images/pc.jpg"></td>
-                    <td><img src="assets/images/alejo.jpg"></td>
-                    <td><img src="assets/images/isa.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Play Station 4 $1'000.000</td>
-                    <td>Teclado Gamer $40.000</td>
-                    <td>Tijera Corta Todo $12.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
                 </tr>
             </table>
         </div>
         <div id="cpestana5">
             <table style="width:100%">
                 <tr>
-                    <td><img src="assets/images/logo.jpg"></td>
-                    <td><img src="assets/images/producto1.jpg"></td>
-                    <td><img src="assets/images/pc.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Computador $120.000</td>
-                    <td>Computador $500.000</td>
-                    <td>Reloj $400.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
                 </tr>
                 <tr>
-                    <td><img src="assets/images/alejo.jpg"></td>
-                    <td><img src="assets/images/isa.jpg"></td>
-                    <td><img src="assets/images/ch.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Play Station 4 $1'000.000</td>
-                    <td>Teclado Gamer $40.000</td>
-                    <td>Tijera Corta Todo $12.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
                 </tr>
             </table>
         </div>
         <div id="cpestana6">
             <table style="width:100%">
                 <tr>
-                    <td><img src="assets/images/producto1.jpg"></td>
-                    <td><img src="assets/images/pc.jpg"></td>
-                    <td><img src="assets/images/alejo.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Computador $120.000</td>
-                    <td>Computador $500.000</td>
-                    <td>Reloj $400.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
                 </tr>
                 <tr>
-                    <td><img src="assets/images/isa.jpg"></td>
-                    <td><img src="assets/images/ch.jpg"></td>
-                    <td><img src="assets/images/logo.jpg"></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
                 </tr>
                 <tr>
-                    <td>Play Station 4 $1'000.000</td>
-                    <td>Teclado Gamer $40.000</td>
-                    <td>Tijera Corta Todo $12.000</td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
                 </tr>
 
-            </table >
+            </table>
         </div>
       </div>
+
+
+      <table>
+        <ul class="pagination pagination-lg" >
+          <td colspan="3">
+          <center>
+          <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+          <li class="waves-effect waves-teal"><a class="num"href="#!">1</a></li>
+          <li class="waves-effect waves-teal"><a class="num"href="#!">2</a></li>
+          <li class="waves-effect waves-teal"><a class="num"href="#!">3</a></li>
+          <li class="waves-effect waves-teal"><a class="num"href="#!">4</a></li>
+          <li class="waves-effect waves-teal"><a class="num"href="#!">5</a></li>
+          <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+          </center>
+          </td>
+        </ul>
+      </table>
+
   </body>
 
 
 </div>
+
+
+
+   <div class="col s12 m8 offset-m2 l6 offset-l3">
+   <div id="modal" class="modal ">
+    <div class="card login ">
+      <div class="card-content">
+        <span class="card-title teal-text">Tijera Corta Todo</span>    <!-- aqui iría el nombre del producto traido de la BD -->
+        <form action="../controladores/CoordinadorUsuario.php" method="post">  <!-- aqui iría la clase donde está la lógica para agregar al carrito -->
+          <?php if (isset($_SESSION['eRegistroUsuario'])) { ?>          
+        <div class="card">
+          <div class="card-content">
+            <?php foreach ($_SESSION['eRegistroUsuario'] as $key) { ?>
+              <p><?php echo $key; ?></p>
+            <?php } ?>
+          </div>
+        </div>        
+      <?php } ?>             
+
+          <div class="row container">
+            <table border="0">
+              <tr>
+                <td rowspan="6">
+                  <img src='assets/images/producto1.jpg' name='producto1'/>
+                </td>
+              </tr>
+              <tr>
+                <td>$12.000</td>   <!-- aqui leerá de la base de datos el valor del producto -->
+              </tr>
+              <tr>
+                <td>Vendedor</td>   <!-- aqui leerá de la base de datos el vendedor que realiza la publicacion -->
+              </tr>
+              <tr>
+                <td>Categoría</td>    <!-- aqui leerá a que categoría fue asignado el producto -->
+              </tr>
+              <tr>
+                <td>Tijeras tacticas corta todo para rescate ambulancias bomberos paramedicos, inoxidables, de buen calibre y buena calidad</td>
+              </tr>
+              <tr>
+                <!-- falta asignar la funcionalidad para que me agregue el producto actual al carrito-->
+                <td>
+                  <input class="btn-flat orange-text" type="submit" value="Añadir al Carrito" name="addCarrito">
+                </td>
+              </tr>
+            </table>
+          </div>
+          </div>
+          <!-- al dar click en confirmar pago se realizar´n las notificaciones requeridas por el sistema (Historias de Usuario) -->
+           
+          </div>
+         
+        </form>                     
+      </div>
+    </div>
+  </div>
+  </div>  
+
+
+
+
+
+
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  <!-- ********************** -->
