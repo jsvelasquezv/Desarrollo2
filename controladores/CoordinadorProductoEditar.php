@@ -7,8 +7,8 @@ $nuevoUserUsuario = $_SESSION['user'];
 if(isset($_GET['edit'])){#si se hizo click en el dibujo del lapiz de la tabla(que significa editar), entonces....
 	#Usuario logueado actualmente, quien esta editando
 	$edit = $_GET['edit']; #capturo el valor de edit, que es igual a el nombre del producto (ver en vistas), luego, editar es igual al nombre del producto seleccionado
-	// echo "Soy edit".$edit;
-	// echo "<br> Soy User:".$nuevoUserUsuario;
+	echo "Soy edit".$edit;
+	echo "<br> Soy User:".$nuevoUserUsuario;
 	$miValidarBuscarProducto= new ValidarBuscarProducto(); #creo una instancia de la clase de VaidarBuscarProducto
 	$frijolEncontrado = $miValidarBuscarProducto->validarBuscarProducto($edit, $nuevoUserUsuario);#busco el bean segun el nombre
 	#Redirecciono por get hacia donde se va a editar el el Producto

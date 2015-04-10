@@ -29,11 +29,11 @@
         </ul>
         <ul id ="dropdown1" class="dropdown-content">
           <li><a href="../vistas/gestionarPerfiles.php">Perfiles</a></li>
-                <li><a href="../vistas/gestionarUsuarios.php">Usuarios</a></li>
-                 <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+          <li><a href="../vistas/gestionarUsuarios.php">Usuarios</a></li>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="categorias.php">Categorias</a></li>
           <?php } ?>
-           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="comision.php">Comision</a></li>
           <?php } ?>
         </ul>

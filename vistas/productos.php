@@ -75,8 +75,8 @@ if(isset($_SESSION['exitoCrearCategoria'])){
            <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="categorias.php">Categorias</a></li>
           <?php } ?>
-           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
-            <li><a href="vistas/comision.php">Comision</a></li>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+            <li><a href="comision.php">Comision</a></li>
           <?php } ?>
         </ul>
         <ul id ="dropdown2" class="dropdown-content">   
@@ -155,7 +155,7 @@ if(isset($_SESSION['exitoCrearCategoria'])){
              <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
              <td><?php echo $registro['estado'];?></td> 
              <!-- Lapiz con el que se edita el producto -->
-             <td> <a href="../controladores/CoordinadorCarrito.php?agrega=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="agrega" id="editar" data-tooltip="Ver mas"><i class="mdi-action-visibility"></i></a></td>
+             <td> <a href="../controladores/CoordinadorCarrito.php?agrega=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="editar" data-tooltip="Ver mas"><i class="mdi-action-visibility"></i></a></td>
              <!-- <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> --> <?php
           ?> </tr>
           <?php } ?> 

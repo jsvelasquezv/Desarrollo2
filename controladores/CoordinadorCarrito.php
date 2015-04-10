@@ -1,7 +1,6 @@
 <?php
-require '../modelos/Carrito.php';
 require '../scripts/gestionarCarrito.php';
-session_start();
+
 $nuevoUserUsuario = $_SESSION['user'];
 if(isset($_GET['agrega'])){#si se hizo click en el dibujo del lapiz de la tabla(que significa editar), entonces....
 	#Usuario logueado actualmente, quien esta editando
@@ -10,7 +9,7 @@ if(isset($_GET['agrega'])){#si se hizo click en el dibujo del lapiz de la tabla(
 	// echo "Soy edit".$edit;
 	// echo "<br> Soy User:".$nuevoUserUsuario;
 	$miCarrito = new Carrito(); #creo una instancia de la clase de Carrito
-	$loQuieroAgregar = $miCarrito->agregarAlCarrito($nombreAgregar);#busco el bean segun el nombre
+	$loQuieroAgregar = $miCarrito->obtenerProducto($nombreAgregar);#busco el bean segun el nombre
 	#Redirecciono por get hacia donde se va a editar el el Producto
 	header('Location: ../vistas/agregarProducto.php?nombre='.$loQuieroAgregar['nombre'].'&cantidad='
 		.$loQuieroAgregar['cantidad'].'&categoria='.$loQuieroAgregar['categoria_id']
@@ -18,21 +17,14 @@ if(isset($_GET['agrega'])){#si se hizo click en el dibujo del lapiz de la tabla(
 		.'&estado='.$loQuieroAgregar['estado'].'&user='.$loQuieroAgregar['usuario_username']);
 
 }
-if(isset($_POST['agregarCarrito'])){
-	//echo $_SESSION['nombreAgrega'];
-	// $nombreAgrega = $_SESSION['nombreAgrega'];
-	$miCarrito = new Carrito();
-	$_SESSION['carrito'] =  $miCarrito->agregarAlCarrito("Boligrafo");
-	echo is_array($_SESSION['carrito']);
-	foreach ($_SESSION['carrito'] as $key) {
-		echo $key;
-	}
-	//unset($_SESSION['nombreAgrega']);
-	//header('Location: ../vistas/productos.php');
-	// foreach ($_SESSION['carrito'] as $key) {
-	// 	echo $key;
-	// }
-}
+// if(isset($_POST['agregarCarrito'])){
+// 	$nombreAgrega = $_SESSION['nombreAgrega'];
+// 	$arreglo = $_SESSION['carrito']->add($nombreAgrega);
+// 	foreach ($arreglo as $key) {
+// 		echo $key;
+// 	}
+// }
+
 
 
 /**
@@ -53,10 +45,10 @@ class CoordinadorCarrito
 			
 	}
 }
-$cc = new CoordinadorCarrito();
-$miQuery = $cc->agregar("Escoba");
-//echo "<br>".$miQuery;
-echo is_array($miQuery);
+// $cc = new CoordinadorCarrito();
+// $miQuery = $cc->agregar("Escoba");
+// //echo "<br>".$miQuery;
+// echo is_array($miQuery);
 ?>
 
 

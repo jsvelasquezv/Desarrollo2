@@ -63,7 +63,7 @@ require'../scripts/gestionarCategorias.php';
           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="categorias.php">Categorias</a></li>
           <?php } ?>
-           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="comision.php">Comision</a></li>
           <?php } ?>
         </ul>

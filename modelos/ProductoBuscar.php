@@ -52,7 +52,7 @@ class ProductoBuscar
 
 	// $pb = new ProductoBuscar();
 	// // print $pb->existeElNombre("Mot");
-	// $arreglo = $consulta = $pb->getProductoPorNombre("Boligrafo");
+	// $arreglo = $consulta = $pb->buscarProducto("Cama","juanTwo");
 
 	// echo $arreglo;
 	

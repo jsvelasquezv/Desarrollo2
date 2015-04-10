@@ -1,6 +1,7 @@
 <?php
-#require_once '../modelos/Carrito.php';
-// if (!isset($_SESSION['miCarrito'])) {
-// 	$_SESSION['miCarrito'] = new Carrito();
-// }
+require_once '../modelos/Carrito.php';
+session_start();
+if (!isset($_SESSION["carrito"])){
+	$_SESSION["carrito"] = new Carrito();
+}
 ?>

@@ -44,9 +44,9 @@ require_once '../scripts/gestionarCategorias.php';
            <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="categorias.php">Categorias</a></li>
           <?php } ?>
-           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
-            <li><a href="comision.php">Comision</a></li>
-          <?php } ?>
+          <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
+          <li><a href="comision.php">Comision</a></li>
+        <?php } ?>
 				</ul>
 				 <ul id ="dropdown2" class="dropdown-content">
                   
@@ -115,7 +115,7 @@ require_once '../scripts/gestionarCategorias.php';
 		</table>
 		</div>
 		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Nuevo Categoria" href="#modal"><i class="mdi-content-add"></i></a>
+			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Nueva Categoria" href="#modal"><i class="mdi-content-add"></i></a>
 		</div>
 		<div class="valign-wrapper">
 			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
@@ -142,8 +142,8 @@ require_once '../scripts/gestionarCategorias.php';
 									<label for="nombre">Nombre</label>
 								</div>
                 <h6>Descripción:</h6>
-                <textarea class="materialize-textarea"  name="diagnostico" id="diagnostico" onblur="guardar(this);"></textarea>
-								<!-- <label for="diagnostico">Descripcion</label> -->
+                <p align="center"><textarea  name="diagnostico" id="diagnostico" resize="nu" cols="95" rows="10" onblur="guardar(this);"></textarea></p>
+								
   								<br>
 								<input class="btn-flat orange-text" type="submit" value="Crear" name="crear">
             <!-- **************************************************************************** -->

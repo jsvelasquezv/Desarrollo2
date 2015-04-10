@@ -470,14 +470,14 @@
                   <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
                 </tr>
           <?php }?>      
-                <tr>img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td> -->
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" hre
+                <!-- <tr>img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td> -->
+                    <!-- <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
+                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td> -->
+                    <!-- <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" hre
                     <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
                     <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
                     <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                </tr> 
+                </tr> -->
             </table>
         </div>
 
