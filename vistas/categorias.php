@@ -12,6 +12,7 @@ require_once '../scripts/gestionarCategorias.php';
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../assets/materialize/css/materialize.min.css" type="text/css">
 	<link rel="stylesheet" href="../assets/css/styles.css" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Dancing+Script:400,700' rel='stylesheet' type='text/css'/>
 	<script src="../assets/jquery-2.1.3.min.js"></script>
 	<script src="../assets/materialize/js/materialize.min.js"></script>
 	<script src="../assets/js/styles.js"></script>
@@ -22,7 +23,7 @@ require_once '../scripts/gestionarCategorias.php';
 	<nav class="teal">
 		<div class="nav-wrapper">
 			<div class="col s12">
-				<a href="index.php" ><img src="../assets/images/logo.png"></a>
+				<a href="../index.php" style ="font-family: 'Dancing Script', cursive; font-size: 50px;"><img src="../assets/images/Imagen1.png">MarketFree...</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 				<ul class="right hide-on-med-and-down">
            <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>

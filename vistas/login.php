@@ -23,7 +23,7 @@
   <nav class="teal">
     <div class="nav-wrapper">
       <div class="col s12">
-        <a href="#!" ><img src="assets/images/logo.png"></a>
+        <a href="#!" ><img src="assets/images/Imagen1.png"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         <ul class="right hide-on-med-and-down">
          <!--  <form action="controladores/Principal.php">

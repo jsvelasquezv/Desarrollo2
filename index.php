@@ -1,4 +1,4 @@
-<?php
+<?php 
     session_start();
     // unset($_SESSION['eLogin']);
     // unset($_SESSION['eRegistroUsuario']);
@@ -30,65 +30,48 @@
     if (isset($_SESSION['user'])) {
       $userMod = $_SESSION['user'];
     }
-    if (isset($_SESSION['todosLosProductos'])) {
-      //echo "Todos los productos cargados";
-      // foreach ($_SESSION['todosLosProductos'] as $key) {
-      //   echo $key;
-      // }
-
-    }
-
+    // if (isset($_SESSION['eUpdateMiUsuario'])) {
+    //   $errorModificarMiUsuario = $_SESSION['eUpdateMiUsuario'];
+    // }
     if (isset($_SESSION['exitoModificarMiUsuario'])) {
       $exitoModificarMiUsuario = $_SESSION['exitoModificarMiUsuario'];
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!-- atributo para establecer el idioma-->
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="assets/materialize/css/materialize.min.css" type="text/css">
   <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Dancing+Script:400,700' rel='stylesheet' type='text/css'/>
   <script src="assets/jquery-2.1.3.min.js"></script>
   <script src="assets/materialize/js/materialize.min.js"></script>
   <script src="assets/js/styles.js"></script>
 
-
-
-
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" type="text/css" href="assets/css/estilo.css"/>
-  <script type="text/javascript" src="assets/js/cambiarPestanna.js"></script>
-
-   
-
-
   <title>Desarrollo2</title>
 </head>
 <body>
-
   <?php if ((isset($_SESSION['logueado']))){ ?>
-  <nav class="teal">
+  <nav class="teal"> <!-- esquema de colores por defecto -->
     <div class="nav-wrapper">
       <div class="col s12">
-        <a href="#!" ><img src="assets/images/logo.png"></a>
+        <a href="index.php" class="brand-logo" style ="font-family: 'Dancing Script', cursive; font-size: 50px;"><img src="assets/images/Imagen1.png">MarketFree...</a><!-- imagen de logo responsiva-->       
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-
-        <ul class="right hide-on-med-and-down" >
+        <ul class="right hide-on-med-and-down">
          <!--  <form action="controladores/Principal.php">
             <input type="hidden" value="salir" name="salir">
             <button name="salir" class="btn-flat white-text">Salir</button>
           </form> -->
           <li> <a href="index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
-          <li> <a href="vistas/productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
-          <li><a  href="vistas/compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
-          <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          <?php } ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Mi Perfil &nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          
+          <li><a  href="vistas/productos.php" ><i class = "mdi-maps-layers left"></i>Productos de venta&nbsp; </a></li>
+          <li><a  href="vistas/compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li
+            <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php } ?>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+        <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+        </ul>   
 
-        </ul>      
         <ul id ="dropdown1" class="dropdown-content">
           <?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
             <li><a href="vistas/gestionarPerfiles.php">Perfiles</a></li>
@@ -96,108 +79,831 @@
           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="vistas/gestionarUsuarios.php">Usuarios</a></li>
           <?php } ?>
-           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="vistas/categorias.php">Categorias</a></li>
           <?php } ?>
           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="vistas/comision.php">Comision</a></li>
           <?php } ?>
         </ul>
-        <ul id ="dropdown2" class="dropdown-content">   
 
-        
-            <li><a href="controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar <br>mis datos</a></li>
+        <ul id ="dropdown2" class="dropdown-content">          
+            <li><a href="controladores/CoordinadorUsuario.php?user=<?php echo $userMod ?>" >Modificar mis datos</a></li>
             <li><a href="#modal7" class="modal-trigger">Cambiar<br> contrasena</a></li>
             <li><a href="scripts/salir.php">Salir</a></li>
         </ul>
 
-        <ul id="dropdown3" class="dropdown-content">
-              <li><a href="vistas/crearProducto.php"> Mis<br> productos</a></li>
-             <li><a href="vistas/visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
+         <ul id="dropdown3" class="dropdown-content">
+              <li><a href="crearProducto.php"> Mis<br> productos</a></li>
+               <li><a href="visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
 
-            </ul> 
-        
+         </ul>
 
         <!-- responsive navbar -->
         <ul class="side-nav" id="mobile-demo">
-         <img src="assets/images/logo.png">
-          <li> <a href="index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
-           <li><a  href="vistas/compras.php" ><i class = " mdi-action-shopping-cart left" class="modal-trigger"></i>Compra </a></li>
-            <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+        <a href="#!" class="brand-logo"><img src="assets/images/Imagen1.png"></a>
+         <br>
+          <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+           <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left" class="modal-trigger"></i>Compra </a></li>
+           <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
            <li><a class="dropdown-button" href="#!" data-activates="dropdown1" class="modal-trigger">&nbsp;&nbsp;Modulos <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <?php } ?>
            <li><a class="dropdown-button" href="#!" data-activates="dropdown2" class="modal-trigger">&nbsp;&nbsp;Mi cuenta <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
            <li><a class="dropdown-button" href="#!" data-activates="dropdown3" class="modal-trigger">&nbsp;&nbsp;Mi perfil <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-
-          <li><a href="scripts/salir.php" class="modal-trigger">&nbsp;&nbsp;Salir</a></li>
-          <li><a href="#" >&nbsp;&nbsp;Opciones</a></li>
+           <li><a href="scripts/salir.php" class="modal-trigger">&nbsp;&nbsp;Salir</a></li>
+          
         </ul>
         
       </div>
     </div>
   </nav>
 
+<!-- Contenedor en el index -->
+  <div class="row">     
+          <div class="col s12 m4 l3">
+              <div class="col s3">               
+                  <h3 class="teal-text">Categorias</h3>  
+              </div>
+              <br>
+              <br>
+              <br>
+              <br>
+              <ul class="collection">
+            <li class="collection-item avatar">
+                <img src="assets/images/casa.png" alt="" class="circle">
+                  <span class="title">Hogar</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/libro.png" alt="" class="circle">
+                  <span class="title">Libro</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/musica.png" alt="" class="circle">
+                  <span class="title">Musica</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/oficina.png" alt="" class="circle">
+                  <span class="title">Oficina</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/salud.png" alt="" class="circle">
+                  <span class="title">Salud</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/pc.png" alt="" class="circle">
+                  <span class="title">Tecnologia</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/vehiculo.png" alt="" class="circle">
+                  <span class="title">Transporte</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            
 
+
+          </ul>
+           
+           </div>
+        
+          <div class="col s12 m8 l9"> 
+               <div class="col s9">
+               <br>
+               <h5 class="teal-text">Productos</h5> 
+               <br> 
+                        
+            <table class="responsive-table">
+                  <thead>
+                      <tr> 
+
+                        <td data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/iphone5.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Iphone 5<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Iphone 5 <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo: $650.000.  Celular en buenas condiciones, de color negro para que tengas una experiencia inigualable.  </p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </td> 
+
+                      <td data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/computador.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Computador<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Computador<i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo: $1.500.000  Computador lenovo de color negro.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </td> 
+                                        
+                
+                      <th data-field="id">
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/Videojuego.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">God of war<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">God of war <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$50.000. Sensacional juego con gráficos excelentes. Para divertirte en tus tardes tristes.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/nintendo.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Nintendo<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Nintendo <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$50.000.  Para que revivas tu infancia con juegos del nintendo.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th> 
+                  </tr>
+                  <tr>
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/mesa.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Mesa de centro<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Mesa de centro<i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$100.000. Decora tu casa y tu sala con esta elegante mesa.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/comedor.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Comedor  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Comedor <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$450.000  Disfruta de tus comidas de una manera comoda.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>  
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/microondas.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Microondas  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Microondas <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$200.000 Calienta tus comidas de la manera mas rapida y practica.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/cama.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Cama para perro  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Cama para perro <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$43.000 Dale a tu mascota la comodidad a la hora de dormir.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>  
+                    </tr>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/gimnasio.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Gimnasio para gato  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Gimnasio para gato <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$150.000 Proporcionale a tu gato la manera de hacer ejercicios.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/estufa.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Estufa con horno  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Estufa con horno <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$450.000 Cocina tus manidas de una manera mas comoda.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/lavadora.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Lavadora  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Lavadora <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$500.000 Lava de la manera mas facil y mas rapido sin desgastar tus manos.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/televisor.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Televisor  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="vistas/productos.php">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Televisor <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$900.000 Disfruta del mejor entretenimiento.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+                      
+
+                </thead>
+              
+          </table>
+            </div>            
+        </div>
+  </div>
     <?php }else{ ?>    
   <nav class="teal">
     <div class="nav-wrapper">
-      <div class="col s12">
-       <a href="#!" ><img src="assets/images/logo.png"></a>
+      <div class="col s12">      
+        <a href="#!" class="brand-logo"><img src="assets/images/Imagen1.png"></a>  <!-- imagen de logo responsiva-->
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="#modal1" class="modal-trigger">Ingresa</a></li>
           <li><a href="#modal2" class="modal-trigger">Registrate</a></li>
           <!-- <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a></li> -->
         </ul>
-        <!-- <ul id ="dropdown1" class="dropdown-content">
-          <li><a href="#!">one</a></li>
-          <li><a href="#!">two</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">three</a></li>
-        </ul> -->
+        
         <ul class="side-nav" id="mobile-demo">
-          <img src="assets/images/logo.png">
-          <li><a href="#modal1" class="modal-trigger">&nbsp;&nbsp;Ingresa</a></li>
-          <li><a href="#modal2" class="modal-trigger">&nbsp;&nbsp;Registrate</a></li>
+          <li><a href="#modal1" class="modal-trigger">Ingresa</a></li>
+          <li><a href="#modal2" class="modal-trigger">Registrate</a></li>
         </ul>
       </div>
     </div>
   </nav>
- <!-- ******************************************************************** INDEX SIN LOGEARSE************************************************************************************** -->
-   <div class="parallax-container ">
-    <div class="parallax"> <img src="assets/images/parallax1.jpg" style = "display:block ; background-image: url(assets/images/parallax1.jpg)" /> 
-      
-   
-  </div>
-  <div class="section ">
-    <div class="row container">
-      <h6 class="header"></h6>
+<!-- Presentación del index pagina de inicio -->
 
-      <p class="grey-text text-darken-3 lighten-3">
+  <!--Aqui contenedores laterales y centrales de la pagina de inicio-->
+  <div class="row">     
+          <div class="col s12 m4 l3">
+              <div class="col s3">               
+                  <h3>Categorias</h3>  
+              </div>
+              <br>
+              <br>
+              <br>
+              <br>
+              <ul class="collection">
+            <li class="collection-item avatar">
+                <img src="assets/images/casa.png" alt="" class="circle">
+                  <span class="title">Hogar</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/libro.png" alt="" class="circle">
+                  <span class="title">Libro</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/musica.png" alt="" class="circle">
+                  <span class="title">Musica</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/oficina.png" alt="" class="circle">
+                  <span class="title">Oficina</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/salud.png" alt="" class="circle">
+                  <span class="title">Salud</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/pc.png" alt="" class="circle">
+                  <span class="title">Tecnologia</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li class="collection-item avatar">
+                <img src="assets/images/vehiculo.png" alt="" class="circle">
+                  <span class="title">Transporte</span>
+                <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            
+
+
+          </ul>
+           
+           </div>
         
-        <div id = "izq"> <a href="#modal2" class="modal-trigger" > 
-          <h5><p> &nbsp;&nbsp;&nbsp;&nbsp;¿Quieres comprar?<br>
-            <b>&nbsp;&nbsp;&nbsp;&nbsp;Encuentra una buena oferta</b>
-          </p></h5>
-          <H3>&nbsp;&nbsp;&nbsp;VER OFERTAS</H3></a>
+          <div class="col s12 m8 l9"> 
+               <div class="col s9">
+               <br>
+               <h2>Productos</h2> 
+               <br>           
+            <table class="responsive-table">
+                  <thead>
+                      <tr> 
 
+                        <td data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/iphone5.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Iphone 5<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Iphone 5 <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo: $650.000.  Celular en buenas condiciones, de color negro para que tengas una experiencia inigualable.  </p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </td> 
+
+                      <td data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/computador.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Computador<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Computador<i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo: $1.500.000  Computador lenovo de color negro.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </td> 
+                                        
+                
+                      <th data-field="id">
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/Videojuego.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">God of war<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">God of war <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$50.000. Sensacional juego con gráficos excelentes. Para divertirte en tus tardes tristes.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/nintendo.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Nintendo<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Nintendo <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$50.000.  Para que revivas tu infancia con juegos del nintendo.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th> 
+                  </tr>
+                  <tr>
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/mesa.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Mesa de centro<i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Mesa de centro<i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$100.000. Decora tu casa y tu sala con esta elegante mesa.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/comedor.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Comedor  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Comedor <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$450.000  Disfruta de tus comidas de una manera comoda.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>  
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/microondas.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Microondas  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Microondas <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$200.000 Calienta tus comidas de la manera mas rapida y practica.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/cama.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Cama para perro  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Cama para perro <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$43.000 Dale a tu mascota la comodidad a la hora de dormir.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>  
+                    </tr>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/gimnasio.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Gimnasio para gato  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Gimnasio para gato <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$150.000 Proporcionale a tu gato la manera de hacer ejercicios.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/estufa.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Estufa con horno  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Estufa con horno <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$450.000 Cocina tus manidas de una manera mas comoda.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/lavadora.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Lavadora  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Lavadora <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$500.000 Lava de la manera mas facil y mas rapido sin desgastar tus manos.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+
+                      <th data-field="id">
+                    
+                        <div class="container">
+                              <div class="row">
+                                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                                    <div class="left">
+                                      <div class="card">                           
+                                         <div class="card-image waves-effect waves-block waves-light">
+                                           <img class="activator" src="assets/images/televisor.png">
+                                         </div>
+                                         <div class="card-content">                               
+                                            <span class="card-title activator grey-text text-darken-4">Televisor  <i class="mdi-navigation-more-vert right"></i></span>
+                                            <p><a href="#">INFORMACION</a></p>
+                                         </div>
+                                         <div class="card-reveal">
+                                              <span class="card-title grey-text text-darken-4">Televisor <i class="mdi-navigation-close right"></i></span>
+                                              <p>Costo:$900.000 Disfruta del mejor entretenimiento.</p>
+                                           </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    
+                      </th>
+                      
+
+                </thead>
+              
+          </table>
+            </div>            
         </div>
-         <div id = "der"><a href="#modal2" class="modal-trigger" > 
-         <h5> <p>&nbsp;&nbsp;&nbsp;&nbsp;¿Quieres vender?<br>
-                <b>&nbsp;&nbsp;&nbsp;&nbsp;Registrate y publica tus productos</b>
-            </p></h5> 
-            <h3>&nbsp;&nbsp;CREA TUS PRODUCTOS</h3></a>
-          </div>
-      </p>
-    </div>
   </div>
-  </div>
-
-
-
-
-
-<!-- ********************************************************************************************************************************************************** -->
   <?php } ?>
   <div class="valign-wrapper">
     <div class="col s12 m8 offset-m2 l4 offset-l3 valign">
@@ -214,7 +920,7 @@
                   <?php } ?>
                   </div>
                 </div>        
-              <?php } ?> 
+              <?php } ?>           
             <div class="input-field col m4 l2">
               <input id="username" type="text" class="validate" name="username">
               <label for="username">Usuario</label>
@@ -231,7 +937,6 @@
     </div>
   </div>    
 </div>
-
 <?php if (isset($erroresLogin)) {
       echo "<script language='javascript'> $('#modal1').openModal(); </script>"; 
     } ?>
@@ -297,7 +1002,6 @@
             <input class="btn-flat orange-text" type="submit" value="Cancelar" name="cancelarRI">
           </div>
         </form>   
-
         <?php if (isset($erroresRegistro)) {
       echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
     } ?>                  
@@ -342,8 +1046,6 @@
     </div>
   </div>    
 </div>
-
-
  <div id="modal4" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -356,10 +1058,6 @@
           } ?>                      
       </div>
     </div>
-
-
-
-
    <div id="modal5" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -372,8 +1070,6 @@
           } ?>                      
       </div>
     </div>
-
-
      <div id="modal6" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -386,374 +1082,6 @@
           } ?>                      
       </div>
     </div>
-
-
-    <!-- ************************ -->
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
-<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
-<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
-<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
-<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
-<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
-<!-- Desde aqui Copia para que te quede lo nuevo, esta fue la parte que modifiqué -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <section id = "category-tree" > <!-- "contenedor de las categorias" -->
-   <div class = "title-bar" >  <!-- titulo categorias -->
-        <h4>Categorias</h4>
-   </div>
-   <div class="divider"></div>
-  <div class="contenedor">
-  <div id="pestanas">
-      <ul id="lista">
-          <li id="pestana1"><a href='javascript:cambiarPestanna(pestanas,pestana1);'><img src="assets/images/pc.png"></a>
-          </li>
-          <li id="pestana2"><a href='javascript:cambiarPestanna(pestanas,pestana2);'><img src="assets/images/vehiculo.png"></a>
-          </li>
-          <li id="pestana3"><a href='javascript:cambiarPestanna(pestanas,pestana3);'><img src="assets/images/tijera.png"></a>
-          </li>
-          <li id="pestana4"><a href='javascript:cambiarPestanna(pestanas,pestana4);'><img src="assets/images/casa.png"></a>
-          </li>
-          <li id="pestana5"><a href='javascript:cambiarPestanna(pestanas,pestana5);'><img src="assets/images/salud.png"></a>
-          </li>
-          <li id="pestana6"><a href='javascript:cambiarPestanna(pestanas,pestana6);'><img src="assets/images/libro.png"></a>
-          </li>
-          <li id="pestana0"><a href='javascript:cambiarPestanna(pestanas,pestana0);'></a>
-          </li>
-      </ul>
-  </div>
-
-      
-  <body onload="javascript:cambiarPestanna(pestanas,pestana0);">
-      <div id="contenidopestanas">
-        <div id="cpestana0">
-          <table style="width:100%">
-          <?php  foreach ($todosLosProductos as $registro){
-                $imagen = $registro['url_imagen'];?> 
-                <tr>
-                  <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
-                </tr>
-          <?php }?>      
-                <!-- <tr>img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td> -->
-                    <!-- <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td> -->
-                    <!-- <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" hre
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                </tr> -->
-            </table>
-        </div>
-
-        <div id="cpestana1">
-            <table style="width:100%">
-                    <tr>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
-                    </tr>
-                    <tr>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
-
-                    </tr>
-                    <tr>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
-                    </tr>
-                    <tr>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
-                        <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                    </tr>
-            </table>
-        </div>
-
-        <div id="cpestana2">
-            <table style="width:100%">
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                </tr>
-            </table>
-        </div>
-        <div id="cpestana3">
-            <table style="width:100%">
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                </tr>
-            </table>
-        </div>
-        <div id="cpestana4">
-            <table style="width:100%">
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                </tr>
-            </table>
-        </div>
-        <div id="cpestana5">
-            <table style="width:100%">
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                </tr>
-            </table>
-        </div>
-        <div id="cpestana6">
-            <table style="width:100%">
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/producto1.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/pc.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/alejo.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $120.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Computador $500.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Reloj $400.000</a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/isa.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/ch.jpg"></a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal"><img src="assets/images/logo.jpg"></a></td>
-                </tr>
-                <tr>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Play Station 4 $1'000.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Teclado Gamer $40.000</a></td>
-                    <td><a class="grey-text text-darken-3 modal-trigger" name="ver" id="ver" href="#modal">Tijera Corta Todo $12.000</a></td>
-                </tr>
-
-            </table>
-        </div>
-      </div>
-
-
-      <table>
-        <ul class="pagination pagination-lg" >
-          <td colspan="3">
-          <center>
-          <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-          <li class="waves-effect waves-teal"><a class="num"href="#!">1</a></li>
-          <li class="waves-effect waves-teal"><a class="num"href="#!">2</a></li>
-          <li class="waves-effect waves-teal"><a class="num"href="#!">3</a></li>
-          <li class="waves-effect waves-teal"><a class="num"href="#!">4</a></li>
-          <li class="waves-effect waves-teal"><a class="num"href="#!">5</a></li>
-          <li class="waves-effect waves-teal"><a class="num"href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-          </center>
-          </td>
-        </ul>
-      </table>
-
-  </body>
-
-
-</div>
-
-
-
-   <div class="col s12 m8 offset-m2 l6 offset-l3">
-   <div id="modal" class="modal ">
-    <div class="card login ">
-      <div class="card-content">
-        <span class="card-title teal-text">Tijera Corta Todo</span>    <!-- aqui iría el nombre del producto traido de la BD -->
-        <form action="../controladores/CoordinadorUsuario.php" method="post">  <!-- aqui iría la clase donde está la lógica para agregar al carrito -->
-          <?php if (isset($_SESSION['eRegistroUsuario'])) { ?>          
-        <div class="card">
-          <div class="card-content">
-            <?php foreach ($_SESSION['eRegistroUsuario'] as $key) { ?>
-              <p><?php echo $key; ?></p>
-            <?php } ?>
-          </div>
-        </div>        
-      <?php } ?>             
-
-          <div class="row container">
-            <table border="0">
-              <tr>
-                <td rowspan="6">
-                  <img src='assets/images/producto1.jpg' name='producto1'/>
-                </td>
-              </tr>
-              <tr>
-                <td>$12.000</td>   <!-- aqui leerá de la base de datos el valor del producto -->
-              </tr>
-              <tr>
-                <td>Vendedor</td>   <!-- aqui leerá de la base de datos el vendedor que realiza la publicacion -->
-              </tr>
-              <tr>
-                <td>Categoría</td>    <!-- aqui leerá a que categoría fue asignado el producto -->
-              </tr>
-              <tr>
-                <td>Tijeras tacticas corta todo para rescate ambulancias bomberos paramedicos, inoxidables, de buen calibre y buena calidad</td>
-              </tr>
-              <tr>
-                <!-- falta asignar la funcionalidad para que me agregue el producto actual al carrito-->
-                <td>
-                  <input class="btn-flat orange-text" type="submit" value="Añadir al Carrito" name="addCarrito">
-                </td>
-              </tr>
-            </table>
-          </div>
-          </div>
-          <!-- al dar click en confirmar pago se realizar´n las notificaciones requeridas por el sistema (Historias de Usuario) -->
-           
-          </div>
-         
-        </form>                     
-      </div>
-    </div>
-  </div>
-  </div>  
-
-
-
-
-
-
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-<!-- Hasta aqui copia para que te aparezca lo que modifiqué -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <!-- ********************** -->
-
-
-
-
      <div id="modal7" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -792,7 +1120,6 @@
       </div>
     </div>
     </div>
-
      <div id="modal8" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -818,9 +1145,4 @@
       </div>
     </div>
 </body>
-
-
-
-
 </html>
- 
