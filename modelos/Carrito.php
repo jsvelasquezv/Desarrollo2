@@ -23,29 +23,25 @@ class Carrito {
 	//Se encarga de introducir los datos en los arrays del objeto carrito
 	//luego aumenta en 1 el numero de productos
 	function add($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado){
+		$cantidad = 1;
 		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-		$this->producto[$this->num_productos] = $miProducto;
+		if (isset($_SESSION['carrito'])) {
+			$carro = $_SESSION['carrito'];
+			array_push($carro, $miProducto);
+			$this->producto = $carro;
+		}
+		else {
+			$carro[0]=$miProducto;
+			$this->producto = $carro;
+		}
 		foreach ($this->producto as $key) {
 			print_r($key);
 		}
 		// array_push($this->producto, $miProducto);
 		$this->num_productos++;
 		return $this->producto;
-		// if (! empty($this->producto)) {
-		// 	echo "indice".$this->num_productos;
-		// 	if ($this->producto[$this->num_productos] == $miProducto) {
-		// 		$cantidad++;
-		// 		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-		// 		$this->producto[$this->num_productos] = $miProducto;
-		// 	}
-		// 	$this->num_productos++;
-		// }
-		// else{
-		// 	$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-		// 	$this->producto[$this->num_productos] = $miProducto;	
-		// }
-
 	}
+
 
 	public function obtenerProducto($nombre)
 	{
@@ -53,13 +49,25 @@ class Carrito {
 		$query = $producto->getProductoPorNombre($nombre);
 		return $query;		
 	}	
-	public function retirarDelCarrito($nombre){
-		$producto = new ProductoBuscar();
-		$query = $producto->getProductoPorNombre($nombre);
-		$this->numeroProductos--;
-		unset($query);
+	
+	###################################################
+	public function remove($nombre){
+		$this->producto = $_SESSION['carrito'];
+		foreach ($this->producto as $key) {
+			if ($key->obtenerNombre() == $nombre) {
+				$llave = array_search($key->obtenerNombre(),$this->producto);
+				unset($this->producto[$llave]);
+				
+			}
+		}
+
+		return $this->producto;
 	}
 		
+		
+	public function getArrayProducto(){
+		return $this->producto;
+	}
 }		
 
 // $carrito = new Carrito();

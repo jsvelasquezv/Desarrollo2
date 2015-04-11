@@ -1,6 +1,6 @@
 <?php 
-  $nombre = $_GET['nombre'];
-  $diagnostico = $_GET['diagnostico'];
+  $id_factura = $_GET['id_factura'];
+  $estado = $_GET['estado'];
  
   session_start();
  
@@ -91,85 +91,30 @@
   <div class="col s12 m8 offset-m2 l6 offset-l3">
     <div class="card login">
       <div class="card-content">
-        <span class="card-title teal-text">Editar categoria</span>  
-        <form action="../controladores/CoordinadorCategoriaEditar.php" method="post">  
-          <?php if (isset($_SESSION['erroresEditarCategoria'])) {  ?>
-                <div class="card">
-                  <div class="card-content">
-                  <?php foreach ($_SESSION['erroresEditarCategoria'] as $key) { ?>
-                    <p><?php echo $key; ?></p>
-                  <?php } ?>
-                  </div>
-                </div>        
-            <?php } ?> 
+        <span class="card-title teal-text">Cambiar Estado de Venta</span>  
+        <form action="../controladores/CoordinadorVenta.php" method="post">   
           <div class="row">
             <div class="input-field col s7">
-             <p align="center"> <input id="nombre" type="text" class="validate tooltipped" name="nombre"  value="<?php echo $nombre; ?>" data-position="left" data-tooltip="Este campo es requerido, 3-30 caracteres alfabeticos">
-              <label for="nombre">Nombre</label></p>
-            </div>
-          <input type="hidden" name="antiguo" value="<?php echo $nombre; ?>">  
+             <p align="center"> <input id="idFactura" type="text" class="validate" name="idFactura"  value="<?php echo $id_factura; ?>" data-position="left">
+              <label for="nombre">Id Factura</label></p>
+            </div>  
             <div class="input-field col s6">
-               <h6>Descripción:</h6>
-                <p align="center"><textarea  name="diagnostico" id="diagnostico" resize="nu" cols="95" rows="10" onblur="guardar(this);"><?php echo $diagnostico; ?></textarea></p>
+              <!-- <h6>Estado:</h6>-->
+              <input id="estado" type="text" class="validate" name="estado" value="<?php echo $estado; ?>">
+              <label for="username">Estado de la Factura</label>
+                    <p>
+                        <input name="group1" type="radio" id="test1" value="enviado"/>
+                        <label for="test1">Enviado</label>
+                    </p>
             </div>
           </div>            
           </div>
-          <input class="btn-flat orange-text" type="submit" value="Guardar" name="editar">
-            <a  href="categorias.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
+          <input class="btn-flat orange-text" type="submit" value="Guardar Estado" name="guardar">
+            <a  href="visualizarPedido.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
         </form>                     
       </div>
     </div>
   </div>
   </div>
-    <!-- MuestraMensajes -->
-    <div id="modal2" class="modal modalLogin">
-      <div class="card login">
-        <div class="card-content">
-            <span class="card-title teal-text">Exito</span> 
-            <p>Edicion categoria</p> 
-        </div>
-          <?php if (isset($erroresEditarCategoria)) {
-             echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
-             unset($_SESSION['erroresEditarCategoria']);
-          } ?>                      
-      </div>
-    </div>
-  <div id="modal7" class="modal modalLogin">
-      <div class="card login">
-        <div class="card-content">
-          <span class="card-title teal-text">Cambiar Contrasena</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">   
-              <?php if (isset($erroresCambiarPass)) {  ?>          
-                <div class="card">
-                  <div class="card-content">
-                  <?php foreach ($erroresCambiarPass as $key) { ?>
-                    <p><?php echo $key; ?></p>
-                  <?php } ?>
-                  </div>
-                </div>        
-              <?php } ?>           
-            <div class="input-field">
-              <input id="password" type="password" class="validate" name="passwordVieja">
-              <label for="password">Contrasena Actual</label>
-            </div> 
-            <div class="input-field">
-              <input id="password" type="password" class="validate" name="passwordNueva">
-              <label for="password">Contrasena Nueva</label>
-            </div>  
-            <div class="input-field">
-              <input id="password" type="password" class="validate" name="passwordNuevaC">
-              <label for="password">Repite la Contrasena</label>
-            </div>  
-            <input class="btn-flat orange-text" type="submit" value="Guardar" name="cambiarPass">        
-          </form>            
-           <?php if (isset($erroresCambiarPass)) {
-             echo "<script language='javascript'> $('#modal7').openModal(); </script>"; 
-             unset($erroresCambiarPass);
-             unset($_SESSION['eCambiarPass']);
-             // header('Location: index.php');
-          } ?>               
-        </div>
-      </div>
-    </div>
 </body>
 </html>

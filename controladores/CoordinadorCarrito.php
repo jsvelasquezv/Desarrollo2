@@ -1,7 +1,8 @@
 <?php
 // require '../scripts/gestionarCarrito.php';
-session_start();
 require_once '../modelos/Carrito.php';
+
+session_start();
 
 $nuevoUserUsuario = $_SESSION['user'];
 if(isset($_GET['agrega'])){#si se hizo click en el dibujo del lapiz de la tabla(que significa editar), entonces....
@@ -30,36 +31,19 @@ if(isset($_POST['agregarCarrito'])){
 	$_SESSION['carrito'] = $miCarrito->agregar($producto['nombre'], $producto['cantidad'], $producto['valor_unitario'],
 							$producto['url_imagen'], $producto['usuario_username'], $producto['categoria_id'], $producto['estado']);
 
-		
-	
-
-	foreach ($_SESSION['carrito'] as $key) {
-		//$key = array_push($_SESSION['carrito'], $producto);	 
-		echo print_r($key);
-	}
-
-	// foreach ($_SESSION as $key) {
-	// 	# code...
-	// 	array_push($_SESSION['carrito'], $key);
-	// }
-
-	// echo "Fuera del for".print_r($_SESSION['carrito']);
-	// foreach ($_SESSION['carrito'] as $key) {
-	// 	echo "Dentro del for".print_r($key);
-	// }
-	//header('Location: ../vistas/compras.php');
-	// foreach ($_SESSION['carrito'] as $key) {
-	// 	print_r($key);
-	// }
-
-// 	$nombreAgrega = $_SESSION['nombreAgrega'];
-// 	$arreglo = $_SESSION['carrito']->add($nombreAgrega);
-// 	foreach ($arreglo as $key) {
-// 		echo $key;
-// 	}
+	header('Location: ../vistas/compras.php');
 }
 
+if (isset($_GET['nombre'])) {
+	echo 'Estoy dentro de get'."<br>";
+	$eliminar = $_GET['nombre']; #nombre del producto que quiero remover del carrito
+	$carrito = new Carrito();
+	$_SESSION['carrito'] =  $carrito->remove($eliminar);
 
+	// foreach ($_SESSION['carrito'] as $key) {
+	// 	echo "Hola".print_r($key);
+	// }
+}
 
 /**
 * 
@@ -67,23 +51,29 @@ if(isset($_POST['agregarCarrito'])){
 class CoordinadorCarrito
 {
 
+	private $miCarrito;
 	function __construct() {
-		
+		$this->miCarrito = new Carrito();
 	}
 
 	public function agregar($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado)
 	{
-		$miCarrito = new Carrito();
-		$queryArray = $miCarrito->add($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
+		//$this->miCarrito = new Carrito();
+		$queryArray = $this->miCarrito->add($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
 		return $queryArray;#Retorna un array, y dentro de ese array abran objetos producto
 		//return $query;
 			
 	}
 	public function obtenerProducto($nombre)
 	{
-		$miCarrito = new Carrito();
-		$query = $miCarrito->obtenerProducto($nombre);
+		//$this->miCarrito = new Carrito();
+		$query = $this->miCarrito->obtenerProducto($nombre);
 		return $query;
+	}
+	public function eliminar($nombre){
+	       $query = $this->miCarrito->remove($nombre);
+	       return $query;
+
 	}
 }
 // $cc = new CoordinadorCarrito();

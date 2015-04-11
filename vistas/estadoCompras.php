@@ -89,7 +89,7 @@
   <div class="container">   
     <br>
     <div class="row">
-      <h4>Visualizar pedidos</h4>
+      <h4>Estado de mis Compras</h4>
     </div>
     <!--  -Se genera una tabla con todas la facturas que se hayan creado- 
     -para visualizar la factura se dará  "CLICK" sobre la factura que se quiere visualizar en caso de que sea administrador y vendedor para editar el estado de la factura
@@ -99,7 +99,7 @@
         <tr>
           <th>Id Factura</th>
           <th>Fecha</th>
-          <th>Nombre del comprador</th>
+          <th>Nombre del Vendedor</th>
           <th>Nombre del producto</th>
           <th>Valor Unitario</th>
           <th>Cantidad</th>
@@ -108,18 +108,21 @@
       </thead>
       <!-- envio de datos a la base de datos -->
       <tbody>       
-        <?php foreach ($_SESSION['pedidosVendedor'] as $key) {
+        <?php foreach ($_SESSION['comprasCliente'] as $key) {
           ?> <tr>
              <td><?php echo $key['id_factura']; ?></td> 
              <td><?php echo $key['fecha']; ?></td> 
-             <td><?php echo $key['comprador']; ?></td>
+             <td><?php echo $key['vendedor']; ?></td>
              <td><?php echo $key['nombre']; ?></td>
              <td><?php echo $key['valor_unitario']; ?></td>
              <td><?php echo $key['cantidad']; ?></td> 
             <td><?php echo $key['estado']; ?></td>
-             <td> <a  class="btn-flat tooltipped" name="edit" id="edit" href="../controladores/CoordinadorVenta.php?edit=<?php echo $key['id_factura'] ?>" data-tooltip="Cambiar estado de venta"><i class="mdi-image-edit small"></i></a></td>
-              <?php
-          ?> </tr> <?php 
+            <?php if ($key['estado']=="aprobado") {
+            ?><td><a href="../controladores/CoordinadorVenta.php?down=<?php echo $key['id_factura'] ?>" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Cancelar"><i class="mdi-action-highlight-remove small"></i></a></td> 
+            <?php }else{ ?>
+              <td><a href="#" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="El pedido no puede ser cancelado"><i class="mdi-action-highlight-remove small"></i></a></td> 
+            <?php } ?>
+            </tr> <?php 
         } ?> 
       </tbody>
     </table>  

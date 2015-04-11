@@ -88,7 +88,7 @@ if(isset($_SESSION['exitoCrearCategoria'])){
            <ul id="dropdown3" class="dropdown-content">
               <li><a href="crearProducto.php"> Mis<br> productos &nbsp;</a></li>
                <li><a href="visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
-
+              <li><a href="estadoCompras.php"> Mis<br> Compras</a></li>
             </ul> 
 
         <!-- responsive navbar -->

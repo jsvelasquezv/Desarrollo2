@@ -1,6 +1,6 @@
 <?php 
   include '../modelos/Producto.php';
-	include_once '../scripts/gestionarUsuarios.php';
+	//include_once '../scripts/gestionarUsuarios.php';
   require_once '../controladores/CoordinadorCarrito.php';
   // require_once'../modelos/Producto.php';
 ?>
@@ -62,7 +62,7 @@
            <ul id="dropdown3" class="dropdown-content">
               <li><a href="crearProducto.php"> Mis<br> productos</a></li>
               <li><a href="visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
-
+              <li><a href="estadoCompras.php"> Mis<br> Compras</a></li>
             </ul> 
 
         <!-- responsive navbar -->
@@ -111,9 +111,9 @@
       </thead>
       <!-- envio de datos a la base de datos -->
       <tbody>       
-        <?php  if(isset($_SESSION['carrito'])){ print_r($_SESSION['carrito']); ?>
+        <?php  if(isset($_SESSION['carrito'])){?>
             <?php foreach ($_SESSION['carrito'] as $key) { 
-            $imagen = $key->obtenerUrl();//empty($_SESSION['carrito'])?>
+            $imagen = $key->obtenerUrl();?>
 
                 <tr>
                    <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td> 
@@ -124,7 +124,7 @@
                    <td></td> 
                    <td></td> 
                    
-                   <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td>
+                   <td><a href="../controladores/CoordinadorCarrito.php?nombre=<?php echo $key->obtenerNombre()?>" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td>
                 </tr> 
           <?php } ?> 
         <?php } ?> 

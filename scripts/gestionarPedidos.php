@@ -6,4 +6,6 @@ session_start();
 #userName del usuario que se encuentra logueado
 $userUsuario = $_SESSION['user'];
 $_SESSION['pedidosVendedor'] = $pedidos->obtenerPedidosVendedor($userUsuario);
+
+$_SESSION['comprasCliente'] = $pedidos->obtenerComprasCliente($userUsuario);
 ?>

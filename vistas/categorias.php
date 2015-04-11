@@ -58,7 +58,7 @@ require_once '../scripts/gestionarCategorias.php';
         		 <ul id="dropdown3" class="dropdown-content">
               <li><a href="crearProducto.php"> Mis<br> productos</a></li>
               <li><a href="visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
-
+               <li><a href="vistas/estadoCompras.php"> Mis<br> Compras</a></li>
             </ul> 
 
               <ul class="side-nav" id="mobile-demo">

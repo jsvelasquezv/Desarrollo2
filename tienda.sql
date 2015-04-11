@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2015 a las 02:29:28
+-- Tiempo de generación: 11-04-2015 a las 10:20:01
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `detalle` (
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `id_factura` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `detalle`
@@ -82,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `detalle` (
 
 INSERT INTO `detalle` (`id`, `id_producto`, `cantidad`, `id_factura`) VALUES
 (1, 66, 4, 1),
-(5, 65, 2, 5);
+(5, 65, 2, 5),
+(6, 65, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -96,15 +97,16 @@ CREATE TABLE IF NOT EXISTS `factura` (
   `id_comision` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` varchar(30) NOT NULL DEFAULT 'aprobado'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `factura`
 --
 
 INSERT INTO `factura` (`id`, `id_cliente`, `id_comision`, `fecha`, `estado`) VALUES
-(1, 1, 1, '2015-04-10 23:46:20', 'aprobado'),
-(5, 12, 1, '2015-04-11 00:18:29', 'aprobado');
+(1, 1, 1, '2015-04-10 23:46:20', 'enviado'),
+(5, 12, 1, '2015-04-11 00:18:29', 'enviado'),
+(7, 11, 1, '2015-04-11 04:53:28', 'enviado');
 
 -- --------------------------------------------------------
 
@@ -155,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
 --
 
 INSERT INTO `producto` (`id`, `usuario_username`, `categoria_id`, `nombre`, `cantidad`, `valor_unitario`, `estado`, `url_imagen`, `usuario_id`) VALUES
-(65, 'camv', 7, 'Cama', 2, 45000, 'En venta', 'http://www.estiloambientacion.com.ar/tienda/camas/cama-brandon-2-plazas-b.jpg', NULL),
+(65, 'camv', 7, 'Cama', 1, 45000, 'En venta', 'http://www.estiloambientacion.com.ar/tienda/camas/cama-brandon-2-plazas-b.jpg', NULL),
 (66, 'juanTwo', 3, 'Nevecon', 12, 120000, 'En venta', 'http://www.feriadelacarrera13electrodomesticos.com/47-157-thickbox_default/nevecon-whirpool-wd5550l.jpg', NULL),
 (67, 'juanTwo', 5, 'Licuadora grande', 4, 120000, 'En venta', 'http://www.coppel.com/images/photos/muebles/166871-1.jpg', NULL),
 (68, 'juanTwo', 3, 'Lapicero', 12, 1200, 'En venta', 'http://mpe-s1-p.mlstatic.com/lapicero-espia-hd-camara-fotos-filmadora-graba-video-usb-367-MPE2756017421_052012-F.jpg', NULL),
@@ -256,12 +258,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `detalle`
 --
 ALTER TABLE `detalle`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
