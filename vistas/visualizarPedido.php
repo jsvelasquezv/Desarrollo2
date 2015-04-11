@@ -1,5 +1,5 @@
 <?php 
-	include_once '../scripts/gestionarUsuarios.php';
+  include_once '../scripts/gestionarPedidos.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,22 +84,12 @@
   </nav>
  <?php }else{ header('Location: ../index.php');}?> 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<?php $perfiles = $_SESSION['perfiles']; ?>
+<!--<?php $perfiles = $_SESSION['perfiles']; ?>-->
 
   <div class="container">   
     <br>
     <div class="row">
       <h4>Visualizar pedidos</h4>
-      <form action="" method="post">
-        <div class="row">
-         <div class="input-field col s6 tooltipped" data-position="right" data-tooltip="Presiona enter para buscar" >
-              <i class="mdi-action-search prefix"></i>
-              <input id="emailB" type="text" class="validate" name="emailB">
-              <label for="emailB">Ingresa el Id de la factura</label>
-              <input type="submit" class="btn col s3 offset-s1" name="buscar" value="Buscar" style='display:none;'>
-            </div>
-        </div>
-      </form>
     </div>
     <!--  -Se genera una tabla con todas la facturas que se hayan creado- 
     -para visualizar la factura se dará  "CLICK" sobre la factura que se quiere visualizar en caso de que sea administrador y vendedor para editar el estado de la factura
@@ -109,30 +99,25 @@
         <tr>
           <th>Id Factura</th>
           <th>Fecha</th>
-          <th>Nombre del vendedor</th>
           <th>Nombre del comprador</th>
           <th>Nombre del producto</th>
-          <th> Valor Unitario</th>
-          <th> Valor SubTotal</th>
-          <th> Valor Total</th>
+          <th>Valor Unitario</th>
+          <th>Cantidad</th>
           <th>Estado </th>
-
         </tr>
       </thead>
       <!-- envio de datos a la base de datos -->
       <tbody>       
-        <?php  {
+        <?php foreach ($_SESSION['pedidosVendedor'] as $key) {
           ?> <tr>
-             <td> <h5>hola</h5> </td> 
-             <td> <h5>hola</h5>  </td> 
-             <td> <h5>hola</h5>  </td>
-             <td> <h5>hola</h5>  </td>
-             <td> <h5>hola</h5> </td>
-             <td> <h5>hola</h5> </td> 
-              <td> <h5>hola</h5>  </td>
-             <td> <h5>hola</h5> </td>
-             <td> <h5>hola</h5> </td>
-             <td> <a  class="grey-text text-darken-3 modal-trigger" name="edit" id="edit" href="#modal"><i class="mdi-image-edit small"></i></a></td>
+             <td><?php echo $key['id_factura']; ?></td> 
+             <td><?php echo $key['fecha']; ?></td> 
+             <td><?php echo $key['comprador']; ?></td>
+             <td><?php echo $key['nombre']; ?></td>
+             <td><?php echo $key['valor_unitario']; ?></td>
+             <td><?php echo $key['cantidad']; ?></td> 
+            <td><?php echo $key['estado']; ?></td>
+             <td> <a  class="grey-text text-darken-3 modal-trigger" name="edit" id="edit" href="#modal" data-tooltip="Cambiar estado de venta"><i class="mdi-image-edit small"></i></a></td>
              <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
           ?> </tr> <?php 
         } ?> 
@@ -144,8 +129,8 @@
    <div id="modal" class="modal ">
     <div class="card login ">
       <div class="card-content">
-        <span class="card-title teal-text">Factura</span>  
-        <form action="../controladores/CoordinadorUsuario.php" method="post"> 
+        <span class="card-title teal-text">Cambiar Estado de Venta</span>  
+        <form action="" method="post"> 
           <?php if (isset($_SESSION['eRegistroUsuario'])) { ?>          
         <div class="card">
           <div class="card-content">
@@ -157,69 +142,27 @@
       <?php } ?>             
           <div class="row">
             <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
+              <input id="username" type="text" class="validate" name="idfactura">
               <label for="username">Id de la factura</label>
             </div>
             <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Fecha de la compra</label>
-            </div>
-           
-            <div class="input-field col s6">
-              <input id="apellido" type="text" class="validate" name="apellido">
-              <label for="apellido">Nombre del vendedor</label>
-            </div>
-          
-            <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Nombre del cliente</label>
-            </div>
-             <div class="input-field col s4">
-              <input id="nombre" type="text" class="validate" name="nombre">
-              <label for="nombre">Nombre de cada producto</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Valor Unitario de cada producto</label>
-            </div>
-          
-           <div class="input-field col s4">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Valor total de cada Producto</label>
-            </div>
-             <div class="input-field col s4 offset-s8">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Precio total de los productos</label>
-            </div>
-
-             <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
+              <input id="username" type="text" class="validate" name="estado">
               <label for="username">Estado de la Factura</label>
             <form action="#">
                     <p>
-                       <input name="group1" type="radio" id="test1" />
-                         <label for="test1">Pendiente</label>
+                        <input name="group1" type="radio" id="test1" />
+                        <label for="test1">Despachado</label>
                     </p>
-                         <p>
-                            <input name="group1" type="radio" id="test2" />
-                               <label for="test2">Aprovado</label>
-                        </p>
-                             <p>
-                            <input name="group1" type="radio" id="test2" />
-                               <label for="test2">Despachado</label>
-                        </p>
-                             <p>
-                            <input name="group1" type="radio" id="test2" />
-                               <label for="test2">Cancelado</label>
-                        </p>
- 
+                    <p>
+                        <input name="group1" type="radio" id="test2" />
+                        <label for="test2">Cancelado</label>
+                    </p>
           </form>
             </div>
-
           </div>
           </div>
           <!-- al dar click en confirmar pago se realizar´n las notificaciones requeridas por el sistema (Historias de Usuario) -->
-           <input class="btn-flat orange-text" type="submit" value="Guardar" name="registrar">
+           <input class="btn-flat orange-text" type="submit" value="Guardar" name="guardar">
           </div>
          
         </form>                     

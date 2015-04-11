@@ -16,7 +16,7 @@ class Carrito {
 	//constructor. Realiza las tareas de inicializar los objetos cuando se instancian
 	//inicializa el numero de productos a 0
 	function __construct() {
-	 	$this->num_productos=0;
+	 	// $this->num_productos=0;
 	 } 
 	
 	//Introduce un producto en el carrito. Recibe los datos del producto
@@ -24,24 +24,27 @@ class Carrito {
 	//luego aumenta en 1 el numero de productos
 	function add($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado){
 		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-
-		if (! empty($this->producto)) {
-			echo "indice".$this->num_productos;
-			if ($this->producto[$this->num_productos] == $miProducto) {
-				$cantidad++;
-				$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-				$this->producto[$this->num_productos] = $miProducto;
-			}
-			$this->num_productos++;
-		}
-		else{
-			$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-			$this->producto[$this->num_productos] = $miProducto;	
-		}
-
+		$this->producto[$this->num_productos] = $miProducto;
 		foreach ($this->producto as $key) {
-		print_r($key);
+			print_r($key);
 		}
+		// array_push($this->producto, $miProducto);
+		$this->num_productos++;
+		return $this->producto;
+		// if (! empty($this->producto)) {
+		// 	echo "indice".$this->num_productos;
+		// 	if ($this->producto[$this->num_productos] == $miProducto) {
+		// 		$cantidad++;
+		// 		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
+		// 		$this->producto[$this->num_productos] = $miProducto;
+		// 	}
+		// 	$this->num_productos++;
+		// }
+		// else{
+		// 	$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
+		// 	$this->producto[$this->num_productos] = $miProducto;	
+		// }
+
 	}
 
 	public function obtenerProducto($nombre)
@@ -59,9 +62,9 @@ class Carrito {
 		
 }		
 
-$carrito = new Carrito();
-$carrito->add("Cama", 1, 1200, "www.abc.com", "User", 2,"En venta");
-$carrito->add("Lapicero", 1, 1200, "www.abc.com", "User", 2,"En venta");
+// $carrito = new Carrito();
+// $carrito->add("Cama", 1, 1200, "www.abc.com", "User", 2,"En venta");
+// $carrito->add("Lapicero", 1, 1200, "www.abc.com", "User", 2,"En venta");
 // $carrito->add("Nevecon", 1, 1200, "www.abc.com", "User", 2,"En venta");
 //echo $carrito->getAnadido()[0];
 //$frijolito = $carrito->add("Lapicero");

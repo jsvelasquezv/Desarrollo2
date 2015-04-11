@@ -1,5 +1,8 @@
 <?php 
+  include '../modelos/Producto.php';
 	include_once '../scripts/gestionarUsuarios.php';
+  require_once '../controladores/CoordinadorCarrito.php';
+  // require_once'../modelos/Producto.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,19 +111,23 @@
       </thead>
       <!-- envio de datos a la base de datos -->
       <tbody>       
-        <?php  {
-          ?> <tr>
-             <td> <h5>hola</h5> </td> 
-             <td> <h5>hola</h5>  </td> 
-             <td> <h5>hola</h5>  </td>
-             <td> <h5>hola</h5>  </td>
-             <td> <h5>hola</h5> </td>
-             <td> <h5>hola</h5> </td> 
-             <td> <h5>hola</h5> </td> 
-             
-             <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td> <?php
-          ?> </tr> <?php 
-        } ?> 
+        <?php  if(isset($_SESSION['carrito'])){ print_r($_SESSION['carrito']); ?>
+            <?php foreach ($_SESSION['carrito'] as $key) { 
+            $imagen = $key->obtenerUrl();//empty($_SESSION['carrito'])?>
+
+                <tr>
+                   <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td> 
+                   <td><?php echo date("d/m/Y")?></td> 
+                   <td><?php echo $key->obtenerNombre(); ?></td>
+                   <td><?php echo $key->obtenerCantidad(); ?></td>
+                   <td><?php echo $key->obtenerValor();?></td>
+                   <td></td> 
+                   <td></td> 
+                   
+                   <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td>
+                </tr> 
+          <?php } ?> 
+        <?php } ?> 
       </tbody>
     </table>  
     <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">

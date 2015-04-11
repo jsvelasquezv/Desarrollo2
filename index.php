@@ -94,8 +94,8 @@
         </ul>
 
          <ul id="dropdown3" class="dropdown-content">
-              <li><a href="crearProducto.php"> Mis<br> productos</a></li>
-               <li><a href="visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
+              <li><a href="vistas/crearProducto.php"> Mis<br> productos</a></li>
+              <li><a href="vistas/visualizarPedido.php">  Visualizar<br> Pedidos</a></li>
 
          </ul>
 
