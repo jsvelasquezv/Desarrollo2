@@ -120,11 +120,28 @@ Class Venta
 		R::selectDatabase('default');
 		$factura = R::findOne('factura', 'id = ?',[$idFactura]);
 		R::trash($factura);
-		//R::exec('DELETE FROM detalle WHERE id_factura=?', [$idFactura]);
 		R::close();
+	}
+
+	/**
+	 * [getFacturasAprobados description]
+	 * @return [type] [description]
+	 */
+	public function getFacturasAprobadas($estado)
+	{
+		R::selectDatabase('default');
+		$query = R::getAll('SELECT f.id, f.fecha, (SELECT u.nombre_usuario FROM usuario AS u WHERE u.id=f.id_cliente) 
+						   AS cliente, (SELECT c.porcentaje FROM comision AS c WHERE c.id=f.id_comision) AS comision, 
+						   f.estado FROM factura AS f WHERE estado = ?', [$estado]);
+		R::close();
+		return $query;
 	}	
 }
 	//$miFactura = new Venta();
+	//$resul = $miFactura->getFacturasAprobadas("aprobado");
+	//foreach ($resul as $key ) {
+	//	echo $key['id'];
+	//}
 	//$miFactura->cancelarCompra(9);
 	//$f = $miFactura->actualizarStock(5);
 	//echo $f;

@@ -35,11 +35,12 @@ if(isset($_POST['agregarCarrito'])){
 }
 
 if (isset($_GET['nombre'])) {
-	echo 'Estoy dentro de get'."<br>";
 	$eliminar = $_GET['nombre']; #nombre del producto que quiero remover del carrito
+	echo 'Estoy dentro de get'.$eliminar."<br>";
 	$carrito = new Carrito();
 	$_SESSION['carrito'] =  $carrito->remove($eliminar);
 
+	header('Location: ../vistas/compras.php');
 	// foreach ($_SESSION['carrito'] as $key) {
 	// 	echo "Hola".print_r($key);
 	// }

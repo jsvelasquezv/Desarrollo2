@@ -58,6 +58,11 @@ Class CoordinadorVenta
 		$this->ventaModelo->actualizarStock($id);
 	}
 
+	/**
+	 * [cancelar description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
 	public function cancelar($id)
 	{
 		$this->ventaModelo->cancelarCompra($id);

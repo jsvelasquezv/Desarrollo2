@@ -52,18 +52,20 @@ class Carrito {
 	
 	###################################################
 	public function remove($nombre){
-		$this->producto = $_SESSION['carrito'];
-		foreach ($this->producto as $key) {
+
+		$producto_buscar = new ProductoBuscar();
+		$carro = $_SESSION['carrito'];
+
+		foreach ($carro as $key) {
 			if ($key->obtenerNombre() == $nombre) {
-				$llave = array_search($key->obtenerNombre(),$this->producto);
-				unset($this->producto[$llave]);
+				$llave = array_search($producto_buscar->getProductoPorNombre($nombre),$carro);
+				unset($carro[$llave]);
 				
 			}
 		}
-
+		$this->producto = $carro;
 		return $this->producto;
 	}
-		
 		
 	public function getArrayProducto(){
 		return $this->producto;

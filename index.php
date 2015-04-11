@@ -85,6 +85,9 @@
           <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
             <li><a href="vistas/comision.php">Comision</a></li>
           <?php } ?>
+          <?php if ($_SESSION['permisoDeGestionarUsuarios'] == 1) { ?>
+            <li><a href="vistas/facturasAdmin.php">Facturas</a></li>
+          <?php } ?>
         </ul>
 
         <ul id ="dropdown2" class="dropdown-content">          

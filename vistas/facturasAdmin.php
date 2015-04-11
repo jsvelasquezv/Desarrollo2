@@ -1,6 +1,5 @@
-
 <?php 
-  require_once '../scripts/gestionarComision.php';
+  require_once '../scripts/gestionarPedidos.php';
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +57,7 @@
         		 <ul id="dropdown3" class="dropdown-content">
               <li><a href="crearProducto.php"> Mis<br> productos</a></li>
               <li><a href="visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
-			<li><a href="estadoCompras.php"> Mis<br> Compras</a></li>	
+
             </ul> 
 
               <ul class="side-nav" id="mobile-demo">
@@ -80,31 +79,34 @@
 	<div class="container">
   <br>	
 		<div class="row">
-      <h4>Comision</h4>
+      <h4>Facturas Aprobadas</h4>
     </div>
 		<div class="row">
 		<table class="hoverable responsive-table centered">
 			<thead>
 				<tr>
-					<th>Porcentaje</th>
-					<th>Fecha Asignacion</th>				
+					<th>Id Factura</th>
+					<th>Fecha</th>	
+					<th>Cliente</th>
+					<th>Comision</th>
+					<th>Estado</th>			
 				</tr>
 			</thead>
 			<tbody>				
-				<?php foreach ($_SESSION['comision'] as $elementos) {
+				<?php foreach ($_SESSION['aprobadas'] as $elementos) {
 					?> <tr>
           <!-- *********************************************************************************************************************** -->
 					<!-- en esta parte ira la conexion para traer los datos de la base de datos y mostrarlos -->
-				  <td><?php echo $elementos['porcentaje']; ?></td>
-          <td><?php echo $elementos['fecha']; ?></td>
+				  <td><?php echo $elementos['id']; ?></td>
+          		  <td><?php echo $elementos['fecha']; ?></td>
+          		  <td><?php echo $elementos['cliente']; ?></td>
+          		  <td><?php echo $elementos['comision']; ?></td>
+          		  <td><?php echo $elementos['estado']; ?></td>
           <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 				 </tr> <?php 
 				} ?>
 			</tbody>
 		</table>
-		</div>
-		<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-			<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Editar" href="#modal"><i class="mdi-editor-border-color"></i></a>
 		</div>
 		<div class="valign-wrapper">
 			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
