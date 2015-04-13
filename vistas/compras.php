@@ -90,7 +90,7 @@
    <div class="divider"></div>
   <div class="section">
     <!-- -->
-        <?php $perfiles = $_SESSION['perfiles']; ?>
+
      
     <br>
     <div class="row"> 
@@ -105,9 +105,9 @@
           <th>Imagen</th>
           <th>Fecha de la compra</th>
           <th>Nombre de producto</th>
-          <th>Cantidad del producto</th>
-          <th>valor unitario</th>
-          <th>Valor precio total del producto</th>
+          <th>Cantidad</th>
+          <th>Valor unitario</th>
+          <th>Valor neto</th>
           <th>valor total de los productos</th>
          
         </tr>
@@ -115,26 +115,27 @@
       <!-- envio de datos a la base de datos -->
       <tbody>       
         <?php  if(isset($_SESSION['carrito'])){?>
-            <?php foreach ($_SESSION['carrito'] as $key) { 
-            $imagen = $key->obtenerUrl();?>
+            <?php foreach ($_SESSION['carrito'] as $key) {  
+              $valorNeto = $key['valor']*$key['cantidad'];
+            #print_r($key)."<br>";?>
 
                 <tr>
-                   <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td> 
+                   <td><?php echo '<img class="responsive-img circle" src="'.$key["url"].'" width="130" height="130" alt="Imagen">';?></td> 
                    <td><?php echo date("d/m/Y")?></td> 
-                   <td><?php echo $key->obtenerNombre(); ?></td>
-                   <td><?php echo $key->obtenerCantidad(); ?></td>
-                   <td><?php echo $key->obtenerValor();?></td>
-                   <td></td> 
+                   <td><?php echo $key["nombre"]; ?></td>
+                   <td><?php echo $key["cantidad"] ?></td>
+                   <td><?php echo $key["valor"]?></td>
+                   <td><?php echo $valorNeto?></td> 
                    <td></td> 
                    
-                   <td><a href="../controladores/CoordinadorCarrito.php?nombre=<?php echo $key->obtenerNombre()?>" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td>
+                   <td><a href="../controladores/CoordinadorCarrito.php?nombre=<?php echo $key['nombre']?>" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td>
                 </tr> 
           <?php } ?> 
         <?php } ?> 
       </tbody>
     </table>  
     <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-      <a class="btn-floating btn-large waves-effect waves-light red right  tooltipped" data-position="rigth" data-tooltip="Seguir Comprando" href="../index.php"><i class="mdi-action-add-shopping-cart"></i></a>
+      <a class="btn-floating btn-large waves-effect waves-light red right  tooltipped" data-position="rigth" data-tooltip="Seguir Comprando" href="productos.php"><i class="mdi-action-add-shopping-cart"></i></a>
     </div>
   <div class="fixed-action-btn" style="bottom: 45px; right: 200px;">
       <a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Comprar" href="#modal"><i class="mdi-maps-local-atm "></i> Comprar</a>
@@ -194,29 +195,7 @@
               <label for="username">Precio total de los productos</label>
             </div>
 
-             <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Estado de la Factura</label>
-            <form action="#">
-                    <p>
-                       <input name="group1" type="radio" id="test1" />
-                         <label for="test1">Pendiente</label>
-                    </p>
-                         <p>
-                            <input name="group1" type="radio" id="test2" />
-                               <label for="test2">Aprovado</label>
-                        </p>
-                             <p>
-                            <input name="group1" type="radio" id="test2" />
-                               <label for="test2">Despachado</label>
-                        </p>
-                             <p>
-                            <input name="group1" type="radio" id="test2" />
-                               <label for="test2">Cancelado</label>
-                        </p>
- 
           </form>
-            </div>
 
           </div>
           </div>

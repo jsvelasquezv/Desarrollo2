@@ -8,40 +8,88 @@ require_once'../modelos/Producto.php';
 require_once '../modelos/ProductoBuscar.php';
 class Carrito {
 	//atributos de la clase
-   	private $num_productos;
+   	//private $num_productos;
    	//var $array_id_prod;
-   	private $producto;
+   	private $arrayDeProductos;
+   	private $miCantidad;
    	//private $array_precio_prod;
 
 	//constructor. Realiza las tareas de inicializar los objetos cuando se instancian
 	//inicializa el numero de productos a 0
 	function __construct() {
-	 	// $this->num_productos=0;
+	 	//$this->miCantidad=1;
 	 } 
 	
 	//Introduce un producto en el carrito. Recibe los datos del producto
 	//Se encarga de introducir los datos en los arrays del objeto carrito
 	//luego aumenta en 1 el numero de productos
 	function add($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado){
-		$cantidad = 1;
-		$miProducto = new Producto($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-		if (isset($_SESSION['carrito'])) {
-			$carro = $_SESSION['carrito'];
-			array_push($carro, $miProducto);
-			$this->producto = $carro;
+		#Un array dnde guardamos el priducto que se quiere agregar al carro
+		$cantidad = 1; #FALTA CORREGIR DETALLE DEL STOCK
+		$new_product = array(array("nombre"=> $nombre, "cantidad"=>$cantidad, "valor"=>$valor, "url"=>$url,
+								   "username"=>$userUsuario, "idCategoria"=>$idCategoria, "estado"=>$estado));
+		
+		if (isset($_SESSION['carrito'])) {#Si la variable de session está seteada entonces
+			$found = false;#establecesmo a false la variable encontrado
+			foreach ($_SESSION['carrito'] as $product) {#para cada producto que este en la variable de session
+				if ($product["nombre"] == $nombre) {#Si el nombre de el producto que este en la variable de session es igual al nombre del nuevo producto entonces
+					$cantidad++;
+					$producto[] = array('nombre'=>$product["nombre"], 'cantidad'=>$cantidad,#la cantidad no se actualiza
+										'valor'=>$product["valor"], 'url'=>$product["url"], 'username'=>$product["username"],
+										'idCategoria'=>$product["idCategoria"], 'estado'=>$product["estado"]
+										);
+					$found = true;
+				}#fin if
+				else{
+
+					$producto[] = array('nombre'=>$product["nombre"], 'cantidad'=>$cantidad,#la cantidad se actualiza
+										    'valor'=>$product["valor"], 'url'=>$product["url"], 'username'=>$product["username"],
+										    'idCategoria'=>$product["idCategoria"], 'estado'=>$product["estado"]
+										);
+				}#fin else		
+			}#fin for
+			if ($found == false) {#Si no se encontró el producto en la variable de session
+				$this->arrayDeProductos = array_merge($producto, $new_product);
+			}
+			else $this->arrayDeProductos = $producto;
+		}#fin if(SESSION['carrito'])
+		else $this->arrayDeProductos = $new_product;
+
+		//print_r($this->arrayDeProductos);
+		return $this->arrayDeProductos;
+	}#fin add
+
+	public function getCantidad($nombre)
+	{
+		// echo isset($_SESSION['todosLosProductos']);
+		if (isset($_SESSION['todosLosProductos'])) {
+			// echo "hola";
+			foreach ($_SESSION['todosLosProductos'] as $key) {
+				if ($key["nombre"] == $nombre) {
+					$cantidad = $key["cantidad"];
+				}
+			}
 		}
-		else {
-			$carro[0]=$miProducto;
-			$this->producto = $carro;
-		}
-		foreach ($this->producto as $key) {
-			print_r($key);
-		}
-		// array_push($this->producto, $miProducto);
-		$this->num_productos++;
-		return $this->producto;
+		//echo $cantidad;
+		return $cantidad;
 	}
 
+	public function remove($nombre){
+		if (isset($_SESSION['carrito'])) {
+			foreach ($_SESSION['carrito'] as $product) {
+				if ($product["nombre"] != $nombre) {
+					echo "Hola1";
+					$cantidad = $product["cantidad"];
+					$producto[] = array('nombre'=>$product["nombre"], 'cantidad'=>$cantidad,#la cantidad se actualiza
+										    'valor'=>$product["valor"], 'url'=>$product["url"], 'username'=>$product["username"],
+										    'idCategoria'=>$product["idCategoria"], 'estado'=>$product["estado"]
+										);
+				}
+				$this->arrayDeProductos = $producto;
+			}
+		}
+		return $this->arrayDeProductos;
+	}
 
 	public function obtenerProducto($nombre)
 	{
@@ -51,25 +99,7 @@ class Carrito {
 	}	
 	
 	###################################################
-	public function remove($nombre){
-
-		$producto_buscar = new ProductoBuscar();
-		$carro = $_SESSION['carrito'];
-
-		foreach ($carro as $key) {
-			if ($key->obtenerNombre() == $nombre) {
-				$llave = array_search($producto_buscar->getProductoPorNombre($nombre),$carro);
-				unset($carro[$llave]);
-				
-			}
-		}
-		$this->producto = $carro;
-		return $this->producto;
-	}
 		
-	public function getArrayProducto(){
-		return $this->producto;
-	}
 }		
 
 // $carrito = new Carrito();

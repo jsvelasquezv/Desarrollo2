@@ -39,7 +39,7 @@ class ProductoBuscar
 		R::close();#se cierra el almacén de Beans
 		return $producto;
 	}
-	#Esta funcion me retorna todos los productos de la base de datos
+	#Esta funcion me retorna todos los productos de la base de datos que están en venta
 	public function getProductosVenta($estado){
 		R::selectDatabase('default');#Se selecciona la BD por default (tienda.sql)
 		$producto = R::findAll('producto', 'estado = ?', [$estado]);#Me retorna todos los productos de la base de datos

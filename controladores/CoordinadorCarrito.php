@@ -21,24 +21,28 @@ if(isset($_GET['agrega'])){#si se hizo click en el dibujo del lapiz de la tabla(
 		.'&estado='.$loQuieroAgregar['estado'].'&user='.$loQuieroAgregar['usuario_username']);
 
 }
+#Aca hago la gestion para cuando voy a agregar productos al carrito
 if(isset($_POST['agregarCarrito'])){
 	
 	$nombreAgrega = $_SESSION['nombreAgrega'];
 	//echo $nombreAgrega;
-	$miCarrito = new CoordinadorCarrito();
-	$producto = $miCarrito->obtenerProducto($nombreAgrega);
+	$miCoordinadorCarrito = new CoordinadorCarrito();
+	$producto = $miCoordinadorCarrito->obtenerProducto($nombreAgrega);
 	//La cantidad debe de ir incrementando de 1 en 1....falta agregar eso.
-	$_SESSION['carrito'] = $miCarrito->agregar($producto['nombre'], $producto['cantidad'], $producto['valor_unitario'],
+	$_SESSION['carrito'] = $miCoordinadorCarrito->agregar($producto['nombre'], $producto['cantidad'], $producto['valor_unitario'],
 							$producto['url_imagen'], $producto['usuario_username'], $producto['categoria_id'], $producto['estado']);
-
+	//print_r($_SESSION['carrito']);
+	// foreach ($_SESSION['carrito'] as $key) {
+	// 	echo $key['nombre'];
+	// }
+	
 	header('Location: ../vistas/compras.php');
 }
-
+#Aca hago la gestion para cuando voy a remover del carrito
 if (isset($_GET['nombre'])) {
 	$eliminar = $_GET['nombre']; #nombre del producto que quiero remover del carrito
-	echo 'Estoy dentro de get'.$eliminar."<br>";
-	$carrito = new Carrito();
-	$_SESSION['carrito'] =  $carrito->remove($eliminar);
+	$miCoordinadorCarrito = new CoordinadorCarrito();
+	$_SESSION['carrito'] =  $miCoordinadorCarrito->eliminar($eliminar);
 
 	header('Location: ../vistas/compras.php');
 	// foreach ($_SESSION['carrito'] as $key) {
