@@ -6,26 +6,26 @@
 // require_once'../scripts/gestionarProductos.php';
 require_once'../modelos/Producto.php';
 require_once '../modelos/ProductoBuscar.php';
+require_once '../modelos/Validaciones.php';
 class Carrito {
 	//atributos de la clase
    	//private $num_productos;
    	//var $array_id_prod;
    	private $arrayDeProductos;
-   	private $miCantidad;
+   	private $misValidaciones;
    	//private $array_precio_prod;
 
 	//constructor. Realiza las tareas de inicializar los objetos cuando se instancian
 	//inicializa el numero de productos a 0
 	function __construct() {
-	 	//$this->miCantidad=1;
+	 	$this->misValidaciones = new Validaciones();
 	 } 
 	
 	//Introduce un producto en el carrito. Recibe los datos del producto
 	//Se encarga de introducir los datos en los arrays del objeto carrito
 	//luego aumenta en 1 el numero de productos
 	function add($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado){
-		#Un array dnde guardamos el priducto que se quiere agregar al carro
-		$cantidad = 1; #FALTA CORREGIR DETALLE DEL STOCK
+
 		$new_product = array(array("nombre"=> $nombre, "cantidad"=>$cantidad, "valor"=>$valor, "url"=>$url,
 								   "username"=>$userUsuario, "idCategoria"=>$idCategoria, "estado"=>$estado));
 		
@@ -33,7 +33,6 @@ class Carrito {
 			$found = false;#establecesmo a false la variable encontrado
 			foreach ($_SESSION['carrito'] as $product) {#para cada producto que este en la variable de session
 				if ($product["nombre"] == $nombre) {#Si el nombre de el producto que este en la variable de session es igual al nombre del nuevo producto entonces
-					$cantidad++;
 					$producto[] = array('nombre'=>$product["nombre"], 'cantidad'=>$cantidad,#la cantidad no se actualiza
 										'valor'=>$product["valor"], 'url'=>$product["url"], 'username'=>$product["username"],
 										'idCategoria'=>$product["idCategoria"], 'estado'=>$product["estado"]
@@ -41,8 +40,7 @@ class Carrito {
 					$found = true;
 				}#fin if
 				else{
-
-					$producto[] = array('nombre'=>$product["nombre"], 'cantidad'=>$cantidad,#la cantidad se actualiza
+					$producto[] = array('nombre'=>$product["nombre"], 'cantidad'=>$product['cantidad'],#la cantidad se actualiza
 										    'valor'=>$product["valor"], 'url'=>$product["url"], 'username'=>$product["username"],
 										    'idCategoria'=>$product["idCategoria"], 'estado'=>$product["estado"]
 										);
@@ -59,6 +57,7 @@ class Carrito {
 		return $this->arrayDeProductos;
 	}#fin add
 
+	#Funcion que me trae la cantidad de productos disponibles en Stock, segun el nombre del producto
 	public function getCantidad($nombre)
 	{
 		// echo isset($_SESSION['todosLosProductos']);

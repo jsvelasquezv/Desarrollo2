@@ -151,15 +151,24 @@ if(isset($_SESSION['exitoCrearCategoria'])){
          <tr>
              <td><?php echo $registro['usuario_username'];?></td> 
              <td><?php echo $registro['nombre'];?></td> 
-             <td><?php echo $registro['cantidad'];?></td> 
+             <form action="../controladores/CoordinadorCarrito.php" method="GET">
+             <input type="hidden" value="<?php echo $registro['nombre']?>" name="nameProduct">
+             <td>
+                 <div class="input-field col s6">
+                    <input id="cantidad" type="text" class="validate tooltipped" data-tooltip = "Hay <?php echo $registro['cantidad'] ?> cantidad(es) disponible(s)" name="cantidadAComprar">
+                    <label for="cantidad">¿Cuántas quieres?</label>
+                 </div> 
+             </td> 
              <td><?php $cat = $categorias[$registro['categoria_id']];
                        echo $cat['nombre'];?>
              </td>
              <td><?php echo $registro['valor_unitario'];?></td>
              <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
              <td><?php echo $registro['estado'];?></td> 
-             <!-- Lapiz con el que se edita el producto -->
-             <td> <a href="../controladores/CoordinadorCarrito.php?agrega=<?php echo $registro['nombre'] ?>" class="btn-flat tooltipped" name="edit" id="editar" data-tooltip="Ver mas"><i class="mdi-action-visibility"></i></a></td>
+             <td></td> 
+             <td> <button class="btn teal darken-2 waves-effect waves-light validate tooltipped" data-tooltip = "Agregar al Carrito" type="submit" name="agregarAlCarrito"><i class="mdi-action-add-shopping-cart"></i>
+  </button></td>
+              </form>
              <!-- <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> --> <?php
           ?> </tr>
           <?php } ?> 

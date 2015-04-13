@@ -1,8 +1,9 @@
 <?php 
-  include '../modelos/Producto.php';
-	//include_once '../scripts/gestionarUsuarios.php';
-  require_once '../controladores/CoordinadorCarrito.php';
-  // require_once'../modelos/Producto.php';
+  
+	include_once '../scripts/gestionarUsuarios.php';
+  include_once '../scripts/gestionarCarrito.php';
+  // require_once '../controladores/CoordinadorCarrito.php';
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +116,7 @@
       <!-- envio de datos a la base de datos -->
       <tbody>       
         <?php  if(isset($_SESSION['carrito'])){?>
-            <?php foreach ($_SESSION['carrito'] as $key) {  
+            <?php foreach ($_SESSION['carrito'] as $key) { #print_r($_SESSION['carrito']); 
               $valorNeto = $key['valor']*$key['cantidad'];
             #print_r($key)."<br>";?>
 
@@ -206,9 +207,46 @@
       </div>
     </div>
   </div>
-  </div>  
+ <?php if (isset($_SESSION['exitoAgregarCarrito'])) {
+      echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
+  } ?>
 </div>
-  <?php if (isset($_SESSION['eRegistroUsuario'])) {
+
+  <div id="modal11" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha creado correctamente el Producto</p> 
+        </div>
+          <?php if (isset($exitoAgregarCarrito)) {
+             echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
+             unset($_SESSION['exitoAgregarCarrito']);
+          } ?>                      
+      </div>
+    </div>
+
+<?php if (isset($_SESSION['erroresCarritoAgregar'])) {  ?>          
+    <div class="row valign-wrapper">
+        <div class="col s12 m4 valign">
+          <div class="card indigo lighten-5 ">
+            <div class="card-content">
+                <h6 class = "valign" style="text-transform: uppercase;"><strong>¡ Error !</strong></h6>
+                <p>Se han detectado los siguientes errores</p>
+              <?php foreach ($erroresCarritoAgregar as $key) { ?>
+                <p><strong><?php echo $key; ?></strong></p>
+                
+            <?php } ?>
+            </div>
+            <div class="card-action">
+              <a href="productos.php" >Vuelva a intentar</a>
+              <!-- <a href='#'>This is a link</a> -->
+            </div>
+          </div>
+        </div>
+      </div>     
+<?php } ?> 
+
+ <?php if (isset($_SESSION['eRegistroUsuario'])) {
       echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
     } ?>
 
@@ -223,7 +261,7 @@
              unset($_SESSION['exitoRegistrar']);
           } ?>                      
       </div>
-    </div>
+</div>
     <div id="modal3" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -284,9 +322,7 @@
           } ?>               
         </div>
       </div>
-    </div>
-
-  
+    </div>         
 </div>
 </body>
 </html>

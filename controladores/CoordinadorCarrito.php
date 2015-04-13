@@ -1,42 +1,32 @@
 <?php
 // require '../scripts/gestionarCarrito.php';
+require_once '../modelos/ValidarCarrito.php';
 require_once '../modelos/Carrito.php';
 
 session_start();
 
 $nuevoUserUsuario = $_SESSION['user'];
-if(isset($_GET['agrega'])){#si se hizo click en el dibujo del lapiz de la tabla(que significa editar), entonces....
-	#Usuario logueado actualmente, quien esta editando
-	$nombreAgregar = $_GET['agrega']; #capturo el valor de edit, que es igual a el nombre del producto (ver en vistas), luego, editar es igual al nombre del producto seleccionado
-	$_SESSION['nombreAgrega'] = $_GET['agrega'];
-	// echo "Soy edit".$edit;
-	// echo "<br> Soy User:".$nuevoUserUsuario;
-	$miCoordinadorCarrito = new CoordinadorCarrito(); #creo una instancia de la clase de Carrito
-	$loQuieroAgregar = $miCoordinadorCarrito->obtenerProducto($nombreAgregar);#busco el bean segun el nombre
-	//echo "Lo quiero agregar".$loQuieroAgregar;
-	#Redirecciono por get hacia donde se va a editar el el Producto
-	header('Location: ../vistas/agregarProducto.php?nombre='.$loQuieroAgregar['nombre'].'&cantidad='
-		.$loQuieroAgregar['cantidad'].'&categoria='.$loQuieroAgregar['categoria_id']
-		.'&valor='.$loQuieroAgregar['valor_unitario'].'&url='.$loQuieroAgregar['url_imagen']
-		.'&estado='.$loQuieroAgregar['estado'].'&user='.$loQuieroAgregar['usuario_username']);
 
-}
 #Aca hago la gestion para cuando voy a agregar productos al carrito
-if(isset($_POST['agregarCarrito'])){
-	
-	$nombreAgrega = $_SESSION['nombreAgrega'];
-	//echo $nombreAgrega;
+if(isset($_GET['agregarAlCarrito'])){
+	$cantidad = $_GET['cantidadAComprar'];
+	// echo "Hola";
+	// echo "<br>".$cantidad."<br>";
+	$nombreAgrega = $_GET['nameProduct'];
+
 	$miCoordinadorCarrito = new CoordinadorCarrito();
 	$producto = $miCoordinadorCarrito->obtenerProducto($nombreAgrega);
+	// print_r($producto);
 	//La cantidad debe de ir incrementando de 1 en 1....falta agregar eso.
-	$_SESSION['carrito'] = $miCoordinadorCarrito->agregar($producto['nombre'], $producto['cantidad'], $producto['valor_unitario'],
+
+
+	$_SESSION['carrito'] = $miCoordinadorCarrito->agregar($producto['nombre'], $cantidad, $producto['valor_unitario'],
 							$producto['url_imagen'], $producto['usuario_username'], $producto['categoria_id'], $producto['estado']);
-	//print_r($_SESSION['carrito']);
+	// print_r($_SESSION['carrito']);
 	// foreach ($_SESSION['carrito'] as $key) {
 	// 	echo $key['nombre'];
 	// }
 	
-	header('Location: ../vistas/compras.php');
 }
 #Aca hago la gestion para cuando voy a remover del carrito
 if (isset($_GET['nombre'])) {
@@ -56,17 +46,33 @@ if (isset($_GET['nombre'])) {
 class CoordinadorCarrito
 {
 
+	private $miCarritoValidado;
 	private $miCarrito;
 	function __construct() {
+		$this->miCarritoValidado = new ValidarCarrito();
 		$this->miCarrito = new Carrito();
 	}
 
 	public function agregar($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado)
 	{
 		//$this->miCarrito = new Carrito();
-		$queryArray = $this->miCarrito->add($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);
-		return $queryArray;#Retorna un array, y dentro de ese array abran objetos producto
-		//return $query;
+		
+		$queryArray = $this->miCarritoValidado->validarAgregarAlCarrito($nombre, $cantidad, $valor, $url, $userUsuario, $idCategoria, $estado);	
+		$errores = $this->miCarritoValidado->getResponse();
+		
+		if (! empty($errores)) {#Si hay errores entonces los acumulamos en una nueva vriable de session
+			// echo 'HOLA'.print_r($errores);
+			$_SESSION['erroresCarritoAgregar'] = $errores;
+			header('Location: ../vistas/compras.php');
+		}
+		else{#Si no hay errores entonces si podemos agregar el producto
+			$_SESSION['exitoAgregarCarrito'] = 0;
+			unset($_SESSION['erroresCarritoAgregar']);
+			header('Location: ../vistas/compras.php');
+			return $queryArray;
+			
+			//return $queryArray;#Retorna un array, y dentro de ese array habran objetos producto
+		}
 			
 	}
 	public function obtenerProducto($nombre)
@@ -82,7 +88,10 @@ class CoordinadorCarrito
 	}
 }
 // $cc = new CoordinadorCarrito();
-// $miQuery = $cc->agregar("Cama", 1, 1200, "www.abc.com", "User", 2,"En venta");
+// $miQuery = $cc->agregar("Cama", 1, 2, "www.abc.com", "User", 2,"En venta");
+// foreach ($miQuery as $key) {
+// 	echo $key;
+// }
 // $cc->agregar("Cama", 1, 1200, "www.abc.com", "User", 2,"En venta");
 // $cc->agregar("Lapicero", 1, 1200, "www.abc.com", "User", 2,"En venta");
 

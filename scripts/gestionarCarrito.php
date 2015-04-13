@@ -1,7 +1,14 @@
 <?php
-// require_once '../modelos/Carrito.php';
-// session_start();
-// if (!isset($_SESSION["carrito"])){
-// 	$_SESSION["carrito"] = '';
+
+if (isset($_SESSION['exitoAgregarCarrito'])) {
+	$exitoAgregarCarrito = $_SESSION['exitoAgregarCarrito'];
+}
+
+if(isset($_SESSION['erroresCarritoAgregar'])){
+	$erroresCarritoAgregar = $_SESSION['erroresCarritoAgregar'];
+}
+
+// foreach ($_SESSION['erroresCarritoAgregar'] as $key) {
+// 	echo $key;
 // }
 ?>
