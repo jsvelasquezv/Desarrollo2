@@ -120,7 +120,7 @@
              <td><?php echo $key['valor_unitario']; ?></td>
              <td><?php echo $key['cantidad']; ?></td> 
             <td><?php echo $key['estado']; ?></td>
-            <?php if ($key['estado']=="aprobado") {
+            <?php if ($key['estado']=="aprobado" or $key['estado']=="pendiente") {
             ?><td><a href="../controladores/CoordinadorVenta.php?down=<?php echo $key['id_factura'] ?>" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Cancelar"><i class="mdi-action-highlight-remove small"></i></a></td> 
             <?php }else{ ?>
               <td><a href="#" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="El pedido no puede ser cancelado"><i class="mdi-action-highlight-remove small"></i></a></td> 

@@ -1,7 +1,10 @@
 <?php 
-  
+  require_once '../modelos/Usuario.php';
 	include_once '../scripts/gestionarUsuarios.php';
   include_once '../scripts/gestionarCarrito.php';
+  $usuarioComprador = new Usuario();
+  $_SESSION['clienteFactura'] = $usuarioComprador->buscarUsuario($_SESSION['user']);
+  // $_SESSION['exitoComprar'] = 0;
   // require_once '../controladores/CoordinadorCarrito.php';
  
 ?>
@@ -96,30 +99,32 @@
     <br>
     <div class="row"> 
       <h4><i class="mdi-action-shopping-cart left" class="modal-trigger"></i>Tu carrito de Compras</h4><br>
-      <form action="" method="post">
-        
-      </form>
+    
     </div>
-    <table class="hoverable responsive-table">
-      <thead>
-        <tr>
-          <th>Imagen</th>
-          <th>Fecha de la compra</th>
-          <th>Nombre de producto</th>
-          <th>Cantidad</th>
-          <th>Valor unitario</th>
-          <th>Valor neto</th>
-          <th>valor total de los productos</th>
-         
-        </tr>
-      </thead>
-      <!-- envio de datos a la base de datos -->
-      <tbody>       
+        
+             
         <?php  if(isset($_SESSION['carrito'])){?>
-            <?php foreach ($_SESSION['carrito'] as $key) { #print_r($_SESSION['carrito']); 
+              <table class="hoverable responsive-table">
+                <thead>
+                  <tr>
+                    <th>Imagen</th>
+                    <th>Fecha de la compra</th>
+                    <th>Nombre de producto</th>
+                    <th>Cantidad</th>
+                    <th>Valor unitario</th>
+                    <th>Valor neto</th>
+                   <!--  <th>valor total de los productos</th> -->
+                   
+                  </tr>
+                </thead>
+            <?php $suma = 0;
+            foreach ($_SESSION['carrito'] as $key) { #print_r($_SESSION['carrito']); 
               $valorNeto = $key['valor']*$key['cantidad'];
+              $suma = $suma + $key['valor']*$key['cantidad'];
             #print_r($key)."<br>";?>
-
+                <!-- envio de datos a la base de datos -->
+                <tbody>
+              
                 <tr>
                    <td><?php echo '<img class="responsive-img circle" src="'.$key["url"].'" width="130" height="130" alt="Imagen">';?></td> 
                    <td><?php echo date("d/m/Y")?></td> 
@@ -132,7 +137,23 @@
                    <td><a href="../controladores/CoordinadorCarrito.php?nombre=<?php echo $key['nombre']?>" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover del carrito"><i class="mdi-action-highlight-remove small"></i></a></td>
                 </tr> 
           <?php } ?> 
-        <?php } ?> 
+        <?php }?>
+        <?php if (! isset($_SESSION['carrito'])) { 
+          echo "<div class='row valign-wrapper'>";
+            echo"<div class='col s12 m12 valign'>";
+              echo"<div class='card indigo lighten-5'>";
+                echo "<div class='card-content'>";
+                  echo "<h6 class = 'valign' style='text-transform: uppercase;'><strong>Tu carrito de compras está vacío</strong></h6>";
+                    echo "<p>No tienes productos en tu carrito de compras, ¡ ve a la sección de Productos en venta y llénalo !</p>";
+                  echo "</div>";
+                  echo "<div class='card-action'>";
+                  echo "<a href='productos.php' >Ir a Productos en Venta</a>";
+                echo "</div>";
+              echo "</div>";
+            echo "</div>";
+          echo "</div>";        
+          }?>
+        
       </tbody>
     </table>  
     <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
@@ -149,64 +170,65 @@
     <div class="card login ">
       <div class="card-content">
         <span class="card-title teal-text">Factura</span>  
-        <form action="../controladores/CoordinadorUsuario.php" method="post"> 
-          <?php if (isset($_SESSION['eRegistroUsuario'])) { ?>          
-        <div class="card">
-          <div class="card-content">
-            <?php foreach ($_SESSION['eRegistroUsuario'] as $key) { ?>
-              <p><?php echo $key; ?></p>
-            <?php } ?>
-          </div>
-        </div>        
-      <?php } ?>             
+        <form action="" method="post">            
           <div class="row">
             <div class="input-field col s6">
               <input id="username" type="text" class="validate" name="username">
-              <label for="username">Id de la factura</label>
+              <label for="username">Id Factura</label>
             </div>
             <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Fecha de la compra</label>
+              <input id="estado" type="text" class="validate" name="estado" value="Pendiente">
+              <label for="last_name">Estado</label>
+            </div>
+            <div class="input-field col s6">
+              <?php $miUsuario = $_SESSION['clienteFactura']; ?>
+              <input id="icon_prefix" type="text" class="validate" value="<?php echo $miUsuario['nombre']." ".$miUsuario['apellidos'];  ?>">
+              <label for="icon_prefix">Cliente</label>
             </div>
            
             <div class="input-field col s6">
-              <input id="apellido" type="text" class="validate" name="apellido">
-              <label for="apellido">Nombre del vendedor</label>
+              <input id="fecha" type="text" class="validate" name="fecha" value="<?php echo date("d/m/y"); ?>">
+              <label for="fecha">Fecha</label>
             </div>
-          
-            <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Nombre del cliente</label>
+            <div class="row">
+              <table class="hoverable responsive-table striped">
+                <thead>
+                <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th> 
+                <th>Valor Unitario</th>   
+                <th>Total</th>
+                <th>Vendedor</th>    
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($_SESSION['carrito'] as $products) {
+                ?> <tr>       
+                    <td><?php echo $products['nombre']; ?></td>
+                    <td><?php echo $products['cantidad']; ?></td>
+                    <td><?php echo $products['valor']; ?></td>
+                    <td><?php echo $products['cantidad']*$products['valor']; ?></td>
+                    <td><?php echo $products['username']; ?></td>
+                  </tr><?php } ?>
+                </tbody>
+             </table>
             </div>
-             <div class="input-field col s4">
-              <input id="nombre" type="text" class="validate" name="nombre">
-              <label for="nombre">Nombre de cada producto</label>
+            <div class="row">
+              <div class="input-field col s6">
+              <input id="total" type="text" class="validate" name="total" value="<?php echo $suma; ?>">
+              <label for="total">Total</label>
             </div>
-            <div class="input-field col s4">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Valor Unitario de cada producto</label>
-            </div>
-          
-           <div class="input-field col s4">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Valor total de cada Producto</label>
-            </div>
-             <div class="input-field col s4 offset-s8">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Precio total de los productos</label>
-            </div>
-
+          </div>
+        </div> 
+        <input class="btn-flat orange-text" type="submit" value="Comprar" name="comprar">
+        </div>  
           </form>
-
-          </div>
-          </div>
-           <input class="btn-flat orange-text" type="submit" value="Comprar" name="comprar">
-          </div>
-         
-        </form>                     
+         </div> 
+          </div>                    
       </div>
     </div>
   </div>
+  
  <?php if (isset($_SESSION['exitoAgregarCarrito'])) {
       echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
   } ?>
@@ -216,7 +238,7 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se ha creado correctamente el Producto</p> 
+            <p>El producto se ha añadido al carrito de compras</p> 
         </div>
           <?php if (isset($exitoAgregarCarrito)) {
              echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
@@ -235,7 +257,7 @@
               <?php foreach ($erroresCarritoAgregar as $key) { ?>
                 <p><strong><?php echo $key; ?></strong></p>
                 
-            <?php } ?>
+            <?php unset($_SESSION['erroresCarritoAgregar']);} ?>
             </div>
             <div class="card-action">
               <a href="productos.php" >Vuelva a intentar</a>

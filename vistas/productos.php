@@ -166,7 +166,7 @@ if(isset($_SESSION['exitoCrearCategoria'])){
              <td><?php echo '<img class="responsive-img circle" src="'.$imagen.'" width="130" height="130" alt="Imagen">';?></td>
              <td><?php echo $registro['estado'];?></td> 
              <td></td> 
-             <td> <button class="btn teal darken-2 waves-effect waves-light validate tooltipped" data-tooltip = "Agregar al Carrito" type="submit" name="agregarAlCarrito"><i class="mdi-action-add-shopping-cart"></i>
+             <td> <button class="btn teal darken-2 waves-effect waves-light validate tooltipped" data-tooltip = "Agregar al Carrito"  data-position="right" type="submit" name="agregarAlCarrito"><i class="mdi-action-add-shopping-cart"></i>
   </button></td>
               </form>
              <!-- <td><a href="" class="grey-text text-darken-3 tooltipped" name="down" id="down" data-tooltip="Remover de la lista"><i class="mdi-action-highlight-remove small"></i></a></td> --> <?php

@@ -17,20 +17,27 @@ Class Venta
 	 * @param  [type] $precio   [description]
 	 * @return [type]           [description]
 	 */
-	public function crearFactura($cliente, $comision, $producto, $cantidad)
+	public function crearFactura($cliente, $comision, $total)
 	{
 		R::selectDatabase('default');
 		$facturaBean = R::dispense('factura');
 		$facturaBean->id_cliente = $cliente;
 		$facturaBean->id_comision = $comision;
-		$idFactura = R::store($facturaBean);
+		$facturaBean->total = $total;
+		R::store($facturaBean);
+        R::close();
+	}
 
+
+	public function guardarDetalleFactura($producto, $cantidad, $idFactura)
+	{
+		R::selectDatabase('default');
 		$detalleBean = R::dispense('detalle');
 		$detalleBean->id_producto = $producto;
 		$detalleBean->cantidad = $cantidad;
 		$detalleBean->id_factura = $idFactura;
 		R::store($detalleBean);
-        R::close();
+		R::close();
 	}
 
 	/**
@@ -44,6 +51,15 @@ Class Venta
 		$factura = R::findOne('factura', 'id = ?',[$idFactura]);
 		R::close();#se cierra el almacén de Beans
 		return $factura;
+	}
+
+
+	public function getUltimaFactura()
+	{
+		R::selectDatabase('default');
+		$facturaActual = R::getCell( 'SELECT id FROM factura ORDER BY id DESC LIMIT 1' );
+		R::close();
+        return $facturaActual;	
 	}
 
 	/**
@@ -127,17 +143,19 @@ Class Venta
 	 * [getFacturasAprobados description]
 	 * @return [type] [description]
 	 */
-	public function getFacturasAprobadas($estado)
+	public function getFacturasPendientes($estado)//Retorna las faturas que deben ser aprobadas por el admin
 	{
 		R::selectDatabase('default');
 		$query = R::getAll('SELECT f.id, f.fecha, (SELECT u.nombre_usuario FROM usuario AS u WHERE u.id=f.id_cliente) 
 						   AS cliente, (SELECT c.porcentaje FROM comision AS c WHERE c.id=f.id_comision) AS comision, 
-						   f.estado FROM factura AS f WHERE estado = ?', [$estado]);
+						   f.total FROM factura AS f WHERE estado = ?', [$estado]);
 		R::close();
 		return $query;
 	}	
 }
 	//$miFactura = new Venta();
+	//$id = $miFactura->getUltimaFactura();
+	//echo $id;
 	//$resul = $miFactura->getFacturasAprobadas("aprobado");
 	//foreach ($resul as $key ) {
 	//	echo $key['id'];

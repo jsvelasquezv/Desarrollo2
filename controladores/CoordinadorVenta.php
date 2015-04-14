@@ -1,5 +1,8 @@
 <?php
 require_once '../modelos/Venta.php';
+require_once '../modelos/Carrito.php';
+require_once '../modelos/Comision.php';
+session_start();
 
 if (isset($_GET['edit'])) {
 	$idFactura = $_GET['edit'];
@@ -15,6 +18,7 @@ if(isset($_POST['guardar']))
 	$nuevoEstado = $_POST['group1'];
 	$actualizaEstado = new CoordinadorVenta();
 	$actualizaEstado->cambiarEstado($facturita, $nuevoEstado);
+	header('Location: ../vistas/visualizarPedido.php');
 	$actualizaEstado->actualizarCantidad($facturita);
 }
 
@@ -22,6 +26,36 @@ if (isset($_GET['down'])) {
 	$idfact = $_GET['down'];
 	$fact = new CoordinadorVenta();
 	$fact->cancelar($idfact);
+}
+
+if(isset($_POST['comprar']))
+{
+	$fact = new Venta();
+	$facturacion = new CoordinadorVenta();
+	$comision = new Comision();
+	$productoCarrito = new Carrito();
+	$total = $_POST['total'];
+	$cliente = $_POST['idCliente'];
+	$comisionActual = $comision->mostrarComision();
+	foreach ($comisionActual as $key) {
+		$laComision = $key['id']; //identificador de la comision actual
+	}
+	$facturacion->factura($cliente, $laComision, $total);
+	$idFactura = $fact->getUltimaFactura();
+	foreach ($_SESSION['carrito'] as $key) {
+		$producto = $productoCarrito->obtenerProducto($key["nombre"]);
+		$idProductoCarrito = $producto['id'];
+		$cantidad = $key["cantidad"];
+		$facturacion->detalle($idProductoCarrito, $cantidad, $idFactura);
+	}
+	header('Location: ../vistas/estadoCompras.php');
+}
+
+if (isset($_GET['aprobar'])) {
+	$idfact = $_GET['aprobar'];
+	$fact = new CoordinadorVenta();
+	$fact->cambiarEstado($idfact, "aprobado"); //el admin aprueba las compras
+	header('Location: ../vistas/facturasAdmin.php');
 }
 
 Class CoordinadorVenta
@@ -45,7 +79,6 @@ Class CoordinadorVenta
 	public function cambiarEstado($id, $estado)
 	{
 		$this->ventaModelo->setEstado($id, $estado);
-		header('Location: ../vistas/visualizarPedido.php');
 	}
 
 	/**
@@ -67,6 +100,30 @@ Class CoordinadorVenta
 	{
 		$this->ventaModelo->cancelarCompra($id);
 		header('Location: ../vistas/estadoCompras.php');
+	}
+
+	/**
+	 * [factura description]
+	 * @param  [type]
+	 * @param  [type]
+	 * @param  [type]
+	 * @return [type]
+	 */
+	public function factura($cliente, $comision, $total)
+	{
+		$this->ventaModelo->crearFactura($cliente, $comision, $total);
+	}
+
+	/**
+	 * [detalle description]
+	 * @param  [type]
+	 * @param  [type]
+	 * @param  [type]
+	 * @return [type]
+	 */
+	public function detalle($producto, $cantidad, $factura)
+	{
+		$this->ventaModelo->guardarDetalleFactura($producto, $cantidad, $factura);
 	}
 }
 

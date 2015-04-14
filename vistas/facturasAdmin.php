@@ -57,7 +57,7 @@
         		 <ul id="dropdown3" class="dropdown-content">
               <li><a href="crearProducto.php"> Mis<br> productos</a></li>
               <li><a href="visualizarPedido.php"> Visualizar<br> Pedidos</a></li>
-
+			  <li><a href="estadoCompras.php"> Mis<br> Compras</a></li>
             </ul> 
 
               <ul class="side-nav" id="mobile-demo">
@@ -79,7 +79,7 @@
 	<div class="container">
   <br>	
 		<div class="row">
-      <h4>Facturas Aprobadas</h4>
+      <h4>Compras por Aprobar</h4>
     </div>
 		<div class="row">
 		<table class="hoverable responsive-table centered">
@@ -88,20 +88,23 @@
 					<th>Id Factura</th>
 					<th>Fecha</th>	
 					<th>Cliente</th>
-					<th>Comision</th>
-					<th>Estado</th>			
+					<th>Total</th>
+					<th>Comision</th>	
+					<th>Ganancia</th>		
 				</tr>
 			</thead>
 			<tbody>				
-				<?php foreach ($_SESSION['aprobadas'] as $elementos) {
+				<?php foreach ($_SESSION['pendientes'] as $elementos) {
 					?> <tr>
           <!-- *********************************************************************************************************************** -->
 					<!-- en esta parte ira la conexion para traer los datos de la base de datos y mostrarlos -->
 				  <td><?php echo $elementos['id']; ?></td>
           		  <td><?php echo $elementos['fecha']; ?></td>
           		  <td><?php echo $elementos['cliente']; ?></td>
-          		  <td><?php echo $elementos['comision']; ?></td>
-          		  <td><?php echo $elementos['estado']; ?></td>
+          		  <td><?php echo $elementos['total']; ?></td>
+          		  <td><?php echo $elementos['comision']; ?></td> 		  
+          		  <td><?php echo $elementos['comision']*$elementos['total']; ?></td>
+          		   <td> <a  class="btn-flat tooltipped" name="aprobar" id="aprobar" href="../controladores/CoordinadorVenta.php?aprobar=<?php echo $elementos['id'] ?>" data-tooltip="Aprobar compra"><i class="mdi-action-done small"></i></a></td>
           <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 				 </tr> <?php 
 				} ?>
