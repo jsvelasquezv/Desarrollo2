@@ -42,6 +42,11 @@ class ValidarBuscarProducto
 	{
 		return $this->responseBuscarProducto;
 	}
+
+	public function getProductoPorNombre($nombre){
+		$miProductoBuscar = new ProductoBuscar();
+		return $miProductoBuscar->getProductoPorNombre($nombre);
+	}
 }
 
 // $vbp = new ValidarBuscarProducto();

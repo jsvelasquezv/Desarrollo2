@@ -141,7 +141,112 @@
 								</div>
 							</form>                     
 						</div>
+
 					</div>
+	<?php if (isset($_SESSION['exitoAprobar'])) {
+      echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
+  } ?>
+</div>
+
+  <div id="modal11" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Has aprobado la compra de <?php echo $_SESSION['user']?></p> 
+        </div>
+          <?php if (isset($exitoAprobar)) {
+             echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
+             unset($_SESSION['exitoAprobar']);
+          } ?>                      
+      </div>
+    </div>
+      <div id="modal12" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se han eliminado los productos del carrito</p> 
+        </div>
+          <?php if (isset($exitoEliminarCarrito)) {
+             echo "<script language='javascript'> $('#modal12').openModal(); </script>"; 
+             unset($_SESSION['exitoCarritoEliminar']);
+          } ?>                      
+      </div>
+    </div>
+
+ <?php if (isset($_SESSION['eRegistroUsuario'])) {
+      echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
+    } ?>
+
+<div id="modal2" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha creado correctamente el usuario</p> 
+        </div>
+          <?php if (isset($exitoRegistrar)) {
+             echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
+             unset($_SESSION['exitoRegistrar']);
+          } ?>                      
+      </div>
+</div>
+    <div id="modal3" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha modificado correctamente el usuario</p> 
+        </div>
+          <?php if (isset($exitoModificar)) {
+             echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
+             unset($_SESSION['exitoModificar']);
+          } ?>                      
+      </div>
+    </div>
+    <div id="modal4" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Error</span> 
+            <p>No se encuentra un usuario con ese documento</p> 
+        </div>
+          <?php if (isset($errorBuscarPerfil)) {
+             echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
+             unset($_SESSION['eBuscar']);
+          } ?>                      
+      </div>
+    </div>
+    <div id="modal7" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+          <span class="card-title teal-text">Cambiar Contrasena</span>  
+          <form action="controladores/CoordinadorUsuario.php" method="post">   
+              <?php if (isset($erroresCambiarPass)) {  ?>          
+                <div class="card">
+                  <div class="card-content">
+                  <?php foreach ($erroresCambiarPass as $key) { ?>
+                    <p><?php echo $key; ?></p>
+                  <?php } ?>
+                  </div>
+                </div>        
+              <?php } ?>           
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordVieja">
+              <label for="password">Contrasena Actual</label>
+            </div> 
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordNueva">
+              <label for="password">Contrasena Nueva</label>
+            </div>  
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordNuevaC">
+              <label for="password">Repite la Contrasena</label>
+            </div>  
+            <input class="btn-flat orange-text" type="submit" value="Guardar" name="cambiarPass">        
+          </form>            
+           <?php if (isset($erroresCambiarPass)) {
+             echo "<script language='javascript'> $('#modal7').openModal(); </script>"; 
+             unset($erroresCambiarPass);
+             unset($_SESSION['eCambiarPass']);
+             // header('Location: index.php');
+          } ?>            		
 				</div>
 			</div>    
 		</div>

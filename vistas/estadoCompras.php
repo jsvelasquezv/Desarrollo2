@@ -173,7 +173,7 @@
          
         </form>
         <?php if (isset($_SESSION['exitoAgregarCarrito'])) {
-      echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
+      echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
   } ?>
 </div>
 
@@ -181,7 +181,7 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Tu compra se ha llevado a cabo de manera exitosa</p> 
+            <p>Tu compra se ha llevado a cabo de manera exitosa <strong>pero aún falta que se aprobada por el Administrador</strong></p> 
         </div>
           <?php if (isset($exitoComprar)) {
              echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
@@ -193,11 +193,11 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se han eliminado los productos del carrito</p> 
+            <p>Se ha cancelado tu compra, se procederá a reembolsar el dinero en las próximas horas</p> 
         </div>
-          <?php if (isset($exitoEliminarCarrito)) {
+          <?php if (isset($exitoCancelar)) {
              echo "<script language='javascript'> $('#modal12').openModal(); </script>"; 
-             unset($_SESSION['exitoCarritoEliminar']);
+             unset($_SESSION['exitoCancelar']);
           } ?>                      
       </div>
     </div>
