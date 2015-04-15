@@ -5,7 +5,6 @@ require_once '../modelos/Comision.php';
 session_start();
 
 if (isset($_GET['edit'])) {
-	$_SESSION['exitoCambiarEstadoPedido'] = 0;
 	$idFactura = $_GET['edit'];
 	$factura = new Venta();
 	$facturaRegistro = $factura->getFactura($idFactura);
@@ -24,7 +23,6 @@ if(isset($_POST['guardar']))
 }
 
 if (isset($_GET['down'])) {
-	$_SESSION['exitoCancelar'] = 0; # Se setea solo cuando pueda cancelar una compra, es decir cuando el estado de la misma permita esta accion
 	$idfact = $_GET['down'];
 	$fact = new CoordinadorVenta();
 	$fact->cancelar($idfact);
@@ -32,8 +30,6 @@ if (isset($_GET['down'])) {
 
 if(isset($_POST['comprar']))
 {
-	$_SESSION['exitoComprar'] = 0; #Seteo una variable de sesssion con cualquier valor, para usarla en las vistas para mostrar el modal de exito
-	unset($_SESSION['carrito']); #Si se da click en el botón Confirmar Pago, entonces el carrito se vacea de manera automática
 	$fact = new Venta();
 	$facturacion = new CoordinadorVenta();
 	$comision = new Comision();
@@ -56,7 +52,6 @@ if(isset($_POST['comprar']))
 }
 
 if (isset($_GET['aprobar'])) {
-	$_SESSION['exitoAprobar'] = 0; #Seteo una variable de session para usarla como condicion en un modal de Facturas Admin
 	$idfact = $_GET['aprobar'];
 	$fact = new CoordinadorVenta();
 	$fact->cambiarEstado($idfact, "aprobado"); //el admin aprueba las compras

@@ -173,7 +173,7 @@
         <form action="../controladores/CoordinadorVenta.php" method="post">            
           <div class="row">
             <div class="input-field col s6">
-              <input id="estado" type="text" class="validate" name="estado" value="Pendiente" readonly="aaa">
+              <input id="estado" type="text" class="validate" name="estado" value="Pendiente" readonly>
               <label for="last_name">Estado</label>
             </div>
             <div class="input-field col s6">
@@ -216,7 +216,7 @@
             </div>
           </div>
         </div> 
-        <input class="btn-flat orange-text" type="submit" value="Confirmar Pago" name="comprar">
+        <input class="btn-flat orange-text" type="submit" value="Comprar" name="comprar">
         </div>  
           </form>
          </div> 
@@ -242,19 +242,6 @@
           } ?>                      
       </div>
     </div>
-      <div id="modal12" class="modal modalLogin">
-      <div class="card login">
-        <div class="card-content">
-            <span class="card-title teal-text">Exito</span> 
-            <p>Se han eliminado los productos del carrito</p> 
-        </div>
-          <?php if (isset($exitoEliminarCarrito)) {
-             echo "<script language='javascript'> $('#modal12').openModal(); </script>"; 
-             unset($_SESSION['exitoCarritoEliminar']);
-          } ?>                      
-      </div>
-    </div>
-
 
 <?php if (isset($_SESSION['erroresCarritoAgregar'])) {  ?>          
     <div class="row valign-wrapper">

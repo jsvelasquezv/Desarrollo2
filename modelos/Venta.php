@@ -99,18 +99,16 @@ Class Venta
 	public function actualizarStock($idFactura)
 	{
 		R::selectDatabase('default');
-		$producto = R::getAll('SELECT id_producto, cantidad FROM detalle WHERE id_factura = ?', [$idFactura]);
-		foreach ($producto as $productoDetalle) {
-			$cantidadPedida = $productoDetalle['cantidad'];
-			$id = $productoDetalle['id_producto'];
-			$cantidadProducto = R::getCell('SELECT cantidad FROM producto WHERE id = ?', [$id]);
+		$producto = R::getCell('SELECT id_producto FROM detalle WHERE id_factura = ?', [$idFactura]);
+		$cantidadPedida = R::getCell('SELECT cantidad FROM detalle WHERE id_factura = ?', [$idFactura]);
+		$cantidadProducto = R::getCell('SELECT cantidad FROM producto WHERE id = ?', [$producto]);
 
-			$actualizacion = R::load('producto', $id);
-			$actualizacion->cantidad = $cantidadProducto-$cantidadPedida;
-			R::store($actualizacion);			
-		}
+		$actualizacion = R::load('producto', $producto);
+		$actualizacion->cantidad = $cantidadProducto-$cantidadPedida;
+		R::store($actualizacion);
 		R::close();
 	}
+
 
 	/**
 	 * [obtenerComprasCliente description]

@@ -142,13 +142,13 @@ require'../scripts/gestionarCategorias.php';
               <label for="categoria">Categoria</label>
             </div> -->
             <div class="input-field col s12">
-              <input id="valor" type="text" class="validate tooltipped" name="valor" value="<?php echo $nuevoValor;?>" data-position="right" data-tooltip="Este campo es requerido y es numérico" readonly>
+              <input id="valor" type="text" class="validate" name="valor" value="<?php echo $nuevoValor;?>" readonly>
               <label for="valor">Valor Unitario</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="url" type="url" class="validate tooltipped" name="url" value="<?php echo $nuevaUrl?>" data-position="left" data-tooltip="Este campo es requerido, use el formato https://www.example.com.co"readonly>
+              <input id="url" type="url" class="validate" name="url" value="<?php echo $nuevaUrl?>"readonly>
               <label for="url">URL de la imagen</label>
             </div>
   
@@ -164,7 +164,7 @@ require'../scripts/gestionarCategorias.php';
                 <!-- </p> -->
               <!-- </div> --> 
           </div>
-          <input class="btn-flat orange-text" type="submit" value="Agregar Al carrito" name="agregarCarrito">
+          <!-- <input class="btn-flat orange-text" type="submit" value="Agregar Al carrito" name="agregarCarrito"> -->
           <!-- BOTON QUE GUARDA LA EDICION DE LOS DATOS DE UN PRODUCTO -->
           <a  href="productos.php" class="button" type="submit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atras</a>
       </form>                     
@@ -177,7 +177,7 @@ require'../scripts/gestionarCategorias.php';
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Se ha creado Editado el Producto</p> 
+            <p>Se ha creado el Producto</p> 
         </div>
           <?php if (isset($exitoCrearProducto)) {
              echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
