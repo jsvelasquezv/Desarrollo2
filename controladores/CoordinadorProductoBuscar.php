@@ -13,7 +13,7 @@ if(isset($_POST['buscar'])){#Si se dio enter en el input de busqyea entonces
 			header('Location: ../vistas/crearProducto.php');#redirijo a vistas/crearProducto
 		}
 		else{#Si existe el producto en la base de datos, redirijo a la vista de editar porducto, con las credenciales de ese producto buscado
-			header('Location: ../vistas/editarProducto.php?nombre='.$frijolEncontrado['nombre'].'&cantidad='
+			header('Location: ../vistas/busquedaProducto.php?nombre='.$frijolEncontrado['nombre'].'&cantidad='
 		.$frijolEncontrado['cantidad'].'&categoria='.$frijolEncontrado['categoria_id']
 		.'&valor='.$frijolEncontrado['valor_unitario'].'&url='.$frijolEncontrado['url_imagen']
 		.'&estado='.$frijolEncontrado['estado']);

@@ -245,7 +245,8 @@ if(isset($_SESSION['exitoCrearCategoria'])){
   <?php if (isset($_SESSION['erroresCrearProducto'])) {
       echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
     } ?>
-</div>   
+</div>
+
     <div id="modal2" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
@@ -255,18 +256,6 @@ if(isset($_SESSION['exitoCrearCategoria'])){
           <?php if (isset($exitoCrearProducto)) {
              echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
              unset($_SESSION['exitoCrearProducto']);
-          } ?>                      
-      </div>
-    </div>
-    <div id="modal3" class="modal modalLogin">
-      <div class="card login">
-        <div class="card-content">
-            <span class="card-title teal-text">Exito</span> 
-            <p>Se ha editado correctamente el Producto</p> 
-        </div>
-          <?php if (isset($exitoEditarProducto)) {
-             echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
-             unset($_SESSION['exitoEditarProducto']);
           } ?>                      
       </div>
     </div>

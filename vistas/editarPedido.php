@@ -98,17 +98,17 @@
         <form action="../controladores/CoordinadorVenta.php" method="post">   
           <div class="row">
             <div class="input-field col s7">
-             <p align="center"> <input id="idFactura" type="text" class="validate" name="idFactura"  value="<?php echo $id_factura; ?>" data-position="left">
+             <p align="center"> <input id="idFactura" type="text" class="validate" name="idFactura"  value="<?php echo $id_factura; ?>" data-position="left" readonly>
               <label for="nombre">Id Factura</label></p>
             </div>  
             <div class="input-field col s6">
               <!-- <h6>Estado:</h6>-->
-              <input id="estado" type="text" class="validate" name="estado" value="<?php echo $estado; ?>">
+              <input id="estado" type="text" class="validate" name="estado" value="<?php echo $estado; ?>" readonly>
               <label for="username">Estado de la Factura</label>
-                    <p>
-                        <input name="group1" type="radio" id="test1" value="enviado"/>
-                        <label for="test1">Enviado</label>
-                    </p>
+               <p>
+                  <input type="checkbox" class="filled-in" id="filled-in-box"  value="enviado" name="group1"/>
+                  <label for="filled-in-box">Enviado</label>
+              </p>
             </div>
           </div>            
           </div>

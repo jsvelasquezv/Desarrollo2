@@ -30,6 +30,7 @@ if(isset($_GET['agregarAlCarrito'])){
 }
 #Aca hago la gestion para cuando voy a remover del carrito
 if (isset($_GET['nombre'])) {
+	$_SESSION['exitoCarritoEliminar'] = 0;#Seteo una variable de session para luego usarla en las vistas para mandar un modal cuando se elimine el prodcto, no es necesario hacer validaciones para eliminar un producto del carrito
 	$eliminar = $_GET['nombre']; #nombre del producto que quiero remover del carrito
 	$miCoordinadorCarrito = new CoordinadorCarrito();
 	$_SESSION['carrito'] =  $miCoordinadorCarrito->eliminar($eliminar);
@@ -82,7 +83,7 @@ class CoordinadorCarrito
 		return $query;
 	}
 	public function eliminar($nombre){
-	       $query = $this->miCarrito->remove($nombre);
+	       $query = $this->miCarrito->remove($nombre);			
 	       return $query;
 
 	}

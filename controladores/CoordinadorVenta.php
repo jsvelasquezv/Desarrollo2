@@ -30,6 +30,7 @@ if (isset($_GET['down'])) {
 
 if(isset($_POST['comprar']))
 {
+	$_SESSION['exitoComprar'] = 0; #Seteo una variable de sesssion con cualquier valor, para usarla en las vistas para mostrar el modal de exito
 	$fact = new Venta();
 	$facturacion = new CoordinadorVenta();
 	$comision = new Comision();

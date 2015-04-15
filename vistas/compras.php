@@ -173,17 +173,17 @@
         <form action="../controladores/CoordinadorVenta.php" method="post">            
           <div class="row">
             <div class="input-field col s6">
-              <input id="estado" type="text" class="validate" name="estado" value="Pendiente">
+              <input id="estado" type="text" class="validate" name="estado" value="Pendiente" readonly="aaa">
               <label for="last_name">Estado</label>
             </div>
             <div class="input-field col s6">
               <?php $miUsuario = $_SESSION['clienteFactura']; ?>
               <input type="hidden" name="idCliente" value="<?php echo $miUsuario['id']; ?>">
-              <input id="icon_prefix" type="text" class="validate" value="<?php echo $miUsuario['nombre']." ".$miUsuario['apellidos'];  ?>">
+              <input id="icon_prefix" type="text" class="validate" value="<?php echo $miUsuario['nombre']." ".$miUsuario['apellidos'];  ?>" readonly>
               <label for="icon_prefix">Cliente</label>
             </div>         
             <div class="input-field col s6">
-              <input id="fecha" type="text" class="validate" name="fecha" value="<?php echo date("d/m/y"); ?>">
+              <input id="fecha" type="text" class="validate" name="fecha" value="<?php echo date("d/m/y"); ?>" readonly>
               <label for="fecha">Fecha</label>
             </div>
             <div class="row">
@@ -211,12 +211,12 @@
             </div>
             <div class="row">
               <div class="input-field col s6">
-              <input id="total" type="text" class="validate" name="total" value="<?php echo $suma; ?>">
+              <input id="total" type="text" class="validate" name="total" value="<?php echo $suma; ?>" readonly>
               <label for="total">Total</label>
             </div>
           </div>
         </div> 
-        <input class="btn-flat orange-text" type="submit" value="Comprar" name="comprar">
+        <input class="btn-flat orange-text" type="submit" value="Confirmar Pago" name="comprar">
         </div>  
           </form>
          </div> 
@@ -242,6 +242,19 @@
           } ?>                      
       </div>
     </div>
+      <div id="modal12" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se han eliminado los productos del carrito</p> 
+        </div>
+          <?php if (isset($exitoEliminarCarrito)) {
+             echo "<script language='javascript'> $('#modal12').openModal(); </script>"; 
+             unset($_SESSION['exitoCarritoEliminar']);
+          } ?>                      
+      </div>
+    </div>
+
 
 <?php if (isset($_SESSION['erroresCarritoAgregar'])) {  ?>          
     <div class="row valign-wrapper">
