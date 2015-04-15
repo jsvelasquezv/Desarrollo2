@@ -170,22 +170,18 @@
     <div class="card login ">
       <div class="card-content">
         <span class="card-title teal-text">Factura</span>  
-        <form action="" method="post">            
+        <form action="../controladores/CoordinadorVenta.php" method="post">            
           <div class="row">
-            <div class="input-field col s6">
-              <input id="username" type="text" class="validate" name="username">
-              <label for="username">Id Factura</label>
-            </div>
             <div class="input-field col s6">
               <input id="estado" type="text" class="validate" name="estado" value="Pendiente">
               <label for="last_name">Estado</label>
             </div>
             <div class="input-field col s6">
               <?php $miUsuario = $_SESSION['clienteFactura']; ?>
+              <input type="hidden" name="idCliente" value="<?php echo $miUsuario['id']; ?>">
               <input id="icon_prefix" type="text" class="validate" value="<?php echo $miUsuario['nombre']." ".$miUsuario['apellidos'];  ?>">
               <label for="icon_prefix">Cliente</label>
-            </div>
-           
+            </div>         
             <div class="input-field col s6">
               <input id="fecha" type="text" class="validate" name="fecha" value="<?php echo date("d/m/y"); ?>">
               <label for="fecha">Fecha</label>
