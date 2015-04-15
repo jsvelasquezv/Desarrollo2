@@ -106,7 +106,7 @@
               <input id="estado" type="text" class="validate" name="estado" value="<?php echo $estado; ?>">
               <label for="username">Estado de la Factura</label>
                     <p>
-                        <input name="group1" type="radio" id="test1" value="enviado"/>
+                        <input name="group1" type="checkbox" id="test1" value="enviado"/>
                         <label for="test1">Enviado</label>
                     </p>
             </div>
