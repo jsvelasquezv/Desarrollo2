@@ -2,28 +2,23 @@
 require_once '../mailer/PHPMailerAutoload.php';
 require_once '../mailer/class.phpmailer.php';
 require_once '../mailer/class.smtp.php';
-require_once 'Usuario.php';
 
 Class Notificacion
 {
 	function __construct(){}
 
-	public function enviarEmail($username, $asunto, $contenido)
+	public function enviarEmail($correo, $asunto, $contenido)
 	{
-		$usuario = new Usuario();
-		$datos = $usuario->buscarUsuario($username);
-		$correo = $datos['email'];
-
 		$crendentials = array(
   		'email'     => 'proyectodesarrollo2@gmail.com',    //Your GMail adress 
     	'password'  => 'Desarrollo2Proyecto'               //Your GMail password
     	);
     	$smtp = array(
 		'host' => 'smtp.gmail.com',
-		'port' => 587,
+		'port' => 2525,
 		'username' => $crendentials['email'],
 		'password' => $crendentials['password'],
-		'secure' => 'tls' //SSL or TLS
+		'secure' => 'ssl' //SSL or TLS
 		);
 
 		$to         = $correo; //The 'To' field
@@ -55,8 +50,9 @@ Class Notificacion
 		//Check if mail is sent :
 		if(!$mailer->send()) {
 		 echo 'Error sending mail : ' . $mailer->ErrorInfo;
-		//$this->response[1] = 'Error al enviar el correo: '.$mailer->ErrorInfo;
 		}
 	}	
 }
+	//$not = new Notificacion();
+	//$not->enviarEmail("vazuluagab@gmail.com", "prueba", "esta es una prueba");
 ?>

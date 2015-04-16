@@ -1,4 +1,4 @@
-<<?php
+<?php
 require_once '../modelos/ValidarBuscarProducto.php';
 #========================SE OBTIENEN EL NOMBRE DEL PRODUCTO A BUSCAR=======================
 if(isset($_POST['buscar'])){#Si se dio enter en el input de busqyea entonces

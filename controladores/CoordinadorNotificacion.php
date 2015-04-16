@@ -5,14 +5,25 @@ Class CoordinadorNotificacion
 {
 	private $notifica;
 
+	/**
+	 * [__construct description]
+	 */
 	function __construct()
 	{
 		$this->notifica = new Notificacion();
 	}
 
-	public function enviaMail($username, asunto, contenido)
+	/**
+	 * [enviaMail description]
+	 * @param  [string] $correo    [description]
+	 * @param  [string] $asunto    [description]
+	 * @param  [string] $contenido [description]
+	 */
+	public function enviaMail($correo, $asunto, $contenido)
 	{
-		$this->notifica->enviarEmail($username, $asunto, $contenido);
+		$this->notifica->enviarEmail($correo, $asunto, $contenido);
 	}
 }
+//$coordinador = new CoordinadorNotificacion();
+//$coordinador->enviaMail("vazuluagab@gmail.com", "prueba controlador notificacion", "esto es una prueba");
 ?>
