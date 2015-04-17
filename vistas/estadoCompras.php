@@ -18,25 +18,17 @@
   <nav class="teal">
     <div class="nav-wrapper">
       <div class="col s12">
-       <a href="../index.php" style ="font-family: 'Dancing Script', cursive; font-size: 50px;"><img src="../assets/images/Imagen1.png">MarketFree...</a>
+       <a href="../index.php" class="brand-logo" style ="font-family: 'Dancing Script', cursive; font-size: 40px;"><img src="../assets/images/Imagen1.png">MarketFree...</a><!-- imagen de logo responsiva-->       
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-        <ul class="right hide-on-med-and-down" >
-           <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
-           <li> <a href="productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
+        <ul class="right hide-on-med-and-down">
+          <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+          <li><a  href="productos.php" ><i class = "mdi-maps-layers left"></i>Productos de venta&nbsp; </a></li>
           <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
-         <!--  <form action="controladores/Principal.php">
-            <input type="hidden" value="salir" name="salir">
-            <button name="salir" class="btn-flat white-text">Salir</button>
-          </form> -->
             <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
-
-          
-          
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-           <?php } ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="mdi-file-folder-shared left"></i>Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php } ?>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown2"><i class="mdi-action-account-box left"></i>Mi Cuenta&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown3"><i class="mdi-social-person left"></i>Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 
           
 
@@ -97,7 +89,9 @@
     <!--  -Se genera una tabla con todas la facturas que se hayan creado- 
     -para visualizar la factura se dará  "CLICK" sobre la factura que se quiere visualizar en caso de que sea administrador y vendedor para editar el estado de la factura
      -para vsaber el estado de la compra solo se mostrata la información que contiene la factura y su estado, en caso de que sea admin o comprador   -->
-    <table class="hoverable responsive-table">
+    <?php if (! empty($_SESSION['comprasCliente'])) {?>
+     
+    <table class="hoverable responsive-table indigo lighten-5">
       <thead>
         <tr>
           <th>Id Factura</th>
@@ -129,6 +123,23 @@
         } ?> 
       </tbody>
     </table>  
+    <?php }?>
+    <?php if (empty($_SESSION['comprasCliente'])) {?>
+    <div class='row valign-wrapper'>
+      <div class='col s12 m12 valign'>
+          <div class='card indigo lighten-5'>
+              <div class='card-content'>
+                <h6 class = 'valign' style='text-transform: uppercase;'><strong>Mensaje del Sistema</strong></h6>
+                <p>No has comprado nada aún, dirigite a la sección de Productos en venta y descubre artículos
+                que quizá te interese comprar.</p>
+              </div>
+              <div class='card-action'>
+                <a href='productos.php' >Ir a Productos en venta</a>
+              </div>
+        </div>
+      </div>
+    </div>     
+    <?php }?>
   </div>
 
    <div class="col s12 m8 offset-m2 l6 offset-l3">
@@ -181,7 +192,7 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Tu compra se ha llevado a cabo de manera exitosa <strong>pero aún falta que se aprobada por el Administrador</strong></p> 
+            <p>Tu compra se ha llevado a cabo de manera exitosa <strong>pero aún falta que sea aprobada por el Administrador</strong></p> 
         </div>
           <?php if (isset($exitoComprar)) {
              echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
@@ -246,7 +257,7 @@
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Cambiar Contrasena</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">   
+          <form action="../controladores/CoordinadorUsuario.php" method="post">   
               <?php if (isset($erroresCambiarPass)) {  ?>          
                 <div class="card">
                   <div class="card-content">

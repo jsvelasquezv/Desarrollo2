@@ -34,7 +34,8 @@ Class CoordinadorComision
 			header('Location: ../vistas/comision.php');		
 		}
 		else{
-			$_SESSION['errorComision'] = 0;
+			session_start();
+			$_SESSION['exitoComision'] = "Edicion exitosa";
 			unset($_SESSION['errorComision']);
 			header('Location: ../vistas/comision.php');
 		}

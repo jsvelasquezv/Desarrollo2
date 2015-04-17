@@ -26,10 +26,10 @@ Class ValidarComision
 
 		}
 		if($this->validacion->esMayor($comision, 6)){
-			$this->responseComision[1] = "El porcentaje no puede contener mas de 6 digitos";
+			$this->responseComision[1] = "El porcentaje no puede contener mas de 5 digitos";
 		}
 		if($this->validacion->esMenor($comision, 3)){
-			$this->responseComision[2] = "El porcentaje debe contener minimo 3 digitos";
+			$this->responseComision[2] = "El porcentaje debe contener minimo 2 digitos";
 		}
 		else
 		{

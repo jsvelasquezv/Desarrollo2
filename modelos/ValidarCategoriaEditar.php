@@ -1,6 +1,5 @@
 <?php
 require_once 'CategoriaEditar.php';
-require_once 'CategoriaBuscar.php';
 require_once 'Validaciones.php';
 
 Class ValidarCategoriaEditar
@@ -8,7 +7,6 @@ Class ValidarCategoriaEditar
 	private $categoriaEditarModel;
 	private $validarEdicion;
 	private $responseEdicion;
-	private $busqueda;
 
 
 	/**
@@ -18,7 +16,6 @@ Class ValidarCategoriaEditar
 	{
 		$this->categoriaEditarModel = new CategoriaEditar();
 		$this->validarEdicion = new Validaciones();
-		$this->busqueda = new CategoriaBuscar();
 	}
 
 	/**
@@ -47,10 +44,6 @@ Class ValidarCategoriaEditar
 		}
 		if ($this->validarEdicion->esMayor($nuevaDescripcion, 150)) {
 			$this->responseEdicion[6] = "La descripcion debe contener maximo 150 caracteres";
-		}
-		if(!empty($this->busqueda->buscarCategoria($nombreNuevo)))
-		{
-			$this->responseEdicion[7] = "El nombre ya existe";
 		}		
 		if (empty($this->responseEdicion)) {
 			$this->categoriaEditarModel->editarCategoria($nombre, $nombreNuevo, $nuevaDescripcion);

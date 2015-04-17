@@ -19,17 +19,17 @@
 	<nav class="teal">
 		<div class="nav-wrapper">
 			<div class="col s12">
-				<a href="../index.php" style ="font-family: 'Dancing Script', cursive; font-size: 50px;"><img src="../assets/images/Imagen1.png">MarketFree...</a>
-				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-				<ul class="right hide-on-med-and-down">
-           <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
-					<li> <a href="productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
+				<a href="../index.php" class="brand-logo" style ="font-family: 'Dancing Script', cursive; font-size: 40px;"><img src="../assets/images/Imagen1.png">MarketFree...</a><!-- imagen de logo responsiva-->       
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+        <ul class="right hide-on-med-and-down">
+          <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+          <li><a  href="productos.php" ><i class = "mdi-maps-layers left"></i>Productos de venta&nbsp; </a></li>
           <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
-          <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          <?php } ?>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdown3">Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="mdi-file-folder-shared left"></i>Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php } ?>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown2"><i class="mdi-action-account-box left"></i>Mi Cuenta&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown3"><i class="mdi-social-person left"></i>Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 				</ul>      
 				<ul id ="dropdown1" class="dropdown-content">
 					<?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
@@ -82,34 +82,51 @@
       <h4>Compras por Aprobar</h4>
     </div>
 		<div class="row">
-		<table class="hoverable responsive-table centered">
-			<thead>
-				<tr>
-					<th>Id Factura</th>
-					<th>Fecha</th>	
-					<th>Cliente</th>
-					<th>Total</th>
-					<th>Comision</th>	
-					<th>Ganancia</th>		
-				</tr>
-			</thead>
-			<tbody>				
-				<?php foreach ($_SESSION['pendientes'] as $elementos) {
-					?> <tr>
-          <!-- *********************************************************************************************************************** -->
-					<!-- en esta parte ira la conexion para traer los datos de la base de datos y mostrarlos -->
-				  <td><?php echo $elementos['id']; ?></td>
-          		  <td><?php echo $elementos['fecha']; ?></td>
-          		  <td><?php echo $elementos['cliente']; ?></td>
-          		  <td><?php echo $elementos['total']; ?></td>
-          		  <td><?php echo $elementos['comision']; ?></td> 		  
-          		  <td><?php echo $elementos['comision']*$elementos['total']; ?></td>
-          		   <td> <a  class="btn-flat tooltipped" name="aprobar" id="aprobar" href="../controladores/CoordinadorVenta.php?aprobar=<?php echo $elementos['id'] ?>" data-tooltip="Aprobar compra"><i class="mdi-action-done small"></i></a></td>
-          <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-				 </tr> <?php 
-				} ?>
-			</tbody>
-		</table>
+  		<table class="hoverable responsive-table centered indigo lighten-5">
+  			<thead>
+  				<tr>
+  					<th>Id Factura</th>
+  					<th>Fecha</th>	
+  					<th>Cliente</th>
+  					<th>Total</th>
+  					<th>Comision</th>	
+  					<th>Ganancia</th>		
+  				</tr>
+  			</thead>
+  			<tbody>				
+  				<?php foreach ($_SESSION['pendientes'] as $elementos) {?> 
+          <tr>
+            <!-- *********************************************************************************************************************** -->
+  					<!-- en esta parte ira la conexion para traer los datos de la base de datos y mostrarlos -->
+  				  <td><?php echo $elementos['id']; ?></td>
+            		  <td><?php echo $elementos['fecha']; ?></td>
+            		  <td><?php echo $elementos['cliente']; ?></td>
+            		  <td><?php echo $elementos['total']; ?></td>
+            		  <td><?php echo $elementos['comision']; ?></td> 		  
+            		  <td><?php echo $elementos['comision']*$elementos['total']; ?></td>
+            		   <td> <a  class="btn-flat tooltipped" name="aprobar" id="aprobar" href="../controladores/CoordinadorVenta.php?aprobar=<?php echo $elementos['id'] ?>" data-tooltip="Aprobar compra"><i class="mdi-action-done small"></i></a></td>
+            <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  				 </tr> <?php 
+  				} ?>
+  			</tbody>
+  		</table>
+
+      <?php if (empty($_SESSION['pendientes'])) {
+        echo "<div class='row valign-wrapper'>";
+            echo"<div class='col s12 m12 valign'>";
+              echo"<div class='card indigo lighten-5'>";
+                echo "<div class='card-content'>";
+                  echo "<h6 class = 'valign' style='text-transform: uppercase;'><strong>Mensaje del sistema</strong></h6>";
+                    echo "<p>Administrador, no tienes facturas pendientes por aprobar.</p>";
+                  echo "</div>";
+                  // echo "<div class='card-action'>";
+                  // echo "<a href='productos.php' >Ir a Productos en Venta</a>";
+                echo "</div>";
+              echo "</div>";
+            echo "</div>";
+          echo "</div>";
+      }?>
+
 		</div>
 		<div class="valign-wrapper">
 			<div class="col s12 m8 offset-m2 l4 offset-l3 valign">
@@ -152,7 +169,7 @@
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
-            <p>Has aprobado la compra de <?php echo $_SESSION['user']?></p> 
+            <p>Has aprobado la compra</p> 
         </div>
           <?php if (isset($exitoAprobar)) {
              echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
@@ -217,7 +234,7 @@
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Cambiar Contrasena</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">   
+          <form action="../controladores/CoordinadorUsuario.php" method="post">   
               <?php if (isset($erroresCambiarPass)) {  ?>          
                 <div class="card">
                   <div class="card-content">

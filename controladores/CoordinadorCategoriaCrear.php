@@ -36,7 +36,8 @@ Class CoordinadorCategoriaCrear
 			header('Location: ../vistas/categorias.php');		
 		}
 		else{
-			$_SESSION['erroresCreacionCat'] = 0;
+			session_start();
+			$_SESSION['exitoCreacionCategoria'] = "Creacion exitosa";
 			unset($_SESSION['erroresCreacionCategoria']);
 			header('Location: ../vistas/categorias.php');
 		}

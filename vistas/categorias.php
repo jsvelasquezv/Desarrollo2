@@ -23,17 +23,17 @@ require_once '../scripts/gestionarCategorias.php';
 	<nav class="teal">
 		<div class="nav-wrapper">
 			<div class="col s12">
-				<a href="../index.php" style ="font-family: 'Dancing Script', cursive; font-size: 50px;"><img src="../assets/images/Imagen1.png">MarketFree...</a>
-				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-				<ul class="right hide-on-med-and-down">
-           <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
-					<li> <a href="productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
+				<a href="../index.php" class="brand-logo" style ="font-family: 'Dancing Script', cursive; font-size: 40px;"><img src="../assets/images/Imagen1.png">MarketFree...</a><!-- imagen de logo responsiva-->       
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+        <ul class="right hide-on-med-and-down">
+          <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+          <li><a  href="productos.php" ><i class = "mdi-maps-layers left"></i>Productos de venta&nbsp; </a></li>
           <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
-          <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          <?php } ?>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdown3">Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="mdi-file-folder-shared left"></i>Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php } ?>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown2"><i class="mdi-action-account-box left"></i>Mi Cuenta&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown3"><i class="mdi-social-person left"></i>Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 				</ul>      
 				<ul id ="dropdown1" class="dropdown-content">
 					<?php if ($_SESSION['permisoDeGestionarPerfiles'] == 1) { ?>
@@ -96,7 +96,7 @@ require_once '../scripts/gestionarCategorias.php';
       </form>
     </div>
 		<div class="row">
-		<table class="hoverable responsive-table centered">
+		<table class="hoverable responsive-table centered indigo lighten-5">
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -162,7 +162,7 @@ require_once '../scripts/gestionarCategorias.php';
 			echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
 		} ?>
 	</div>
-	<div id="modal2" class="modal modalLogin">
+    <div id="modal2" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
             <span class="card-title teal-text">Exito</span> 
@@ -170,7 +170,7 @@ require_once '../scripts/gestionarCategorias.php';
         </div>
           <?php if (isset($exitoCrearCategoria)) {
              echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
-             unset($_SESSION['exitoCrearCategoria']);
+             unset($_SESSION['exitoCreacionCategoria']);
           } ?>                      
       </div>
     </div>
@@ -202,7 +202,7 @@ require_once '../scripts/gestionarCategorias.php';
       <div class="card login">
         <div class="card-content">
           <span class="card-title teal-text">Cambiar Contrasena</span>  
-          <form action="controladores/CoordinadorUsuario.php" method="post">   
+          <form action="../controladores/CoordinadorUsuario.php" method="post">   
               <?php if (isset($erroresCambiarPass)) {  ?>          
                 <div class="card">
                   <div class="card-content">

@@ -18,26 +18,17 @@
   <nav class="teal">
     <div class="nav-wrapper">
       <div class="col s12">
-       <a href="../index.php" style ="font-family: 'Dancing Script', cursive; font-size: 50px;"><img src="../assets/images/Imagen1.png">MarketFree...</a>
+       <a href="../index.php" class="brand-logo" style ="font-family: 'Dancing Script', cursive; font-size: 40px;"><img src="../assets/images/Imagen1.png">MarketFree...</a><!-- imagen de logo responsiva-->       
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-        <ul class="right hide-on-med-and-down" >
-           <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
-           <li> <a href="productos.php"><i class="mdi-maps-layers left" class="modal-trigger"></i>Productos en venta</a></li>
-          <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li>
-         <!--  <form action="controladores/Principal.php">
-            <input type="hidden" value="salir" name="salir">
-            <button name="salir" class="btn-flat white-text">Salir</button>
-          </form> -->
+        <ul class="right hide-on-med-and-down">
+          <li> <a href="../index.php"><i class="mdi-action-home left" class="modal-trigger"></i> Home </a></li>
+          <li><a  href="productos.php" ><i class = "mdi-maps-layers left"></i>Productos de venta&nbsp; </a></li>
+          <li><a  href="compras.php" ><i class = " mdi-action-shopping-cart left"></i>Compra&nbsp; </a></li
             <?php if (!(($_SESSION['permisoDeGestionarPerfiles'] == 0) and ($_SESSION['permisoDeGestionarUsuarios'] == 0))) { ?>
-
-          
-          
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Modulos &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-           <?php } ?>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Mi Cuenta &nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="mdi-file-folder-shared left"></i>Modulos<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <?php } ?>
+           <li><a class="dropdown-button" href="#!" data-activates="dropdown2"><i class="mdi-action-account-box left"></i>Mi Cuenta&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown3"><i class="mdi-social-person left"></i>Mi Perfil&nbsp;&nbsp;<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
           
 
         </ul>      
@@ -97,7 +88,8 @@
     <!--  -Se genera una tabla con todas la facturas que se hayan creado- 
     -para visualizar la factura se dará  "CLICK" sobre la factura que se quiere visualizar en caso de que sea administrador y vendedor para editar el estado de la factura
      -para vsaber el estado de la compra solo se mostrata la información que contiene la factura y su estado, en caso de que sea admin o comprador   -->
-    <table class="hoverable responsive-table">
+    <?php if (! empty($_SESSION['pedidosVendedor'])) {?>
+    <table class="hoverable responsive-table indigo lighten-5">
       <thead>
         <tr>
           <th>Id Factura</th>
@@ -126,6 +118,26 @@
         } ?> 
       </tbody>
     </table>  
+     
+    <?php }?>
+    <?php if (empty($_SESSION['pedidosVendedor'])) {?>
+    <div class='row valign-wrapper'>
+      <div class='col s12 m12 valign'>
+          <div class='card indigo lighten-5'>
+              <div class='card-content'>
+                <h6 class = 'valign' style='text-transform: uppercase;'><strong>Mensaje del Sistema</strong></h6>
+                <p>No tienes pedidos pendientes, crea productos y súbelos a la plataforma para que otras personas puedan verlos,
+                       y así tener mas oportunidades de aumentar tus pedidos</p>
+              </div>
+              <div class='card-action'>
+                <a href='crearProducto.php' >Ir a Crear Productos</a>
+              </div>
+        </div>
+      </div>
+    </div> 
+    <?php }?>
+      
+
   </div>
 
    <div class="col s12 m8 offset-m2 l6 offset-l3">
@@ -174,3 +186,136 @@
   </div>
   </div>  
 </div>
+ 
+ <?php if (isset($_SESSION['exitoAgregarCarrito'])) {
+      echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
+  } ?>
+</div>
+
+  <div id="modal11" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Has cambiado el estado de tu pedido</p> 
+        </div>
+          <?php if (isset($exitoCambiarEstadoPedido)) {
+             echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
+             unset($_SESSION['exitoCambiarEstadoPedido']);
+          } ?>                      
+      </div>
+    </div>
+      <div id="modal12" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se han eliminado los productos del carrito</p> 
+        </div>
+          <?php if (isset($exitoEliminarCarrito)) {
+             echo "<script language='javascript'> $('#modal12').openModal(); </script>"; 
+             unset($_SESSION['exitoCarritoEliminar']);
+          } ?>                      
+      </div>
+    </div>
+
+
+<?php if (isset($_SESSION['erroresCarritoAgregar'])) {  ?>          
+    <div class="row valign-wrapper">
+        <div class="col s12 m4 valign">
+          <div class="card indigo lighten-5 ">
+            <div class="card-content">
+                <h6 class = "valign" style="text-transform: uppercase;"><strong>¡ Error !</strong></h6>
+                <p>Se han detectado los siguientes errores</p>
+              <?php foreach ($erroresCarritoAgregar as $key) { ?>
+                <p><strong><?php echo $key; ?></strong></p>
+                
+            <?php unset($_SESSION['erroresCarritoAgregar']);} ?>
+            </div>
+            <div class="card-action">
+              <a href="productos.php" >Vuelva a intentar</a>
+              <!-- <a href='#'>This is a link</a> -->
+            </div>
+          </div>
+        </div>
+      </div>     
+<?php } ?> 
+
+ <?php if (isset($_SESSION['eRegistroUsuario'])) {
+      echo "<script language='javascript'> $('#modal').openModal(); </script>"; 
+    } ?>
+
+<div id="modal2" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha creado correctamente el usuario</p> 
+        </div>
+          <?php if (isset($exitoRegistrar)) {
+             echo "<script language='javascript'> $('#modal2').openModal(); </script>"; 
+             unset($_SESSION['exitoRegistrar']);
+          } ?>                      
+      </div>
+</div>
+    <div id="modal3" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Exito</span> 
+            <p>Se ha modificado correctamente el usuario</p> 
+        </div>
+          <?php if (isset($exitoModificar)) {
+             echo "<script language='javascript'> $('#modal3').openModal(); </script>"; 
+             unset($_SESSION['exitoModificar']);
+          } ?>                      
+      </div>
+    </div>
+    <div id="modal4" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+            <span class="card-title teal-text">Error</span> 
+            <p>No se encuentra un usuario con ese documento</p> 
+        </div>
+          <?php if (isset($errorBuscarPerfil)) {
+             echo "<script language='javascript'> $('#modal4').openModal(); </script>"; 
+             unset($_SESSION['eBuscar']);
+          } ?>                      
+      </div>
+    </div>
+    <div id="modal7" class="modal modalLogin">
+      <div class="card login">
+        <div class="card-content">
+          <span class="card-title teal-text">Cambiar Contrasena</span>  
+          <form action="../controladores/CoordinadorUsuario.php" method="post">   
+              <?php if (isset($erroresCambiarPass)) {  ?>          
+                <div class="card">
+                  <div class="card-content">
+                  <?php foreach ($erroresCambiarPass as $key) { ?>
+                    <p><?php echo $key; ?></p>
+                  <?php } ?>
+                  </div>
+                </div>        
+              <?php } ?>           
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordVieja">
+              <label for="password">Contrasena Actual</label>
+            </div> 
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordNueva">
+              <label for="password">Contrasena Nueva</label>
+            </div>  
+            <div class="input-field">
+              <input id="password" type="password" class="validate" name="passwordNuevaC">
+              <label for="password">Repite la Contrasena</label>
+            </div>  
+            <input class="btn-flat orange-text" type="submit" value="Guardar" name="cambiarPass">        
+          </form>            
+           <?php if (isset($erroresCambiarPass)) {
+             echo "<script language='javascript'> $('#modal7').openModal(); </script>"; 
+             unset($erroresCambiarPass);
+             unset($_SESSION['eCambiarPass']);
+             // header('Location: index.php');
+          } ?>               
+        </div>
+      </div>
+    </div>         
+</div>
+</body>
+</html>

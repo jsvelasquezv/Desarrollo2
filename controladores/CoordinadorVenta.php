@@ -7,7 +7,7 @@ require_once 'CoordinadorNotificacion.php';
 session_start();
 
 if (isset($_GET['edit'])) {
-	$_SESSION['exitoCambiarEstadoPedido'] = 0;
+	$_SESSION['exitoCambiarEstadoPedido'] = 0; #Se setea una variable para usarla en el modal
 	$idFactura = $_GET['edit'];
 	$factura = new Venta();
 	$facturaRegistro = $factura->getFactura($idFactura);
@@ -64,7 +64,7 @@ if(isset($_POST['comprar']))
 	$contenido = "Una compra ha sido realizada y debe ser aprobada";
 	foreach ($admins as $key) {
 		$correo = $key['email'];
-	$notificar->enviaMail($correo, $asunto, $contenido); //envia el email al admin
+	#$notificar->enviaMail($correo, $asunto, $contenido); //envia el email al admin
 	}
 }
 
