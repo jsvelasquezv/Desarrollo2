@@ -129,9 +129,9 @@
         <div class="row center">
           <h5 class="header col s12 light  white-text">Un lugar donde vender y comprar es muy fácil, ¿Qué esperas para unirte?</h5>
         </div>
-        <div class="row center">
-          <a href="#modal1" id="download-button" class="modal-trigger btn-large waves-effect waves-light teal">Únete</a>
-        </div>
+        <!-- <div class="row center">
+          <a href="#" id="download-button" class="modal-trigger btn-large waves-effect waves-light teal">Únete</a>
+        </div> -->
         <br><br>
 
       </div>
@@ -247,7 +247,7 @@
           <h5 class="header col s12 light  white-text">Un lugar donde vender y comprar es muy fácil, ¿Qué esperas para unirte?</h5>
         </div>
         <div class="row center">
-          <a href="#modal1" id="download-button" class="modal-trigger btn-large waves-effect waves-light teal">Únete</a>
+          <a href="#modal2" id="download-button" class="modal-trigger btn-large waves-effect waves-light teal">Únete</a>
         </div>
         <br><br>
 
