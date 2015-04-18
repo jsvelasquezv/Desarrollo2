@@ -2,11 +2,13 @@
   require_once '../modelos/Usuario.php';
 	include_once '../scripts/gestionarUsuarios.php';
   include_once '../scripts/gestionarCarrito.php';
+
+  
   $usuarioComprador = new Usuario();
   $_SESSION['clienteFactura'] = $usuarioComprador->buscarUsuario($_SESSION['user']);
   // $_SESSION['exitoComprar'] = 0;
   // require_once '../controladores/CoordinadorCarrito.php';
- 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -225,7 +227,6 @@
       echo "<script language='javascript'> $('#modal11').openModal(); </script>"; 
   } ?>
 </div>
-
   <div id="modal11" class="modal modalLogin">
       <div class="card login">
         <div class="card-content">
