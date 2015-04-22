@@ -3,11 +3,11 @@ require_once '../modelos/Venta.php';
 require_once '../modelos/Carrito.php';
 require_once '../modelos/Comision.php';
 require_once '../modelos/Usuario.php';
+require_once '../modelos/ProductoBuscar.php';
 require_once 'CoordinadorNotificacion.php';
 session_start();
 
 if (isset($_GET['edit'])) {
-	$_SESSION['exitoCambiarEstadoPedido'] = 0; #Se setea una variable para usarla en el modal
 	$idFactura = $_GET['edit'];
 	$factura = new Venta();
 	$facturaRegistro = $factura->getFactura($idFactura);
@@ -15,8 +15,9 @@ if (isset($_GET['edit'])) {
 		.$facturaRegistro['estado']);
 }
 
-if(isset($_POST['guardar']))
+if(isset($_POST['guardar']))#Se da click en el boton guardar estado
 {
+	$_SESSION['exitoCambiarEstadoPedido'] = 0; #Se setea una variable para usarla en el modal
 	$facturita = $_POST['idFactura'];
 	$nuevoEstado = $_POST['group1'];
 	$actualizaEstado = new CoordinadorVenta();
@@ -28,8 +29,12 @@ if(isset($_POST['guardar']))
 if (isset($_GET['down'])) {
 	$_SESSION['exitoCancelar'] = 0; # Se setea solo cuando pueda cancelar una compra, es decir cuando el estado de la misma permita esta accion
 	$idfact = $_GET['down'];
+	$nombreProduct = $_GET['product'];
+	$producto = new ProductoBuscar();
+	$miProducto = $producto->getProductoPorNombre($nombreProduct);
+	$idProduct = $miProducto['id'];
 	$fact = new CoordinadorVenta();
-	$fact->cancelar($idfact);
+	$fact->cancelar($idfact, $idProduct);
 }
 
 if(isset($_POST['comprar']))
@@ -59,13 +64,13 @@ if(isset($_POST['comprar']))
 	//Se notifica al administrador que se ha realizado una venta
 	$notificar = new CoordinadorNotificacion();
 	$administrador = new Usuario();
-	$admins = $administrador->getAdmin();
+	$admin = $administrador->getAdmin();
 	$asunto = "Compra Realizada";
 	$contenido = "Una compra ha sido realizada y debe ser aprobada";
-	foreach ($admins as $key) {
-		$correo = $key['email'];
+	foreach ($admin as $key) {
+		$correo = $key['email']; //correo del administrador de la aplicacion
+	}	
 	$notificar->enviaMail($correo, $asunto, $contenido); //envia el email al admin
-	}
 }
 
 if (isset($_GET['aprobar'])) {
@@ -114,9 +119,9 @@ Class CoordinadorVenta
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function cancelar($id)
+	public function cancelar($idFactura, $idProducto)
 	{
-		$this->ventaModelo->cancelarCompra($id);
+		$this->ventaModelo->cancelarCompra($idFactura, $idProducto);
 		header('Location: ../vistas/estadoCompras.php');
 	}
 

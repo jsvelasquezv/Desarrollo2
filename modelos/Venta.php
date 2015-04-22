@@ -133,11 +133,26 @@ Class Venta
 	 * @param  [type] $idFactura [description]
 	 * @return [type]            [description]
 	 */
-	public function cancelarCompra($idFactura)
+	public function cancelarCompra($idFactura, $idProducto)
 	{
 		R::selectDatabase('default');
-		$factura = R::findOne('factura', 'id = ?',[$idFactura]);
-		R::trash($factura);
+		$detalles = R::findAll('detalle', 'id_factura = ?', [$idFactura]);// se obtienen cuantos detalles estan relacionados con la factura
+		if (count($detalles) == 1) {
+			$factura = R::findOne('factura', 'id = ?',[$idFactura]);// Se elimina una factura en la que se tiene un producto
+			R::trash($factura);
+		}
+		else{
+			$elDetalle = R::findOne('detalle', 'id_producto = ? AND id_factura = ?', [$idProducto, $idFactura]);// Se elimina un producto de una factura
+			$elProducto = R::findOne('producto', 'id = ?', [$idProducto]);
+			$cantidad = $elDetalle['cantidad']; //cantidad comprada del producto que se desea cancelar
+			$valor = $elProducto['valor_unitario']; //valor del producto a eliminar
+
+			$actualizarTotalFactura = R::load('factura', $idFactura); //se actualiza el total al eliminar un producto presente en ella
+			$totalFactura = $actualizarTotalFactura['total'];
+			$actualizarTotalFactura->total = $totalFactura - ($valor*$cantidad);
+			R::store($actualizarTotalFactura);
+			R::trash($elDetalle);
+		}		
 		R::close();
 	}
 
@@ -162,7 +177,7 @@ Class Venta
 	//foreach ($resul as $key ) {
 	//	echo $key['id'];
 	//}
-	//$miFactura->cancelarCompra(9);
+	//$miFactura->cancelarCompra(10);
 	//$f = $miFactura->actualizarStock(5);
 	//echo $f;
 	//$miFactura->crearFactura(12, 1, 65, 2);

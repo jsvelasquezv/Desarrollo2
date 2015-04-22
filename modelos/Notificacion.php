@@ -15,10 +15,10 @@ Class Notificacion
     	);
     	$smtp = array(
 		'host' => 'smtp.gmail.com',
-		'port' => 2525,
+		'port' => 587,
 		'username' => $crendentials['email'],
 		'password' => $crendentials['password'],
-		'secure' => 'ssl' //SSL or TLS
+		'secure' => 'tls' //SSL or TLS
 		);
 
 		$to         = $correo; //The 'To' field
