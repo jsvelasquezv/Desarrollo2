@@ -151,13 +151,17 @@
           }?>
         
       </tbody>
-    </table>  
-    <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-      <a class="btn-floating btn-large waves-effect waves-light red right  tooltipped" data-position="rigth" data-tooltip="Seguir Comprando" href="productos.php"><i class="mdi-action-add-shopping-cart"></i></a>
-    </div>
-  <div class="fixed-action-btn" style="bottom: 45px; right: 200px;">
-      <a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Comprar" href="#modal"><i class="mdi-maps-local-atm "></i> Comprar</a>
-    </div>
+    </table>
+    <!-- cuando n esta seteado el carro, entonces se ocultan los botones flotantes de comprar y seguir comprando -->
+    <?php if ($_SESSION['carrito']) {
+      echo '<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">';
+        echo'<a class="btn-floating btn-large waves-effect waves-light red right  tooltipped" data-position="rigth" data-tooltip="Seguir Comprando" href="productos.php"><i class="mdi-action-add-shopping-cart"></i></a>';
+      echo'</div>';
+      echo '<div class="fixed-action-btn" style="bottom: 45px; right: 200px;">';
+        echo'<a class="btn-floating btn-large waves-effect waves-light red right modal-trigger tooltipped" data-position="left" data-tooltip="Comprar" href="#modal"><i class="mdi-maps-local-atm "></i> Comprar</a>';
+      echo'</div>';
+      
+      }?>  
   </div>
 </div>
 
