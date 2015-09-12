@@ -128,6 +128,14 @@
         	return $usuarios;
 		}
 
+		public function getAdmin()
+		{
+			R::selectDatabase('default');
+			$admin = R::findAll('usuario', 'tipo_perfil = 1');
+			R::close();
+			return $admin;
+		}
+
 		public function cambiarPass($username, $password)
 		{
 			R::selectDatabase('default');
@@ -138,7 +146,11 @@
 		}
 	}
 
-	   // $user = new Usuario();
+	    //$user = new Usuario();
+	    //$admins = $user->getAdmin();
+	    //foreach ($admins as $key) {
+	    //	echo $key['email'];
+	    //}
 	//  $user->registrarUsuario(116264525, "Juan", "Velasquez", "Velasquez94@hotmail.com", "juseve","j89s1994","Admin");
 	//  $user->asignarPerfil("Gasimba",116264525);
 	   // $a = $user->buscarUsuario("116264525");

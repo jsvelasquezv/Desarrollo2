@@ -2050,7 +2050,7 @@ img.responsive-img, video.responsive-video {
 .parallax-container {
   position: relative;
   overflow: hidden;
-  height: 500px; }
+  height: 100%; }
 
 .parallax {
   position: absolute;
@@ -5747,7 +5747,7 @@ ul.tabs li.tab {
   position: absolute;
   background-color: #FFFFFF;
   margin: 0px;
-  min-width: 100px;
+  min-width: 150px;
   z-index: 1000;
   max-height: 70%;
   opacity: 0;
@@ -5755,14 +5755,14 @@ ul.tabs li.tab {
   will-change: width, height; }
   .dropdown-content li {
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 0.2rem;
     color: rgba(0, 0, 0, 0.87);
     line-height: 1.5rem; }
     .dropdown-content li:hover, .dropdown-content li.active {
       background-color: rgba(0, 0, 0, 0.06); }
     .dropdown-content li > a, .dropdown-content li > span {
       display: block;
-      padding: 1rem 1rem;
+      padding: 2rem 2rem;
       color: #26a69a; }
 
 /*!
@@ -6459,7 +6459,8 @@ input[type=checkbox]:first-child:not(:disabled) ~ .lever:active:after {
 .select-wrapper {
   position: relative;
   margin-top: 15px; }
-  .select-wrapper input.select-dropdown {
+  .select-wrapper input.select-
+   {
     position: relative;
     cursor: pointer;
     color: #444;

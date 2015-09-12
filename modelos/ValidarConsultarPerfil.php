@@ -42,5 +42,8 @@
 		}
 	}
 	// $validar = new ValidarConsultarPerfil();
-	// echo $validar->consultarPerfil("hola mundo"); 
+	// $arreglo = $validar->consultarTodos();
+	// foreach ($arreglo as $key) {
+	//  	echo $key;
+	//  } 
 ?>

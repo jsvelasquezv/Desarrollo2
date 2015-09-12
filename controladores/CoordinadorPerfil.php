@@ -119,8 +119,8 @@
 			if (!empty($errores)) {
 				session_start();
 				$_SESSION['eUpdatePerfil'] = $errores;
-				header('Location: ../vistas/editarPerfil.php?nombre='.$nombre.'&permiso1='.$permisoGestionarUsuarios
-					.'&permiso2='.$permisoVender.'&permiso3='.$permisoGestionarPerfiles);
+				#Aca es donde me redeirge si hay un error al editar un perfil
+				header('Location: ../vistas/editarPerfil.php?nombre='.$nombre.'&permiso1='.$permisoGestionarUsuarios.'&permiso2='.$permisoVender.'&permiso3='.$permisoGestionarPerfiles);
 			}
 			else
 			{	
@@ -171,5 +171,5 @@
 		}
 	}
 	// $registrar = new CoordinadorPerfil();
-	// $error = $registrar->registrarPerfil("Admin",1,1,1);
+	// $error = $registrar->registrarPerfil("Super Admin",1,1,1);
 ?>

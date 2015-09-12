@@ -10,3 +10,97 @@
 	overflow-y: scroll;
 }
 
+a{
+	color: white;
+}
+a:hover{
+	color: #00796B;
+}
+#izq{
+	float: left;
+	
+	
+}
+#der{
+	float: right;
+	margin-left: 0;
+
+}
+.portfolio img
+{
+    width: 33%;
+    display: inline-block;
+    float: left;
+}
+
+
+
+  #category-tree {
+  width: 80%;
+  height: 40%;
+  background-color: #fff;
+  border-color: #0079B6;
+  border-style: none;
+  border-radius: 3px 3px 3px 3px;
+  padding: 10px;
+  padding: 0 0 18px 0;
+  position: relative;
+  margin-left: 10%;
+}
+h2{
+	color: #00796B;
+}
+.title-bar{
+width: 100%;
+height: 80px;
+font-style-color: #00796B;
+border-bottom:solid;
+border-bottom-color: #00796B;
+
+}
+ul.category-list{
+	display: block;
+	float: left;
+	width: 30%;
+	height: 40%;
+	padding-left: 10px;
+	padding-right: 20px;
+	font-size: 14px;
+	list-style-type: none;
+	margin: 10px 10px 10px 10px;
+	padding: 0 20px 10px 0;
+	position: relative;
+	z-index: 50;
+	background-color: ; /* CAMBIO DE COLOR DIV DEL UL*/
+}
+
+ul.category-list .category-list-first {
+	display: block;
+	float: left;
+	width: 30%;
+	height: 40%;
+	padding-left: 10px;
+	padding-right: 20px;
+	font-size: 14px;
+	list-style-type: none;
+	margin: 20px 30px 20px 20px;
+	padding: 0 20px 10px 0;
+	position: relative;
+	z-index: 50;
+	background-color: blue;
+}
+.acordion{
+	position: absolute;
+	margin-left: 0;
+}
+
+li.category{
+	display: list-item;
+	font-size: 14px;
+	list-style-type: none;
+	text-align: left;
+	width: 33.2%; 
+}
+a.categoryLink{
+	color: black;
+}
